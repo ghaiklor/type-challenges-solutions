@@ -4,4 +4,4 @@ Solutions for the collection of [TypeScript Type Challenges](https://github.com/
 
 ## License
 
-[MIT](LICENSE)
+[MIT](../LICENSE)
