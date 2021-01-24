@@ -1,12 +1,16 @@
-<h1>Pick <img src="https://img.shields.io/badge/-easy-90bb12" alt="easy"/> <img src="https://img.shields.io/badge/-%23union-999" alt="#union"/> <img src="https://img.shields.io/badge/-%23built--in-999" alt="#built-in"/></h1>
+# Pick
+
+![easy](https://img.shields.io/badge/-easy-7aad0c)
+![#union](https://img.shields.io/badge/-%23union-999)
+![#built-in](https://img.shields.io/badge/-%23built--in-999)
 
 ## Challenge
 
 Implement the built-in `Pick<T, K>` generic without using it.
 
-Constructs a type by picking the set of properties `K` from `T`
+Constructs a type by picking the set of properties `K` from `T`.
 
-For example
+For example:
 
 ```ts
 interface Todo {
@@ -18,8 +22,8 @@ interface Todo {
 type TodoPreview = MyPick<Todo, 'title' | 'completed'>
 
 const todo: TodoPreview = {
-    title: 'Clean room',
-    completed: false,
+  title: 'Clean room',
+  completed: false,
 }
 ```
 
@@ -49,3 +53,9 @@ type MyPick<T, K extends keyof T> = { [P in K]: T[P] }
 
 We are saying “get everything from K, name it as P and make it as a new key in our new object with a value type taken from the input type”.
 It's hard to grasp at first, so if you didn’t understand something, try to read the info again and wrap it in your head step by step.
+
+## References
+
+- [Lookup Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types)
+- [Mapped Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
+- [Indexed Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
