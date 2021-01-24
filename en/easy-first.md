@@ -1,10 +1,13 @@
-<h1>First of Array <img src="https://img.shields.io/badge/-easy-90bb12" alt="easy"/> <img src="https://img.shields.io/badge/-%23array-999" alt="#array"/></h1>
+# First of Array
+
+![easy](https://img.shields.io/badge/-easy-7aad0c)
+![#array](https://img.shields.io/badge/-%23array-999)
 
 ## Challenge
 
 Implement a generic `First<T>` that takes an Array `T` and returns it's first element's type.
 
-For example
+For example:
 
 ```ts
 type arr1 = ['a', 'b', 'c']
@@ -36,3 +39,8 @@ We are going to check, if the array is empty, we return nothing, otherwise we re
 ```ts
 type First<T extends any[]> = T extends [] ? never : T[0];
 ```
+
+## References
+
+- [Indexed Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
+- [Conditional Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
