@@ -1,16 +1,19 @@
-<h1>Length of Tuple <img src="https://img.shields.io/badge/-easy-90bb12" alt="easy"/> <img src="https://img.shields.io/badge/-%23tuple-999" alt="#tuple"/></h1>
+# Length of Tuple
+
+![easy](https://img.shields.io/badge/-easy-7aad0c)
+![#tuple](https://img.shields.io/badge/-%23tuple-999)
 
 ## Challenge
 
-For given a tuple, you need create a generic `Length`, pick the length of the tuple
+For given a tuple, you need create a generic `Length`, pick the length of the tuple.
 
-For example
+For example:
 
 ```ts
 type tesla = ['tesla', 'model 3', 'model X', 'model Y']
 type spaceX = ['FALCON 9', 'FALCON HEAVY', 'DRAGON', 'STARSHIP', 'HUMAN SPACEFLIGHT']
 
-type teslaLength = Length<tesla>  // expected 4
+type teslaLength = Length<tesla> // expected 4
 type spaceXLength = Length<spaceX> // expected 5
 ```
 
@@ -29,3 +32,7 @@ So we need to give a hint to TypeScript and tell that our input type parameter h
 ```ts
 type Length<T extends { length: number }> = T['length']
 ```
+
+## References
+
+- [Indexed Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
