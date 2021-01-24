@@ -1,10 +1,10 @@
-<h1>Hello World <img src="https://img.shields.io/badge/-warm--up-teal" alt="warm-up"/> </h1>
+# Hello, World
+
+![warm-up](https://img.shields.io/badge/-warm--up-teal)
 
 ## Challenge
 
-Hello, World!
-
-In Type Challenges, we uses the type system itself to do the assertion. 
+In Type Challenges, we use the type system itself to do the assertion.
 
 For this challenge, you will need to change the following code to make the tests pass (no type check errors).
 
@@ -20,12 +20,16 @@ type test = Expect<Equal<HelloWorld, string>>
 
 ## Solution
 
-Just a warm up challenge where we are going to use types.
-In our case, the type is `string`:
+This challenge is a warm-up challenge to get familiar with their playground, how to take challenges and other stuff.
+All we asked to do here is literally to set the type of `string` instead of `any`:
 
 ```ts
 type HelloWorld = string
 ```
 
-In case you are a newcomer into TypeScript world, I highly recommend reading their [handbook](https://www.typescriptlang.org/docs/handbook/intro.html).
-You will find anything needed to write TypeScript code there.
+## References
+
+- [Typed JavaScript at Any Scale](https://www.typescriptlang.org)
+- [The TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
+- [TypeScript for Java/C# Programmers](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-oop.html)
+- [TypeScript for Functional Programmers](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html)
