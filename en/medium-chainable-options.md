@@ -1,12 +1,18 @@
-<h1>Chainable Options <img src="https://img.shields.io/badge/-medium-eaa648" alt="medium"/> <img src="https://img.shields.io/badge/-%23application-999" alt="#application"/></h1>
+# Chainable Options
+
+![medium](https://img.shields.io/badge/-medium-d9901a)
+![#application](https://img.shields.io/badge/-%23application-999)
 
 ## Challenge
 
-Chainable options are commonly used in Javascript. But when we switch to TypeScript, can you properly type it?
+Chainable options are commonly used in Javascript.
+But when we switch to TypeScript, can you properly type it?
 
-In this challenge, you need to type an object or a class - whatever you like - to provide two function `option(key, value)` and `get()`. In `option`, you can extend the current config type by the given key and value. We should about to access the final result via `get`.
+In this challenge, you need to type an object or a class - whatever you like - to provide two function `option(key, value)` and `get()`.
+In `option`, you can extend the current config type by the given key and value.
+We should about to access the final result via `get`.
 
-For example
+For example:
 
 ```ts
 declare const config: Chainable
@@ -27,9 +33,10 @@ interface Result {
 }
 ```
 
-You don't need to write any js/ts logic to handle the problem - just in type level. 
+You don't need to write any js/ts logic to handle the problem - just in type level.
 
-You can assume that `key` only accept `string` and the `value` and be anything - just leave it as-is. Same `key` won't be passed twice.
+You can assume that `key` only accept `string` and the `value` can be anything - just leave it as-is.
+Same `key` won't be passed twice.
 
 ## Solution
 
@@ -51,7 +58,7 @@ type Chainable = {
 ```
 
 Before we can start accumulating the type information, it would be great to get it first.
-So we replace `any` in `key` and `value` parameters with type parameters, so TypeScript could infer their types and assign it to type parameters:
+So we replace `string` in `key` and `any` in `value` parameters with type parameters, so TypeScript could infer their types and assign it to type parameters:
 
 ```ts
 type Chainable = {
@@ -67,9 +74,9 @@ E.g. calling `option(‘foo’, 123)` will result into having types for `key = �
 
 We have the information, but where can we store it?
 It must be the place that persists its state across different method calls.
-The only place here is on the type Chainable itself!
+The only place here is on the type `Chainable` itself!
 
-Let us add a new type parameter O to the Chainable type and do not forget that it is by default an empty object:
+Let us add a new type parameter `O` to the `Chainable` type and do not forget that it is by default an empty object:
 
 ```ts
 type Chainable<O = {}> = {
@@ -79,7 +86,7 @@ type Chainable<O = {}> = {
 ```
 
 The most interesting part now, pay attention!
-We want `option(key, value)` to return Chainable type itself (we want to have a possibility to chain the calls, right) but with the type information accumulated to its type parameter.
+We want `option(key, value)` to return `Chainable` type itself (we want to have a possibility to chain the calls, right) but with the type information accumulated to its type parameter.
 Let us use [intersection types](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types) to add new types into accumulator:
 
 ```ts
@@ -91,7 +98,7 @@ type Chainable<O = {}> = {
 
 Small things left.
 We are getting the compilation error “Type ‘K’ is not assignable to type ‘string | number | symbol’.“.
-That’s because we don’t have a constraint over type parameter K that says it must be a string:
+That’s because we don’t have a constraint over type parameter `K` that says it must be a string:
 
 ```ts
 type Chainable<O = {}> = {
@@ -101,7 +108,7 @@ type Chainable<O = {}> = {
 ```
 
 Everything is ready to rock!
-Now, when the developer will call the `get()` method, it must return the type parameter O from Chainable that has an accumulated type information from previous `option(key, value)` calls:
+Now, when the developer will call the `get()` method, it must return the type parameter `O` from `Chainable` that has an accumulated type information from previous `option(key, value)` calls:
 
 ```ts
 type Chainable<O = {}> = {
@@ -109,3 +116,9 @@ type Chainable<O = {}> = {
   get(): O
 }
 ```
+
+## References
+
+- [Intersection Types](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types)
+- [Mapped Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
+- [Generics](https://www.typescriptlang.org/docs/handbook/generics.html)
