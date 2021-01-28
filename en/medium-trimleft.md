@@ -1,13 +1,16 @@
-<h1>Trim Left <img src="https://img.shields.io/badge/-medium-eaa648" alt="medium"/> <img src="https://img.shields.io/badge/-%23template--literal-999" alt="#template-literal"/></h1>
+# Trim Left
+
+![medium](https://img.shields.io/badge/-medium-d9901a)
+![#template-literal](https://img.shields.io/badge/-%23template--literal-999)
 
 ## Challenge
 
 Implement `TrimLeft<T>` which takes an exact string type and returns a new string with the whitespace beginning removed.
 
-For example
+For example:
 
 ```ts
-type trimed = TrimLeft<'  Hello World  '> // expected to be 'Hello World  '
+type trimmed = TrimLeft<'  Hello World  '> // expected to be 'Hello World  '
 ```
 
 ## Solution
@@ -33,3 +36,10 @@ Let us fix that by replacing the white space with a union of those three:
 ```ts
 type TrimLeft<S> = S extends `${' ' | '\n' | '\t'}${infer T}` ? TrimLeft<T> : S;
 ```
+
+## References
+
+- [Conditional Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
+- [Type inference in conditional types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
+- [Recursive Conditional Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#recursive-conditional-types)
+- [Template Literal Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#template-literal-types)
