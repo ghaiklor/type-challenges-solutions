@@ -1,10 +1,14 @@
-<h1>Get Return Type <img src="https://img.shields.io/badge/-medium-eaa648" alt="medium"/> <img src="https://img.shields.io/badge/-%23infer-999" alt="#infer"/> <img src="https://img.shields.io/badge/-%23built--in-999" alt="#built-in"/></h1>
+# Get Return Type
+
+![medium](https://img.shields.io/badge/-medium-d9901a)
+![#infer](https://img.shields.io/badge/-%23infer-999)
+![#built-in](https://img.shields.io/badge/-%23built--in-999)
 
 ## Challenge
 
 Implement the built-in `ReturnType<T>` generic without using it.
 
-For example
+For example:
 
 ```ts
 const fn = (v: boolean) => {
@@ -31,7 +35,7 @@ So let us replace it with `infer R` and it will be our first iteration to the so
 type MyReturnType<T> = T extends () => infer R ? R : T;
 ```
 
-In case our type T is assignable to the function, we infer its return type and return it, otherwise we return T itself.
+In case our type `T` is assignable to the function, we infer its return type and return it, otherwise we return `T` itself.
 Pretty straightforward.
 
 The problem with the solution is that if we pass a function with parameters, it will not be assignable to our type `() => infer R`.
@@ -41,3 +45,8 @@ Let us show that we can accept any parameters and we don’t care about them by 
 ```ts
 type MyReturnType<T> = T extends (...args: any[]) => infer R ? R : T;
 ```
+
+## References
+
+- [Conditional Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
+- [Type inference in conditional types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
