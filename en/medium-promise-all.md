@@ -1,4 +1,8 @@
-<h1>Promise.all <img src="https://img.shields.io/badge/-medium-eaa648" alt="medium"/> <img src="https://img.shields.io/badge/-%23array-999" alt="#array"/> <img src="https://img.shields.io/badge/-%23built--in-999" alt="#built-in"/></h1>
+# Promise.all
+
+![medium](https://img.shields.io/badge/-medium-d9901a)
+![#array](https://img.shields.io/badge/-%23array-999)
+![#built-in](https://img.shields.io/badge/-%23built--in-999)
 
 ## Challenge
 
@@ -21,7 +25,7 @@ Interesting challenge here, IMHO.
 Let me explain it step by step.
 
 We start with the simplest solution - the function that returns `Promise<T>`.
-We need to return `Promise<T>` after all, where T is an array of types for resolved promises:
+We need to return `Promise<T>` after all, where `T` is an array of types for resolved promises:
 
 ```ts
 declare function PromiseAll<T>(values: T): Promise<T>
@@ -46,20 +50,28 @@ declare function PromiseAll<T extends unknown[]>(values: readonly [...T]): Promi
 
 We have a solution that even works on one of the test cases.
 That is because the test case does not have promises inside.
-We return `Promise<T>` where T is just an array with the same types as in `values` parameter.
-But once we get Promise inside the `values` parameter, things going wild.
+We return `Promise<T>` where `T` is just an array with the same types as in `values` parameter.
+But once we get `Promise` inside the `values` parameter, things going wild.
 
-The reason is that we do not unwrap the type from Promise and just return it as is.
-So let us replace the T with a conditional type to check if the element is actually a Promise.
+The reason is that we do not unwrap the type from `Promise` and just return it as is.
+So let us replace the `T` with a conditional type to check if the element is actually a `Promise`.
 If so, we return its inner type, otherwise - the type with no changes:
 
 ```ts
 declare function PromiseAll<T extends unknown[]>(values: readonly [...T]): Promise<T extends Promise<infer R> ? R : T>
 ```
 
-The solution still does not work, because the T is not a union but the tuple.
-So we need to iterate over each element in the tuple and check if the value is a Promise or not:
+The solution still does not work, because the `T` is not a union but the tuple.
+So we need to iterate over each element in the tuple and check if the value is a `Promise` or not:
 
 ```ts
 declare function PromiseAll<T extends unknown[]>(values: readonly [...T]): Promise<{ [P in keyof T]: T[P] extends Promise<infer R> ? R : T[P] }>
 ```
+
+## References
+
+- [Variadic Tuple Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)
+- [Mapped Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
+- [Index Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
+- [Conditional Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
+- [Type inference in conditional types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
