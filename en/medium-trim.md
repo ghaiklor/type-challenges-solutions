@@ -1,21 +1,24 @@
-<h1>Trim <img src="https://img.shields.io/badge/-medium-eaa648" alt="medium"/> <img src="https://img.shields.io/badge/-%23template--literal-999" alt="#template-literal"/></h1>
+# Trim
+
+![medium](https://img.shields.io/badge/-medium-d9901a)
+![#template-literal](https://img.shields.io/badge/-%23template--literal-999)
 
 ## Challenge
 
 Implement `Trim<T>` which takes an exact string type and returns a new string with the whitespace from both ends removed.
 
-For example
+For example:
 
 ```ts
-type trimed = Trim<'  Hello World  '> // expected to be 'Hello World'
+type trimmed = Trim<'  Hello World  '> // expected to be 'Hello World'
 ```
 
 ## Solution
 
-Same task as in `TrimLeft<T>` (almost).
+Same task as in [`TrimLeft<T>`](./medium-trimleft.md) (almost).
 We used [template literal types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#template-literal-types) there to model the string in type system.
 
-There are three cases: white space on the left, white space on the right of the string, and the string without white spaces on both sides.
+There are three cases now: white space on the left, white space on the right of the string, and the string without white spaces on both sides.
 
 Let us start with modelling the case when there is a white space on the left.
 By combining template literal type with a conditional type, we can infer the rest of the string without a white space.
@@ -43,3 +46,11 @@ I don’t want to duplicate the union type, so I made a separate type and replac
 type Whitespace = ' ' | '\n' | '\t';
 type Trim<S> = S extends `${Whitespace}${infer R}` ? Trim<R> : S extends `${infer L}${Whitespace}` ? Trim<L> : S;
 ```
+
+## References
+
+- [Union Types](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#union-types)
+- [Conditional Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
+- [Type inference in conditional types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
+- [Recursive conditional types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#recursive-conditional-types)
+- [Template Literal Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#template-literal-types)
