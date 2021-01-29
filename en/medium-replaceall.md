@@ -1,10 +1,13 @@
-<h1>ReplaceAll <img src="https://img.shields.io/badge/-medium-eaa648" alt="medium"/> <img src="https://img.shields.io/badge/-%23template--literal-999" alt="#template-literal"/></h1>
+# ReplaceAll
+
+![medium](https://img.shields.io/badge/-medium-d9901a)
+![#template-literal](https://img.shields.io/badge/-%23template--literal-999)
 
 ## Challenge
 
-Implement `ReplaceAll<S, From, To>` which replace the all the substring `From` with `To` in the given string `S`
+Implement `ReplaceAll<S, From, To>` which replace the all the substring `From` with `To` in the given string `S`.
 
-For example
+For example:
 
 ```ts
 type replaced = ReplaceAll<'t y p e s', ' ', ''> // expected to be 'types'
@@ -12,14 +15,13 @@ type replaced = ReplaceAll<'t y p e s', ' ', ''> // expected to be 'types'
 
 ## Solution
 
-We will base this solution on solution for Replace type.
-For those who didn’t look there, I’ll repeat it here.
+We will base this solution on solution for [`Replace`](./medium-replace.md) type.
 
-The input string S must be split into three parts.
-The leftmost part before From, the From itself, the rightmost part after the From.
+The input string `S` must be split into three parts.
+The leftmost part before `From`, the `From` itself, the rightmost part after the `From`.
 We can do that with conditional types and inferring.
 
-Once the string is inferred and we know the parts, we can return a new template literal type which is constructed from those parts and our required To part:
+Once the string is inferred and we know the parts, we can return a new template literal type which is constructed from those parts and our required `To` part:
 
 ```ts
 type ReplaceAll<
@@ -39,3 +41,10 @@ type ReplaceAll<
   To extends string
 > = From extends '' ? S : S extends `${infer L}${From}${infer R}` ? ReplaceAll<`${L}${To}${R}`, From, To> : S;
 ```
+
+## References
+
+- [Conditional Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
+- [Type inference in conditional types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
+- [Recursive Conditional Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#recursive-conditional-types)
+- [Template Literal Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#template-literal-types)
