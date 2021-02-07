@@ -1,11 +1,5 @@
-jobs:
-  include:
-    - name: Jekyll & HTML Proofer
-      language: ruby
-      rvm: 2.6.3
-      script: jekyll build && htmlproofer ./_site
-      cache: bundler
-      addons:
-        apt:
-          packages:
-            - libcurl4-openssl-dev
+language: ruby
+rvm: 2.6
+cache: bundler
+before_install: gem install bundler
+script: make
