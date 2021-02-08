@@ -30,6 +30,7 @@ Temporary Items
 *.rbc
 /.config
 /coverage/
+/Gemfile.lock
 /InstalledFiles
 /pkg/
 /spec/reports/
