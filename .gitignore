@@ -73,3 +73,9 @@ build-iPhoneSimulator/
 # Ignore all local history of files
 .history
 .ionide
+
+# Jekyll
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
