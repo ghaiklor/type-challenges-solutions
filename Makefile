@@ -1,5 +1,8 @@
 all: build test
 
+clean:
+	bundle exec jekyll clean
+
 build:
 	bundle exec jekyll build
 
