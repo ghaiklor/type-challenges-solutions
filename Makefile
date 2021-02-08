@@ -1,4 +1,4 @@
-all: build test
+all: build test lint
 
 clean:
 	bundle exec jekyll clean
@@ -8,3 +8,6 @@ build:
 
 test: build
 	bundle exec htmlproofer ./_site
+
+lint:
+	bundle exec mdl en
