@@ -1,3 +1,4 @@
 all: test
 test:
-	jekyll build && htmlproofer ./_site
+	bundle exec jekyll build
+	bundle exec htmlproofer ./_site
