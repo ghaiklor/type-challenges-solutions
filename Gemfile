@@ -9,6 +9,7 @@ group :jekyll_plugins do
   gem "jekyll-sitemap"
   gem "jekyll-seo-tag"
   gem "jekyll-remote-theme"
+  gem 'jekyll-relative-links'
 end
 
 group :jekyll_themes do
