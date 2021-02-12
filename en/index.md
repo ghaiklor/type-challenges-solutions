@@ -1,5 +1,5 @@
 ---
-title: TypeScript Type Challenges
+title: Welcome!
 lang: en
 ---
 
@@ -17,29 +17,29 @@ How well do you know a TypeScript and its type system?
 ### Warm Up
 
 {% for challenge in warm %}
- [{{ challenge.title }}]({{ challenge.url }})
+  [{{ challenge.title }}]({{ challenge.url | absolute_url }})
 {% endfor %}
 
 ### Easy
 
 {% for challenge in easy %}
- [{{ challenge.title }}]({{ challenge.url }})
+  [{{ challenge.title }}]({{ challenge.url | absolute_url }})
 {% endfor %}
 
 ### Medium
 
 {% for challenge in medium %}
- [{{ challenge.title }}]({{ challenge.url }})
+  [{{ challenge.title }}]({{ challenge.url | absolute_url }})
 {% endfor %}
 
 ### Hard
 
 {% for challenge in hard %}
- [{{ challenge.title }}]({{ challenge.url }})
+  [{{ challenge.title }}]({{ challenge.url | absolute_url }})
 {% endfor %}
 
 ### Extreme
 
 {% for challenge in extreme %}
- [{{ challenge.title }}]({{ challenge.url }})
+  [{{ challenge.title }}]({{ challenge.url | absolute_url }})
 {% endfor %}
