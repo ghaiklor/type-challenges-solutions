@@ -15,9 +15,12 @@ In each folder there is must be a single Markdown file per challenge, named as i
 The Markdown file itself must comprise the following content:
 
 ```md
-# <CHALLENGE_NAME>
-
-<CHALLENGE_BADGES>
+---
+title: <CHALLENGE_TITLE>
+lang: <COUNTRY_CODE>
+level: <CHALLENGE_LEVEL>
+tags: <CHALLENGE_TAGS>
+---
 
 ## Challenge
 
