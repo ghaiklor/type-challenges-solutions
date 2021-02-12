@@ -12,7 +12,7 @@ NOTE: *I sort these items from the highest priority to the lowest*
 - [x] Integrate html-proofer to test the built site
 - [x] Integrate mdl to lint the Markdown files
 - [x] Integrate with Travis CI
-- [ ] Automate index creation for solutions (`index.md` for solutions)
+- [x] Automate index creation for solutions (`index.md` for solutions)
 - [ ] Add Ukrainian localization (`/uk`)
 - [ ] Add Russian localization (`/ru`)
 - [ ] Add an index for the whole site, where users can choose the language first
