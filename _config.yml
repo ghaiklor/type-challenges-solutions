@@ -1,8 +1,9 @@
 title: TypeScript Type Challenges
 tagline: Challenges and solutions to them
 description: This project is aimed at helping you better understand how the type system works, writing your own utilities, or just having fun with the challenges.
-theme: jekyll-whiteglass
+remote_theme: yous/whiteglass
 exclude: [vendor]
 plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
+  - jekyll-remote-theme
