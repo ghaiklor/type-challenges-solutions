@@ -1,13 +1,9 @@
 ---
+title: Trim Left
 lang: en
 level: medium
 tags: template-literal
 ---
-
-# Trim Left
-
-![medium](https://img.shields.io/badge/-medium-d9901a)
-![#template-literal](https://img.shields.io/badge/-%23template--literal-999)
 
 ## Challenge
 

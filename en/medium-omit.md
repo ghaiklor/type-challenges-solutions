@@ -1,14 +1,9 @@
 ---
+title: Omit
 lang: en
 level: medium
 tags: union built-in
 ---
-
-# Omit
-
-![medium](https://img.shields.io/badge/-medium-d9901a)
-![#union](https://img.shields.io/badge/-%23union-999)
-![#built-in](https://img.shields.io/badge/-%23built--in-999)
 
 ## Challenge
 

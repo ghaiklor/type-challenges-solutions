@@ -1,14 +1,9 @@
 ---
+title: Readonly 2
 lang: en
 level: medium
 tags: readonly object-keys
 ---
-
-# Readonly 2
-
-![medium](https://img.shields.io/badge/-medium-d9901a)
-![#readonly](https://img.shields.io/badge/-%23readonly-999)
-![#object-keys](https://img.shields.io/badge/-%23object--keys-999)
 
 ## Challenge
 

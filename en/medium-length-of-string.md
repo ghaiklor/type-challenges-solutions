@@ -1,13 +1,9 @@
 ---
+title: Length of String
 lang: en
 level: medium
 tags: template-literal
 ---
-
-# Length of String
-
-![medium](https://img.shields.io/badge/-medium-d9901a)
-![#template-literal](https://img.shields.io/badge/-%23template--literal-999)
 
 ## Challenge
 

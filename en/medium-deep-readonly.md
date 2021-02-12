@@ -1,15 +1,9 @@
 ---
+title: Deep Readonly
 lang: en
 level: medium
 tags: readonly object-keys deep
 ---
-
-# Deep Readonly
-
-![medium](https://img.shields.io/badge/-medium-d9901a)
-![#readonly](https://img.shields.io/badge/-%23readonly-999)
-![#object-keys](https://img.shields.io/badge/-%23object--keys-999)
-![#deep](https://img.shields.io/badge/-%23deep-999)
 
 ## Challenge
 

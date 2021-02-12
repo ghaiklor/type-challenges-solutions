@@ -1,13 +1,9 @@
 ---
+title: First of Array
 lang: en
 level: easy
 tags: array
 ---
-
-# First of Array
-
-![easy](https://img.shields.io/badge/-easy-7aad0c)
-![#array](https://img.shields.io/badge/-%23array-999)
 
 ## Challenge
 

@@ -1,13 +1,9 @@
 ---
+title: Last of Array
 lang: en
 level: medium
 tags: array
 ---
-
-# Last of Array
-
-![medium](https://img.shields.io/badge/-medium-d9901a)
-![#array](https://img.shields.io/badge/-%23array-999)
 
 ## Challenge
 

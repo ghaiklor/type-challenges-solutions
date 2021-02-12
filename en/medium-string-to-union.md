@@ -1,14 +1,9 @@
 ---
+title: String to Union
 lang: en
 level: medium
 tags: union string
 ---
-
-# String to Union
-
-![medium](https://img.shields.io/badge/-medium-d9901a)
-![#union](https://img.shields.io/badge/-%23union-999)
-![#string](https://img.shields.io/badge/-%23string-999)
 
 ## Challenge
 

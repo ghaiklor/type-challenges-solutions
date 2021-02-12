@@ -1,13 +1,9 @@
 ---
+title: Exclude
 lang: en
 level: easy
 tags: built-in
 ---
-
-# Exclude
-
-![easy](https://img.shields.io/badge/-easy-7aad0c)
-![#built-in](https://img.shields.io/badge/-%23built--in-999)
 
 ## Challenge
 

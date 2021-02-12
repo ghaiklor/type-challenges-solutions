@@ -1,14 +1,9 @@
 ---
+title: Pick
 lang: en
 level: easy
 tags: union built-in
 ---
-
-# Pick
-
-![easy](https://img.shields.io/badge/-easy-7aad0c)
-![#union](https://img.shields.io/badge/-%23union-999)
-![#built-in](https://img.shields.io/badge/-%23built--in-999)
 
 ## Challenge
 

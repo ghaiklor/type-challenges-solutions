@@ -1,14 +1,9 @@
 ---
+title: Type Lookup
 lang: en
 level: medium
 tags: union map
 ---
-
-# Type Lookup
-
-![medium](https://img.shields.io/badge/-medium-d9901a)
-![#union](https://img.shields.io/badge/-%23union-999)
-![#map](https://img.shields.io/badge/-%23map-999)
 
 ## Challenge
 

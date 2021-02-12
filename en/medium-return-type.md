@@ -1,14 +1,9 @@
 ---
+title: Get Return Type
 lang: en
 level: medium
 tags: infer built-in
 ---
-
-# Get Return Type
-
-![medium](https://img.shields.io/badge/-medium-d9901a)
-![#infer](https://img.shields.io/badge/-%23infer-999)
-![#built-in](https://img.shields.io/badge/-%23built--in-999)
 
 ## Challenge
 

@@ -1,15 +1,9 @@
 ---
+title: Readonly
 lang: en
 level: easy
 tags: built-in readonly object-keys
 ---
-
-# Readonly
-
-![easy](https://img.shields.io/badge/-easy-7aad0c)
-![#built-in](https://img.shields.io/badge/-%23built--in-999)
-![#readonly](https://img.shields.io/badge/-%23readonly-999)
-![#object-keys](https://img.shields.io/badge/-%23object--keys-999)
 
 ## Challenge
 

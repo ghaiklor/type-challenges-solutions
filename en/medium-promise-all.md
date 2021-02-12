@@ -1,14 +1,9 @@
 ---
+title: Promise.all
 lang: en
 level: medium
 tags: array built-in
 ---
-
-# Promise.all
-
-![medium](https://img.shields.io/badge/-medium-d9901a)
-![#array](https://img.shields.io/badge/-%23array-999)
-![#built-in](https://img.shields.io/badge/-%23built--in-999)
 
 ## Challenge
 

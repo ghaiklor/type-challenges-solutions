@@ -1,13 +1,9 @@
 ---
+title: Append Argument
 lang: en
 level: medium
 tags: arguments
 ---
-
-# Append Argument
-
-![medium](https://img.shields.io/badge/-medium-d9901a)
-![#arguments](https://img.shields.io/badge/-%23arguments-999)
 
 ## Challenge
 

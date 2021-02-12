@@ -1,13 +1,9 @@
 ---
+title: Concat
 lang: en
 level: easy
 tags: array
 ---
-
-# Concat
-
-![easy](https://img.shields.io/badge/-easy-7aad0c)
-![#array](https://img.shields.io/badge/-%23array-999)
 
 ## Challenge
 

@@ -1,13 +1,9 @@
 ---
+title: Permutation
 lang: en
 level: medium
 tags: union
 ---
-
-# Permutation
-
-![medium](https://img.shields.io/badge/-medium-d9901a)
-![#union](https://img.shields.io/badge/-%23union-999)
 
 ## Challenge
 

@@ -1,13 +1,9 @@
 ---
+title: Merge
 lang: en
 level: medium
 tags: object
 ---
-
-# Merge
-
-![medium](https://img.shields.io/badge/-medium-d9901a)
-![#object](https://img.shields.io/badge/-%23object-999)
 
 ## Challenge
 

@@ -1,12 +1,9 @@
 ---
+title: Tuple to Object
 lang: en
 level: easy
 tags: tuple
 ---
-
-# Tuple to Object
-
-![easy](https://img.shields.io/badge/-easy-7aad0c)
 
 ## Challenge
 

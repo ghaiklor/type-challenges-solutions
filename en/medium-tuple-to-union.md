@@ -1,15 +1,9 @@
 ---
+title: Tuple to Union
 lang: en
 level: medium
 tags: infer tuple union
 ---
-
-# Tuple to Union
-
-![medium](https://img.shields.io/badge/-medium-d9901a)
-![#infer](https://img.shields.io/badge/-%23infer-999)
-![#tuple](https://img.shields.io/badge/-%23tuple-999)
-![#union](https://img.shields.io/badge/-%23union-999)
 
 ## Challenge
 

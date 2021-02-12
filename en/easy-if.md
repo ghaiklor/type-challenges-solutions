@@ -1,13 +1,9 @@
 ---
+title: If
 lang: en
 level: easy
 tags: utils
 ---
-
-# If
-
-![easy](https://img.shields.io/badge/-easy-7aad0c)
-![#utils](https://img.shields.io/badge/-%23utils-999)
 
 ## Challenge
 

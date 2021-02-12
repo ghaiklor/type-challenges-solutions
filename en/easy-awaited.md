@@ -1,13 +1,9 @@
 ---
+title: Awaited
 lang: en
 level: easy
 tags: promise
 ---
-
-# Awaited
-
-![easy](https://img.shields.io/badge/-easy-7aad0c)
-![#promise](https://img.shields.io/badge/-%23promise-999)
 
 ## Challenge
 

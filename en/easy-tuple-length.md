@@ -1,13 +1,9 @@
 ---
+title: Length of Tuple
 lang: en
 level: easy
 tags: tuple
 ---
-
-# Length of Tuple
-
-![easy](https://img.shields.io/badge/-easy-7aad0c)
-![#tuple](https://img.shields.io/badge/-%23tuple-999)
 
 ## Challenge
 

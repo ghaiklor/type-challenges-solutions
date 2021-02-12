@@ -1,14 +1,9 @@
 ---
+title: Absolute
 lang: en
 level: medium
 tags: math template-literal
 ---
-
-# Absolute
-
-![medium](https://img.shields.io/badge/-medium-d9901a)
-![#math](https://img.shields.io/badge/-%23math-999)
-![#template-literal](https://img.shields.io/badge/-%23template--literal-999)
 
 ## Challenge
 

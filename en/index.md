@@ -1,8 +1,7 @@
 ---
+title: TypeScript Type Challenges
 lang: en
 ---
-
-# TypeScript Type Challenges
 
 You can find here a collection of challenges to test yourself!
 How well do you know a TypeScript and its type system?

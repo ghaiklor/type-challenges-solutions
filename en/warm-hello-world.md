@@ -1,11 +1,8 @@
 ---
+title: Hello, World
 lang: en
 level: warm
 ---
-
-# Hello, World
-
-![warm-up](https://img.shields.io/badge/-warm--up-teal)
 
 ## Challenge
 
