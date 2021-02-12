@@ -1,9 +1,8 @@
 title: TypeScript Type Challenges
+tagline: Challenges and solutions to them
 description: This project is aimed at helping you better understand how the type system works, writing your own utilities, or just having fun with the challenges.
-author: ghaiklor
 theme: jekyll-theme-slate
 exclude: [vendor]
 plugins:
-  - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
