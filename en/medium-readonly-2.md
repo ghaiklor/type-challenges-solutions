@@ -1,3 +1,9 @@
+---
+lang: en
+level: medium
+tags: readonly object-keys
+---
+
 # Readonly 2
 
 ![medium](https://img.shields.io/badge/-medium-d9901a)

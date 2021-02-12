@@ -1,3 +1,9 @@
+---
+lang: en
+level: medium
+tags: math template-literal
+---
+
 # Absolute
 
 ![medium](https://img.shields.io/badge/-medium-d9901a)

@@ -1,3 +1,9 @@
+---
+lang: en
+level: medium
+tags: object-keys
+---
+
 # Append to object
 
 ![medium](https://img.shields.io/badge/-medium-d9901a)

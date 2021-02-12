@@ -1,3 +1,9 @@
+---
+lang: en
+level: easy
+tags: promise
+---
+
 # Awaited
 
 ![easy](https://img.shields.io/badge/-easy-7aad0c)

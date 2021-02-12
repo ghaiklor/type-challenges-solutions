@@ -1,3 +1,9 @@
+---
+lang: en
+level: medium
+tags: array built-in
+---
+
 # Promise.all
 
 ![medium](https://img.shields.io/badge/-medium-d9901a)

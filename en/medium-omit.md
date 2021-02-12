@@ -1,3 +1,9 @@
+---
+lang: en
+level: medium
+tags: union built-in
+---
+
 # Omit
 
 ![medium](https://img.shields.io/badge/-medium-d9901a)

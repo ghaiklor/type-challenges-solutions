@@ -1,3 +1,9 @@
+---
+lang: en
+level: medium
+tags: infer built-in
+---
+
 # Get Return Type
 
 ![medium](https://img.shields.io/badge/-medium-d9901a)

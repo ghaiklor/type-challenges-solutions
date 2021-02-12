@@ -1,3 +1,9 @@
+---
+lang: en
+level: medium
+tags: infer tuple union
+---
+
 # Tuple to Union
 
 ![medium](https://img.shields.io/badge/-medium-d9901a)
