@@ -34,3 +34,19 @@ tags: <CHALLENGE_TAGS>
 
 <CHALLENGE_REFERENCES_TO_READ_MORE>
 ```
+
+## Serving Locally
+
+I use Jekyll to build the site and deploy to GitHub Pages.
+So if you want to experiment with the repository and serve the content locally, make sure that you have installed the dependencies and call the serve recipe:
+
+```shell
+bundle install
+make serve
+```
+
+If you want to run the whole pipeline with tests and linter, just call make:
+
+```shell
+make
+```
