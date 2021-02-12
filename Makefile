@@ -11,3 +11,6 @@ test: build
 
 lint:
 	bundle exec mdl en
+
+serve:
+	bundle exec jekyll serve
