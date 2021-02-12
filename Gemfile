@@ -11,5 +11,5 @@ group :jekyll_plugins do
 end
 
 group :jekyll_themes do
-  gem "jekyll-theme-slate"
+  gem "jekyll-whiteglass"
 end
