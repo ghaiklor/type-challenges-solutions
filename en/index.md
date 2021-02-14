@@ -19,5 +19,5 @@ Take your time and enjoy the challenges!
 | Challenge | Solution |
 | :-------: | :------: |
 {%- for challenge in challenges %}
-| [Challenge "{{ challenge.title }}"]({{ challenge.challenge_url }}) | [Solution "{{ challenge.title }}"]({{ challenge.url }}) |
+| [Challenge "{{ challenge.title }}"]({{ challenge.challenge_url }}) | [Solution "{{ challenge.title }}"]({{ challenge.url | absolute_url }}) |
 {%- endfor %}
