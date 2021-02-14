@@ -3,6 +3,7 @@ title: Last of Array
 lang: en
 level: medium
 tags: array
+challenge_url: https://tsch.js.org/15
 ---
 
 ## Challenge

@@ -3,6 +3,7 @@ title: Append to Object
 lang: en
 level: medium
 tags: object-keys
+challenge_url: https://tsch.js.org/527
 ---
 
 ## Challenge

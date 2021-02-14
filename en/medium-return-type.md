@@ -3,6 +3,7 @@ title: Get Return Type
 lang: en
 level: medium
 tags: infer built-in
+challenge_url: https://tsch.js.org/2
 ---
 
 ## Challenge

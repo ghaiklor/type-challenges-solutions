@@ -3,6 +3,7 @@ title: Pop
 lang: en
 level: medium
 tags: array
+challenge_url: https://tsch.js.org/16
 ---
 
 ## Challenge

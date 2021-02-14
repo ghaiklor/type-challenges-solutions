@@ -3,6 +3,7 @@ title: Flatten
 lang: en
 level: medium
 tags: array
+challenge_url: https://tsch.js.org/459
 ---
 
 ## Challenge

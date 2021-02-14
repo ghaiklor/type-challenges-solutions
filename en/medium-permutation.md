@@ -3,6 +3,7 @@ title: Permutation
 lang: en
 level: medium
 tags: union
+challenge_url: https://tsch.js.org/296
 ---
 
 ## Challenge

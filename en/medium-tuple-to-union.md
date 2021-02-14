@@ -3,6 +3,7 @@ title: Tuple to Union
 lang: en
 level: medium
 tags: infer tuple union
+challenge_url: https://tsch.js.org/10
 ---
 
 ## Challenge

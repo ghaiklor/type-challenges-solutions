@@ -3,6 +3,7 @@ title: Deep Readonly
 lang: en
 level: medium
 tags: readonly object-keys deep
+challenge_url: https://tsch.js.org/9
 ---
 
 ## Challenge

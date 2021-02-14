@@ -3,6 +3,7 @@ title: Concat
 lang: en
 level: easy
 tags: array
+challenge_url: https://tsch.js.org/533
 ---
 
 ## Challenge

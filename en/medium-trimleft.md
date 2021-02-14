@@ -3,6 +3,7 @@ title: Trim Left
 lang: en
 level: medium
 tags: template-literal
+challenge_url: https://tsch.js.org/106
 ---
 
 ## Challenge

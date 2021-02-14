@@ -3,6 +3,7 @@ title: Awaited
 lang: en
 level: easy
 tags: promise
+challenge_url: https://tsch.js.org/189
 ---
 
 ## Challenge

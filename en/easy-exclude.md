@@ -3,6 +3,7 @@ title: Exclude
 lang: en
 level: easy
 tags: built-in
+challenge_url: https://tsch.js.org/43
 ---
 
 ## Challenge

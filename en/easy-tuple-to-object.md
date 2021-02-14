@@ -3,6 +3,7 @@ title: Tuple to Object
 lang: en
 level: easy
 tags: tuple
+challenge_url: https://tsch.js.org/11
 ---
 
 ## Challenge

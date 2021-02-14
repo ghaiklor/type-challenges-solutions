@@ -3,6 +3,7 @@ title: Length of Tuple
 lang: en
 level: easy
 tags: tuple
+challenge_url: https://tsch.js.org/18
 ---
 
 ## Challenge

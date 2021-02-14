@@ -3,6 +3,7 @@ title: Chainable Options
 lang: en
 level: medium
 tags: application
+challenge_url: https://tsch.js.org/12
 ---
 
 ## Challenge

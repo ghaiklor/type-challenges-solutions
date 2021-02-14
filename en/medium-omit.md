@@ -3,6 +3,7 @@ title: Omit
 lang: en
 level: medium
 tags: union built-in
+challenge_url: https://tsch.js.org/3
 ---
 
 ## Challenge
