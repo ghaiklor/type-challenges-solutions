@@ -26,4 +26,4 @@ NOTE: *I sort these items from the highest priority to the lowest*
 
 ## License
 
-[MIT](../LICENSE)
+[CC-BY-4.0](../LICENSE)
