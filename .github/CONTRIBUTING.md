@@ -1,6 +1,6 @@
 # Contributing
 
-## What this repo is about?
+## What this repository is about
 
 This repository is a collection of Markdown files where we store the solutions for Type Challenges with explanations and comments.
 
