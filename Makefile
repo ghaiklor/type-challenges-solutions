@@ -1,4 +1,4 @@
-all: build test lint
+all: clean build test lint
 
 clean:
 	bundle exec jekyll clean
@@ -9,8 +9,8 @@ build:
 test: build
 	bundle exec htmlproofer --url-ignore "/fonts.gstatic.com/" ./_site
 
-lint:
-	bundle exec mdl en
+lint: clean
+	find . -name '*.md' | xargs bundle exec mdl
 
 serve:
 	bundle exec jekyll serve
