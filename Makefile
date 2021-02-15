@@ -7,7 +7,7 @@ build:
 	bundle exec jekyll build
 
 test: build
-	bundle exec htmlproofer ./_site
+	bundle exec htmlproofer --url-ignore "/fonts.gstatic.com/" ./_site
 
 lint:
 	bundle exec mdl en
