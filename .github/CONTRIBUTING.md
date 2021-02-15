@@ -16,6 +16,7 @@ The Markdown file itself must comprise the following content:
 
 ```md
 ---
+id: <CHALLENGE_ID>
 title: <CHALLENGE_TITLE>
 lang: <COUNTRY_CODE>
 level: <CHALLENGE_LEVEL>
