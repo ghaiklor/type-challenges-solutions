@@ -1,9 +1,9 @@
 ---
+id: 119
 title: ReplaceAll
 lang: en
 level: medium
 tags: template-literal
-challenge_url: https://tsch.js.org/119
 ---
 
 ## Challenge

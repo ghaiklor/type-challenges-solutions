@@ -1,9 +1,9 @@
 ---
+id: 7
 title: Readonly
 lang: en
 level: easy
 tags: built-in readonly object-keys
-challenge_url: https://tsch.js.org/7
 ---
 
 ## Challenge

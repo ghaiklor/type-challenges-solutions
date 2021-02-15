@@ -1,9 +1,9 @@
 ---
+id: 116
 title: Replace
 lang: en
 level: medium
 tags: template-literal
-challenge_url: https://tsch.js.org/116
 ---
 
 ## Challenge

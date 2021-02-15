@@ -1,9 +1,9 @@
 ---
+id: 4
 title: Pick
 lang: en
 level: easy
 tags: union built-in
-challenge_url: https://tsch.js.org/4
 ---
 
 ## Challenge

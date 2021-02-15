@@ -1,9 +1,9 @@
 ---
+id: 531
 title: String to Union
 lang: en
 level: medium
 tags: union string
-challenge_url: https://tsch.js.org/531
 ---
 
 ## Challenge

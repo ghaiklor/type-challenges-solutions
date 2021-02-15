@@ -1,9 +1,9 @@
 ---
+id: 62
 title: Type Lookup
 lang: en
 level: medium
 tags: union map
-challenge_url: https://tsch.js.org/62
 ---
 
 ## Challenge

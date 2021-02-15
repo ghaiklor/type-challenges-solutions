@@ -1,9 +1,9 @@
 ---
+id: 645
 title: Diff
 lang: en
 level: medium
 tags: object
-challenge_url: https://tsch.js.org/645
 ---
 
 ## Challenge

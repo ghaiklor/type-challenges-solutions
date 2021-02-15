@@ -1,9 +1,9 @@
 ---
+id: 898
 title: Includes
 lang: en
 level: easy
 tags: array
-challenge_url: https://tsch.js.org/898
 ---
 
 ## Challenge

@@ -1,9 +1,9 @@
 ---
+id: 610
 title: CamelCase
 lang: en
 level: medium
 tags: template-literal
-challenge_url: https://tsch.js.org/610
 ---
 
 ## Challenge

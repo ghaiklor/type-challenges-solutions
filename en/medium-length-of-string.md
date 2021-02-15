@@ -1,9 +1,9 @@
 ---
+id: 298
 title: Length of String
 lang: en
 level: medium
 tags: template-literal
-challenge_url: https://tsch.js.org/298
 ---
 
 ## Challenge

@@ -19,5 +19,5 @@ Take your time and enjoy the challenges!
 | Challenge | Solution |
 | :-------: | :------: |
 {%- for challenge in challenges %}
-| [Challenge "{{ challenge.title }}"]({{ challenge.challenge_url }}) | [Solution "{{ challenge.title }}"]({{ challenge.url | absolute_url }}) |
+| [Challenge "{{ challenge.title }}"](<https://tsch.js.org/{{ challenge.id }}>) | [Solution "{{ challenge.title }}"]({{ challenge.url | absolute_url }}) |
 {%- endfor %}

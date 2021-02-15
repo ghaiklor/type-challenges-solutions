@@ -1,9 +1,9 @@
 ---
+id: 599
 title: Merge
 lang: en
 level: medium
 tags: object
-challenge_url: https://tsch.js.org/599
 ---
 
 ## Challenge

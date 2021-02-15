@@ -1,9 +1,9 @@
 ---
+id: 13
 title: Hello, World
 lang: en
 level: warm
 tags: warm-up
-challenge_url: https://tsch.js.org/13
 ---
 
 ## Challenge

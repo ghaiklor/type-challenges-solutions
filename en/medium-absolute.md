@@ -1,9 +1,9 @@
 ---
+id: 529
 title: Absolute
 lang: en
 level: medium
 tags: math template-literal
-challenge_url: https://tsch.js.org/529
 ---
 
 ## Challenge

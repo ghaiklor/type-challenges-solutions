@@ -1,9 +1,9 @@
 ---
+id: 191
 title: Append Argument
 lang: en
 level: medium
 tags: arguments
-challenge_url: https://tsch.js.org/191
 ---
 
 ## Challenge

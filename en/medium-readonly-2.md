@@ -1,9 +1,9 @@
 ---
+id: 8
 title: Readonly 2
 lang: en
 level: medium
 tags: readonly object-keys
-challenge_url: https://tsch.js.org/8
 ---
 
 ## Challenge

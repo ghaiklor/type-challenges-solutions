@@ -1,9 +1,9 @@
 ---
+id: 20
 title: Promise.all
 lang: en
 level: medium
 tags: array built-in
-challenge_url: https://tsch.js.org/20
 ---
 
 ## Challenge
