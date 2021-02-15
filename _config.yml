@@ -8,3 +8,4 @@ plugins:
   - jekyll-seo-tag
   - jekyll-remote-theme
   - jekyll-relative-links
+  - jekyll-feed
