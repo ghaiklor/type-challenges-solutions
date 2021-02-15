@@ -2,7 +2,13 @@
 
 Solutions for the collection of [TypeScript Type Challenges](https://github.com/type-challenges/type-challenges) with explanations.
 
-Navigate to website -> [link](https://ghaiklor.github.io/type-challenges-solutions/)
+## Languages
+
+- [English](https://ghaiklor.github.io/type-challenges-solutions/en)
+
+## Contributing
+
+See [CONTRIBUTING.md](./.github/CONTRIBUTING.md)
 
 ## Credits
 
