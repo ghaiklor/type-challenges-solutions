@@ -1,4 +1,4 @@
-# TypeScript Type Challenges Solutions
+# TypeScript Type Challenges
 
 Solutions for the collection of [TypeScript Type Challenges](https://github.com/type-challenges/type-challenges) with explanations.
 
@@ -23,6 +23,10 @@ NOTE: *I sort these items from the highest priority to the lowest*
 - [ ] Solve and write English posts for "hard" and "extreme" levels
 - [ ] Custom theme to improve readability
 - [ ] Look for the people who can help me to translate it to more languages
+
+## Credits
+
+- [type-challenges](https://github.com/type-challenges/type-challenges)
 
 ## License
 
