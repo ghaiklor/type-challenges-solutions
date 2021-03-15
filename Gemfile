@@ -3,6 +3,7 @@ source "https://rubygems.org"
 gem "jekyll"
 gem "html-proofer"
 gem "mdl"
+gem "octokit"
 
 group :jekyll_plugins do
   gem "github-pages"
