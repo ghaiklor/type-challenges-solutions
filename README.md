@@ -5,6 +5,7 @@ Solutions for the collection of [TypeScript Type Challenges](https://github.com/
 ## Languages
 
 - [English](https://ghaiklor.github.io/type-challenges-solutions/en)
+- [Русский](https://ghaiklor.github.io/type-challenges-solutions/ru)
 
 ## Credits
 
