@@ -25,5 +25,6 @@ title: Привіт!
 {% for challenge in challenges %}
 {{- -}} | ["{{ challenge.title }}" Задача](<https://tsch.js.org/{{ challenge.id }}>) _({{ challenge.level }})_
 {{- -}} | [Розв'язок "{{ challenge.title }}"]({{ challenge.url | absolute_url }})
+
 {{- -}} |
 {% endfor %}
