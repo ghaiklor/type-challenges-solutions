@@ -18,7 +18,7 @@ type A = If<true, 'a', 'b'> // expected to be 'a'
 type B = If<false, 'a', 'b'> // expected to be 'b'
 ```
 
-## Рішення
+## Розв'язок
 
 Використовуйте умовні типи [(conditional types)](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types) в  TypeScript коли вам необхідно вжити “if” до типів.
 Якщо тип умови буде `true` то візьмемо тип з гілки “true” і навпаки
