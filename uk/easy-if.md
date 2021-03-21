@@ -1,7 +1,7 @@
 ---
 id: 268
 title: If
-lang: ua
+lang: uk
 level: easy
 tags: utils
 ---

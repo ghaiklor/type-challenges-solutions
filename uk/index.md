@@ -18,7 +18,7 @@ title: Привіт!
 
 Якщо у вас є запитання чи ви помітили помилку, напишіть нам в [issues](https://github.com/ghaiklor/type-challenges-solutions/issues)
 
-{% assign challenges = site.pages | where: "lang", "ua" | sort: "title" %}
+{% assign challenges = site.pages | where: "lang", "uk" | sort: "title" %}
 
 | Задача | Розв'язок |
 | :----: | :-------: |
