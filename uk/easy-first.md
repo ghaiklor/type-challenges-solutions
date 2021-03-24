@@ -1,49 +1,49 @@
 ---
 id: 14
 title: First of Array
-lang: en
+lang: uk
 level: easy
 tags: array
 ---
 
-## Challenge
+## Завдання
 
-Implement a generic `First<T>` that takes an Array `T` and returns it's first element's type.
+Реалізувати тип `First<T>`, який приймає масив `T` і повертає тип його першого елемента.
 
-For example:
+Наприклад:
 
 ```ts
 type arr1 = ['a', 'b', 'c']
 type arr2 = [3, 2, 1]
 
-type head1 = First<arr1> // expected to be 'a'
-type head2 = First<arr2> // expected to be 3
+type head1 = First<arr1> // 'a'
+type head2 = First<arr2> // 3
 ```
 
-## Solution
+## Розв'язок
 
-The first thing that could come up is to use lookup types and just write `T[0]`:
+Перше, що приходить в голову, це використати пошукові(або індексні) типи й просто написати `T[0]`:
 
 ```ts
 type First<T extends any[]> = T[0]
 ```
 
-But there is an edge case that we need to handle.
-If we pass an empty array, `T[0]` will not work, because there is no element.
+Та це рішення не враховує один з випадків, який необхідно враховувати.
+Якщо ми передамо порожній масив, `T[0]` не спрацює, бо не буде елементу з індексом 0(як і жодних інших).
 
-So that, before accessing the first element in the array, we need to check if the array is empty.
-To do that, we can use [conditional types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types) in TypeScript.
+Тож, перед тим, як використати тип першого елемента, нам потрібно перевірити, чи масив не порожній.
+Для цього, ми можемо скористатись [умовними типами](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types) в TypeScript.
 
-The idea behind them is pretty straightforward.
-If we can assign the type to the type of condition, it will go into “true” branch, otherwise it will take “false” path.
-
-We are going to check, if the array is empty, we return nothing, otherwise we return the first element of the array:
+Їх принцип доволі простий.
+Якщо ми можемо присвоїти типу `T`(вхідний масив) порожній масив, це означає, що він порожній.
+В такому випадку, ми повертаємо `never`, бо він нам не підходить. Немає елемента – немає типу.
+І навпаки, якщо ми не можемо, значить масив містить елементи й ми спокійно можемо дізнатись тип першого з них.
 
 ```ts
 type First<T extends any[]> = T extends [] ? never : T[0];
 ```
 
-## References
+## Посилання
 
-- [Indexed Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
-- [Conditional Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
+- [Типи пошуку/індексні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
+- [Умовні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
