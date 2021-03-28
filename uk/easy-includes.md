@@ -18,6 +18,7 @@ tags: array
 type isPillarMen = Includes<['Kars', 'Esidisi', 'Wamuu', 'Santana'], 'Dio'>
 ```
 
+
 ## Розв'язок
 
 Почнемо з того, що створимо тип який приймає два аргументи `T` (кортеж із елементів) та `U` (елемент який ми шукаємо)
@@ -25,6 +26,7 @@ type isPillarMen = Includes<['Kars', 'Esidisi', 'Wamuu', 'Santana'], 'Dio'>
 ```typescript
 type Includes<T, U> = never;
 ```
+
 
 Перед тим, як шукати щось у кортежі, легше "перетворити" його на об'єднання елементів.
 Для цього використаємо індексні типи.

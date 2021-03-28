@@ -57,3 +57,4 @@ type MyPick<T, K extends keyof T> = { [P in K]: T[P] }
 - [Типи пошуку](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types)
 - [Типи співставлення](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
 - [Індексні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
+
