@@ -1,35 +1,36 @@
 ---
 id: 43
 title: Exclude
-lang: en
+lang: uk
 level: easy
 tags: built-in
 ---
 
-## Challenge
+## Завдання
 
-Implement the built-in `Exclude<T, U>`.
+Реалізувати вбудований тип `Exclude<T, U>`.
 
-> Exclude from T those types that are assignable to U
+> Виключити з типу T ті типи, що є присвоюваними в U
 
 ```ts
-type T0 = Exclude<"a" | "b" | "c", "a">; // expected "b" | "c"
-type T1 = Exclude<"a" | "b" | "c", "a" | "b">; // expected "c"
+type T0 = Exclude<"a" | "b" | "c", "a">; // "b" | "c"
+type T1 = Exclude<"a" | "b" | "c", "a" | "b">; // "c"
 ```
 
-## Solution
+## Розв'язок
 
-The important detail here is a knowledge that conditional types in TypeScript are [distributive](https://www.typescriptlang.org/docs/handbook/advanced-types.html#distributive-conditional-types).
+Для вирішення цього завдання важливо знати, що умовні типи в TypeScript [дистрибутивні](https://www.typescriptlang.org/docs/handbook/advanced-types.html#distributive-conditional-types).
 
-So that when you are writing the construct `T extends U` where `T` is the union, actually what is happening is TypeScript iterates over the union `T` and applies the condition to each element.
+Тож, коли ви пишете `T extends U`, де `T` є об'єднанням, TypeScript перебиратиме кожен елемент з `T` і застосовуватиме умову до кожного з них.
 
-Therefore, the solution is pretty straightforward.
-We check that `T` can be assigned to `U` and if so; we skip it:
+Зважаючи на це, рішення виглядатиме просто.
+Ми перевірятимемо, чи `T` можна присвоїти в тип `U` і, якщо це так, будемо пропускати `T`, повертаючи `never`.
+Іншими словами, це означає, що поточний елемент із `T` не знаходиться в `U`, а отже ми можемо повернути його:
 
 ```ts
 type MyExclude<T, U> = T extends U ? never : T;
 ```
 
-## References
+## Посилання
 
-- [Distributive Conditional Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#distributive-conditional-types)
+- [Дистрибутивні умовні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#distributive-conditional-types)
