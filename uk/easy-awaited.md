@@ -29,8 +29,8 @@ tags: promise
 
 Тож, до завдання.
 Розпочнімо з найпростішого прикладу.
-Якщо наш тип `Awaited` отримує `Promise<string>`, пом потрібно повернути `string`, інакше ми повернемо сам `T`, бо він не є `Promise`, а отже повертаємо без змін. Тут в пригоді стануть умовні типи:
-If our `Awaited` type gets `Promise<string>`, we need to return the `string`, otherwise we return the `T` itself, because it is not a Promise:
+Якщо наш тип `Awaited` отримує `Promise<string>`, пом потрібно повернути `string`, інакше ми повернемо сам `T`, бо він не є `Promise`, а отже повертаємо без змін.
+Тут в пригоді стануть умовні типи:
 
 ```ts
 type Awaited<T> = T extends Promise<string> ? string : T;
