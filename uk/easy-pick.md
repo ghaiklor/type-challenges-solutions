@@ -1,18 +1,18 @@
 ---
 id: 4
 title: Pick
-lang: en
+lang: uk
 level: easy
 tags: union built-in
 ---
 
-## Challenge
+## Завдання
 
-Implement the built-in `Pick<T, K>` generic without using it.
+Реалізуйте вбудований тип `Pick<T, K>` не використовуючи його.
 
-Constructs a type by picking the set of properties `K` from `T`.
+Створює новий тип в котрому перераховані лише ті властивості `T`, які вказані в `K`.
 
-For example:
+Наприклад:
 
 ```ts
 interface Todo {
@@ -29,35 +29,32 @@ const todo: TodoPreview = {
 }
 ```
 
-## Solution
+## Розв'язок
 
-For this challenge to solve, we need to use Lookup Types and Mapped Types.
+Для цієї задачі нам потрібні типи пошуку (Lookup Types) та співставляючі типи (Mapped Types)
 
-Lookup Types allow for us to extract a type from another type by its name.
-Kind of getting a value from an object by using its key.
+Типи пошуку дозволяють нам отримати тип з іншого типу за іменем. Схоже на отримання значення з об'єкта за ключем.
 
-Mapped Types allow for us to transform each property in a type into a new type.
+Типи співставлення дозволяють перетворити властивості типу в новий тип.
 
-You can read more about them and understand what they are doing on TypeScript website: [lookup types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types) and [mapped types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types).
+Ви можете прочитати більше про них і зрозуміти як вони працюють на сайті TypeScript: [типи пошуку (lookup types)](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types) і [типи співставлення (mapped types)](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types).
 
-Now, knowing that there are lookup types and mapped types in TypeScript.
-How to implement the required type?
+Тепер, знаючи про типи пошуку та співставляючі типи, як реалізувати необхідний тип?
 
-We need to take everything from the union K, iterate over it, and return a new type that will consist only of those keys.
-Exactly what mapped types are doing.
+Потрібно взяти всі елементи з об'єднання `K` та проітерувавши над `T` повернути новий тип який буде складатись лише з їх ключів, що вказані в `K`.
 
-The type of values itself are going to be without change.
-Although, we need to take its type from the original type and that is where lookup type is useful:
+Типи значень цих ключів не зміняться. Хоча нам доведеться взяти їх з початкового `T` і для цього будуть корисні типи пошуку:
 
 ```ts
 type MyPick<T, K extends keyof T> = { [P in K]: T[P] }
 ```
 
-We are saying “get everything from K, name it as P and make it as a new key in our new object with a value type taken from the input type”.
-It's hard to grasp at first, so if you didn’t understand something, try to read the info again and wrap it in your head step by step.
+Ми кажемо: "Візьми всі елементи з К, назви Р і зроби це ключем в новому об'єкті із значенням з початкового типу".
+Це складно зрозуміти одразу, тому якщо щось не зрозуміло спробуйте перечитати ще раз і розібрати рішення крок за кроком.
 
-## References
+## Посилання
 
-- [Lookup Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types)
-- [Mapped Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
-- [Indexed Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
+- [Типи пошуку](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types)
+- [Типи співставлення](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
+- [Індексні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
+

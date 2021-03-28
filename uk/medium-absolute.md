@@ -1,63 +1,59 @@
 ---
 id: 529
 title: Absolute
-lang: en
+lang: uk
 level: medium
 tags: math template-literal
 ---
 
-## Challenge
+## Завдання
 
-Implement the `Absolute` type.
-A type that take string, number or bigint.
-The output should be a positive number string.
+Реалізувати тип `Absolute`. Тип приймає рядок, число чи bigint. Повертає рядок з додатнім числом.
 
-For example:
+Наприклад:
 
 ```typescript
 type Test = -100;
 type Result = Absolute<Test>; // expected to be "100"
 ```
 
-## Solution
+## Розв'язок
 
-The easiest way to make a number absolute is to convert it to string and remove the “-” sign.
-I’m not joking, literally.
-Remove the “-” sign.
+Найлегший спосіб отримати абсолютне значення - привести число до рядка та видалити знак "-".
+Я не жартую, просто заберіть знак "-".
 
-We can approach it by checking if the type has a “-” sign in its template literal type, and if so, we infer the part without the “-” sign, otherwise return the type itself:
+Ми можемо почати з перевірки чи тип має знак "-" в своєму типі шаблонного літералу, якщо так - виводимо (infer) частину без мінуса, в іншому випадку - повертаємо сам тип:
 
 ```typescript
 type Absolute<T extends number | string | bigint> = T extends `-${infer N}` ? N : T;
 ```
 
-So, e.g. if we provide the type `T = “-50”`, it will match the `“-<N>”`, where `N` will become just “50”.
-That’s how it works.
+Отже, якщо ми візьмемо тип `T = “-50”` він співпаде з `“-<N>”`, де `N` стане просто "50".
+Ось так це працює.
 
-Now, we can see that some tests are still failing.
-That is because we do not return strings every time.
-When providing a positive number, it will not match the literal type and return the number, but we need to return a string.
+Тепер ми бачимо, що деякі тести все ще падають. Це відбувається тому що ми не завжди повертаємо рядки.
+У випадку з додатнім чистлом - воно не співпаде з типом шаблонного літералу та дженерик поверне число, хоча нам потрібен рядок.
 
-Let us fix that by wrapping our `T` in template literal type:
+Давайте виправимо це обгорнувши наш `T` в тип шаблонного літералу:
 
 ```typescript
 type Absolute<T extends number | string | bigint> = T extends `-${infer N}` ? N : `${T}`;
 ```
 
-Still, some tests are failing.
-We do not handle the case when `T` is a negative number.
-Number will not match the template literal type of condition, so it will return the negative number as a string.
-To overcome this, we can convert the number to string:
+Деякі тести все ще не проходять.
+Ми не обробляємо випадок, коли `T` - від'ємне число.
+Число не задовільнить умову для типу шаблонного літералу, тому повернеться від'ємне число як рядок.
+Щоб обійти це, ми перетворимо число в рядок:
 
 ```typescript
 type Absolute<T extends number | string | bigint> = `${T}` extends `-${infer N}` ? N : `${T}`;
 ```
 
-As a result, we got a type that takes any `number`, `string`, `bigint` and converts it to the string.
-Afterwards, infers the number without “-” sign and returns it or just returns the string without changes.
+В результаті ми маємо тип, що приймає будь-які `number`, `string`, `bigint` та перетворює їх в рядок.
+Потім, виводить число без знаку мінус "-" та повертає його або просто повертає рядок без змін.
 
-## References
+## Посилання
 
-- [Template Literal Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#template-literal-types)
-- [Conditional Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
-- [Type inference in conditional types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
+- [Типи шаблонних літералів](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#template-literal-types)
+- [Умовні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
+- [Виведення в умовних типах](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
