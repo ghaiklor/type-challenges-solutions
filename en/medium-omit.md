@@ -9,9 +9,7 @@ tags: union built-in
 ## Challenge
 
 Implement the built-in `Omit<T, K>` generic without using it.
-
-> Constructs a type by picking all properties from `T` and then removing `K`.
-
+Constructs a type by picking all properties from `T` and then removing `K`.
 For example:
 
 ```ts
