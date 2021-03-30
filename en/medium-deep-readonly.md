@@ -12,7 +12,7 @@ Implement a generic `DeepReadonly<T>` which makes every parameter of an object a
 
 You can assume that we are only dealing with Objects in this challenge.
 Arrays, Functions, Classes and so on are no need to take into consideration.
-However, you can still challenge your self by covering different cases as many as possbile.
+However, you can still challenge yourself by covering different cases as many as possbile.
 
 For example:
 
