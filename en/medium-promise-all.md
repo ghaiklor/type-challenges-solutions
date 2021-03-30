@@ -8,7 +8,8 @@ tags: array built-in
 
 ## Challenge
 
-Type the function `PromiseAll` that accepts an array of PromiseLike objects, the returning value should be `Promise<T>` where `T` is the resolved result array.
+Type the function `PromiseAll` that accepts an array of `PromiseLike` objects.
+The returning value should be `Promise<T>` where `T` is the resolved result array.
 
 ```ts
 const promise1 = Promise.resolve(3);
