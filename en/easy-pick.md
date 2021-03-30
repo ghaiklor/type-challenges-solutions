@@ -43,7 +43,7 @@ You can read more about them and understand what they are doing on TypeScript we
 Now, knowing that there are lookup types and mapped types in TypeScript.
 How to implement the required type?
 
-We need to take everything from the union K, iterate over it, and return a new type that will consist only of those keys.
+We need to take everything from the union `K`, iterate over it, and return a new type that will consist only of those keys.
 Exactly what mapped types are doing.
 
 The type of values itself are going to be without change.
@@ -53,7 +53,7 @@ Although, we need to take its type from the original type and that is where look
 type MyPick<T, K extends keyof T> = { [P in K]: T[P] }
 ```
 
-We are saying “get everything from K, name it as P and make it as a new key in our new object with a value type taken from the input type”.
+We are saying “get everything from `K`, name it as `P` and make it as a new key in our new object with a value type taken from the input type”.
 It's hard to grasp at first, so if you didn’t understand something, try to read the info again and wrap it in your head step by step.
 
 ## References
