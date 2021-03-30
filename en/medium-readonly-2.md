@@ -11,8 +11,7 @@ tags: readonly object-keys
 Implement a generic `MyReadonly2<T, K>` which takes two type arguments `T` and `K`.
 
 `K` specify the set of properties of `T` that should set to `readonly`.
-When `K` is not provided, it should make all properties readonly just like the normal `Readonly<T>`.
-
+When `K` is not provided, it should make all properties `readonly`, just like the normal `Readonly<T>`.
 For example:
 
 ```ts
@@ -53,8 +52,8 @@ type MyReadonly2<T, K> = T & { readonly [P in K]: T[P] };
 ```
 
 Looks like a solution, but we are getting a compilation error “Type ‘P’ cannot be used to index type ‘T’”.
-And that is true, we do not set a constraint on K.
-It should be “every key from T”:
+And that is true, we do not set a constraint on `K`.
+It should be “every key from `T`”:
 
 ```ts
 type MyReadonly2<T, K extends keyof T> = T & { readonly [P in K]: T[P] };
@@ -64,7 +63,7 @@ Works now?
 No!
 We do not handle the case when `K` is not set at all.
 That is the case when our type must behave as an usual `Readonly<T>` type.
-To fix that, we are just specifying the default type parameter for K to be “all the keys from T”:
+To fix that, we are just specifying the default type parameter for `K` to be “all the keys from `T`”:
 
 ```ts
 type MyReadonly2<T, K extends keyof T = keyof T> = T & { readonly [P in K]: T[P] };
