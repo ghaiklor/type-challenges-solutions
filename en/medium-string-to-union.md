@@ -8,8 +8,8 @@ tags: union string
 
 ## Challenge
 
-Implement the String to Union type.
-Type take string argument.
+Implement the `StringToUnion` type.
+Type take `string` argument.
 The output should be a union of input letters.
 
 For example:
