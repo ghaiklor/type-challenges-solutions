@@ -1,30 +1,31 @@
 ---
 id: 533
 title: Concat
-lang: en
+lang: uk
 level: easy
 tags: array
 ---
 
-## Challenge
+## Завдання
 
-Implement the JavaScript `Array.concat` function in the type system.
-A type takes the two arguments.
-The output should be a new array that includes inputs in ltr order.
+Створіть JavaScript функцію `Array.concat` використовуючи систему типів.
+Тип має приймати два аргументи.
+Результатом має бути новий масив, що містить об'єднання двох вхідних масивів.
 
-For example:
+Наприклад:
 
 ```ts
-type Result = Concat<[1], [2]> // expected to be [1, 2]
+type Result = Concat<[1], [2]> // [1, 2]
 ```
 
-## Solution
+## Розв'язок
 
-When working with arrays in TypeScript, pretty often Variadic Tuple Types are coming to the rescue in certain situations.
-They allow us to make generic spreads.
-I’ll try to explain, hold on.
+Працюючи з масивами в TypeScript, варіативні типи часто спрощують життя в моделюванні потрібної поведінки.
+Вони дозволяють нам використовувати `spread` оператор перед типом-параметром.
+Зачекайте, зараз поясню.
 
-Let me show you the implementation of concatenating two arrays in JavaScript:
+Розгляньмо на прикладі нашого завдання варіативні типи детальніше. Ми знаємо, що для реалізації об'єднання двох масивів в один мовою JavaScript,
+достатньо повернути новий масив, в якому, за допомогою `...`, з'єднати два вхідних:
 
 ```js
 function concat(arr1, arr2) {
@@ -32,24 +33,25 @@ function concat(arr1, arr2) {
 }
 ```
 
-We can use spread operators and just take everything from the `arr1` and paste it into another array.
-We can apply the same to the `arr2`.
-The key idea here is that it iterates over the elements in array\tuple and pastes them in the place where spread operator is used.
+Ми можемо використати оператор `...` і взяти все з масиву `arr1` і вставити в інший масив.
+Те ж саме застосовувано до `arr2`.
+Ключовим моментом є те, що ми таким чином ітеруємо елементи в масиві й вставляємо їх в місце, де використано оператор `...`.
 
-Variadic Tuple Types allows us to model the same behavior in the type system.
-If we want to concatenate two generic arrays, we can return the new array where both arrays are behind the spread operator:
+Варіативні типи дозволяють нам моделювати таку поведінку в системі типів.
+Коли нам потрібно об'єднати два масиви на рівні типів, ти можемо повернути новий тип, що міститиме елементи з двох вхідних масивів.
 
 ```ts
 type Concat<T, U> = [...T, ...U]
 ```
 
-We are getting the error “A rest element type must be an array type.”, though.
-Let us fix that by letting compiler know those types are arrays:
+Заждіть, в такому разі ми ж отримаємо помилку “A rest element type must be an array type.”.
+TypeScript каже, що не може застосувати оператор `...` до наших типів-параметрів, бо вони не є масивами.
+Виправмо це, вказавши, що ці типи будуть масивами:
 
 ```ts
 type Concat<T extends unknown[], U extends unknown[]> = [...T, ...U]
 ```
 
-## References
+## Посилання
 
-- [Variadic Tuple Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)
+- [Варіативні типи](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)
