@@ -1,59 +1,62 @@
 ---
 id: 189
 title: Awaited
-lang: en
+lang: uk
 level: easy
 tags: promise
 ---
 
-## Challenge
+## Завдання
 
-If we have a type which is wrapped type like `Promise`.
-How we can get a type which is inside the wrapped type?
-For example if we have `Promise<ExampleType>` how to get `ExampleType`?
+В TypeScript є типи, які обгортають інший, наприклад `Promise`.
+Як ми можемо дістати внутрішній тип з такої обгортки?
+Наприклад, як, маючи `Promise<ExampleType>`, отримати `ExampleType`?
 
-## Solution
+> Це питання взято з [допису на dev.to](https://dev.to/macsikora/advanced-typescript-exercises-question-1-45k4) від [@maciejsikora](https://github.com/maciejsikora)
 
-Pretty interesting challenge that requires us to know about one of the underrated TypeScript features, IMHO.
+## Розв'язок
 
-But, before explaining what I mean, let us analyze the challenge.
-The author asks us to unwrap the type.
-What is unwrap?
-Unwrap is extracting the inner type from another type.
+Досить цікаве завдання, що вимагає від нас знання однієї з недооцінених можливостей TypeScript, як на мене.
 
-Let me explain it with an example.
-If you have a type `Promise<string>`, unwrapping the `Promise` type will result into type `string`.
-We got the inner type from the outer type.
+Але, перед тим, як пояснити, що я маю на увазі, проаналізуймо завдання.
+Автор просить нас розгорнути тип.
+Що означає "розгорнути тип"?
+Розгортання, це добування внутрішнього типу з іншого, що його огортає.
 
-Now, to the challenge.
-I’ll start with the simplest case.
-If our `Awaited` type gets `Promise<string>`, we need to return the `string`, otherwise we return the `T` itself, because it is not a Promise:
+Розгляньмо на прикладі.
+Якщо ми маємо тип `Promise<string>`, то розгортання такого типу `Promise` дасть нам тип `string`, що знаходиться всередині `Promise`.
+Ми отримуємо внутрішній тип з зовнішнього.
+
+Тож, до завдання.
+Розпочнімо з найпростішого прикладу.
+Якщо наш тип `Awaited` отримує `Promise<string>`, пом потрібно повернути `string`, інакше ми повернемо сам `T`, бо він не є `Promise`, а отже повертаємо без змін.
+Тут в пригоді стануть умовні типи:
 
 ```ts
 type Awaited<T> = T extends Promise<string> ? string : T;
 ```
 
-But there is a problem.
-That way, we can handle only strings in `Promise` while we need to handle any case.
-So how to do that?
-How to get the type from `Promise` if we don’t know what is there?
+В цьому рішенні є проблема.
+За цією логікою, ми можемо видобути тільки рядки в `Promise`, коли нам необхідно мати підтримку будь-якого типу.
+Тож, як цього досягти?
+Як видобути тип з `Promise`, якщо ми не знаємо, що в ньому за тип?
 
-For these purposes, TypeScript has type inference in conditional types!
-You can say to the compiler “hey, once you know what the type is, assign it to my type parameter, please”.
-You can read more about [type inference in conditional types here](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html#type-inference-in-conditional-types).
+Для таких потреб, в TypeScript є виведення типів в умовних типах!
+Ми можемо сказати компілятору: “коли знатимеш, що це за тип, присвой його, будь ласка, моєму параметрові”.
+Ви можете прочитати більше про [виведення типів в умовних типах тут](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html#type-inference-in-conditional-types).
 
-Knowing about type inference, we can update our solution.
-Instead of checking for `Promise<string>` in our conditional type, we replace a `string` with `infer R`, because we don’t know what must be there.
-The only thing we know is that it is a `Promise<T>` with some type inside.
+Знаючи про виведення, ми можемо покращити наше рішення.
+Замість перевірки на `Promise<string>` у нашому умовному типі, ми замінимо `string` на `infer R`, бо ми не знаємо, що там має бути.
+Єдине, що ми знаємо, це те, що це `Promise<T>` з якимось типом всередині.
 
-Once the TypeScript figures out the type inside the `Promise`, it will assign it to our type parameter `R` and becomes available in “true” branch.
-Exactly where we return it:
+Як тільки TypeScript зрозуміє, який тип знаходиться всередині `Promise`, він присвоїть його нашому параметрові `R` і стане доступним у гілці "true", звідки ми його і повернемо.
+Виглядатиме це все наступним чином:
 
 ```ts
 type Awaited<T> = T extends Promise<infer R> ? R : T;
 ```
 
-## References
+## Посилання
 
-- [Conditional Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
-- [Type Inference in Conditional Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
+- [Умовні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
+- [Виведення типів в умовних типах](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
