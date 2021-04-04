@@ -14,12 +14,5 @@ comments: false
 
 Если у вас есть вопросы, заметили ошибку или не поняли объяснение, пожалуйста, дайте об этом знать в [Issues](https://github.com/ghaiklor/type-challenges-solutions/issues).
 
-{% assign challenges = site.pages | where: "lang", "ru" | sort: "title" %}
-
-| Проблема | Решение |
-| :------: | :-----: |
-{% for challenge in challenges %}
-{{- -}} | ["{{ challenge.title }}"](<https://tsch.js.org/{{ challenge.id }}>) _({{ challenge.level }})_
-{{- -}} | [Решение для "{{ challenge.title }}"]({{ challenge.url | absolute_url }})
-{{- -}} |
-{% endfor %}
+{% assign challenges = site.pages | where: "lang", "ru" %}
+{% include draw_challenges_table.html challenges = challenges %}
