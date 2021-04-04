@@ -1,5 +1,6 @@
 ---
 title: Welcome!
+lang: en
 comments: false
 ---
 

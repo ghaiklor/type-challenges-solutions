@@ -7,12 +7,12 @@
 
 <table>
   <tr align="center">
-    <th>Challenge</th>
-    <th>Solution</th>
+    <th>{% include i18n.html lang=lang value="challenge" default="Challenge" %}</th>
+    <th>{% include i18n.html lang=lang value="solution" default="Solution" %}</th>
   </tr>
-  {% include draw_challenges_level.html challenges = warm level = "Warm Up" %}
-  {% include draw_challenges_level.html challenges = easy level = "Easy" %}
-  {% include draw_challenges_level.html challenges = medium level = "Medium" %}
-  {% include draw_challenges_level.html challenges = hard level = "Hard" %}
-  {% include draw_challenges_level.html challenges = extreme level = "Extreme" %}
+  {% include draw_challenges_level.html challenges = warm level = "warm" %}
+  {% include draw_challenges_level.html challenges = easy level = "easy" %}
+  {% include draw_challenges_level.html challenges = medium level = "medium" %}
+  {% include draw_challenges_level.html challenges = hard level = "hard" %}
+  {% include draw_challenges_level.html challenges = extreme level = "extreme" %}
 </table>

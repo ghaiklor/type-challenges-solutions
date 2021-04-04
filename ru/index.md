@@ -1,5 +1,6 @@
 ---
 title: Привет!
+lang: ru
 comments: false
 ---
 
