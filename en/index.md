@@ -20,12 +20,5 @@ Further in the solution, I’m providing references to TypeScript documentation 
 If you have questions, go ahead to [issues](https://github.com/ghaiklor/type-challenges-solutions/issues) and raise it there.
 Take your time and enjoy!
 
-{% assign challenges = site.pages | where: "lang", "en" | sort: "title" %}
-
-| Challenge | Solution |
-| :-------: | :------: |
-{% for challenge in challenges %}
-{{- -}} | [Take "{{ challenge.title }}" Challenge](<https://tsch.js.org/{{ challenge.id }}>) _({{ challenge.level }})_
-{{- -}} | [See "{{ challenge.title }}" Solution]({{ challenge.url | absolute_url }})
-{{- -}} |
-{% endfor %}
+{% assign challenges = site.pages | where: "lang", "en" %}
+{% include draw_challenges_table.html challenges = challenges %}

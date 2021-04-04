@@ -1,0 +1,18 @@
+{% assign challenges = include.challenges %}
+{% assign warm = challenges | where: "level", "warm" %}
+{% assign easy = challenges | where: "level", "easy" %}
+{% assign medium = challenges | where: "level", "medium" %}
+{% assign hard = challenges | where: "level", "hard" %}
+{% assign extreme = challenges | where: "level", "extreme" %}
+
+<table>
+  <tr align="center">
+    <th>Challenge</th>
+    <th>Solution</th>
+  </tr>
+  {% include draw_challenges_level.html challenges = warm level = "Warm Up" %}
+  {% include draw_challenges_level.html challenges = easy level = "Easy" %}
+  {% include draw_challenges_level.html challenges = medium level = "Medium" %}
+  {% include draw_challenges_level.html challenges = hard level = "Hard" %}
+  {% include draw_challenges_level.html challenges = extreme level = "Extreme" %}
+</table>
