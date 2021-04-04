@@ -1,0 +1,28 @@
+en:
+  date:
+    format: "%b %-d, %Y"
+    abbr_day_names: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    abbr_month_names: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dez"]
+    day_names: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    month_names: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+  morelink: "Read on"
+  page-older: "Older"
+  page-newer: "Newer"
+  archive: "Blog Archive"
+  archive-category: "Archive of category '%1'"
+  archive-tag: "Archive of tag '%1'"
+  comments: "Comments"
+ru:
+  date:
+    format: "%-d/%m/%Y"
+    abbr_day_names: ["Вс", "Пон", "Втр", "Ср", "Чтв", "Пт", "Сбт"]
+    abbr_month_names: ["Янв", "Фев", "Мрт", "Апр", "Май", "Июн", "Июл", "Авг", "Сент", "Окт", "Нбр", "Дек"]
+    day_names: ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]
+    month_names: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
+  morelink: "Читать дальше"
+  page-older: "Старее"
+  page-newer: "Новее"
+  archive: "Архив"
+  archive-category: "Архив категории '%1'"
+  archive-tag: "Архив тега '%1'"
+  comments: "Комментарии"
