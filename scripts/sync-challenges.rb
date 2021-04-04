@@ -9,16 +9,10 @@ questions = client
   .sort()
 
 for i in 0 ... languages.size
-  puts ''
-  puts 'Language: ' + languages[i]
-  puts ''
-
   for j in 0 ... questions.size
     path = Pathname.new(languages[i] + '/' + questions[j])
 
-    if (path.exist?())
-      puts '✅ ' + path.to_s
-    else
+    if (not path.exist?())
       puts '❌ ' + path.to_s
     end
   end

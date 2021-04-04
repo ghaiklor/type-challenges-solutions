@@ -9,8 +9,8 @@ tags: built-in
 ## Challenge
 
 Implement the built-in `Exclude<T, U>`.
-
-> Exclude from T those types that are assignable to U
+Exclude from `T` those types that are assignable to `U`.
+For example:
 
 ```ts
 type T0 = Exclude<"a" | "b" | "c", "a">; // expected "b" | "c"

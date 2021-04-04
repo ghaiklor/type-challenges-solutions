@@ -64,7 +64,7 @@ type CamelCase<S> = S extends `${infer H}-${infer T}`
   : S;
 ```
 
-We got a type that can capitalize template literal types, neat!
+We got a type that can "camelCase" template literal types, neat!
 
 ## References
 

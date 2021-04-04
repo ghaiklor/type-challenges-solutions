@@ -53,7 +53,7 @@ type MyReadonly2<T, K> = T & { readonly [P in K]: T[P] };
 
 Выглядит как решение, но получаем ошибку “Type ‘P’ cannot be used to index type ‘T’”.
 И это правда, у нас нет ограничений на `K`.
-Ограничим его до "ключи из T".
+Ограничим его до "ключи из `T`".
 
 ```typescript
 type MyReadonly2<T, K extends keyof T> = T & { readonly [P in K]: T[P] };
@@ -63,7 +63,7 @@ type MyReadonly2<T, K extends keyof T> = T & { readonly [P in K]: T[P] };
 Нет!
 Мы забыли о случае, когда `K` не передан вовсе, как аргумент.
 Это тот случай, когда `MyReadonly2` ведёт себя как встроенный `Readonly<T>`.
-Добавим к `K` тип параметр по умолчанию "все ключи из T".
+Добавим к `K` тип параметр по умолчанию "все ключи из `T`".
 
 ```typescript
 type MyReadonly2<T, K extends keyof T = keyof T> = T & { readonly [P in K]: T[P] };

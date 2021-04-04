@@ -28,13 +28,13 @@ type trimmed = Trim<'  Hello World  '> // expected to be 'Hello World'
 Продолжая выводить рекурсивно, избавляемся от пробелов слева.
 
 ```typescript
-type Trim<S> = S extends `${infer R}` ? Trim<R> : S;
+type Trim<S> = S extends ` ${infer R}` ? Trim<R> : S;
 ```
 
 Когда пробелы слева убраны, проверим, есть ли пробелы по правую сторону строки и сделаем то же.
 
 ```typescript
-type Trim<S> = S extends `${infer R}` ? Trim<R> : S extends `${infer L}` ? Trim<L> : S;
+type Trim<S> = S extends ` ${infer R}` ? Trim<R> : S extends `${infer L} ` ? Trim<L> : S;
 ```
 
 Таким образом, убираем пробелы с левой стороны, после, убираем с правой стороны.

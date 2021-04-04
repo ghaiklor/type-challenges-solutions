@@ -6,6 +6,7 @@ keywords: typescript, types, challenges, solutions
 lang: en
 
 # Build related stuff
+comments: true
 remote_theme: yous/whiteglass
 exclude: [vendor]
 plugins:

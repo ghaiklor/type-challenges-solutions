@@ -1,5 +1,6 @@
 ---
 title: Welcome!
+comments: false
 ---
 
 You can find here a collection of challenges to test yourself and their solutions!

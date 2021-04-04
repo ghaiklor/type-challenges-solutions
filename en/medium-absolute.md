@@ -9,7 +9,7 @@ tags: math template-literal
 ## Challenge
 
 Implement the `Absolute` type.
-A type that take string, number or bigint.
+A type that take `string`, `number` or `bigint`.
 The output should be a positive number string.
 
 For example:
