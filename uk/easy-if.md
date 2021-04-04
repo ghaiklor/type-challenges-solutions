@@ -1,41 +1,40 @@
 ---
 id: 268
 title: If
-lang: en
+lang: uk
 level: easy
 tags: utils
 ---
 
-## Challenge
+## Завдання
 
-Implement a utils `If` which accepts condition `C`, a truthy return type `T`, and a falsy return type `F`.
-`C` is expected to be either `true` or `false` while `T` and `F` can be any type.
+Реалізувати допоміжний тип `If`, який приймає умову `C` типи `T` та `F`.
+Залежно від того, чи умова `C` істинна повернути тип `T` або `F`.
 
-For example:
+Наприклад:
 
 ```ts
 type A = If<true, 'a', 'b'> // expected to be 'a'
 type B = If<false, 'a', 'b'> // expected to be 'b'
 ```
 
-## Solution
+## Розв'язок
 
-If you are not sure when to use [conditional types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types) in TypeScript, it is when you need to use an “if” statement on types.
-Exactly what we tasked to do here.
-
-If the condition type evaluates to `true`, we need to take a “true” branch, otherwise “false” branch:
+Використовуйте умовні типи [(conditional types)](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types) в TypeScript коли вам необхідно вжити “if” до типів.
+Якщо тип умови буде `true` то візьмемо тип з гілки “true” і навпаки.
 
 ```ts
 type If<C, T, F> = C extends true ? T : F;
 ```
 
-Going that way we will get a compilation error, because we are trying to assign `C` to boolean type and not having a constraint that shows that.
-So let us fix it by adding `extends boolean` to the type parameter `C`:
+Але так ми отримаємо помилку при компіляції, тому що ми намагаємось привести `C` до булевого типу.
+
+Виправимо це додавши обмеження `extends boolean` до параметру `C`.
 
 ```ts
 type If<C extends boolean, T, F> = C extends true ? T : F;
 ```
 
-## References
+## Посилання
 
-- [Conditional Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
+- [Умовні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
