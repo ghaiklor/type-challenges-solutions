@@ -1,0 +1,7 @@
+main:
+  - title: "English"
+    url: /en/
+  - title: "Русский"
+    url: /ru/
+  - title: "GitHub"
+    url: https://github.com/ghaiklor/type-challenges-solutions
