@@ -1,18 +1,18 @@
 ---
 id: 7
 title: Readonly
-lang: en
+lang: uk
 level: easy
 tags: built-in readonly object-keys
 ---
 
-## Challenge
+## Завдання
 
-Implement the built-in `Readonly<T>` generic without using it.
+Реалізуйте вбудований тип `Readonly<T>`, не використовуючи його.
 
-Constructs a type with all properties of `T` set to `readonly`, meaning the properties of the constructed type cannot be reassigned.
+Він має створювати тип з усіма властивостями `T` визначеними як `readonly`, тобто вони не можуть бути переприсвоєними.
 
-For example:
+Наприклад:
 
 ```ts
 interface Todo {
@@ -29,18 +29,18 @@ todo.title = "Hello" // Error: cannot reassign a readonly property
 todo.description = "barFoo" // Error: cannot reassign a readonly property
 ```
 
-## Solution
+## Розв'язок
 
-We need to make all the properties in the object read-only.
-Therefore, we need to iterate over all the properties and add a modifier to them.
+Нам потрібно зробити всі властивості у типі доступними лише для читання.
+Отже, ми маємо проітерувати всі властивості та додати до них модифікатор.
 
-We are going to use the usual [Mapped Type](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types) here, nothing serious.
-For each property in the type, we take its key and add a `readonly` modifier to it:
+Ми використаємо звичайні [типи співставлення](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types), нічого складного.
+Ми візьмемо ключ кожної властивості та додамо йому модифікатор `readonly`:
 
 ```ts
 type MyReadonly<T> = { readonly [K in keyof T]: T[K] }
 ```
 
-## References
+## Посилання
 
-- [Mapped Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
+- [Типи співставлення](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
