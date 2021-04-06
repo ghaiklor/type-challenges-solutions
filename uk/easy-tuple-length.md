@@ -1,16 +1,16 @@
 ---
 id: 18
 title: Length of Tuple
-lang: en
+lang: uk
 level: easy
 tags: tuple
 ---
 
-## Challenge
+## Завдання
 
-For given a tuple, you need create a generic `Length`, pick the length of the tuple.
+Потрібно створити дженерик-тип `Length`, що поверне довжину заданого кортежу.
 
-For example:
+До прикладу:
 
 ```ts
 type tesla = ['tesla', 'model 3', 'model X', 'model Y']
@@ -20,22 +20,22 @@ type teslaLength = Length<tesla> // expected 4
 type spaceXLength = Length<spaceX> // expected 5
 ```
 
-## Solution
+## Розв'язок
 
-We know that we can use property `length` to access the length of the array in JavaScript.
-We can do the same in types as well:
+Ми знаємо, що можна використати властивість `length` для доступу до довжини масиву в JavaScript.
+Того ж можна досягти в типах:
 
 ```ts
 type Length<T extends any> = T['length']
 ```
 
-But going that way we will get the compilation error “Type 'length' cannot be used to index type 'T'.”.
-So we need to give a hint to TypeScript and tell that our input type parameter has this property:
+Проте, якщо зробити так, ми отримаємо помилку компіляції “Type 'length' cannot be used to index type 'T'.”.
+Тож, треба дати TypeScript підказку, вказавши, що наш вхідний тип має таку властивість:
 
 ```ts
 type Length<T extends { length: number }> = T['length']
 ```
 
-## References
+## Посилання
 
-- [Indexed Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
+- [Індексні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
