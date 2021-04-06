@@ -1,16 +1,16 @@
 ---
 id: 11
 title: Tuple to Object
-lang: en
+lang: uk
 level: easy
 tags: tuple
 ---
 
-## Challenge
+## Завдання
 
-Given an array, transform to an object type and the key/value must in the given array.
+Перетворити отриманий масив на об'єкт, де парами ключ-значення будуть елементи цього масиву.
 
-For example:
+Наприклад:
 
 ```ts
 const tuple = ['tesla', 'model 3', 'model X', 'model Y'] as const
@@ -19,19 +19,19 @@ const tuple = ['tesla', 'model 3', 'model X', 'model Y'] as const
 const result: TupleToObject<typeof tuple>
 ```
 
-## Solution
+## Розв'язок
 
-We need to take all the values from the array and make it as keys and values in our new object.
+Нам потрібно взяти всі значення масиву і зробити їх ключами та, відповідно, значеннями нашого нового об'єкта.
 
-It is easy to do with indexed types.
-We can get the values from an array by using `T[number]` construct.
-With the help of mapped types, we can iterate over those values in `T[number]` and return a new type where the key and value is the type from `T[number]`:
+Це легко зробити з індексними типами.
+Ми можемо взяти значення масиву використовуючи вираз `T[number]`.
+За допомогою типів зіставлення, ми можемо ітерувати значення через `T[number]` і повернути новий тип, ключами та значеннями якого будуть відповідні елементи `T[number]`:
 
 ```ts
 type TupleToObject<T extends readonly any[]> = { [K in T[number]]: K }
 ```
 
-## References
+## Посилання
 
-- [Mapped Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
-- [Indexed Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
+- [Типи зіставлення](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
+- [Індексні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
