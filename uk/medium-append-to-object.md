@@ -1,60 +1,56 @@
 ---
 id: 527
 title: Append to Object
-lang: en
+lang: uk
 level: medium
 tags: object-keys
 ---
 
-## Challenge
+## Завдання
 
-Implement a type that adds a new field to the interface.
-The type takes the three arguments.
-The output should be an object with the new field.
+Реалізуйте тип, що додає нове поле до інтерфейсу.
+Тип приймає три аргументи. Повертає об'єкт з доданим полем.
 
-For example:
+Наприклад:
 
 ```ts
 type Test = { id: '1' }
 type Result = AppendToObject<Test, 'value', 4> // expected to be { id: '1', value: 4 }
 ```
 
-## Solution
+## Розв'язок
 
-When we try to change objects\interfaces in TypeScript, usually intersection types are helpful for that.
-This challenge is not an exception.
-I’ve tried to write a type that takes the whole `T` plus an object with a new property:
+Коли ми хочемо змінити об'єкти/інтерфейси в TypeScript, зазвичай для цього бувають корисні типи перетину (intersection types).
+Ця задача не виняток.
+Я спробував написати тип, що приймає `T` та об'єкт з новою властивістю:
 
 ```typescript
 type AppendToObject<T, U, V> = T & { [P in U]: V }
 ```
 
-Unfortunately, this solution does not satisfy the tests.
-They are expecting to have a flat type, not the intersection.
-So we need to return an object type where all the properties plus our new property.
-I’ll start by mapping the properties from `T`:
+Нажаль, це рішення не задовольняє тести.
+Вони очікують плоский тип, а не перетин.
+Тому нам необхідно повернути об'єкт, в якому є всі властивості разом з нашою новою.
+Почнемо з того, що повернемо властивості `T`:
 
 ```typescript
 type AppendToObject<T, U, V> = { [P in keyof T]: T[P] }
 ```
 
-Now, we need to add to those properties of `T` our new property `U`.
-Easy, here is the trick.
-Nothing stops you from passing a union to `in` operator:
+Тепер нам потрібно додати до властивостей `T` нову властивість `U`. Для цього ми можемо передати об'єднання типів оператору `in`:
 
 ```typescript
 type AppendToObject<T, U, V> = { [P in keyof T | U]: T[P] }
 ```
 
-That way, we will get all the properties of `T` plus properties of `U`, exactly what we need here.
-Let us fix minor errors now by adding a constraint to `U`:
+Таким чином ми отримаємо всі властивості з `T` разом з властивостями `U`, саме те, що нам потрібно. Виправимо незначні помилки обмеживши `U`:
 
 ```typescript
 type AppendToObject<T, U extends string, V> = { [P in keyof T | U]: T[P] }
 ```
 
-The only thing that TypeScript can’t handle now is the fact, that `P` can be absent in `T`, because `P` is a union of `T` and `U`.
-We need to handle the case and check, if `P` is from the `T`, we get `T[P]`, otherwise we pass `V`:
+Останнє, що TypeScript не може гарантувати - це те, що `P` може не бути в `T`, бо `P` - об'єднання `T` і `U`.
+Нам необхідно додати перевірку: якщо `P` з `T` - отримаємо `T[P]`, в іншому випадку `V`:
 
 ```typescript
 type AppendToObject<T, U extends string, V> = { [P in keyof T | U]: P extends keyof T ? T[P] : V }
@@ -62,6 +58,6 @@ type AppendToObject<T, U extends string, V> = { [P in keyof T | U]: P extends ke
 
 ## References
 
-- [Mapped Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
-- [Conditional Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
-- [Union Types](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#union-types)
+- [Типи співставлення](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
+- [Умовні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
+- [Об'єднання типів](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#union-types)
