@@ -1,25 +1,24 @@
 ---
 id: 610
 title: CamelCase
-lang: en
+lang: uk
 level: medium
 tags: template-literal
 ---
 
-## Challenge
+## Завдання
 
-Convert a string to CamelCase.
-For example:
+Перевести рядок до CamelCase.
+Наприклад:
 
 ```typescript
 type camelCased = CamelCase<'foo-bar-baz'> // expected "fooBarBaz"
 ```
 
-## Solution
+## Розв'язок
 
-There is a common pattern that we can use for inferring the parts of the string - hyphen.
-We can have everything before the hyphen - head, and everything after the hyphen - tail.
-Let us infer those parts.
+Спільною частиною, яку ми можемо використати для виведення рядка є дефіс.
+Давайте виведемо частини до та після дефісу.
 
 ```typescript
 type CamelCase<S> = S extends `${infer H}-${infer T}`
@@ -27,8 +26,7 @@ type CamelCase<S> = S extends `${infer H}-${infer T}`
   : never;
 ```
 
-What if there is no such pattern?
-We return the input string with no changes.
+Якщо такого шаблону немає - повертаємо рядок без змін.
 
 ```typescript
 type CamelCase<S> = S extends `${infer H}-${infer T}`
@@ -36,8 +34,8 @@ type CamelCase<S> = S extends `${infer H}-${infer T}`
   : S;
 ```
 
-But if there is such a pattern, we need to remove the hyphen and capitalize the tail.
-Also, we don’t forget that there are possibly other substring we need to process, so we do it recursively.
+Але коли такий шаблон знайдений нам потрібно видалити дефіс та зробити першу букву великою.
+Крім цього не забуваємо, що можуть бути інші під-рядки, які також потрібно обробити. Зробимо це рекурсивно.
 
 ```typescript
 type CamelCase<S> = S extends `${infer H}-${infer T}`
@@ -45,8 +43,8 @@ type CamelCase<S> = S extends `${infer H}-${infer T}`
   : S;
 ```
 
-The problem now is that we do not handle the cases when the tail already capitalized.
-We can fix that by checking if we can assign the tail to capitalized tail.
+Тепер проблема в тому, що ми не враховуємо випадок, коли друга частина рядка уже починається з великої літери.
+Виправимо це перевіркою чи можемо ми присвоїти цю частину до неї ж, але капіталізованої.
 
 ```typescript
 type CamelCase<S> = S extends `${infer H}-${infer T}`
@@ -54,9 +52,8 @@ type CamelCase<S> = S extends `${infer H}-${infer T}`
   : S;
 ```
 
-What will we do if we get the capitalized tail?
-We need to preserve the hyphen and just skip this one.
-Sure, we need to do it recursively as well.
+Що робити, якщо друга частина рядка уже починається з великої літери?
+Збережемо дефіс та пропустимо цю частину. Звісно, також рекурсивно.
 
 ```typescript
 type CamelCase<S> = S extends `${infer H}-${infer T}`
@@ -64,11 +61,11 @@ type CamelCase<S> = S extends `${infer H}-${infer T}`
   : S;
 ```
 
-We got a type that can "camelCase" template literal types, neat!
+Чудово, ми отримали тип, що приводить шаблонні літерали до "camelCase"!
 
-## References
+## Посилання
 
-- [Conditional Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
-- [Type inference in conditional types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
-- [Recursive Conditional Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#recursive-conditional-types)
-- [Template Literal Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#template-literal-types)
+- [Умовні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
+- [Виведення типів в умовних типах](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
+- [Рекурсивні умовні типи](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#recursive-conditional-types)
+- [Типи шаблонних літералів](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#template-literal-types)
