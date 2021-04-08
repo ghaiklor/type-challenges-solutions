@@ -2,7 +2,7 @@
 {% assign level = include.level %}
 
 <tr align="center">
-  <td><b>{{ level }}</b></td>
+  <td><b>{% include i18n.html lang=lang value=level default="TK" %}</b></td>
   <td>-</td>
 </tr>
 {% for challenge in challenges %}

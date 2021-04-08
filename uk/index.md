@@ -1,5 +1,6 @@
 ---
 title: Welcome!
+lang: uk
 comments: false
 ---
 
@@ -20,5 +21,5 @@ Further in the solution, I’m providing references to TypeScript documentation 
 If you have questions, go ahead to [issues](https://github.com/ghaiklor/type-challenges-solutions/issues) and raise it there.
 Take your time and enjoy!
 
-{% assign challenges = site.pages | where: "lang", "en" %}
+{% assign challenges = site.pages | where: "lang", "uk" %}
 {% include draw_challenges_table.html challenges = challenges %}

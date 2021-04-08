@@ -1,7 +1,7 @@
 require 'pathname'
 require 'octokit'
 
-languages = ['en', 'ru']
+languages = ['en', 'ru', 'uk']
 client = Octokit::Client.new
 questions = client
   .contents('type-challenges/type-challenges', path: 'questions')

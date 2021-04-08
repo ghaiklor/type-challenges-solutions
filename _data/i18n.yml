@@ -1,0 +1,63 @@
+en:
+  date:
+    format: "%b %-d, %Y"
+    abbr_day_names: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    abbr_month_names: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dez"]
+    day_names: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    month_names: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+  morelink: "Read on"
+  page-older: "Older"
+  page-newer: "Newer"
+  archive: "Blog Archive"
+  archive-category: "Archive of category '%1'"
+  archive-tag: "Archive of tag '%1'"
+  comments: "Comments"
+  challenge: "Challenge"
+  solution: "Solution"
+  warm: "Warm Up"
+  easy: "Easy"
+  medium: "Medium"
+  hard: "Hard"
+  extreme: "Extreme"
+ru:
+  date:
+    format: "%-d/%m/%Y"
+    abbr_day_names: ["Вс", "Пон", "Втр", "Ср", "Чтв", "Пт", "Сбт"]
+    abbr_month_names: ["Янв", "Фев", "Мрт", "Апр", "Май", "Июн", "Июл", "Авг", "Сент", "Окт", "Нбр", "Дек"]
+    day_names: ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"]
+    month_names: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
+  morelink: "Читать дальше"
+  page-older: "Старее"
+  page-newer: "Новее"
+  archive: "Архив"
+  archive-category: "Архив категории '%1'"
+  archive-tag: "Архив тега '%1'"
+  comments: "Комментарии"
+  challenge: "Проблема"
+  solution: "Решение"
+  warm: "Разогрев"
+  easy: "Лёгкий"
+  medium: "Средний"
+  hard: "Сложный"
+  extreme: "Экстремальный"
+uk:
+  date:
+    format: "%-d/%m/%Y"
+    abbr_day_names: ["Нд", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"]
+    abbr_month_names: ["Сiч", "Лют", "Бер", "Квіт", "Трав", "Черв", "Лип", "Серп", "Вер", "Жвт", "Лист", "Груд"]
+    day_names: ["Неділя", "Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця", "Субота"]
+    month_names: ["Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень", "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень"]
+  morelink: "Читати далі"
+  page-older: "Старіші"
+  page-newer: "Новіше"
+  archive: "Архів"
+  archive-category: "Архів категорії '%1'"
+  archive-tag: "Архів тега '%1'"
+  comments: "Коментарі"
+  challenge: "Проблема"
+  solution: "Рішення"
+  warm: "Розігрів"
+  easy: "Легкий"
+  medium: "Середній"
+  hard: "Складний"
+  extreme: "Екстремальний"
