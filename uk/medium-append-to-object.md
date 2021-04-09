@@ -9,7 +9,8 @@ tags: object-keys
 ## Завдання
 
 Реалізуйте тип, що додає нове поле до інтерфейсу.
-Тип приймає три аргументи. Повертає об'єкт з доданим полем.
+Тип приймає три аргументи.
+Повертає об'єкт з доданим полем.
 
 Наприклад:
 
@@ -28,7 +29,7 @@ type Result = AppendToObject<Test, 'value', 4> // expected to be { id: '1', valu
 type AppendToObject<T, U, V> = T & { [P in U]: V }
 ```
 
-Нажаль, це рішення не задовольняє тести.
+На жаль, це рішення не задовольняє тести.
 Вони очікують плоский тип, а не перетин.
 Тому нам необхідно повернути об'єкт, в якому є всі властивості разом з нашою новою.
 Почнемо з того, що повернемо властивості `T`:
@@ -37,13 +38,15 @@ type AppendToObject<T, U, V> = T & { [P in U]: V }
 type AppendToObject<T, U, V> = { [P in keyof T]: T[P] }
 ```
 
-Тепер нам потрібно додати до властивостей `T` нову властивість `U`. Для цього ми можемо передати об'єднання типів оператору `in`:
+Тепер нам потрібно додати до властивостей `T` нову властивість `U`.
+Для цього ми можемо передати об'єднання типів оператору `in`:
 
 ```typescript
 type AppendToObject<T, U, V> = { [P in keyof T | U]: T[P] }
 ```
 
-Таким чином ми отримаємо всі властивості з `T` разом з властивостями `U`, саме те, що нам потрібно. Виправимо незначні помилки обмеживши `U`:
+Таким чином ми отримаємо всі властивості з `T` разом з властивостями `U`, саме те, що нам потрібно.
+Виправимо незначні помилки обмеживши `U`:
 
 ```typescript
 type AppendToObject<T, U extends string, V> = { [P in keyof T | U]: T[P] }
@@ -56,7 +59,7 @@ type AppendToObject<T, U extends string, V> = { [P in keyof T | U]: T[P] }
 type AppendToObject<T, U extends string, V> = { [P in keyof T | U]: P extends keyof T ? T[P] : V }
 ```
 
-## References
+## Посилання
 
 - [Типи співставлення](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
 - [Умовні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
