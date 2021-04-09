@@ -35,17 +35,8 @@ They inspired me to create this project, so give them some credits, would you?
 
 This project wouldn’t be so amazing without contributions of those wonderful people!
 
-| [Eugene Obrezkov][1] | [Bohdan Dvorianov][2] | [Rostyslav Yurchyk][3] |
-| :------------------: | :-------------------: | :--------------------: |
-|    ![ghaiklor][4]    |   ![bdvorianov][5]    |     ![rosyurch][6]     |
+![contributors](https://contrib.rocks/image?repo=ghaiklor/type-challenges-solutions)
 
 ## License
 
 [CC-BY-4.0](./LICENSE)
-
-[1]: https://github.com/ghaiklor
-[2]: https://github.com/bdvorianov
-[3]: https://github.com/rosyurch
-[4]: https://avatars.githubusercontent.com/u/3625244
-[5]: https://avatars.githubusercontent.com/u/33183223
-[6]: https://avatars.githubusercontent.com/u/16103730
