@@ -52,7 +52,7 @@ If you want to run the whole pipeline with tests and linter, just call make:
 make
 ```
 
-## What solution is missing?
+## What solutions are missing
 
 You can sync up with the original repository `type-challenges` to know what solution is missing in the repository.
 To do that, there is a script called `sync-challenges.rb` in [`_scripts`](../_scripts/sync-challenges.rb) folder.
