@@ -1,17 +1,16 @@
 ---
 id: 599
 title: Merge
-lang: en
+lang: uk
 level: medium
 tags: object
 ---
 
-## Challenge
+## Завдання
 
-Merge two types into a new type.
-Keys of the second type overrides keys of the first type.
-
-For example:
+Об'єднайте два типи в один.
+Ключі другого типу замінюють ключі першого.
+Наприклад:
 
 ```typescript
 type Foo = {
@@ -26,37 +25,36 @@ type Bar = {
 type merged = Merge<Foo, Bar>; // expected { a: number; b: number }
 ```
 
-## Solution
+## Розв'язок
 
-This challenge reminds me [“append to object”](./medium-append-to-object.md) challenge.
-There we were using union operator to gather all the properties from the object and string.
+Дане завдання дуже схоже на [“append to object”](./medium-append-to-object.md).
+Тоді ми використовували об'єднання типів, щоб зібрати всі властивості об'єкту та рядок в один тип.
 
-We can use the same trick here, to gather all the properties names from both objects.
-So that our mapped type holds properties from both objects:
+Повторюємо те саме і тут.
+Як результат, отримаємо об'єкт з ключами першого і другого типів.
 
 ```typescript
 type Merge<F, S> = { [P in keyof F | keyof S]: never };
 ```
 
-Having properties names from both objects, we can start getting their value types.
-We start with `S` because it has a higher precedence, it can override the value type from `F`.
-But also we need to check if the property exists on `S`:
+Маючи ключі обох об'єктів, почнемо проставляти типи їх значень.
+Почнемо з `S`, тому що він може переназначити властивості типу `F`.
+Також перевіряємо наявність властивостей у типі `S`:
 
 ```typescript
 type Merge<F, S> = { [P in keyof F | keyof S]: P extends keyof S ? S[P] : never };
 ```
 
-In case, there is no property in `S`, we check if the property exists on `F` and if so; we get the value type from there:
+У випадку, коли властивість відсутня, ми перевіряємо її наявність у типі `F`.
+Якщо є, то беремо значення звідти.
 
 ```typescript
 type Merge<F, S> = { [P in keyof F | keyof S]: P extends keyof S ? S[P] : P extends keyof F ? F[P] : never };
 ```
 
-That way we merge two objects with `S` having a higher precedence.
+## Посилання
 
-## References
-
-- [Union Types](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#union-types)
-- [keyof and Lookup Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types)
-- [Mapped Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
-- [Conditional Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
+- [Об'єднання типів](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#union-types)
+- [Типи пошуку](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types)
+- [Типи співставлення](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
+- [Умовні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
