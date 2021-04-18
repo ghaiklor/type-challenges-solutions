@@ -1,79 +1,77 @@
 ---
 id: 298
 title: Length of String
-lang: en
+lang: uk
 level: medium
 tags: template-literal
 ---
 
-## Challenge
+## Завдання
 
-Compute the length of a string literal, which behaves like `String#length`.
-
-For example:
+Вирахуйте довжину рядкового літералу.
+Наприклад:
 
 ```typescript
 type length = LengthOfString<"Hello, World"> // expected to be 12
 ```
 
-## Solution
+## Розв'язок
 
-At first, I tried to go with a trivial solution - access the property `length` via index type.
-I thought, maybe TypeScript is smart enough to get the value:
+Спочатку я спробував найпростіше рішення - звернутись до властивості `length` через індексні типи.
+Сподівався, що TypeScript достатньо розумний щоб повернути значення:
 
 ```typescript
 type LengthOfString<S extends string> = S['length']
 ```
 
-Unfortunately, no.
-The evaluated type will be a `number`, not the number literal type.
-So we need to think about something else.
+На жаль, ні.
+Результуючий тип буде `number`, але не числовий літерал.
+Отже, потрібно придумати інше рішення.
 
-What if we infer the first character and the tail of the string recursively until there are none first characters?
-That way, the recursion itself will be our counter.
-Let us start by writing a type that will infer the first character and the tail of the string:
+Якщо ми виведемо перший символ та решту символів рекурсивно, доти, доки не залишиться символів в рядку?
+В такому випадку, ми отримаємо лічильник який працює на рекурсії.
+Почнемо з типу, який виводить перший символ та решту рядка (хвіст):
 
 ```typescript
 type LengthOfString<S extends string> = S extends `${infer C}${infer T}` ? never : never;
 ```
 
-Type parameter `C` gets the first character of the string and `T` gets the tail.
-Calling the type itself recursively with a tail, we will stop sometimes on the case when there are no characters:
+В тип параметр `C` отримуємо перший символ та у `T` отримуємо хвіст.
+Викликаючи тип `LengthOfString` рекурсивно з рештою рядку, ми зупинимось у випадку коли символів більше не залишиться.
 
 ```typescript
 type LengthOfString<S extends string> = S extends `${infer C}${infer T}` ? LengthOfString<T> : never;
 ```
 
-The problem with it is that we don’t know where to store the counter.
-Obviously, we can add another type parameter that will accumulate the count, but TypeScript does not provide options to manipulate with numbers in the type system.
-It would be great to add another type parameter and just increment its value.
+Проблема в тому, що ми не знаємо де зберігати наш лічильник.
+Очевидно, ми можемо додати інший тип параметр до `LengthOfString`, який буде акумулювати значення, але TypeScript не надає можливостей для керування числами в системі типів.
 
-Instead, we can make the type parameter a tuple with characters and fill it in with the first character on each recursive call:
+Замість чисел, створимо кортеж і будемо додавати по одному символу на кожній ітерації.
 
 ```typescript
 type LengthOfString<S extends string, A extends string[]> = S extends `${infer C}${infer T}` ? LengthOfString<T, [C, ...A]> : never;
 ```
 
-We “convert” the string literal type into a tuple with its characters that are stored inside our new type parameter.
-Once we hit the case when there are no characters (the base case for a recursion) we just return the length of the tuple:
+Перетворюємо рядковий літерал в кортеж символів цього рядкового літералу.
+Як тільки в рядковому літералі не залишається символів - повертаємо довжину кортежу.
 
 ```typescript
 type LengthOfString<S extends string, A extends string[]> = S extends `${infer C}${infer T}` ? LengthOfString<T, [C, ...A]> : A['length'];
 ```
 
-By introducing another type parameter, we broke the tests.
-Because our type now requires having two type parameters instead of one.
-Let us fix this by making our type parameter an empty tuple by default:
+Додавши новий тип параметр ми зламали тести.
+Тому що ми передаємо два типи параметри замість одного.
+Виправляємо це, додавши до другого параметру значення за замовчуванням - порожній кортеж.
 
 ```typescript
 type LengthOfString<S extends string, A extends string[] = []> = S extends `${infer C}${infer T}` ? LengthOfString<T, [C, ...A]> : A['length'];
 ```
 
-## References
+## Посилання
 
-- [Conditional Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
-- [Type inference in conditional types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
-- [Recursive Conditional Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#recursive-conditional-types)
-- [Template Literal Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#template-literal-types)
-- [Variadic Tuple Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)
-- [Index Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
+- [Умовні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
+- [Виведення типів в умовних типах](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
+- [Рекурсивні умовні типи](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#recursive-conditional-types)
+- [Типи шаблонних літералів](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#template-literal-types)
+- [Варіативні типи](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)
+- [Типи пошуку/індексні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
