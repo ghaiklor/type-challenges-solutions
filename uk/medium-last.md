@@ -1,18 +1,17 @@
 ---
 id: 15
 title: Last of Array
-lang: en
+lang: uk
 level: medium
 tags: array
 ---
 
-## Challenge
+## Завдання
 
-Implement a generic `Last<T>` that takes an Array `T` and returns it's last element's type.
+Створити тип `Last<T>` який приймає масив `T` і повертає тип останнього елемента.
+Наприклад:
 
-For example:
-
-```ts
+```typescript
 type arr1 = ['a', 'b', 'c']
 type arr2 = [3, 2, 1]
 
@@ -20,21 +19,22 @@ type tail1 = Last<arr1> // expected to be 'c'
 type tail2 = Last<arr2> // expected to be 1
 ```
 
-## Solution
+## Розв'язок
 
-When you want to get the last element from the array, you need to get all the elements starting from the head until you find the last element.
-It is a hint to use [variadic tuple types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types); we have an array and we need to work with its elements.
+Щоб отримати останній елемент массиву, потрібно перебрати всі елементи до останнього.
 
-Knowing about variadic tuple types, the solution is pretty obvious.
-We need to take anything in the head and the last element.
-Combining it with the [type inference in conditional types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types) makes it easy to infer the last element:
+Для цього використаємо [варіативні типи](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types).
 
-```ts
+Знаючи варіативні типи, рішення очевидне.
+Беремо елементи від першого, доки не дійдемо до останнього.
+Комбінуючи це з [виведенням типів в умовних типах](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types) рішення стає доволі простим:
+
+```typescript
 type Last<T extends any[]> = T extends [...infer X, infer L] ? L : never;
 ```
 
-## References
+## Посилання
 
-- [Conditional Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
-- [Type inference in conditional types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
-- [Variadic Tuple Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)
+- [Умовні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
+- [Виведення типів в умовних типах](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
+- [Варіативні типи](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)
