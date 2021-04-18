@@ -1,17 +1,16 @@
 ---
 id: 20
 title: Promise.all
-lang: en
+lang: uk
 level: medium
 tags: array built-in
 ---
 
-## Challenge
+## Завдання
 
-Type the function `PromiseAll` that accepts an array of `PromiseLike` objects.
-The returning value should be `Promise<T>` where `T` is the resolved result array.
+Типізувати функцію `PromiseAll`, яка приймає массив `PromiseLike` об'єктів і повертає `Promise<T>`, де `T` це массив типів результату виконання `Promise`.
 
-```ts
+```typescript
 const promise1 = Promise.resolve(3);
 const promise2 = 42;
 const promise3 = new Promise<string>((resolve, reject) => {
@@ -22,59 +21,56 @@ const promise3 = new Promise<string>((resolve, reject) => {
 const p = Promise.all([promise1, promise2, promise3] as const)
 ```
 
-## Solution
+## Розв'язок
 
-Interesting challenge here, IMHO.
-Let me explain it step by step.
+Почнемо з простого - функція що повертає `Promise<T>`.
 
-We start with the simplest solution - the function that returns `Promise<T>`.
-We need to return `Promise<T>` after all, where `T` is an array of types for resolved promises:
-
-```ts
+```typescript
 declare function PromiseAll<T>(values: T): Promise<T>
 ```
 
-Now, let us think how to evaluate types for resolved promises.
-We start with the fact that `values` is an array.
-So let us show that in our types.
-By using [variadic tuple types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types) we can split its types so it is easier to work with its elements:
+Тепер, давайте придумаємо, як вирахувати типи з виконаних `Promise`.
+Почнемо з факту, що `values` це массив.
+Виразимо це в наших типах.
 
-```ts
+Використовуючи [варіативні типи](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types) вказуємо, що `values` це массив, а `T` елементи цього массиву:
+
+```typescript
 declare function PromiseAll<T extends unknown[]>(values: [...T]): Promise<T>
 ```
 
-Oops, getting the compilation error “Argument of type ‘readonly [1, 2, 3]’ is not assignable to parameter of type ‘[1, 2, 3]’.“.
-That is because we do not expect to have a `readonly` modifier in our `values` parameter.
-Let us fix that by adding the modifier to the parameter:
+Отримуємо помилку “Argument of type ‘readonly [1, 2, 3]’ is not assignable to parameter of type ‘[1, 2, 3]’.“.
+Тому що `values` не очікує модифікатор `readonly` в параметрі.
+Виправимо це, додавши модифікатор до параметру функції:
 
-```ts
+```typescript
 declare function PromiseAll<T extends unknown[]>(values: readonly [...T]): Promise<T>
 ```
 
-We have a solution that even works on one of the test cases.
-That is because the test case does not have promises inside.
-We return `Promise<T>` where `T` is just an array with the same types as in `values` parameter.
-But once we get `Promise` inside the `values` parameter, things going wild.
+В нас є рішення, яке проходить один з тестів.
+Це тому що цей тест не включає в собі `Promise`.
+Ми повертаємо такий самий массив, який ми отримали в `values`.
+Але як тільки ми отримуємо `Promise`, як елемент `values`, наше рішення перестає працювати.
 
-The reason is that we do not unwrap the type from `Promise` and just return it as is.
-So let us replace the `T` with a conditional type to check if the element is actually a `Promise`.
-If so, we return its inner type, otherwise - the type with no changes:
+Це тому що ми не розгорнули `Promise`, а повернули його.
+Замінимо тип `T` на умовний тип, який буде перевіряти чи є елемент `Promise`.
+Якщо елемент це `Promise` то повертаємо внутрішній тип, інакше - тип без змін.
 
-```ts
+```typescript
 declare function PromiseAll<T extends unknown[]>(values: readonly [...T]): Promise<T extends Promise<infer R> ? R : T>
 ```
 
-The solution still does not work, because the `T` is not a union but the tuple.
-So we need to iterate over each element in the tuple and check if the value is a `Promise` or not:
+Рішення досі не робоче, тому що `T`, не об'єднання, а кортеж.
+Тож потрібно пройтись по всім елементам кортежу і перевірити чи є поточний елемент `Promise` чи ні.
 
-```ts
+```typescript
 declare function PromiseAll<T extends unknown[]>(values: readonly [...T]): Promise<{ [P in keyof T]: T[P] extends Promise<infer R> ? R : T[P] }>
 ```
 
-## References
+## Посилання
 
-- [Variadic Tuple Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)
-- [Mapped Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
-- [Index Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
-- [Conditional Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
-- [Type inference in conditional types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
+- [Варіативні типи](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)
+- [Типи співставлення (mapped types)](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
+- [Типи пошуку/індексні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
+- [Умовні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
+- [Виведення типів в умовних типах](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
