@@ -1,18 +1,17 @@
 ---
 id: 3
 title: Omit
-lang: en
+lang: uk
 level: medium
 tags: union built-in
 ---
 
-## Challenge
+## Завдання
 
-Implement the built-in `Omit<T, K>` generic without using it.
-Constructs a type by picking all properties from `T` and then removing `K`.
-For example:
+Реалізуйте вбудований тип `Omit<T, K>`, який прийматиме об'єкт `T` та видалить з нього список ключів `K`.
+Наприклад:
 
-```ts
+```typescript
 interface Todo {
   title: string
   description: string
@@ -26,33 +25,28 @@ const todo: TodoPreview = {
 }
 ```
 
-## Solution
+## Розв'язок
 
-We need to return a new object type here, but without specified keys.
-Obviously, it is a hint that we need to use [mapped types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types) here.
-We need to map each property in object and construct a new type.
+`Omit<T, K>` приймає об'єкт `T` і список ключів в `K`, які треба виключити з об'єкту.
+Очевидно, що для вирішення цього завдання ми використаємо [типи співставлення (mapped types)](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types).
 
-Let us start with the basic block and construct the same object:
-
-```ts
+```typescript
 type MyOmit<T, K> = { [P in keyof T]: T[P] }
 ```
 
-Here, we iterate over all the keys in `T`, map it to the type `P` and make it a key in our new object type, while value type is the type from `T[P]`.
+Залишається відфільтрувати властивості, які необхідно залишити в об'єкті.
+Для цього використаємо [перепризначення ключів в типах співставлення (mapped types)](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#key-remapping-in-mapped-types):
 
-That way, we iterate over all the keys, but we need to filter out those that we are not interested in.
-To achieve that, we can [remap the key type using “as” syntax](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#key-remapping-in-mapped-types):
-
-```ts
+```typescript
 type MyOmit<T, K> = { [P in keyof T as P extends K ? never : P]: T[P] }
 ```
 
-We map all the properties from `T` and if the property is in `K` union, we return “never” type as its key, otherwise the key itself.
-That way, we filter out the properties and got the required object type.
+В результаті ми отримаємо тип, який перебирає властивості з `T` та перевизначає ті, що не в `K`, на `never`.
+Таким чином, відфільтрувавши властивості вхідного об'єкту ми отримаємо необхідний нам тип.
 
-## References
+## Посилання
 
-- [Mapped Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
-- [Index Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
-- [Conditional Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
-- [Key remapping in mapped types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#key-remapping-in-mapped-types)
+- [Типи співставлення (mapped types)](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
+- [Типи пошуку/індексні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
+- [Умовні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
+- [Перепризначення ключів в типах співставлення (mapped types)](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#key-remapping-in-mapped-types)
