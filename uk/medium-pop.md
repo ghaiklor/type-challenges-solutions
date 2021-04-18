@@ -1,18 +1,17 @@
 ---
 id: 16
 title: Pop
-lang: en
+lang: uk
 level: medium
 tags: array
 ---
 
-## Challenge
+## Завдання
 
-Implement a generic `Pop<T>` that takes an Array `T` and returns an Array without it's last element.
+Реалізувати тип `Pop<T>` який приймає массив `T` та повертає массив без останнього елемента.
+Наприклад:
 
-For example:
-
-```ts
+```typescript
 type arr1 = ['a', 'b', 'c', 'd']
 type arr2 = [3, 2, 1]
 
@@ -20,22 +19,22 @@ type re1 = Pop<arr1> // expected to be ['a', 'b', 'c']
 type re2 = Pop<arr2> // expected to be [3, 2]
 ```
 
-## Solution
+## Розв'язок
 
-We need to split the array into two parts: everything from the head until the last element and the last element itself.
-Afterwards, we can get rid of the last element and return the other part.
+Розділимо массив на дві частини: від початку до останнього елементу, і останній елемент.
+Потім позбуваємось від останнього елемента і повертаємо першу частину.
 
-To achieve that, we can use [variadic tuple types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types).
-By combining them with [type inference in conditional types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types), we can infer the needed parts:
+Для цього скористаємось [варіативними типами](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types).
+Комбінуючи їх з [виведенням типів в умовних типах](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types), виводимо потрібні частини массиву:
 
-```ts
+```typescript
 type Pop<T extends any[]> = T extends [...infer H, infer T] ? H : never;
 ```
 
-In case `T` is assignable to the type of array that can be split in two parts, we return everything except the last one, otherwise - `never`.
+У випадку коли `T` можна присвоїти до масиву, який можна поділити на дві частини, повертаємо його першу частину, інакше повертаємо `never`.
 
-## References
+## Посилання
 
-- [Conditional Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
-- [Type inference in conditional types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
-- [Variadic Tuple Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)
+- [Умовні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
+- [Виведення типів в умовних типах](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
+- [Варіативні типи](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)
