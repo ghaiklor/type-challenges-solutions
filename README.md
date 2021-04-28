@@ -31,12 +31,6 @@ They inspired me to create this project, so give them some credits, would you?
 
 - [type-challenges](https://github.com/type-challenges/type-challenges) by [Anthony Fu](https://github.com/antfu)
 
-## Contributors
-
-This project wouldn’t be so amazing without contributions of those wonderful people!
-
-![contributors](https://contrib.rocks/image?repo=ghaiklor/type-challenges-solutions)
-
 ## License
 
 [CC-BY-4.0](./LICENSE)
