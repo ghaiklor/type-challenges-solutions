@@ -1,25 +1,25 @@
 ---
-title: Welcome!
+title: Вітаємо!
 lang: uk
 comments: false
 ---
 
-You can find here a collection of challenges to test yourself and their solutions!
-How well do you know a TypeScript and its type system?
+Наскільки добре ви знаєте TypeScript та його систему типів?
+Тут ви знайдете задачі для перевірки себе та їх розв'язки!
 
-> High-quality types can help to improve projects’ maintainability while avoiding potential bugs.
-> This project is aimed at helping you better understand how the type system works, writing your own utilities, or just having fun with the challenges.
-> We are also trying to form a community that you can ask questions and get answers you have faced in the actual world - they may become part of the challenges!
+> Добре описані типи можуть покращити підтримку проєкту та попередити появу помилок.
+> Ціль цього проєкту – допомогти краще зрозуміти роботу системи типів, написати власні допоміжні типи або просто гарно провести час за розв'язанням задачок.
+> Також, ми формуємо спільноту, в якому можна ставити питання про те, з чим ви стикались в реальному житті, та отримувати відповіді – згодом вони можуть стати частиною завдань!
 
-If you want to try out solve them yourselves first, go ahead to [type-challenges](https://github.com/type-challenges/type-challenges) repository.
-There you can find all the challenges, even those that I didn’t solve (yet!).
-In case you are stuck, get back here and open the solution to your challenge.
+Якщо ви хочете спочатку спробувати власні сили – вперед до [репозиторію type-challenges](https://github.com/type-challenges/type-challenges).
+Там ви знайдете всі задачі, навіть ті, які я (поки що) не розв'язав.
+Якщо ви застрягнете, повертайтесь сюди та відкрийте розв'язок вашого завдання.
 
-There you will find an explanation on how to solve it.
-Further in the solution, I’m providing references to TypeScript documentation where you can read more in details about specific type features I’ve used to solve it.
+Тут ви знайдете пояснення до розв'язків задач.
+Крім того, у розв'язках я приводжу посилання на документацію TypeScript, де можна прочитати більше про особливості TypeScript, котрі я використав в ході розв'язання.
 
-If you have questions, go ahead to [issues](https://github.com/ghaiklor/type-challenges-solutions/issues) and raise it there.
-Take your time and enjoy!
+Якщо у вас є запитання чи ви помітили помилку, напишіть нам в [issues](https://github.com/ghaiklor/type-challenges-solutions/issues).
+Допомога чи поради вітаються!
 
 {% assign challenges = site.pages | where: "lang", "uk" %}
 {% include draw_challenges_table.html challenges = challenges %}
