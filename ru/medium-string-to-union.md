@@ -16,7 +16,7 @@ type Test = '123';
 type Result = StringToUnion<Test>; // expected to be "1" | "2" | "3"
 ```
 
-## Решение
+## Решение #1
 
 В этой проблеме нужно перебрать все символы из строчного тип литерала и добавить их в объединение.
 Начнём с первого - перебора.
@@ -40,6 +40,18 @@ type StringToUnion<T extends string> = T extends `${infer C}${infer T}` ? String
 
 ```typescript
 type StringToUnion<T extends string> = T extends `${infer C}${infer T}` ? C | StringToUnion<T> : never
+```
+
+## Решение #2
+
+Попробуем решить задачу, воспользовавшись наработками из задачи [`Length of String`](./medium-length-of-string.md) - используем аккумулятор.
+Разделим строку на первый и остальные символы, на каждом шаге сохраняя первый символ в аккумуляторе.
+При этом строка с одним символом будет разделена на сам символ и пустую строку. Вызов типа с пустой строкой запустит второе выражение тернарного оператора.
+Всё, что остаётся нам сделать - это создать объединение из всех элементов аккумулятора:
+
+```typescript
+type StringToUnion<T extends string, A extends string[] = []> = T extends `${infer H}${infer T}` ? StringToUnion<T, [...A, H]> : A[number]
+
 ```
 
 ## Что почитать
