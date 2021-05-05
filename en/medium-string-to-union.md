@@ -19,7 +19,7 @@ type Test = '123';
 type Result = StringToUnion<Test>; // expected to be "1" | "2" | "3"
 ```
 
-## Solution
+## Solution #1
 
 In this challenge, we need to iterate over each character and add it to the union.
 It is easy to iterate over the characters, let us start with that.
@@ -41,6 +41,18 @@ We need to add the first character to the union and since in the base case `Stri
 
 ```typescript
 type StringToUnion<T extends string> = T extends `${infer C}${infer T}` ? C | StringToUnion<T> : never
+```
+
+## Solution #2
+
+Let's solve this challenge using our work from [`Length of String`](./medium-length-of-string.md) by using an accumulator.
+We can split string to first and rest of letters, saving first letter to the accumulator on each step.
+String with a length of one letter will be splitted to the letter itself and an empty string. Calling our type with the empty string will evaluate second expression of a ternary operator.
+All we have to do -  create a union of all of the accumulator's elements:
+
+```typescript
+type StringToUnion<T extends string, A extends string[] = []> = T extends `${infer H}${infer T}` ? StringToUnion<T, [...A, H]> : A[number]
+
 ```
 
 ## References
