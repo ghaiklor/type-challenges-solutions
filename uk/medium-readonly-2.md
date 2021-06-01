@@ -1,7 +1,7 @@
 ---
 id: 8
 title: Readonly 2
-lang: en
+lang: uk
 level: medium
 tags: readonly object-keys
 ---
