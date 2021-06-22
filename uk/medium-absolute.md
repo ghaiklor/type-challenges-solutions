@@ -51,7 +51,7 @@ type Absolute<T extends number | string | bigint> = T extends `-${infer N}` ? N 
 type Absolute<T extends number | string | bigint> = `${T}` extends `-${infer N}` ? N : `${T}`;
 ```
 
-В результаті, ми отримали тип, який приймає `number`, `string`, `bigint` й конвертує їх в рядок.
+В результаті, ми отримали тип, який приймає `number`, `string` або `bigint` і конвертує їх в рядок.
 Потім він виводить частину рядка без знаку "-", або повертає його без змін.
 
 ## Посилання
