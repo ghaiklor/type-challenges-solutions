@@ -4,6 +4,7 @@ gem "jekyll"
 gem "html-proofer"
 gem "mdl"
 gem "octokit"
+gem 'front_matter_parser'
 
 group :jekyll_plugins do
   gem "github-pages"
