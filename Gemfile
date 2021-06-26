@@ -5,6 +5,7 @@ gem "html-proofer"
 gem "mdl"
 gem "octokit"
 gem 'front_matter_parser'
+gem 'rubocop'
 
 group :jekyll_plugins do
   gem "github-pages"
