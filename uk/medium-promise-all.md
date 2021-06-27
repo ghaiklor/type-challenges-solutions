@@ -60,7 +60,7 @@ declare function PromiseAll<T extends unknown[]>(values: readonly [...T]): Promi
 declare function PromiseAll<T extends unknown[]>(values: readonly [...T]): Promise<T extends Promise<infer R> ? R : T>
 ```
 
-Рішення досі неробоче, тому що `T`, не об'єднання, а кортеж.
+Рішення досі помилкове, тому що `T`, не об'єднання, а кортеж.
 Тож, потрібно проітерувати всі елементи кортежу і перевірити, є поточний елемент `Promise` чи ні.
 
 ```typescript
