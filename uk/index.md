@@ -22,4 +22,4 @@ comments: false
 Допомога чи поради вітаються!
 
 {% assign challenges = site.pages | where: "lang", "uk" %}
-{% include draw_challenges_table.html challenges = challenges %}
+{% include challenges.html challenges = challenges %}

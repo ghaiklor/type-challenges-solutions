@@ -22,4 +22,4 @@ If you have questions, go ahead to [issues](https://github.com/ghaiklor/type-cha
 Take your time and enjoy!
 
 {% assign challenges = site.pages | where: "lang", "en" %}
-{% include draw_challenges_table.html challenges = challenges %}
+{% include challenges.html challenges = challenges %}

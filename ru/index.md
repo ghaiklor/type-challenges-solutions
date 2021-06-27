@@ -16,4 +16,4 @@ comments: false
 Если у вас есть вопросы, заметили ошибку или не поняли объяснение, пожалуйста, дайте об этом знать в [Issues](https://github.com/ghaiklor/type-challenges-solutions/issues).
 
 {% assign challenges = site.pages | where: "lang", "ru" %}
-{% include draw_challenges_table.html challenges = challenges %}
+{% include challenges.html challenges = challenges %}
