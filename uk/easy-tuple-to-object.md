@@ -25,7 +25,7 @@ const result: TupleToObject<typeof tuple>
 
 Це легко зробити з індексними типами.
 Ми можемо взяти значення масиву використовуючи вираз `T[number]`.
-За допомогою типів зіставлення, ми можемо ітерувати значення через `T[number]` і повернути новий тип, ключами та значеннями якого будуть відповідні елементи `T[number]`:
+За допомогою типів співставлення, ми можемо ітерувати значення через `T[number]` і повернути новий тип, ключами та значеннями якого будуть відповідні елементи `T[number]`:
 
 ```ts
 type TupleToObject<T extends readonly any[]> = { [K in T[number]]: K }
@@ -33,5 +33,5 @@ type TupleToObject<T extends readonly any[]> = { [K in T[number]]: K }
 
 ## Посилання
 
-- [Типи зіставлення](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
+- [Типи співставлення](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
 - [Індексні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)

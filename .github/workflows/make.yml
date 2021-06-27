@@ -1,0 +1,19 @@
+name: Makefile
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  all:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cloning the repository
+        uses: actions/checkout@v2
+      - name: Setting up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6
+          bundler-cache: true
+      - name: Running the make
+        run: make
