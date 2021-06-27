@@ -1,8 +1,14 @@
 name: Makefile
 
 on:
-  - push
-  - pull_request
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: "0 18 \* \* \*"
 
 jobs:
   all:
