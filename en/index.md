@@ -1,5 +1,9 @@
 ---
-title: Welcome!
+title: Type Challenges Solutions
+description: >-
+  This project is aimed at helping you better understand how the type system
+  works, writing your own utilities, or just having fun with the challenges.
+keywords: 'type, challenges, solutions, typescript, javascript'
 lang: en
 comments: false
 ---
