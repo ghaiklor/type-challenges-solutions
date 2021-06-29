@@ -1,5 +1,10 @@
 ---
-title: Привет!
+title: Решения для Type Challenges
+description: >-
+  Цель этого проекта, помочь вам лучше понять, как работает система типов,
+  реализовать собственные вспомогательные типы или просто получить удовольствие
+  от решения задач.
+keywords: 'type, challenges, typescript, javascript, решения, объяснения'
 lang: ru
 comments: false
 ---
