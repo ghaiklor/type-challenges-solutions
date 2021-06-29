@@ -19,7 +19,7 @@ So that, Type Challenges are the challenges that must be solved only by using Ty
 These challenges become hard sometimes, especially if you are a beginner in types and TypeScript.
 So that, this website provides a place where you can find solutions for those challenges with an explanation on how they’ve been solved.
 Once you read the explanation, you can find a compiled list of useful references to dive more in depth.
-In case you solved the challenge in some other way (not like on this website) leave it in the comments, you can find them for any solution out here.
+In case you solved the challenge in some other way (not like on this website) you can leave it in the comments.
 
 If you have any questions, issues, etc, please [open an issue in the repository](https://github.com/ghaiklor/type-challenges-solutions/issues).
 
