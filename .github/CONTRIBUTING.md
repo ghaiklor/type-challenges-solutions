@@ -60,7 +60,7 @@ To do that, there is a script called `sync-challenges.rb` in [`_scripts`](../_sc
 Calling that script via `ruby` will print all the challenges that are exists in `type-challenges` repo but are missing in ours.
 
 ```shell
-ruby _scripts/sync-challenges.rb
+bundle exec ruby _scripts/sync-challenges.rb
 ```
 
 E.g. it prints out `en/easy-awaited.md`.

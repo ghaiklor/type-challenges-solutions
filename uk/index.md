@@ -1,5 +1,9 @@
 ---
-title: Вітаємо!
+title: Рішення для Type Challenges
+description: >-
+  Проект має на меті допомогти вам краще зрозуміти, як працює система типів, як
+  писати свої типи, або просто гарно провести вечір за задачками.
+keywords: 'type, challenges, typescript, javascript, рішення'
 lang: uk
 comments: false
 ---
@@ -22,4 +26,4 @@ comments: false
 Допомога чи поради вітаються!
 
 {% assign challenges = site.pages | where: "lang", "uk" %}
-{% include draw_challenges_table.html challenges = challenges %}
+{% include challenges.html challenges = challenges %}

@@ -1,0 +1,19 @@
+{% assign challenges = include.challenges %}
+{% assign level = include.level %}
+
+<b>{% include i18n.html lang=lang value=level default="N/A" %}</b>
+<ol>
+  {% for challenge in challenges %}
+  <li>
+    {{ challenge.title }}
+    ⸱
+    <a target="_blank" href="https://tsch.js.org/{{ challenge.id }}">
+      {% include i18n.html lang=lang value="challenge" default="Challenge" %}
+    </a>
+    ⸱
+    <a href="{{ challenge.url | absolute_url }}">
+      {% include i18n.html lang=lang value="solution" default="Solution" %}
+    </a>
+  </li>
+  {% endfor %}
+</ol>

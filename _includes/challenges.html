@@ -1,0 +1,12 @@
+{% assign challenges = include.challenges %}
+{% assign warm = challenges | where: "level", "warm" %}
+{% assign easy = challenges | where: "level", "easy" %}
+{% assign medium = challenges | where: "level", "medium" %}
+{% assign hard = challenges | where: "level", "hard" %}
+{% assign extreme = challenges | where: "level", "extreme" %}
+
+{% include challenges_list.html challenges = warm level = "warm" %}
+{% include challenges_list.html challenges = easy level = "easy" %}
+{% include challenges_list.html challenges = medium level = "medium" %}
+{% include challenges_list.html challenges = hard level = "hard" %}
+{% include challenges_list.html challenges = extreme level = "extreme" %}
