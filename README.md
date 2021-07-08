@@ -1,4 +1,4 @@
-# TypeScript Type Challenges
+# Type Challenges Solutions
 
 ![Makefile](https://github.com/ghaiklor/type-challenges-solutions/actions/workflows/make.yml/badge.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/ghaiklor/type-challenges-solutions)
@@ -15,9 +15,6 @@ There are a bunch of outstanding type utility libraries may boosting your works 
 We aim this project at helping you better understand how the type system works, writing your own utilities, or just having fun with the challenges.
 
 We are also trying to form a community that you can ask questions and get answers you have faced in the actual world - they may become part of the challenges!
-
-To get started with the challenges, follow the navigation at the top right corner.
-Choose your language and take your time!
 
 ## How to Contribute
 
