@@ -19,7 +19,7 @@ type capitalized = Capitalize<'hello world'> // expected to be 'Hello world'
 
 Спочатку, я не зрозумів завдання.
 Ми не можемо реалізувати загальний розв'язок для того, щоб зробити літеру великою.
-Тому, TypeScript компілятор надає вбудований тип `Capitalize` (вбудований), за допомогою якого ця проблема вирішується досить легко:
+Тому, TypeScript компілятор надає вбудований тип `Capitalize`, за допомогою якого ця проблема вирішується досить легко:
 
 ```typescript
 type MyCapitalize<S extends string> = Capitalize<S>
