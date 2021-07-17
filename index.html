@@ -2,10 +2,12 @@
 layout: default
 ---
 
+{% assign url = "en" | relative_url %}
+
 <script>
-  window.location.href = "/en/"
+  window.location.href = '{{ url }}'
 </script>
 
 <noscript>
-  If you are not redirected automatically, follow this <a href='/en/'>link</a>.
+  If you are not redirected automatically, follow this <a href='{{ url }}'>link</a>.
 </noscript>
