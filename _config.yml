@@ -1,5 +1,5 @@
 # Site Settings
-author: "@ghaiklor"
+author: "Eugene Obrezkov aka ghaiklor"
 exclude: [vendor]
 lang: en
 remote_theme: yous/whiteglass
