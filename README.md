@@ -42,6 +42,13 @@ They inspired me to create this project, so give them some credits, would you?
 
 - [type-challenges](https://github.com/type-challenges/type-challenges) by [Anthony Fu](https://github.com/antfu)
 
+## Contributors
+
+These outstanding people created most content here!
+Huge thanks to them and any contribution they made.
+
+![Contributors](https://contrib.rocks/image?repo=ghaiklor/type-challenges-solutions)
+
 ## License
 
 [CC-BY-4.0](./LICENSE)
