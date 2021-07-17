@@ -65,3 +65,10 @@ bundle exec ruby _scripts/sync-challenges.rb
 
 E.g. it prints out `en/easy-awaited.md`.
 In that case, it means that there is a challenge `easy-awaited`, but you don’t have a solution for it in English.
+
+Also, you can specify an optional language to filter out.
+For instance, if you want to sync only the solutions that are written in English, you can pass it as an argument.
+
+```shell
+bundle exec ruby _scripts/sync-challenges.rb en
+```
