@@ -16,6 +16,13 @@ We aim this project at helping you better understand how the type system works, 
 
 We are also trying to form a community that you can ask questions and get answers you have faced in the actual world - they may become part of the challenges!
 
+## Getting Started
+
+You can find anything you need [on the website](https://ghaiklor.github.io/type-challenges-solutions).
+This repository is just a source code and you don’t need to interact with it from here, actually.
+
+But, in case you came here to contribute, then you came to the right place.
+
 ## How to Contribute
 
 Easy!
