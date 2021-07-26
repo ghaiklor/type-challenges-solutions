@@ -62,5 +62,5 @@ type Includes<T extends unknown[], U> = U extends T[number] ? true : false;
 - [Общие типы](https://www.typescriptlang.org/docs/handbook/generics.html)
 - [Ограничения на общих типах](https://www.typescriptlang.org/docs/handbook/generics.html#generic-constraints)
 - [Условные типы](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
-- [Дистрибутивные условные типы](https://www.typescriptlang.org/docs/handbook/advanced-types.html#distributive-conditional-types)
+- [Дистрибутивные условные типы](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#distributive-conditional-types)
 - [Индексные типы](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)

@@ -46,4 +46,4 @@ So that each item from the union is going to be checked against our condition.
 ## References
 
 - [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
-- [Distributive Conditional Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#distributive-conditional-types)
+- [Distributive Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#distributive-conditional-types)

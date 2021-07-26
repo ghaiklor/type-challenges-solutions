@@ -40,4 +40,4 @@ type LookUp<U, T> = U extends { type: T } ? U : never;
 ## Что почитать
 
 - [Условные типы](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
-- [Дистрибутивные условные типы](https://www.typescriptlang.org/docs/handbook/advanced-types.html#distributive-conditional-types)
+- [Дистрибутивные условные типы](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#distributive-conditional-types)

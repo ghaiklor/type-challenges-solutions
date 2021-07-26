@@ -19,7 +19,7 @@ type T1 = Exclude<"a" | "b" | "c", "a" | "b">; // "c"
 
 ## Розв'язок
 
-Для вирішення цього завдання важливо знати, що умовні типи в TypeScript [дистрибутивні](https://www.typescriptlang.org/docs/handbook/advanced-types.html#distributive-conditional-types).
+Для вирішення цього завдання важливо знати, що умовні типи в TypeScript [дистрибутивні](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#distributive-conditional-types).
 
 Тож, коли ви пишете `T extends U`, де `T` є об'єднанням, TypeScript застосує умову до кожного елементу з `T`.
 
@@ -33,4 +33,4 @@ type MyExclude<T, U> = T extends U ? never : T;
 
 ## Посилання
 
-- [Дистрибутивні умовні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#distributive-conditional-types)
+- [Дистрибутивні умовні типи](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#distributive-conditional-types)
