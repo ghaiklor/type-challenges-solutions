@@ -34,4 +34,4 @@ type TupleToObject<T extends readonly any[]> = { [K in T[number]]: K }
 ## References
 
 - [Mapped Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
-- [Indexed Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
+- [Indexed Types](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html)

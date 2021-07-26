@@ -38,4 +38,4 @@ type Length<T extends { length: number }> = T['length']
 
 ## Посилання
 
-- [Індексні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
+- [Індексні типи](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html)

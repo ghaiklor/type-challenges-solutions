@@ -76,4 +76,4 @@ type LengthOfString<S extends string, A extends string[] = []> = S extends `${in
 - [Recursive Conditional Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#recursive-conditional-types)
 - [Template Literal Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#template-literal-types)
 - [Variadic Tuple Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)
-- [Index Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
+- [Index Types](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html)

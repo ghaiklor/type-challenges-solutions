@@ -63,6 +63,6 @@ type Diff<O, O1> = { [P in keyof O | keyof O1 as Exclude<P, keyof O & keyof O1>]
 - [Переназначение в сопоставляющих типах](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#key-remapping-in-mapped-types)
 - [Типы объединений](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#union-types)
 - [Типы пересечений](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types)
-- [Индексные типы](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
+- [Индексные типы](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html)
 - [Условные типы](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 - [keyof и типы поиска](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types)

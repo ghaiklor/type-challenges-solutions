@@ -46,5 +46,5 @@ type First<T extends any[]> = T extends [] ? never : T[0];
 
 ## Что почитать
 
-- [Индексные типы](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
+- [Индексные типы](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html)
 - [Условные типы](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)

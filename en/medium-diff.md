@@ -64,6 +64,6 @@ type Diff<O, O1> = { [P in keyof O | keyof O1 as Exclude<P, keyof O & keyof O1>]
 - [Key remapping in Mapped Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#key-remapping-in-mapped-types)
 - [Union Types](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#union-types)
 - [Intersection Types](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types)
-- [Index Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
+- [Index Types](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html)
 - [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 - [keyof and Lookup Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types)

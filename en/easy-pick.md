@@ -60,4 +60,4 @@ It's hard to grasp at first, so if you didn’t understand something, try to rea
 
 - [Lookup Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types)
 - [Mapped Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
-- [Indexed Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
+- [Indexed Types](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html)

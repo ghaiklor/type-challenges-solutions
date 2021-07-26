@@ -73,5 +73,5 @@ type MyReadonly2<T, K extends keyof T = keyof T> = T & { readonly [P in K]: T[P]
 
 - [Типи перетину](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types)
 - [Типи співставлення](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
-- [Типи пошуку/індексні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
+- [Типи пошуку/індексні типи](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html)
 - [Використання типів-параметрів в обмеженнях дженериків](https://www.typescriptlang.org/docs/handbook/generics.html#using-type-parameters-in-generic-constraints)
