@@ -40,4 +40,4 @@ type If<C extends boolean, T, F> = C extends true ? T : F;
 
 ## Что почитать
 
-- [Условные типы](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
+- [Условные типы](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)

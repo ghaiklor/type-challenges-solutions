@@ -48,5 +48,5 @@ type MyOmit<T, K> = { [P in keyof T as P extends K ? never : P]: T[P] }
 
 - [Типи співставлення](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
 - [Типи пошуку/індексні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
-- [Умовні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
+- [Умовні типи](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 - [Перепризначення ключів в типах співставлення](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#key-remapping-in-mapped-types)

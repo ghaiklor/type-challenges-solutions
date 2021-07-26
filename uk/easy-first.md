@@ -32,7 +32,7 @@ type First<T extends any[]> = T[0]
 Якщо ми передамо порожній масив, `T[0]` не спрацює, бо не буде елементу з індексом 0 (як і жодних інших).
 
 Тож, перед тим, як використати тип першого елемента, нам потрібно перевірити, чи масив не порожній.
-Для цього, ми можемо скористатись [умовними типами](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types) в TypeScript.
+Для цього, ми можемо скористатись [умовними типами](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html) в TypeScript.
 
 Їх принцип доволі простий.
 Якщо ми можемо присвоїти типу `T` (вхідний масив) порожній масив, це означає, що він порожній.
@@ -47,4 +47,4 @@ type First<T extends any[]> = T extends [] ? never : T[0];
 ## Посилання
 
 - [Типи пошуку/індексні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
-- [Умовні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
+- [Умовні типи](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)

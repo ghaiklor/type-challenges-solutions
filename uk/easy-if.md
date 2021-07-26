@@ -20,7 +20,7 @@ type B = If<false, 'a', 'b'> // expected to be 'b'
 
 ## Розв'язок
 
-Використовуйте умовні типи [(conditional types)](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types) в TypeScript коли вам необхідно вжити “if” до типів.
+Використовуйте умовні типи [(conditional types)](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html) в TypeScript коли вам необхідно вжити “if” до типів.
 Якщо тип умови буде `true` то візьмемо тип з гілки “true” і навпаки.
 
 ```ts
@@ -37,4 +37,4 @@ type If<C extends boolean, T, F> = C extends true ? T : F;
 
 ## Посилання
 
-- [Умовні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
+- [Умовні типи](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)

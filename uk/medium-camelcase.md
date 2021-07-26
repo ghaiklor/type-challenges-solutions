@@ -67,7 +67,7 @@ type CamelCase<S> = S extends `${infer H}-${infer T}`
 
 ## Посилання
 
-- [Умовні типи](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
+- [Умовні типи](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 - [Виведення типів в умовних типах](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
 - [Рекурсивні умовні типи](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#recursive-conditional-types)
 - [Типи шаблонних літералів](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#template-literal-types)

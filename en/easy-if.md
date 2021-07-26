@@ -20,7 +20,7 @@ type B = If<false, 'a', 'b'> // expected to be 'b'
 
 ## Solution
 
-If you are not sure when to use [conditional types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types) in TypeScript, it is when you need to use an “if” statement on types.
+If you are not sure when to use [conditional types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html) in TypeScript, it is when you need to use an “if” statement on types.
 Exactly what we tasked to do here.
 
 If the condition type evaluates to `true`, we need to take a “true” branch, otherwise “false” branch:
@@ -38,4 +38,4 @@ type If<C extends boolean, T, F> = C extends true ? T : F;
 
 ## References
 
-- [Conditional Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
+- [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)

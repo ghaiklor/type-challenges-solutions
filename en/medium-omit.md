@@ -54,5 +54,5 @@ That way, we filter out the properties and got the required object type.
 
 - [Mapped Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
 - [Index Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
-- [Conditional Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
+- [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 - [Key remapping in mapped types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#key-remapping-in-mapped-types)

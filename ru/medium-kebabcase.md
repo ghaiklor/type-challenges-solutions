@@ -70,7 +70,7 @@ type KebabCase<S> = S extends `${infer C}${infer T}`
 
 ## Что почитать
 
-- [Условные типы](https://www.typescriptlang.org/docs/handbook/advanced-types.html#conditional-types)
+- [Условные типы](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 - [Выведение типов в условных типах](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
 - [Рекурсивные условные типы](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#recursive-conditional-types)
 - [Строчные тип литералы](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#template-literal-types)
