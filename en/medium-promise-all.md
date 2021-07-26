@@ -77,4 +77,4 @@ declare function PromiseAll<T extends unknown[]>(values: readonly [...T]): Promi
 - [Mapped Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
 - [Index Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
 - [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
-- [Type inference in conditional types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
+- [Type inference in conditional types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types)

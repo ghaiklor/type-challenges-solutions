@@ -55,4 +55,4 @@ type Awaited<T> = T extends Promise<infer R> ? R : T;
 ## Посилання
 
 - [Умовні типи](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
-- [Виведення типів в умовних типах](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
+- [Виведення типів в умовних типах](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types)

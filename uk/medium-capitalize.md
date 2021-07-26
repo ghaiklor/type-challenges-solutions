@@ -56,6 +56,6 @@ type Capitalize<S> = S extends `${infer C}${infer T}` ? `${C extends keyof Capit
 ## Посилання
 
 - [Умовні типи](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
-- [Виведення типів в умовних типах](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
+- [Виведення типів в умовних типах](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types)
 - [Рядкові тип-літерали](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#template-literal-types)
 - [keyof й типи пошуку](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types)

@@ -88,6 +88,6 @@ type Permutation<T, C = T> = [T] extends [never] ? [] : C extends infer U ? [U, 
 ## References
 
 - [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
-- [Type inference in conditional types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
+- [Type inference in conditional types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types)
 - [Recursive Conditional Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#recursive-conditional-types)
 - [Variadic Tuple Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)

@@ -25,7 +25,7 @@ type a = MyReturnType<typeof fn> // should be "1 | 2"
 
 ## Solution
 
-The rule of the thumb of using [type inference in conditional types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types) is when you are not sure what the type must be in.
+The rule of the thumb of using [type inference in conditional types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types) is when you are not sure what the type must be in.
 Exactly the case of the challenge.
 We don’t know what the return type of the function, but we tasked to get it.
 
@@ -51,4 +51,4 @@ type MyReturnType<T> = T extends (...args: any[]) => infer R ? R : T;
 ## References
 
 - [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
-- [Type inference in conditional types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
+- [Type inference in conditional types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types)

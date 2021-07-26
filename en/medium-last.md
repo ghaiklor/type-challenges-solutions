@@ -27,7 +27,7 @@ It is a hint to use [variadic tuple types](https://www.typescriptlang.org/docs/h
 
 Knowing about variadic tuple types, the solution is pretty obvious.
 We need to take anything in the head and the last element.
-Combining it with the [type inference in conditional types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types) makes it easy to infer the last element:
+Combining it with the [type inference in conditional types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types) makes it easy to infer the last element:
 
 ```ts
 type Last<T extends any[]> = T extends [...infer X, infer L] ? L : never;
@@ -36,5 +36,5 @@ type Last<T extends any[]> = T extends [...infer X, infer L] ? L : never;
 ## References
 
 - [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
-- [Type inference in conditional types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
+- [Type inference in conditional types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types)
 - [Variadic Tuple Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)

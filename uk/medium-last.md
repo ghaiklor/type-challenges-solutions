@@ -27,7 +27,7 @@ type tail2 = Last<arr2> // expected to be 1
 
 Знаючи варіативні типи, рішення очевидне.
 Беремо елементи від першого, доки не дійдемо до останнього.
-Комбінуючи це з [виведенням типів в умовних типах](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types), рішення стає доволі простим:
+Комбінуючи це з [виведенням типів в умовних типах](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types), рішення стає доволі простим:
 
 ```typescript
 type Last<T extends any[]> = T extends [...infer X, infer L] ? L : never;
@@ -36,5 +36,5 @@ type Last<T extends any[]> = T extends [...infer X, infer L] ? L : never;
 ## Посилання
 
 - [Умовні типи](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
-- [Виведення типів в умовних типах](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
+- [Виведення типів в умовних типах](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types)
 - [Варіативні типи](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)

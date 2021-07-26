@@ -70,6 +70,6 @@ type KebabCase<S> = S extends `${infer C}${infer T}`
 ## Посилання
 
 - [Умовні типи](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
-- [Виведення типів в умовних типах](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types)
+- [Виведення типів в умовних типах](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types)
 - [Рекурсивні умовні типи](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#recursive-conditional-types)
 - [Рядкові тип літерали](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#template-literal-types)
