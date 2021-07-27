@@ -59,7 +59,7 @@ type Includes<T extends unknown[], U> = U extends T[number] ? true : false;
 ## References
 
 - [Generics](https://www.typescriptlang.org/docs/handbook/generics.html)
-- [Generic Constraints](https://www.typescriptlang.org/docs/handbook/generics.html#generic-constraints)
+- [Generic Constraints](https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-constraints)
 - [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 - [Distributive Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#distributive-conditional-types)
 - [Index Types](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html)
