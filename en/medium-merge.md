@@ -58,5 +58,5 @@ That way we merge two objects with `S` having a higher precedence.
 
 - [Union Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types)
 - [keyof and Lookup Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types)
-- [Mapped Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
+- [Mapped Types](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
 - [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)

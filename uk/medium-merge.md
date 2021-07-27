@@ -56,5 +56,5 @@ type Merge<F, S> = { [P in keyof F | keyof S]: P extends keyof S ? S[P] : P exte
 
 - [Об'єднання типів](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types)
 - [Типи пошуку](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types)
-- [Типи співставлення](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
+- [Типи співставлення](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
 - [Умовні типи](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)

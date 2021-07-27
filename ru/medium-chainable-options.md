@@ -117,5 +117,5 @@ type Chainable<O = {}> = {
 ## Что почитать
 
 - [Типы пересечений](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types)
-- [Сопоставляющие типы](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
+- [Сопоставляющие типы](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
 - [Общие типы](https://www.typescriptlang.org/docs/handbook/generics.html)

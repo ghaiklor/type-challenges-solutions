@@ -38,7 +38,7 @@ Kind of getting a value from an object by using its key.
 
 Mapped Types allow for us to transform each property in a type into a new type.
 
-You can read more about them and understand what they are doing on TypeScript website: [lookup types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types) and [mapped types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types).
+You can read more about them and understand what they are doing on TypeScript website: [lookup types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types) and [mapped types](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html).
 
 Now, knowing that there are lookup types and mapped types in TypeScript.
 How to implement the required type?
@@ -59,5 +59,5 @@ It's hard to grasp at first, so if you didn’t understand something, try to rea
 ## References
 
 - [Lookup Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types)
-- [Mapped Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
+- [Mapped Types](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
 - [Indexed Types](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html)

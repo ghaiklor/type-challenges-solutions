@@ -41,4 +41,4 @@ type MyReadonly<T> = { readonly [K in keyof T]: T[K] }
 
 ## Что почитать
 
-- [Сопоставляющие типы](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
+- [Сопоставляющие типы](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)

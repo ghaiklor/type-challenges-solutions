@@ -57,6 +57,6 @@ type DeepReadonly<T> = { readonly [P in keyof T]: T[P] extends Record<string, un
 ## Посилання
 
 - [Індексні типи](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html)
-- [Типи зіставлення](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
+- [Типи зіставлення](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
 - [Умовні типи](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 - [Рекурсивні умовні типи](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#recursive-conditional-types)

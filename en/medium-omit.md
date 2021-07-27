@@ -29,7 +29,7 @@ const todo: TodoPreview = {
 ## Solution
 
 We need to return a new object type here, but without specified keys.
-Obviously, it is a hint that we need to use [mapped types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types) here.
+Obviously, it is a hint that we need to use [mapped types](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html) here.
 We need to map each property in object and construct a new type.
 
 Let us start with the basic block and construct the same object:
@@ -52,7 +52,7 @@ That way, we filter out the properties and got the required object type.
 
 ## References
 
-- [Mapped Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
+- [Mapped Types](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
 - [Index Types](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html)
 - [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 - [Key remapping in mapped types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#key-remapping-in-mapped-types)

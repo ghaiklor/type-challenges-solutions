@@ -34,7 +34,7 @@ todo.description = "barFoo" // Error: cannot reassign a readonly property
 We need to make all the properties in the object read-only.
 Therefore, we need to iterate over all the properties and add a modifier to them.
 
-We are going to use the usual [Mapped Type](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types) here, nothing serious.
+We are going to use the usual [Mapped Type](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html) here, nothing serious.
 For each property in the type, we take its key and add a `readonly` modifier to it:
 
 ```ts
@@ -43,4 +43,4 @@ type MyReadonly<T> = { readonly [K in keyof T]: T[K] }
 
 ## References
 
-- [Mapped Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
+- [Mapped Types](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
