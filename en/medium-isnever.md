@@ -52,6 +52,6 @@ With this workaround, hack, genuine solution, you name it; we can pass the test 
 
 ## References
 
-- [never type](https://www.typescriptlang.org/docs/handbook/basic-types.html#never)
+- [never type](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#the-never-type)
 - [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 - [Generics](https://www.typescriptlang.org/docs/handbook/2/generics.html)

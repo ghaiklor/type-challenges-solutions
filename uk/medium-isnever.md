@@ -51,6 +51,6 @@ type IsNever<T> = [T] extends [never] ? true : false
 
 ## Посилання
 
-- [Тип never](https://www.typescriptlang.org/docs/handbook/basic-types.html#never)
+- [Тип never](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#the-never-type)
 - [Умовні типи](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 - [Дженерики](https://www.typescriptlang.org/docs/handbook/2/generics.html)
