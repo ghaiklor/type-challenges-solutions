@@ -124,4 +124,4 @@ type Chainable<O = {}> = {
 
 - [Intersection Types](https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types)
 - [Mapped Types](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
-- [Generics](https://www.typescriptlang.org/docs/handbook/generics.html)
+- [Generics](https://www.typescriptlang.org/docs/handbook/2/generics.html)
