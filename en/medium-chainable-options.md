@@ -90,7 +90,7 @@ type Chainable<O = {}> = {
 
 The most interesting part now, pay attention!
 We want `option(key, value)` to return `Chainable` type itself (we want to have a possibility to chain the calls, right) but with the type information accumulated to its type parameter.
-Let us use [intersection types](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types) to add new types into accumulator:
+Let us use [intersection types](https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types) to add new types into accumulator:
 
 ```ts
 type Chainable<O = {}> = {
@@ -122,6 +122,6 @@ type Chainable<O = {}> = {
 
 ## References
 
-- [Intersection Types](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types)
+- [Intersection Types](https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types)
 - [Mapped Types](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
 - [Generics](https://www.typescriptlang.org/docs/handbook/generics.html)

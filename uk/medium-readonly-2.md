@@ -45,7 +45,7 @@ type MyReadonly2<T, K> = T;
 ```
 
 Тепер потрібно врахувати випадок, коли `K` містить якісь властивості.
-Ми можемо використати оператор `&` і створити [перетин двох типів](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types): першим є наш тип `T`, а другим є множина властивостей, які треба зробити `readonly`:
+Ми можемо використати оператор `&` і створити [перетин двох типів](https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types): першим є наш тип `T`, а другим є множина властивостей, які треба зробити `readonly`:
 
 ```ts
 type MyReadonly2<T, K> = T & { readonly [P in K]: T[P] };
@@ -71,7 +71,7 @@ type MyReadonly2<T, K extends keyof T = keyof T> = T & { readonly [P in K]: T[P]
 
 ## Посилання
 
-- [Типи перетину](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types)
+- [Типи перетину](https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types)
 - [Типи співставлення](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
 - [Типи пошуку/індексні типи](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html)
 - [Використання типів-параметрів в обмеженнях дженериків](https://www.typescriptlang.org/docs/handbook/generics.html#using-type-parameters-in-generic-constraints)

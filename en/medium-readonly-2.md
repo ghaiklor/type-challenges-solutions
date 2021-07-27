@@ -45,7 +45,7 @@ type MyReadonly2<T, K> = T;
 ```
 
 Now, we need to handle the case, when we provide the properties in `K`.
-We can use `&` operator and make [intersection of both types](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types): the one is the `T` we had before and the second one is the type with read-only properties:
+We can use `&` operator and make [intersection of both types](https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types): the one is the `T` we had before and the second one is the type with read-only properties:
 
 ```ts
 type MyReadonly2<T, K> = T & { readonly [P in K]: T[P] };
@@ -71,7 +71,7 @@ type MyReadonly2<T, K extends keyof T = keyof T> = T & { readonly [P in K]: T[P]
 
 ## References
 
-- [Intersection types](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types)
+- [Intersection types](https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types)
 - [Mapped Types](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
 - [Index Types](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html)
 - [Using type parameters in generic constraints](https://www.typescriptlang.org/docs/handbook/generics.html#using-type-parameters-in-generic-constraints)

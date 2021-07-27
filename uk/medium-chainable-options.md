@@ -116,6 +116,6 @@ type Chainable<O = {}> = {
 
 ## Посилання
 
-- [Типи перетинів](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types)
+- [Типи перетинів](https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types)
 - [Типи співставлення](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
 - [Дженерики](https://www.typescriptlang.org/docs/handbook/generics.html)
