@@ -64,4 +64,4 @@ type AppendToObject<T, U extends string, V> = { [P in keyof T | U]: P extends ke
 
 - [Mapped Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)
 - [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
-- [Union Types](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#union-types)
+- [Union Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types)

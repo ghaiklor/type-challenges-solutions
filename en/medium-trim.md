@@ -52,7 +52,7 @@ type Trim<S> = S extends `${Whitespace}${infer R}` ? Trim<R> : S extends `${infe
 
 ## References
 
-- [Union Types](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#union-types)
+- [Union Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types)
 - [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 - [Type inference in conditional types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types)
 - [Recursive conditional types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#recursive-conditional-types)

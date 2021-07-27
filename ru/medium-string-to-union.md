@@ -48,4 +48,4 @@ type StringToUnion<T extends string> = T extends `${infer C}${infer T}` ? C | St
 - [Выведение типов в условных типах](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types)
 - [Рекурсивные условные типы](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#recursive-conditional-types)
 - [Строчные тип литералы](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#template-literal-types)
-- [Типы объединений](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#union-types)
+- [Типы объединений](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types)
