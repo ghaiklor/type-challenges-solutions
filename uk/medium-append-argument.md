@@ -72,4 +72,4 @@ type AppendArgument<Fn, A> = Fn extends (...args: [...infer P]) => infer R ? (..
 - [Умовні типи](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 - [Вивід типів в умовних типах](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types)
 - [Варіативні кортежі](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)
-- [Залишкові параметри в функціональних типах](https://www.typescriptlang.org/docs/handbook/functions.html#rest-parameters)
+- [Залишкові параметри в функціональних типах](https://www.typescriptlang.org/docs/handbook/2/functions.html#rest-parameters-and-arguments)
