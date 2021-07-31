@@ -28,7 +28,7 @@ type StringToUnion<T extends string> = T extends `${infer C}${infer T}` ? never 
 
 В тип-параметрах `C` и `T` отримуємо першу літеру рядка і її хвіст.
 Щоб продовжити перебір, викличемо `StringToUnion` ще раз з параметром `T`.
-Таким чином, буде відбуватися рекурсивний перебір.
+У такий спосіб буде відбуватися рекурсивний перебір.
 
 ```typescript
 type StringToUnion<T extends string> = T extends `${infer C}${infer T}` ? StringToUnion<T> : never
