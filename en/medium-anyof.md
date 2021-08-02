@@ -33,7 +33,13 @@ But, the actual implementation for this turned out to be really quirky.
 I don’t like it, take a look:
 
 ```typescript
-type AnyOf<T extends readonly any[], I = T[number]> = (I extends any ? I extends Falsy ? false : true : never) extends false ? false : true;
+type AnyOf<T extends readonly any[], I = T[number]> = (
+  I extends any ?
+  I extends Falsy ?
+  false :
+  true :
+  never
+) extends false ? false : true;
 ```
 
 So I’ve started thinking, can we make it more maintainable?
@@ -44,7 +50,9 @@ Remember, we used these when solving [Last](./medium-last.md) challenge or [Pop]
 We start from inferring the single element from the tuple and the rest of the family:
 
 ```typescript
-type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T] ? never : never;
+type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T]
+  ? never
+  : never;
 ```
 
 How can we check if the inferred element `H` is false-y?
@@ -58,7 +66,11 @@ type Falsy = 0 | '' | false | [] | { [P in any]: never }
 Having a type that represents false-y values, we can just use a conditional type to check if the `H` extends from the type:
 
 ```typescript
-type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T] ? H extends Falsy ? never : never : never;
+type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T]
+  ? H extends Falsy
+  ? never
+  : never
+  : never;
 ```
 
 What do we do if the element is false-y?
@@ -66,7 +78,11 @@ It means we are still trying to check if there is at least one true-y element.
 So we can continue recursively:
 
 ```typescript
-type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T] ? H extends Falsy ? AnyOf<T> : never : never;
+type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T]
+  ? H extends Falsy
+  ? AnyOf<T>
+  : never
+  : never;
 ```
 
 Finally, once we see the element is not false-y, it means it is true-y.
@@ -74,7 +90,11 @@ It makes little sense to continue recursively since we already know there is tru
 So we just exit from recursion by returning `true` type literal:
 
 ```typescript
-type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T] ? H extends Falsy ? AnyOf<T> : true : never;
+type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T]
+  ? H extends Falsy
+  ? AnyOf<T>
+  : true
+  : never;
 ```
 
 The last state is when we have an empty tuple.
@@ -82,7 +102,11 @@ In such case our inferring will not work, meaning there is definitely no true-y 
 We can return `false` in such case:
 
 ```typescript
-type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T] ? H extends Falsy ? AnyOf<T> : true : false;
+type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T]
+  ? H extends Falsy
+  ? AnyOf<T>
+  : true
+  : false;
 ```
 
 That’s how we made an implementation of `AnyOf` function in the type system.
@@ -90,7 +114,12 @@ For the reference here is the whole implementation:
 
 ```typescript
 type Falsy = 0 | '' | false | [] | { [P in any]: never }
-type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T] ? H extends Falsy ? AnyOf<T> : true : false;
+
+type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T]
+  ? H extends Falsy
+  ? AnyOf<T>
+  : true
+  : false;
 ```
 
 ## References
