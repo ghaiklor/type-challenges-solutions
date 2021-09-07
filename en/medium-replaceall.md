@@ -45,6 +45,21 @@ type ReplaceAll<
 > = From extends '' ? S : S extends `${infer L}${From}${infer R}` ? ReplaceAll<`${L}${To}${R}`, From, To> : S;
 ```
 
+However if in next recursive call char combination will be replaced to `ReplaceAll<"fooo", "fo", "f">` will lead in each iteration `foo -> fo -> f`. When need to keep track of current replaced chars:
+
+```
+type ReplaceAll<
+  S extends string,
+  From extends string,
+  To extends string,
+  Before extends string = ""
+> = From extends "" ? 
+      S : 
+      S extends `${Before}${infer L}${From}${infer R}` ?
+        ReplaceAll<`${Before}${L}${To}${R}`, From, To, `${Before}${L}${To}`> :
+        S
+```
+
 ## References
 
 - [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
