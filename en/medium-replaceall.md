@@ -49,17 +49,17 @@ However, on the next recursive call, characters can be replaced in not expected 
 For instance, calling `ReplaceAll<"fooo", "fo", "f">` will lead to `foo -> fo -> f`.
 So that, we need to keep track of the string before:
 
-```
+```typescript
 type ReplaceAll<
   S extends string,
   From extends string,
   To extends string,
   Before extends string = ""
-> = From extends "" ?
-      S :
-      S extends `${Before}${infer L}${From}${infer R}` ?
-        ReplaceAll<`${Before}${L}${To}${R}`, From, To, `${Before}${L}${To}`> :
-        S
+> = From extends ""
+  ? S
+  : S extends `${Before}${infer L}${From}${infer R}`
+    ? ReplaceAll<`${Before}${L}${To}${R}`, From, To, `${Before}${L}${To}`>
+    : S
 ```
 
 ## References
