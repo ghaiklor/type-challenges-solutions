@@ -47,13 +47,13 @@ Now, we need to check if the temporary accumulator has the required length.
 To do that, we access its property `length` and compare it with the required length:
 
 ```typescript
-type Tuple<L extends number, T extends unknown[] = []> = T[‘length’] extends L ? never : never;
+type Tuple<L extends number, T extends unknown[] = []> = T['length'] extends L ? never : never;
 ```
 
 Once we get the tuple of required length - return the tuple:
 
 ```typescript
-type Tuple<L extends number, T extends unknown[] = []> = T[‘length’] extends L ? T : never;
+type Tuple<L extends number, T extends unknown[] = []> = T['length'] extends L ? T : never;
 ```
 
 However, while we are still don’t have a required tuple, we need to create it somehow.
@@ -61,7 +61,7 @@ To do that, we apply recursive types and append to the temporary accumulator a s
 We do so until the temporary accumulator will not have the required count of elements:
 
 ```typescript
-type Tuple<L extends number, T extends unknown[] = []> = T[‘length’] extends L ? T : Tuple<L, [...T, unknown]>;
+type Tuple<L extends number, T extends unknown[] = []> = T['length'] extends L ? T : Tuple<L, [...T, unknown]>;
 ```
 
 Now, when we call the type with `5` as a parameter, for instance, we will get a tuple with 5 `unknown` elements.
@@ -81,15 +81,15 @@ Hence, the tuple that is one element shorter.
 All that’s left is to return the type value of property `length`:
 
 ```typescript
-type MinusOne<T extends number> = Tuple<T> extends [...infer L, unknown] ? L[‘length’] : never;
+type MinusOne<T extends number> = Tuple<T> extends [...infer L, unknown] ? L['length'] : never;
 ```
 
 That way we have implemented a simple substraction in a type system.
 Calling `MinusOne<5>` e.g. will give a result - type literal `4`.
 
 ```typescript
-type Tuple<L extends number, T extends unknown[] = []> = T[‘length’] extends L ? T : Tuple<L, [...T, unknown]>;
-type MinusOne<T extends number> = Tuple<T> extends [...infer L, unknown] ? L[‘length’] : never;
+type Tuple<L extends number, T extends unknown[] = []> = T['length'] extends L ? T : Tuple<L, [...T, unknown]>;
+type MinusOne<T extends number> = Tuple<T> extends [...infer L, unknown] ? L['length'] : never;
 ```
 
 Although, please note that with recent TypeScript versions, they have added a check for recursive calls.
