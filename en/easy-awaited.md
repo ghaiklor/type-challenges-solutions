@@ -25,6 +25,9 @@ Let me explain it with an example.
 If you have a type `Promise<string>`, unwrapping the `Promise` type will result into type `string`.
 We got the inner type from the outer type.
 
+Note that you also need to unwrap the type recursively.
+For example, if you have type `Promise<Promise<string>>`, you need to return type `string`.
+
 Now, to the challenge.
 I’ll start with the simplest case.
 If our `Awaited` type gets `Promise<string>`, we need to return the `string`, otherwise we return the `T` itself, because it is not a Promise:
@@ -51,6 +54,13 @@ Exactly where we return it:
 
 ```ts
 type Awaited<T> = T extends Promise<infer R> ? R : T;
+```
+
+We are almost done, but yet from type `Promise<Promise<string>>` we get type `Promise<string>`.
+So, we need to repeat the same process recursively, which is achieved by using `Awaited` type itself:
+
+```ts
+type Awaited<T> = T extends Promise<infer R> ? Awaited<R> : T;
 ```
 
 ## References
