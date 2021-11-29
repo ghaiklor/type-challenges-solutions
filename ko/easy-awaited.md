@@ -40,7 +40,7 @@ type Awaited<T> = T extends Promise<string> ? string : T;
 이럴 경우 어떻게 해야할까요?
 `Promise` 내부에 어떤 타입이 있는지 모를 때 그 타입을 어떻게 얻어올 수 있을까요?
 
-이런 경우를 위해, Typescript는 조건부 타입에 대한 타입 추론을 제공합니다! 
+이런 경우를 위해, Typescript는 조건부 타입에 대한 타입 추론을 제공합니다!
 우리는 컴파일러에게 이렇게 부탁할 수 있습니다.
 "그 타입이 무엇인지 안다면, 우리의 타입 매개변수에 할당해 줄 수 있을까요."
 조건부 타입의 타입추론에 대해서는 [여기서 더 읽어보실 수 있습니다](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html#type-inference-in-conditional-types).
