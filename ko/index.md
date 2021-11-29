@@ -1,7 +1,7 @@
 ---
 title: Type Challenges Solutions
 description: >-
-  이 프로젝트는 타입 시스템이 어떻게 작동하는지 더 잘 이해하는 것을 돕고, 스스로 유틸리티 타입을 만들어보거나 혹은 새롭고 즐거운 문제들을 경험해보는 것을 목표로 합니다. 
+  이 프로젝트는 타입 시스템이 어떻게 작동하는지 더 잘 이해하는 것을 돕고, 스스로 유틸리티 타입을 만들어보거나 혹은 새롭고 즐거운 문제들을 경험해보는 것을 목표로 합니다.
 keywords: 'type, challenges, solutions, typescript, javascript'
 lang: ko
 comments: false
@@ -10,8 +10,8 @@ comments: false
 [Type Challenges](https://github.com/type-challenges/type-challenges)가 무엇인가요?
 Type Challenges는 Anthony Fu가 만들고 유지 중인 프로젝트입니다.
 본 프로젝트의 목표는 Typescript에 관한 흥미로운 챌린지들을 모아 제공하는 것입니다.
-단, 이 챌린지에는 특이점이 있습니다. 
-챌린지들을 런타임 내에서 해결할 수 없습니다. 
+단, 이 챌린지에는 특이점이 있습니다.
+챌린지들을 런타임 내에서 해결할 수 없습니다.
 타입 시스템이 적용되는 단계까지에서 문제를 해결해야합니다.
 따라서, Type Challenges는 Typescript의 타입시스템만을 이용해서 해결하는 챌린지들입니다.
 
