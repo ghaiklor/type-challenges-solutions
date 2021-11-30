@@ -5,5 +5,7 @@ main:
     url: /ru/
   - title: "Українська"
     url: /uk/
+  - title: "한국어"
+    url: /ko/
   - title: "GitHub"
     url: https://github.com/ghaiklor/type-challenges-solutions
