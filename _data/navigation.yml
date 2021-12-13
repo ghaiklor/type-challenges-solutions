@@ -7,5 +7,7 @@ main:
     url: /uk/
   - title: "한국어"
     url: /ko/
+  - title: "中文"
+    url: /zh/
   - title: "GitHub"
     url: https://github.com/ghaiklor/type-challenges-solutions
