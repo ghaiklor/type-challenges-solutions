@@ -22,11 +22,11 @@ tags: promise
 展开是从另一个类型中提取内部类型。
 
 让我用一个例子来说明。
-如果你有一个类型`Promise<string>`，展开`Promise `类型将得到类型`string `。
+如果你有一个类型`Promise<string>`，展开`Promise`类型将得到类型`string`。
 我们从外部类型得到其内部类型。
 
 注意，你还需要递归地展开类型。
-例如，如果你有类型`Promise<Promise<string>>`，你需要返回类型`string `。
+例如，如果你有类型`Promise<Promise<string>>`，你需要返回类型`string`。
 
 现在，言归正传。
 我将从最简单的例子开始。
@@ -44,7 +44,6 @@ type Awaited<T> = T extends Promise<string> ? string : T;
 出于这些目的，TypeScript在条件类型中有类型推断功能!
 你可以对编译器说"嘿，一旦你知道了类型是什么，请把它赋给我的类型参数"。
 你可以在这里阅读更多关于[条件类型中的类型推断](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html#type-inference-in-conditional-types)。
-
 
 了解了类型推断之后，我们可以更新我们的解法。
 我们没有在条件类型中检查`Promise<string>`，而是将`string`替换为`infer R`，因为我们不知道那里必须有什么。
