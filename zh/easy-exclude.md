@@ -19,7 +19,6 @@ type T1 = Exclude<"a" | "b" | "c", "a" | "b">; // expected "c"
 
 这里重要的细节是TypeScript中的条件类型是[可分配的](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#distributive-conditional-types)。
 
-
 所以当你在写`T extends U`且`T`是联合类型时，实际上发生的是TypeScript遍历联合类型`T`并将条件应用到每个元素上。
 
 因此，这个解法是非常直接的。我们检查`T`如果可以分配给`U`则跳过：
