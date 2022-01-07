@@ -49,4 +49,4 @@ type Push<T extends unknown[], U> = [...T, U]
 ## Посилання
 
 - [Дженерики](https://www.typescriptlang.org/docs/handbook/2/generics.html)
-- [Варіативні кортежі](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)
+- [Варіативні типи](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)
