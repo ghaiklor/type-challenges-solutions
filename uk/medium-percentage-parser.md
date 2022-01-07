@@ -108,7 +108,7 @@ type ParseNumber<T extends string> = T extends `${ParseSign<T>}${infer N}${Parse
 Це не дає йому потрапити в частину з виведенням числа.
 
 В результаті ми залишаємося тільки з самим числом, яке ми й отримуємо через виведення типів.
-Нам тільки залишається повернути його з умовного типу. 
+Нам тільки залишається повернути його з умовного типу.
 
 ```typescript
 type ParseNumber<T extends string> = T extends `${ParseSign<T>}${infer N}${ParsePercent<T>}`
