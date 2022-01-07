@@ -70,7 +70,7 @@ declare function PromiseAll<T extends unknown[]>(values: readonly [...T]): Promi
 ## Посилання
 
 - [Варіативні типи](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)
-- [Типи співставлення](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
+- [Типи зіставлення](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
 - [Типи пошуку/індексні типи](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html)
 - [Умовні типи](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 - [Виведення типів в умовних типах](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types)

@@ -31,14 +31,14 @@ const todo: TodoPreview = {
 
 ## Розв'язок
 
-Для цієї задачі нам потрібні типи пошуку (Lookup Types) та типи співставлення (Mapped Types).
+Для цієї задачі нам потрібні типи пошуку (Lookup Types) та типи зіставлення (Mapped Types).
 
 Типи пошуку дозволяють нам отримати тип з іншого типу за іменем.
 Схоже на отримання значення з об'єкта за ключем.
 
 Порівняльні типи дозволяють перетворити властивості типу в новий тип.
 
-Ви можете прочитати більше про них і зрозуміти як вони працюють на сайті TypeScript: [типи пошуку (lookup types)](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types) і [типи співставлення](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html).
+Ви можете прочитати більше про них і зрозуміти як вони працюють на сайті TypeScript: [типи пошуку (lookup types)](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types) і [типи зіставлення](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html).
 
 Тепер, знаючи про типи пошуку та порівняльні типи, як реалізувати необхідний тип?
 
@@ -57,5 +57,5 @@ type MyPick<T, K extends keyof T> = { [P in K]: T[P] }
 ## Посилання
 
 - [Типи пошуку](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types)
-- [Типи співставлення](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
+- [Типи зіставлення](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
 - [Індексні типи](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html)
