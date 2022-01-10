@@ -28,14 +28,14 @@ const todo: TodoPreview = {
 ## Розв'язок
 
 `Omit<T, K>` приймає об'єкт `T` і список ключів в `K`, які треба виключити з об'єкта.
-Очевидно, що для вирішення цього завдання ми використаємо [типи співставлення](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html).
+Очевидно, що для вирішення цього завдання ми використаємо [типи зіставлення](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html).
 
 ```typescript
 type MyOmit<T, K> = { [P in keyof T]: T[P] }
 ```
 
 Залишається відфільтрувати властивості, які необхідно залишити в об'єкті.
-Для цього використаємо [перепризначення ключів в типах співставлення](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#key-remapping-in-mapped-types):
+Для цього використаємо [перепризначення ключів в типах зіставлення](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#key-remapping-in-mapped-types):
 
 ```typescript
 type MyOmit<T, K> = { [P in keyof T as P extends K ? never : P]: T[P] }
@@ -46,7 +46,7 @@ type MyOmit<T, K> = { [P in keyof T as P extends K ? never : P]: T[P] }
 
 ## Посилання
 
-- [Типи співставлення](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
+- [Типи зіставлення](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
 - [Типи пошуку/індексні типи](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html)
 - [Умовні типи](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
-- [Перепризначення ключів в типах співставлення](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#key-remapping-in-mapped-types)
+- [Перепризначення ключів в типах зіставлення](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#key-remapping-in-mapped-types)

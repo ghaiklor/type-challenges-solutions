@@ -34,7 +34,7 @@ todo.description = "barFoo" // Error: cannot reassign a readonly property
 Нам потрібно зробити всі властивості у типі доступними лише для читання.
 Отже, ми маємо проітерувати всі властивості та додати до них модифікатор.
 
-Ми використаємо звичайні [типи співставлення](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html), нічого складного.
+Ми використаємо звичайні [типи зіставлення](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html), нічого складного.
 Ми візьмемо ключ кожної властивості та додамо йому модифікатор `readonly`:
 
 ```ts
@@ -43,4 +43,4 @@ type MyReadonly<T> = { readonly [K in keyof T]: T[K] }
 
 ## Посилання
 
-- [Типи співставлення](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
+- [Типи зіставлення](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
