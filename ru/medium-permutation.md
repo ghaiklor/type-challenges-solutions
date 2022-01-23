@@ -12,7 +12,7 @@ tags: union
 Например:
 
 ```typescript
-type perm = Permutation<'A' | 'B' | 'C'>;
+type perm = Permutation<"A" | "B" | "C">;
 // expected ['A', 'B', 'C'] | ['A', 'C', 'B'] | ['B', 'A', 'C'] | ['B', 'C', 'A'] | ['C', 'A', 'B'] | ['C', 'B', 'A']
 ```
 
@@ -21,7 +21,7 @@ type perm = Permutation<'A' | 'B' | 'C'>;
 Одно из моих любимых.
 Эта проблема выглядит как сложная, на первый взгляд, но это не так.
 
-Чтобы понять решение, проникнитесь одним из подходов к решению задач - ["разделяй и властвуй"](https://ru.wikipedia.org/wiki/Разделяй_и_властвуй_(информатика)).
+Чтобы понять решение, проникнитесь одним из подходов к решению задач - ["разделяй и властвуй"](<https://ru.wikipedia.org/wiki/Разделяй_и_властвуй_(информатика)>).
 Если решение к проблеме найти не получается, потому что проблема слишком сложная - разделяйте её и решайте проблемы поменьше.
 Вместо того, чтобы искать возможные перестановки всех элементов, начнём с задач, где этих элементов нету или есть только один.
 
@@ -32,7 +32,7 @@ type perm = Permutation<'A' | 'B' | 'C'>;
 Выразим эту ситуацию, используя условные типы:
 
 ```typescript
-type Permutation<T> = T extends never ? [] : [T]
+type Permutation<T> = T extends never ? [] : [T];
 ```
 
 С этим решением мы даже проходим один тест.
@@ -67,7 +67,11 @@ Permutation<‘A’ | ‘B’> -> [‘A’, ...Permutation<‘B’>] + [‘B’,
 Заменим `[T]`, на реализацию нашего "разделяй и властвуй":
 
 ```typescript
-type Permutation<T> = T extends never ? [] : T extends infer U ? [U, ...Permutation<Exclude<T, U>>] : []
+type Permutation<T> = T extends never
+  ? []
+  : T extends infer U
+  ? [U, ...Permutation<Exclude<T, U>>]
+  : [];
 ```
 
 Мы близки к решению.
@@ -77,7 +81,11 @@ type Permutation<T> = T extends never ? [] : T extends infer U ? [U, ...Permutat
 После непродолжительной отладки, я понял, что нужно обернуть наш условный тип в кортежи.
 
 ```typescript
-type Permutation<T> = [T] extends [never] ? [] : T extends infer U ? [U, ...Permutation<Exclude<T, U>>] : []
+type Permutation<T> = [T] extends [never]
+  ? []
+  : T extends infer U
+  ? [U, ...Permutation<Exclude<T, U>>]
+  : [];
 ```
 
 Решение всё ещё не рабочее, но после второго захода на отладку, я нашел проблему.
@@ -86,7 +94,11 @@ type Permutation<T> = [T] extends [never] ? [] : T extends infer U ? [U, ...Perm
 И я был откровенно удивлен, когда обычное копирование тип параметра `T` в другой тип параметр `C` решило проблему.
 
 ```typescript
-type Permutation<T, C = T> = [T] extends [never] ? [] : C extends infer U ? [U, ...Permutation<Exclude<T, U>>] : []
+type Permutation<T, C = T> = [T] extends [never]
+  ? []
+  : C extends infer U
+  ? [U, ...Permutation<Exclude<T, U>>]
+  : [];
 ```
 
 ## Что почитать

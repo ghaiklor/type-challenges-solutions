@@ -11,9 +11,9 @@ tags: template-literal
 Implement `EndsWith<T, U>` which takes two exact string types and returns whether `T` ends with `U`:
 
 ```typescript
-type R0 = EndsWith<'abc', 'bc'> // true
-type R1 = EndsWith<'abc', 'abc'> // true
-type R2 = EndsWith<'abc', 'd'> // false
+type R0 = EndsWith<"abc", "bc">; // true
+type R1 = EndsWith<"abc", "abc">; // true
+type R2 = EndsWith<"abc", "d">; // false
 ```
 
 ## Solution
@@ -29,10 +29,9 @@ Let us start with the template literal type that shows any string it can have.
 At this point, we don’t care about the content, so we can leave `any` type here:
 
 ```typescript
-type EndsWith<
-  T extends string,
-  U extends string
-> = T extends `${any}` ? never : never
+type EndsWith<T extends string, U extends string> = T extends `${any}`
+  ? never
+  : never;
 ```
 
 With this statement, we are saying “hey, compiler, check if the string literal type of `T` extends from `any` type”.
@@ -43,20 +42,18 @@ We pass the substring through a type parameter `U` and we need to check if it is
 So be it:
 
 ```typescript
-type EndsWith<
-  T extends string,
-  U extends string
-> = T extends `${any}${U}` ? never : never
+type EndsWith<T extends string, U extends string> = T extends `${any}${U}`
+  ? never
+  : never;
 ```
 
 By using such a construct, we are checking if the string extends from anything, but ends with `U` - simple.
 All what’s left is to return boolean literal types according to the result:
 
 ```typescript
-type EndsWith<
-  T extends string,
-  U extends string
-> = T extends `${any}${U}` ? true : false
+type EndsWith<T extends string, U extends string> = T extends `${any}${U}`
+  ? true
+  : false;
 ```
 
 ## References

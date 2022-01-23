@@ -12,7 +12,7 @@ tags: template-literal
 Наприклад:
 
 ```typescript
-type replaced = ReplaceAll<'t y p e s', ' ', ''> // expected to be 'types'
+type replaced = ReplaceAll<"t y p e s", " ", "">; // expected to be 'types'
 ```
 
 ## Розв'язок
@@ -30,7 +30,11 @@ type ReplaceAll<
   S extends string,
   From extends string,
   To extends string
-> = From extends '' ? S : S extends `${infer L}${From}${infer R}` ? `${L}${To}${R}` : S;
+> = From extends ""
+  ? S
+  : S extends `${infer L}${From}${infer R}`
+  ? `${L}${To}${R}`
+  : S;
 ```
 
 Цей розв'язок працює тільки з одним збігом, як в [`Replace`](./medium-replace.md), але нам потрібно замінити всі.
@@ -41,7 +45,11 @@ type ReplaceAll<
   S extends string,
   From extends string,
   To extends string
-> = From extends '' ? S : S extends `${infer L}${From}${infer R}` ? ReplaceAll<`${L}${To}${R}`, From, To> : S;
+> = From extends ""
+  ? S
+  : S extends `${infer L}${From}${infer R}`
+  ? ReplaceAll<`${L}${To}${R}`, From, To>
+  : S;
 ```
 
 ## Посилання

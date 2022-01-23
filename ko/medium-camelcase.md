@@ -13,7 +13,7 @@ tags: template-literal
 예시:
 
 ```typescript
-type camelCased = CamelCase<'foo-bar-baz'> // expected "fooBarBaz"
+type camelCased = CamelCase<"foo-bar-baz">; // expected "fooBarBaz"
 ```
 
 ## 해답
@@ -23,18 +23,14 @@ type camelCased = CamelCase<'foo-bar-baz'> // expected "fooBarBaz"
 이제 이 부분들을 추론해 보겠습니다.
 
 ```typescript
-type CamelCase<S> = S extends `${infer H}-${infer T}`
-  ? never
-  : never;
+type CamelCase<S> = S extends `${infer H}-${infer T}` ? never : never;
 ```
 
 패턴이 존재하지 않는다면 어떻게 해야할까요?
 기존의 문자열을 그대로 반환해주면 됩니다.
 
 ```typescript
-type CamelCase<S> = S extends `${infer H}-${infer T}`
-  ? never
-  : S;
+type CamelCase<S> = S extends `${infer H}-${infer T}` ? never : S;
 ```
 
 패턴이 존재한다면 하이픈을 지우고 tail의 첫 문자를 대문자로 교체해주면 됩니다.
@@ -52,7 +48,9 @@ type CamelCase<S> = S extends `${infer H}-${infer T}`
 
 ```typescript
 type CamelCase<S> = S extends `${infer H}-${infer T}`
-  ? T extends Capitalize<T> ? never : `${H}${CamelCase<Capitalize<T>>}`
+  ? T extends Capitalize<T>
+    ? never
+    : `${H}${CamelCase<Capitalize<T>>}`
   : S;
 ```
 
@@ -62,7 +60,9 @@ tail이 이미 대문자화 된 경우라면 어떻게 해야할까요?
 
 ```typescript
 type CamelCase<S> = S extends `${infer H}-${infer T}`
-  ? T extends Capitalize<T> ? `${H}-${CamelCase<T>}` : `${H}${CamelCase<Capitalize<T>>}`
+  ? T extends Capitalize<T>
+    ? `${H}-${CamelCase<T>}`
+    : `${H}${CamelCase<Capitalize<T>>}`
   : S;
 ```
 

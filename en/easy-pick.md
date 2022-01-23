@@ -16,17 +16,17 @@ For example:
 
 ```ts
 interface Todo {
-  title: string
-  description: string
-  completed: boolean
+  title: string;
+  description: string;
+  completed: boolean;
 }
 
-type TodoPreview = MyPick<Todo, 'title' | 'completed'>
+type TodoPreview = MyPick<Todo, "title" | "completed">;
 
 const todo: TodoPreview = {
-  title: 'Clean room',
+  title: "Clean room",
   completed: false,
-}
+};
 ```
 
 ## Solution
@@ -50,7 +50,7 @@ The type of values itself are going to be without change.
 Although, we need to take its type from the original type and that is where lookup type is useful:
 
 ```ts
-type MyPick<T, K extends keyof T> = { [P in K]: T[P] }
+type MyPick<T, K extends keyof T> = { [P in K]: T[P] };
 ```
 
 We are saying “get everything from `K`, name it as `P` and make it as a new key in our new object with a value type taken from the input type”.

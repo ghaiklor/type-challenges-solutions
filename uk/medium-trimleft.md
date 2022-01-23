@@ -12,7 +12,7 @@ tags: template-literal
 Наприклад:
 
 ```typescript
-type trimmed = TrimLeft<'  Hello World  '> // expected to be 'Hello World  '
+type trimmed = TrimLeft<"  Hello World  ">; // expected to be 'Hello World  '
 ```
 
 ## Розв'язок
@@ -37,7 +37,7 @@ type TrimLeft<S> = S extends ` ${infer T}` ? TrimLeft<T> : S;
 Виправимо це, замінивши пробіл на об'єднання символів "пробіл", "перенесення рядка", "табуляція":
 
 ```typescript
-type TrimLeft<S> = S extends `${' ' | '\n' | '\t'}${infer T}` ? TrimLeft<T> : S;
+type TrimLeft<S> = S extends `${" " | "\n" | "\t"}${infer T}` ? TrimLeft<T> : S;
 ```
 
 ## Посиланняп

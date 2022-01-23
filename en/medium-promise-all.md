@@ -15,11 +15,11 @@ The returning value should be `Promise<T>` where `T` is the resolved result arra
 const promise1 = Promise.resolve(3);
 const promise2 = 42;
 const promise3 = new Promise<string>((resolve, reject) => {
-  setTimeout(resolve, 100, 'foo');
+  setTimeout(resolve, 100, "foo");
 });
 
 // expected to be `Promise<[number, number, string]>`
-const p = Promise.all([promise1, promise2, promise3] as const)
+const p = Promise.all([promise1, promise2, promise3] as const);
 ```
 
 ## Solution
@@ -31,7 +31,7 @@ We start with the simplest solution - the function that returns `Promise<T>`.
 We need to return `Promise<T>` after all, where `T` is an array of types for resolved promises:
 
 ```ts
-declare function PromiseAll<T>(values: T): Promise<T>
+declare function PromiseAll<T>(values: T): Promise<T>;
 ```
 
 Now, let us think how to evaluate types for resolved promises.
@@ -40,7 +40,7 @@ So let us show that in our types.
 By using [variadic tuple types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types) we can split its types so it is easier to work with its elements:
 
 ```ts
-declare function PromiseAll<T extends unknown[]>(values: [...T]): Promise<T>
+declare function PromiseAll<T extends unknown[]>(values: [...T]): Promise<T>;
 ```
 
 Oops, getting the compilation error “Argument of type ‘readonly [1, 2, 3]’ is not assignable to parameter of type ‘[1, 2, 3]’.“.
@@ -48,7 +48,9 @@ That is because we do not expect to have a `readonly` modifier in our `values` p
 Let us fix that by adding the modifier to the parameter:
 
 ```ts
-declare function PromiseAll<T extends unknown[]>(values: readonly [...T]): Promise<T>
+declare function PromiseAll<T extends unknown[]>(
+  values: readonly [...T]
+): Promise<T>;
 ```
 
 We have a solution that even works on one of the test cases.
@@ -61,14 +63,18 @@ So let us replace the `T` with a conditional type to check if the element is act
 If so, we return its inner type, otherwise - the type with no changes:
 
 ```ts
-declare function PromiseAll<T extends unknown[]>(values: readonly [...T]): Promise<T extends Promise<infer R> ? R : T>
+declare function PromiseAll<T extends unknown[]>(
+  values: readonly [...T]
+): Promise<T extends Promise<infer R> ? R : T>;
 ```
 
 The solution still does not work, because the `T` is not a union but the tuple.
 So we need to iterate over each element in the tuple and check if the value is a `Promise` or not:
 
 ```ts
-declare function PromiseAll<T extends unknown[]>(values: readonly [...T]): Promise<{ [P in keyof T]: T[P] extends Promise<infer R> ? R : T[P] }>
+declare function PromiseAll<T extends unknown[]>(
+  values: readonly [...T]
+): Promise<{ [P in keyof T]: T[P] extends Promise<infer R> ? R : T[P] }>;
 ```
 
 ## References

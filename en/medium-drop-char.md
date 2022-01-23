@@ -12,7 +12,7 @@ Drop a specified char from a string.
 For example:
 
 ```typescript
-type Butterfly = DropChar<' b u t t e r f l y ! ', ' '> // 'butterfly!'
+type Butterfly = DropChar<" b u t t e r f l y ! ", " ">; // 'butterfly!'
 ```
 
 ## Solution
@@ -25,9 +25,7 @@ Let’s start with the simplest case - infer the left part and the right part of
 The delimiter between them is the needed char itself.
 
 ```typescript
-type DropChar<S, C> = S extends `${infer L}${C}${infer R}`
-  ? never
-  : never;
+type DropChar<S, C> = S extends `${infer L}${C}${infer R}` ? never : never;
 ```
 
 With such a notation, we are getting a compilation error “Type ‘C’ is not assignable to type ‘string | number | bigint | boolean | null | undefined’.“.

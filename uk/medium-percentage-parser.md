@@ -16,17 +16,17 @@ tags: parser
 Наприклад:
 
 ```typescript
-type PString1=''
-type PString2='+85%'
-type PString3='-85%'
-type PString4='85%'
-type PString5='85'
+type PString1 = "";
+type PString2 = "+85%";
+type PString3 = "-85%";
+type PString4 = "85%";
+type PString5 = "85";
 
-type R1=PercentageParser<PString1> // expected ['', '', '']
-type R2=PercentageParser<PString2> // expected ["+", "85", "%"]
-type R3=PercentageParser<PString3> // expected ["-", "85", "%"]
-type R4=PercentageParser<PString4> // expected ["", "85", "%"]
-type R5=PercentageParser<PString5> // expected ["", "85", ""]
+type R1 = PercentageParser<PString1>; // expected ['', '', '']
+type R2 = PercentageParser<PString2>; // expected ["+", "85", "%"]
+type R3 = PercentageParser<PString3>; // expected ["-", "85", "%"]
+type R4 = PercentageParser<PString4>; // expected ["", "85", "%"]
+type R5 = PercentageParser<PString5>; // expected ["", "85", ""]
 ```
 
 ## Розв'язок
@@ -45,9 +45,7 @@ type R5=PercentageParser<PString5> // expected ["", "85", ""]
 Щоб цього досягнути, нам потрібно спочатку вивести цей перший символ.
 
 ```typescript
-type ParseSign<T extends string> = T extends `${infer S}${any}`
-  ? never
-  : never
+type ParseSign<T extends string> = T extends `${infer S}${any}` ? never : never;
 ```
 
 Маючи перший символ в тип параметрі `S`, ми можемо перевірити плюс це чи мінус.
@@ -56,8 +54,10 @@ type ParseSign<T extends string> = T extends `${infer S}${any}`
 
 ```typescript
 type ParseSign<T extends string> = T extends `${infer S}${any}`
-  ? S extends '+' | '-' ? S : ''
-  : ''
+  ? S extends "+" | "-"
+    ? S
+    : ""
+  : "";
 ```
 
 Таким чином, ми реалізували тип, який може розпізнати й повернути знак числа.
@@ -66,18 +66,14 @@ type ParseSign<T extends string> = T extends `${infer S}${any}`
 Для початку, перевіримо, чи є символ відсотка в кінці рядка.
 
 ```typescript
-type ParsePercent<T extends string> = T extends `${any}%`
-  ? never
-  : never
+type ParsePercent<T extends string> = T extends `${any}%` ? never : never;
 ```
 
 У випадку, якщо символ відсотка присутній в кінці рядка - повертаємо символ відсотка.
 У всіх інших випадках повертаємо порожній рядок.
 
 ```typescript
-type ParsePercent<T extends string> = T extends `${any}%`
-  ? '%'
-  : ''
+type ParsePercent<T extends string> = T extends `${any}%` ? "%" : "";
 ```
 
 Маючи два типи, два аналізатора, які повертають знаки, ми можемо почати думати про число.
@@ -93,9 +89,8 @@ type ParsePercent<T extends string> = T extends `${any}%`
 Все що нам потрібно це правильно їх зіставити.
 
 ```typescript
-type ParseNumber<T extends string> = T extends `${ParseSign<T>}${infer N}${ParsePercent<T>}`
-  ? never
-  : never
+type ParseNumber<T extends string> =
+  T extends `${ParseSign<T>}${infer N}${ParsePercent<T>}` ? never : never;
 ```
 
 Бачите що відбувається?
@@ -111,9 +106,8 @@ type ParseNumber<T extends string> = T extends `${ParseSign<T>}${infer N}${Parse
 Нам тільки залишається повернути його з умовного типу.
 
 ```typescript
-type ParseNumber<T extends string> = T extends `${ParseSign<T>}${infer N}${ParsePercent<T>}`
-  ? N
-  : ''
+type ParseNumber<T extends string> =
+  T extends `${ParseSign<T>}${infer N}${ParsePercent<T>}` ? N : "";
 ```
 
 Ви, напевно, вже здогадуєтеся, як ми можемо це використовувати для вирішення завдання.
@@ -124,8 +118,8 @@ type ParseNumber<T extends string> = T extends `${ParseSign<T>}${infer N}${Parse
 type PercentageParser<A extends string> = [
   ParseSign<A>,
   ParseNumber<A>,
-  ParsePercent<A>,
-]
+  ParsePercent<A>
+];
 ```
 
 Мої вітання!

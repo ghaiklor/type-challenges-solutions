@@ -12,7 +12,7 @@ tags: union string
 Например:
 
 ```typescript
-type Test = '123';
+type Test = "123";
 type Result = StringToUnion<Test>; // expected to be "1" | "2" | "3"
 ```
 
@@ -23,7 +23,9 @@ type Result = StringToUnion<Test>; // expected to be "1" | "2" | "3"
 Воспользуемся условными типами со строчными тип литералами и выведём первую букву и остальную часть.
 
 ```typescript
-type StringToUnion<T extends string> = T extends `${infer C}${infer T}` ? never : never
+type StringToUnion<T extends string> = T extends `${infer C}${infer T}`
+  ? never
+  : never;
 ```
 
 В тип параметрах `C` и `T` получаем первую букву строки и её хвост.
@@ -31,7 +33,9 @@ type StringToUnion<T extends string> = T extends `${infer C}${infer T}` ? never 
 Таким образом, будет происходить рекурсивный перебор.
 
 ```typescript
-type StringToUnion<T extends string> = T extends `${infer C}${infer T}` ? StringToUnion<T> : never
+type StringToUnion<T extends string> = T extends `${infer C}${infer T}`
+  ? StringToUnion<T>
+  : never;
 ```
 
 Единственное что осталось - объединение.
@@ -39,7 +43,9 @@ type StringToUnion<T extends string> = T extends `${infer C}${infer T}` ? String
 Так как базовый случай `StringToUnion<T>` это `never`, получим `C1 | C2 | CN | never`.
 
 ```typescript
-type StringToUnion<T extends string> = T extends `${infer C}${infer T}` ? C | StringToUnion<T> : never
+type StringToUnion<T extends string> = T extends `${infer C}${infer T}`
+  ? C | StringToUnion<T>
+  : never;
 ```
 
 ## Что почитать

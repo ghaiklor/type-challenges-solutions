@@ -12,7 +12,7 @@ tags: template-literal
 Наприклад:
 
 ```typescript
-type capitalized = Capitalize<'hello world'> // expected to be 'Hello world'
+type capitalized = Capitalize<"hello world">; // expected to be 'Hello world'
 ```
 
 ## Розв'язок
@@ -22,7 +22,7 @@ type capitalized = Capitalize<'hello world'> // expected to be 'Hello world'
 Тому, TypeScript компілятор надає вбудований тип `Capitalize`, за допомогою якого ця проблема вирішується досить легко:
 
 ```typescript
-type MyCapitalize<S extends string> = Capitalize<S>
+type MyCapitalize<S extends string> = Capitalize<S>;
 ```
 
 Але я сумніваюся, що задум автора був саме в цьому.
@@ -33,7 +33,9 @@ type MyCapitalize<S extends string> = Capitalize<S>
 Щоб розв'язок був компактним, зробимо словник тільки для тих літер, які потрібні для того, щоб пройти тести.
 
 ```typescript
-interface CapitalizedChars { 'f': 'F' };
+interface CapitalizedChars {
+  f: "F";
+}
 ```
 
 Є словник з великими літерами.
@@ -49,8 +51,12 @@ type Capitalize<S> = S extends `${infer C}${infer T}` ? C : S;
 Якщо так, то повертаємо велику літеру зі словника, в іншому випадку — першу літеру без змін.
 
 ```typescript
-interface CapitalizedChars { 'f': 'F' };
-type Capitalize<S> = S extends `${infer C}${infer T}` ? `${C extends keyof CapitalizedChars ? CapitalizedChars[C] : C}${T}` : S;
+interface CapitalizedChars {
+  f: "F";
+}
+type Capitalize<S> = S extends `${infer C}${infer T}`
+  ? `${C extends keyof CapitalizedChars ? CapitalizedChars[C] : C}${T}`
+  : S;
 ```
 
 ## Посилання

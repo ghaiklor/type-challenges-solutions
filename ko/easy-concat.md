@@ -15,7 +15,7 @@ tags: array
 예시:
 
 ```ts
-type Result = Concat<[1], [2]> // expected to be [1, 2]
+type Result = Concat<[1], [2]>; // expected to be [1, 2]
 ```
 
 ## 해답
@@ -40,14 +40,14 @@ Variadic Tuple 타입은 타입 시스템 내에서 위와 같은 동작이 가�
 만약 두 제네릭 배열을 합치고 싶다면, 새로운 배열 안에서 두 제네릭 배열에 스프레드 연산자를 적용한 뒤 새로운 배열을 반환해주면 됩니다:
 
 ```ts
-type Concat<T, U> = [...T, ...U]
+type Concat<T, U> = [...T, ...U];
 ```
 
 이렇게만 사용할 경우 “A rest element type must be an array type.”라는 에러를 만나게 됩니다.
 컴파일러에게 사용하는 제네릭들이 배열이라는 것을 알려주어 이 문제를 해결해보겠습니다:
 
 ```ts
-type Concat<T extends unknown[], U extends unknown[]> = [...T, ...U]
+type Concat<T extends unknown[], U extends unknown[]> = [...T, ...U];
 ```
 
 ## 참고

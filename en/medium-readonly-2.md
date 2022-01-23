@@ -16,20 +16,20 @@ For example:
 
 ```ts
 interface Todo {
-  title: string
-  description: string
-  completed: boolean
+  title: string;
+  description: string;
+  completed: boolean;
 }
 
-const todo: MyReadonly2<Todo, 'title' | 'description'> = {
+const todo: MyReadonly2<Todo, "title" | "description"> = {
   title: "Hey",
   description: "foobar",
   completed: false,
-}
+};
 
-todo.title = "Hello" // Error: cannot reassign a readonly property
-todo.description = "barFoo" // Error: cannot reassign a readonly property
-todo.completed = true // OK
+todo.title = "Hello"; // Error: cannot reassign a readonly property
+todo.description = "barFoo"; // Error: cannot reassign a readonly property
+todo.completed = true; // OK
 ```
 
 ## Solution
@@ -66,7 +66,9 @@ That is the case when our type must behave as an usual `Readonly<T>` type.
 To fix that, we are just specifying the default type parameter for `K` to be “all the keys from `T`”:
 
 ```ts
-type MyReadonly2<T, K extends keyof T = keyof T> = T & { readonly [P in K]: T[P] };
+type MyReadonly2<T, K extends keyof T = keyof T> = T & {
+  readonly [P in K]: T[P];
+};
 ```
 
 ## References

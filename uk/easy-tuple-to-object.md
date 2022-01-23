@@ -13,10 +13,10 @@ tags: tuple
 Наприклад:
 
 ```ts
-const tuple = ['tesla', 'model 3', 'model X', 'model Y'] as const
+const tuple = ["tesla", "model 3", "model X", "model Y"] as const;
 
 // expected { tesla: 'tesla', 'model 3': 'model 3', 'model X': 'model X', 'model Y': 'model Y'}
-const result: TupleToObject<typeof tuple>
+const result: TupleToObject<typeof tuple>;
 ```
 
 ## Розв'язок
@@ -28,7 +28,7 @@ const result: TupleToObject<typeof tuple>
 За допомогою типів зіставлення, ми можемо ітерувати значення через `T[number]` і повернути новий тип, ключами та значеннями якого будуть відповідні елементи `T[number]`:
 
 ```ts
-type TupleToObject<T extends readonly any[]> = { [K in T[number]]: K }
+type TupleToObject<T extends readonly any[]> = { [K in T[number]]: K };
 ```
 
 ## Посилання

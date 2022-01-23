@@ -13,11 +13,11 @@ tags: array
 Наприклад:
 
 ```ts
-type arr1 = ['a', 'b', 'c']
-type arr2 = [3, 2, 1]
+type arr1 = ["a", "b", "c"];
+type arr2 = [3, 2, 1];
 
-type head1 = First<arr1> // 'a'
-type head2 = First<arr2> // 3
+type head1 = First<arr1>; // 'a'
+type head2 = First<arr2>; // 3
 ```
 
 ## Розв'язок
@@ -25,7 +25,7 @@ type head2 = First<arr2> // 3
 Перше, що приходить в голову, це використати пошукові (або індексні) типи й просто написати `T[0]`:
 
 ```ts
-type First<T extends any[]> = T[0]
+type First<T extends any[]> = T[0];
 ```
 
 Та це рішення не враховує один з граничних випадків.

@@ -14,21 +14,21 @@ tags: readonly object-keys deep
 ```typescript
 type X = {
   x: {
-    a: 1
-    b: 'hi'
-  }
-  y: 'hey'
-}
+    a: 1;
+    b: "hi";
+  };
+  y: "hey";
+};
 
 type Expected = {
   readonly x: {
-    readonly a: 1
-    readonly b: 'hi'
-  }
-  readonly y: 'hey'
-}
+    readonly a: 1;
+    readonly b: "hi";
+  };
+  readonly y: "hey";
+};
 
-const todo: DeepReadonly<X> // should be same as `Expected`
+const todo: DeepReadonly<X>; // should be same as `Expected`
 ```
 
 ## Розв'язок
@@ -39,7 +39,7 @@ const todo: DeepReadonly<X> // should be same as `Expected`
 Почнемо з класичної реалізації і зробимо [`Readonly<T>`](./easy-readonly.md):
 
 ```typescript
-type DeepReadonly<T> = { readonly [P in keyof T]: T[P] }
+type DeepReadonly<T> = { readonly [P in keyof T]: T[P] };
 ```
 
 Але, як ви вже здогадалися, цей тип не зробить всі властивості незмінними, а тільки ті, що знаходяться на першому рівні вкладеності.
@@ -51,7 +51,11 @@ type DeepReadonly<T> = { readonly [P in keyof T]: T[P] }
 Якщо, `T[P]` - об'єкт, рухаємося в глибину й викликаємо `DeepReadonly`, в інакшому випадку — повертаємо `T[P]` без змін.
 
 ```typescript
-type DeepReadonly<T> = { readonly [P in keyof T]: T[P] extends Record<string, unknown> ? DeepReadonly<T[P]> : T[P] }
+type DeepReadonly<T> = {
+  readonly [P in keyof T]: T[P] extends Record<string, unknown>
+    ? DeepReadonly<T[P]>
+    : T[P];
+};
 ```
 
 ## Посилання

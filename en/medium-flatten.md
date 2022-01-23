@@ -23,7 +23,7 @@ When we get an empty array, we return an empty array; it is already flatten anyw
 Otherwise, `T` itself:
 
 ```typescript
-type Flatten<T> = T extends [] ? [] : T
+type Flatten<T> = T extends [] ? [] : T;
 ```
 
 But, if `T` will not be an empty array, it means that we have an array with elements inside or the element itself.
@@ -32,7 +32,11 @@ We need to infer one item from it and the tail.
 For now, we can just return inferred items:
 
 ```typescript
-type Flatten<T> = T extends [] ? [] : T extends [infer H, ...infer T] ? [H, T] : [T]
+type Flatten<T> = T extends []
+  ? []
+  : T extends [infer H, ...infer T]
+  ? [H, T]
+  : [T];
 ```
 
 BTW, pay attention to the case when it is not an array with elements.
@@ -42,7 +46,11 @@ Knowing our array’s head and tail, we can recursively call `Flatten` again and
 That way, we flatten the item until it is not an array and return the item itself `[T]`:
 
 ```typescript
-type Flatten<T> = T extends [] ? [] : T extends [infer H, ...infer T] ? [...Flatten<H>, ...Flatten<T>] : [T]
+type Flatten<T> = T extends []
+  ? []
+  : T extends [infer H, ...infer T]
+  ? [...Flatten<H>, ...Flatten<T>]
+  : [T];
 ```
 
 ## References

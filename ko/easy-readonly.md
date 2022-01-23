@@ -17,17 +17,17 @@ tags: built-in readonly object-keys
 
 ```ts
 interface Todo {
-  title: string
-  description: string
+  title: string;
+  description: string;
 }
 
 const todo: MyReadonly<Todo> = {
   title: "Hey",
-  description: "foobar"
-}
+  description: "foobar",
+};
 
-todo.title = "Hello" // Error: cannot reassign a readonly property
-todo.description = "barFoo" // Error: cannot reassign a readonly property
+todo.title = "Hello"; // Error: cannot reassign a readonly property
+todo.description = "barFoo"; // Error: cannot reassign a readonly property
 ```
 
 ## 해답
@@ -39,7 +39,7 @@ todo.description = "barFoo" // Error: cannot reassign a readonly property
 타입의 각 프로퍼티에서 키를 받아와 `readonly` 접근 제어자를 붙여줍니다:
 
 ```ts
-type MyReadonly<T> = { readonly [K in keyof T]: T[K] }
+type MyReadonly<T> = { readonly [K in keyof T]: T[K] };
 ```
 
 ## 참고

@@ -28,7 +28,9 @@ type Result = Absolute<Test>; // expected to be "100"
 우선 주어진 수를 template literal type으로 만든 형태에 "-" 부호가 포함되어 있는지 확인합니다. 포함된다면 "-" 부호가 제거된 부분을 타입 추론합니다. 포함되지 않는다면 타입을 그대로 반환합니다:
 
 ```typescript
-type Absolute<T extends number | string | bigint> = T extends `-${infer N}` ? N : T;
+type Absolute<T extends number | string | bigint> = T extends `-${infer N}`
+  ? N
+  : T;
 ```
 
 예를 들어 `T = “-50”`인 타입이 있으면, `“-<N>”`인 타입과 일치할 것이고 여기서 `N`은 50이 됩니다.
@@ -41,7 +43,9 @@ type Absolute<T extends number | string | bigint> = T extends `-${infer N}` ? N 
 `T`를 template literal type으로 만들어주어 이 문제를 해결해 봅시다:
 
 ```typescript
-type Absolute<T extends number | string | bigint> = T extends `-${infer N}` ? N : `${T}`;
+type Absolute<T extends number | string | bigint> = T extends `-${infer N}`
+  ? N
+  : `${T}`;
 ```
 
 여전히 실패하는 테스트들이 있습니다.
@@ -50,7 +54,9 @@ type Absolute<T extends number | string | bigint> = T extends `-${infer N}` ? N 
 이를 해결하기 위해 숫자를 문자열로 변환할 필요가 있습니다:
 
 ```typescript
-type Absolute<T extends number | string | bigint> = `${T}` extends `-${infer N}` ? N : `${T}`;
+type Absolute<T extends number | string | bigint> = `${T}` extends `-${infer N}`
+  ? N
+  : `${T}`;
 ```
 
 결과적으로 `number`, `string`, `bigint` 타입을 받아서 문자열로 변환해주는 타입을 만들었습니다. 그 이후에 "-" 부호가 있다면 수에서 부호가 제거된 형태를 추론하여 반환하거나 "-" 부호가 없다면 문자열을 그대로 반환해주면 됩니다.

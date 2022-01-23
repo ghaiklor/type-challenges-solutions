@@ -13,10 +13,10 @@ tags: arguments
 예시:
 
 ```ts
-type Fn = (a: number, b: string) => number
+type Fn = (a: number, b: string) => number;
 
 // expected be (a: number, b: string, x: boolean) => number
-type Result = AppendArgument<Fn, boolean>
+type Result = AppendArgument<Fn, boolean>;
 ```
 
 ## 해답
@@ -29,7 +29,9 @@ type Result = AppendArgument<Fn, boolean>
 타입을 추론하고 나면, 지금 단계에서는 입력으로 주어진 것을 복사한 형태의 함수 시그니처를 반환해 줍니다:
 
 ```ts
-type AppendArgument<Fn, A> = Fn extends (args: infer P) => infer R ? (args: P) => R : never;
+type AppendArgument<Fn, A> = Fn extends (args: infer P) => infer R
+  ? (args: P) => R
+  : never;
 ```
 
 아직 해답은 전혀 충분하지 않습니다.
@@ -39,7 +41,9 @@ type AppendArgument<Fn, A> = Fn extends (args: infer P) => infer R ? (args: P) =
 이 문제를 해결하기 위해 스프레드 연산자(spread operator)를 사용할 수 있습니다:
 
 ```ts
-type AppendArgument<Fn, A> = Fn extends (...args: infer P) => infer R ? (args: P) => R : never;
+type AppendArgument<Fn, A> = Fn extends (...args: infer P) => infer R
+  ? (args: P) => R
+  : never;
 ```
 
 이제 조건부 타입의 조건이 참으로 평가됩니다. 이 경우 참인 경우의 분기를 타기 때문에 타입 매개변수 `P`(함수의 매개변수)와 타입 매개변수 `R`(반환 타입)을 사용할 수 있습니다.
@@ -49,21 +53,27 @@ type AppendArgument<Fn, A> = Fn extends (...args: infer P) => infer R ? (args: P
 가변 인자 튜플 타입(variadic tuple type)을 사용하여 튜플을 쪼갤 수 있습니다(역주: 본 문단의 과정이 없어도 답을 구할 수 있습니다. 이후 과정에서 얻은 튜플을 변형하여 사용하지 않을 것이기 때문입니다.):
 
 ```ts
-type AppendArgument<Fn, A> = Fn extends (...args: [...infer P]) => infer R ? (args: P) => R : never;
+type AppendArgument<Fn, A> = Fn extends (...args: [...infer P]) => infer R
+  ? (args: P) => R
+  : never;
 ```
 
 타입 매개변수 `P`는 이제 우리가 원하는 형태입니다.
 남은 것은 추론된 타입을 통해 새로운 함수 시그니처를 만드는 작업입니다:
 
 ```ts
-type AppendArgument<Fn, A> = Fn extends (...args: [...infer P]) => infer R ? (...args: [...P]) => R : never;
+type AppendArgument<Fn, A> = Fn extends (...args: [...infer P]) => infer R
+  ? (...args: [...P]) => R
+  : never;
 ```
 
 이제 입력으로 주어진 함수를 받아서 타입을 추론한 뒤 새로운 함수를 반환해주는 타입을 만들었습니다.
 이 작업이 끝난 뒤 매개변수 `A`를 매개변수들의 배열에 넣어주기만 하면 됩니다:
 
 ```ts
-type AppendArgument<Fn, A> = Fn extends (...args: [...infer P]) => infer R ? (...args: [...P, A]) => R : never;
+type AppendArgument<Fn, A> = Fn extends (...args: [...infer P]) => infer R
+  ? (...args: [...P, A]) => R
+  : never;
 ```
 
 ## 참고

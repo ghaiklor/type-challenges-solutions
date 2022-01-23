@@ -12,7 +12,7 @@ tags: template-literal
 Например:
 
 ```typescript
-type capitalized = Capitalize<'hello world'> // expected to be 'Hello world'
+type capitalized = Capitalize<"hello world">; // expected to be 'Hello world'
 ```
 
 ## Решение
@@ -22,7 +22,7 @@ type capitalized = Capitalize<'hello world'> // expected to be 'Hello world'
 Поэтому, TypeScript компилятор предоставляет встроенный тип `Capitalize` (intrinsic), с помощью которого эта проблема решается легко:
 
 ```typescript
-type MyCapitalize<S extends string> = Capitalize<S>
+type MyCapitalize<S extends string> = Capitalize<S>;
 ```
 
 Но я сильно сомневаюсь, что в этом изначальная задумка автора.
@@ -33,7 +33,9 @@ type MyCapitalize<S extends string> = Capitalize<S>
 Чтобы решение не разрозлось до больших объемов, сделаем словарь только для тех букв, которые нужны для прохождения тестов.
 
 ```typescript
-interface CapitalizedChars { 'f': 'F' };
+interface CapitalizedChars {
+  f: "F";
+}
 ```
 
 Есть словарь с буквами и их заглавными вариантами.
@@ -49,8 +51,12 @@ type Capitalize<S> = S extends `${infer C}${infer T}` ? C : S;
 Если да, возвращаем заглавный вариант из словаря, иначе - ничего не делаем и возвращаем первую букву без изменений.
 
 ```typescript
-interface CapitalizedChars { 'f': 'F' };
-type Capitalize<S> = S extends `${infer C}${infer T}` ? `${C extends keyof CapitalizedChars ? CapitalizedChars[C] : C}${T}` : S;
+interface CapitalizedChars {
+  f: "F";
+}
+type Capitalize<S> = S extends `${infer C}${infer T}`
+  ? `${C extends keyof CapitalizedChars ? CapitalizedChars[C] : C}${T}`
+  : S;
 ```
 
 ## Что почитать

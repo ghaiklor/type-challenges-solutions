@@ -13,13 +13,13 @@ tags: utils
 例如：
 
 ```ts
-type A = If<true, 'a', 'b'> // expected to be 'a'
-type B = If<false, 'a', 'b'> // expected to be 'b'
+type A = If<true, "a", "b">; // expected to be 'a'
+type B = If<false, "a", "b">; // expected to be 'b'
 ```
 
 ## 解法
 
-如果你不确定什么时候在TypeScript中使用[条件类型](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)，那就是你需要对类型使用“if”语句的时候。这正是我们这里要做的。
+如果你不确定什么时候在 TypeScript 中使用[条件类型](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)，那就是你需要对类型使用“if”语句的时候。这正是我们这里要做的。
 
 如果条件类型的计算结果为`true`，我们需要取“true”分支，否则“false”分支:
 

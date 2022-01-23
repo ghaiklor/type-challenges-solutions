@@ -16,17 +16,17 @@ tags: union built-in
 
 ```ts
 interface Todo {
-  title: string
-  description: string
-  completed: boolean
+  title: string;
+  description: string;
+  completed: boolean;
 }
 
-type TodoPreview = MyPick<Todo, 'title' | 'completed'>
+type TodoPreview = MyPick<Todo, "title" | "completed">;
 
 const todo: TodoPreview = {
-  title: 'Clean room',
+  title: "Clean room",
   completed: false,
-}
+};
 ```
 
 ## 해답
@@ -50,7 +50,7 @@ Mapped type이 해줄 수 있는 동작입니다.
 다만 값의 타입을 가져와서 사용할 것이고 이 부분은 lookup type을 유용하게 사용할 수 있습니다.
 
 ```ts
-type MyPick<T, K extends keyof T> = { [P in K]: T[P] }
+type MyPick<T, K extends keyof T> = { [P in K]: T[P] };
 ```
 
 위의 과정은 `K`에 속한 모든 타입들을 `P`로 명명하고 새로운 객체의 키로 만듭니다. 이 객체의 값이 되는 타입은 주어지는 타입(이 경우 `T`)로부터 받아올 수 있습니다.

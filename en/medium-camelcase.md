@@ -12,7 +12,7 @@ Convert a string to CamelCase.
 For example:
 
 ```typescript
-type camelCased = CamelCase<'foo-bar-baz'> // expected "fooBarBaz"
+type camelCased = CamelCase<"foo-bar-baz">; // expected "fooBarBaz"
 ```
 
 ## Solution
@@ -22,18 +22,14 @@ We can have everything before the hyphen - head, and everything after the hyphen
 Let us infer those parts.
 
 ```typescript
-type CamelCase<S> = S extends `${infer H}-${infer T}`
-  ? never
-  : never;
+type CamelCase<S> = S extends `${infer H}-${infer T}` ? never : never;
 ```
 
 What if there is no such pattern?
 We return the input string with no changes.
 
 ```typescript
-type CamelCase<S> = S extends `${infer H}-${infer T}`
-  ? never
-  : S;
+type CamelCase<S> = S extends `${infer H}-${infer T}` ? never : S;
 ```
 
 But if there is such a pattern, we need to remove the hyphen and capitalize the tail.
@@ -50,7 +46,9 @@ We can fix that by checking if we can assign the tail to capitalized tail.
 
 ```typescript
 type CamelCase<S> = S extends `${infer H}-${infer T}`
-  ? T extends Capitalize<T> ? never : `${H}${CamelCase<Capitalize<T>>}`
+  ? T extends Capitalize<T>
+    ? never
+    : `${H}${CamelCase<Capitalize<T>>}`
   : S;
 ```
 
@@ -60,7 +58,9 @@ Sure, we need to do it recursively as well.
 
 ```typescript
 type CamelCase<S> = S extends `${infer H}-${infer T}`
-  ? T extends Capitalize<T> ? `${H}-${CamelCase<T>}` : `${H}${CamelCase<Capitalize<T>>}`
+  ? T extends Capitalize<T>
+    ? `${H}-${CamelCase<T>}`
+    : `${H}${CamelCase<Capitalize<T>>}`
   : S;
 ```
 

@@ -13,8 +13,8 @@ tags: math
 Например:
 
 ```typescript
-type Zero = MinusOne<1> // 0
-type FiftyFour = MinusOne<55> // 54
+type Zero = MinusOne<1>; // 0
+type FiftyFour = MinusOne<55>; // 54
 ```
 
 ## Решение
@@ -49,20 +49,26 @@ type Tuple<L extends number, T extends unknown[] = []> = never;
 Чтобы эту проверку реализовать, обратимся к свойству `length` и сравним его с требуемым:
 
 ```typescript
-type Tuple<L extends number, T extends unknown[] = []> = T['length'] extends L ? never : never;
+type Tuple<L extends number, T extends unknown[] = []> = T["length"] extends L
+  ? never
+  : never;
 ```
 
 Как только мы получили кортеж нужной длины - возвращаем его:
 
 ```typescript
-type Tuple<L extends number, T extends unknown[] = []> = T['length'] extends L ? T : never;
+type Tuple<L extends number, T extends unknown[] = []> = T["length"] extends L
+  ? T
+  : never;
 ```
 
 Но, если же мы не получаем кортеж нужной длины, нам нужно добавить к нему ещё один элемент.
 И продолжать так стоит до тех пор, пока не получим ожидаемую длину кортежа:
 
 ```typescript
-type Tuple<L extends number, T extends unknown[] = []> = T['length'] extends L ? T : Tuple<L, [...T, unknown]>;
+type Tuple<L extends number, T extends unknown[] = []> = T["length"] extends L
+  ? T
+  : Tuple<L, [...T, unknown]>;
 ```
 
 Теперь, если мы вызовем наш тип с параметром `5`, например, то мы получим кортеж длиной в 5 элементов и типа `unknown`.
@@ -74,22 +80,30 @@ type Tuple<L extends number, T extends unknown[] = []> = T['length'] extends L ?
 Другими словами, кортеж на один элемент будет короче.
 
 ```typescript
-type MinusOne<T extends number> = Tuple<T> extends [...infer L, unknown] ? never : never;
+type MinusOne<T extends number> = Tuple<T> extends [...infer L, unknown]
+  ? never
+  : never;
 ```
 
 Используя такую конструкцию, мы получим в тип параметре `L` кортеж без последнего его элемента.
 Всё что остается сделать - это вернуть длину выведенного кортежа.
 
 ```typescript
-type MinusOne<T extends number> = Tuple<T> extends [...infer L, unknown] ? L['length'] : never;
+type MinusOne<T extends number> = Tuple<T> extends [...infer L, unknown]
+  ? L["length"]
+  : never;
 ```
 
 Таким образом, мы реализовали некое подобие математической операции в системе типов.
 Например, вызывая наш тип с параметром `5`, мы получим числовой литерал `4`.
 
 ```typescript
-type Tuple<L extends number, T extends unknown[] = []> = T['length'] extends L ? T : Tuple<L, [...T, unknown]>;
-type MinusOne<T extends number> = Tuple<T> extends [...infer L, unknown] ? L['length'] : never;
+type Tuple<L extends number, T extends unknown[] = []> = T["length"] extends L
+  ? T
+  : Tuple<L, [...T, unknown]>;
+type MinusOne<T extends number> = Tuple<T> extends [...infer L, unknown]
+  ? L["length"]
+  : never;
 ```
 
 Но!

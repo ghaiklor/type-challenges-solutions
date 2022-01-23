@@ -13,10 +13,10 @@ tags: arguments
 Наприклад:
 
 ```ts
-type Fn = (a: number, b: string) => number
+type Fn = (a: number, b: string) => number;
 
 // expected be (a: number, b: string, x: boolean) => number
-type Result = AppendArgument<Fn, boolean>
+type Result = AppendArgument<Fn, boolean>;
 ```
 
 ## Розв'язок
@@ -29,7 +29,9 @@ type Result = AppendArgument<Fn, boolean>
 Коли типи виведені ми можемо повернути власну сигнатуру функції, що копіює вхідну:
 
 ```ts
-type AppendArgument<Fn, A> = Fn extends (args: infer P) => infer R ? (args: P) => R : never;
+type AppendArgument<Fn, A> = Fn extends (args: infer P) => infer R
+  ? (args: P) => R
+  : never;
 ```
 
 Очевидно, що це рішення ще не готове.
@@ -40,7 +42,9 @@ type AppendArgument<Fn, A> = Fn extends (args: infer P) => infer R ? (args: P) =
 Щоб це виправити використаємо оператор `...`:
 
 ```ts
-type AppendArgument<Fn, A> = Fn extends (...args: infer P) => infer R ? (args: P) => R : never;
+type AppendArgument<Fn, A> = Fn extends (...args: infer P) => infer R
+  ? (args: P) => R
+  : never;
 ```
 
 Тепер умова в умовному типі буде істинна, отже буде використана гілка “true” з аргументами функції `P` та поверне тип `R`.
@@ -50,21 +54,27 @@ type AppendArgument<Fn, A> = Fn extends (...args: infer P) => infer R ? (args: P
 Ми це можемо зробити застосувавши варіативні кортежі:
 
 ```ts
-type AppendArgument<Fn, A> = Fn extends (...args: [...infer P]) => infer R ? (args: P) => R : never;
+type AppendArgument<Fn, A> = Fn extends (...args: [...infer P]) => infer R
+  ? (args: P) => R
+  : never;
 ```
 
 Параметр `P` містить те, що нам потрібно.
 Залишилось лише сконструювати нашу нову функцію з виведених типів.
 
 ```ts
-type AppendArgument<Fn, A> = Fn extends (...args: [...infer P]) => infer R ? (...args: [...P]) => R : never;
+type AppendArgument<Fn, A> = Fn extends (...args: [...infer P]) => infer R
+  ? (...args: [...P]) => R
+  : never;
 ```
 
 Маємо тип, що приймає функцію та повертає нову з виведеними типами.
 Додамо аргумент `A` до списку параметрів:
 
 ```ts
-type AppendArgument<Fn, A> = Fn extends (...args: [...infer P]) => infer R ? (...args: [...P, A]) => R : never;
+type AppendArgument<Fn, A> = Fn extends (...args: [...infer P]) => infer R
+  ? (...args: [...P, A]) => R
+  : never;
 ```
 
 ## Посилання

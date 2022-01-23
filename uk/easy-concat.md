@@ -15,7 +15,7 @@ tags: array
 Наприклад:
 
 ```ts
-type Result = Concat<[1], [2]> // [1, 2]
+type Result = Concat<[1], [2]>; // [1, 2]
 ```
 
 ## Розв'язок
@@ -41,7 +41,7 @@ function concat(arr1, arr2) {
 Коли нам потрібно об'єднати два масиви на рівні типів, ми можемо повернути новий тип, що міститиме елементи з двох вхідних масивів.
 
 ```ts
-type Concat<T, U> = [...T, ...U]
+type Concat<T, U> = [...T, ...U];
 ```
 
 Зачекайте, в такому разі ми ж отримаємо помилку “A rest element type must be an array type.”.
@@ -49,7 +49,7 @@ TypeScript нам каже, що не може застосувати опера
 Виправмо це, вказавши, що ці типи будуть масивами:
 
 ```ts
-type Concat<T extends unknown[], U extends unknown[]> = [...T, ...U]
+type Concat<T extends unknown[], U extends unknown[]> = [...T, ...U];
 ```
 
 ## Посилання

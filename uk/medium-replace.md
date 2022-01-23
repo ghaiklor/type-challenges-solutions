@@ -13,7 +13,7 @@ tags: template-literal
 Приклад:
 
 ```ts
-type replaced = Replace<'types are fun!', 'fun', 'awesome'> // expected to be 'types are awesome!'
+type replaced = Replace<"types are fun!", "fun", "awesome">; // expected to be 'types are awesome!'
 ```
 
 ## Розв'язок
@@ -25,14 +25,22 @@ type replaced = Replace<'types are fun!', 'fun', 'awesome'> // expected to be 't
 Ми виділимо ліву частину рядка, поки не знайдено `From`, власне, `From` та третім шматком те, що буде справа від нього:
 
 ```ts
-type Replace<S, From extends string, To> = S extends `${infer L}${From}${infer R}` ? S : S;
+type Replace<
+  S,
+  From extends string,
+  To
+> = S extends `${infer L}${From}${infer R}` ? S : S;
 ```
 
 Після цього, ми маємо виокремлений підрядок `From` та ті частини, що його оточують.
 Тож, ми можемо повернути новий шаблонний літерал з'єднавши частини та замінивши збіг:
 
 ```ts
-type Replace<S, From extends string, To extends string> = S extends `${infer L}${From}${infer R}` ? `${L}${To}${R}` : S;
+type Replace<
+  S,
+  From extends string,
+  To extends string
+> = S extends `${infer L}${From}${infer R}` ? `${L}${To}${R}` : S;
 ```
 
 Рішення працює без проблем, окрім випадку, коли `From` – порожній рядок.
@@ -44,7 +52,11 @@ type Replace<
   S extends string,
   From extends string,
   To extends string
-> = From extends '' ? S : S extends `${infer L}${From}${infer R}` ? `${L}${To}${R}` : S;
+> = From extends ""
+  ? S
+  : S extends `${infer L}${From}${infer R}`
+  ? `${L}${To}${R}`
+  : S;
 ```
 
 ## Посилання

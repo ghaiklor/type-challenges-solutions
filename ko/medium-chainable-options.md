@@ -18,21 +18,21 @@ tags: application
 예시:
 
 ```ts
-declare const config: Chainable
+declare const config: Chainable;
 
 const result = config
-  .option('foo', 123)
-  .option('name', 'type-challenges')
-  .option('bar', { value: 'Hello World' })
-  .get()
+  .option("foo", 123)
+  .option("name", "type-challenges")
+  .option("bar", { value: "Hello World" })
+  .get();
 
 // expect the type of result to be:
 interface Result {
-  foo: number
-  name: string
+  foo: number;
+  name: string;
   bar: {
-    value: string
-  }
+    value: string;
+  };
 }
 ```
 
@@ -55,9 +55,9 @@ interface Result {
 
 ```ts
 type Chainable = {
-  option(key: string, value: any): any
-  get(): any
-}
+  option(key: string, value: any): any;
+  get(): any;
+};
 ```
 
 타입 정보를 저장하는 것을 시작하기 전에, 미리 작업해 둘 것이 있습니다.
@@ -65,9 +65,9 @@ type Chainable = {
 
 ```ts
 type Chainable = {
-  option<K, V>(key: K, value: V): any
-  get(): any
-}
+  option<K, V>(key: K, value: V): any;
+  get(): any;
+};
 ```
 
 좋습니다!
@@ -83,20 +83,20 @@ type Chainable = {
 
 ```ts
 type Chainable<O = {}> = {
-  option<K, V>(key: K, value: V): any
-  get(): any
-}
+  option<K, V>(key: K, value: V): any;
+  get(): any;
+};
 ```
 
 이제 가장 흥미로운 부분이니 집중해서 읽어주셔야 합니다!
-`option(key, value)`는 (메서드 체이닝을 가능하게 하기 위해서) 호출한 주체인  `Chainable` 타입을 다시 반환해야 하는데 타입 매개변수를 통해 전달되는 타입 정보들도 함께 저장되어야 합니다.
+`option(key, value)`는 (메서드 체이닝을 가능하게 하기 위해서) 호출한 주체인 `Chainable` 타입을 다시 반환해야 하는데 타입 매개변수를 통해 전달되는 타입 정보들도 함께 저장되어야 합니다.
 기존 정보에 새로운 타입을 추가하기 위해 [교차 타입](https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types)을 사용합니다:
 
 ```ts
 type Chainable<O = {}> = {
-  option<K, V>(key: K, value: V): Chainable<O & { [P in K]: V }>
-  get(): any
-}
+  option<K, V>(key: K, value: V): Chainable<O & { [P in K]: V }>;
+  get(): any;
+};
 ```
 
 마지막으로 사소한 부분만 처리해주면 됩니다.
@@ -105,9 +105,9 @@ type Chainable<O = {}> = {
 
 ```ts
 type Chainable<O = {}> = {
-  option<K extends string, V>(key: K, value: V): Chainable<O & { [P in K]: V }>
-  get(): any
-}
+  option<K extends string, V>(key: K, value: V): Chainable<O & { [P in K]: V }>;
+  get(): any;
+};
 ```
 
 모든 준비가 끝났습니다!
@@ -115,9 +115,9 @@ type Chainable<O = {}> = {
 
 ```ts
 type Chainable<O = {}> = {
-  option<K extends string, V>(key: K, value: V): Chainable<O & { [P in K]: V }>
-  get(): O
-}
+  option<K extends string, V>(key: K, value: V): Chainable<O & { [P in K]: V }>;
+  get(): O;
+};
 ```
 
 ## 참고

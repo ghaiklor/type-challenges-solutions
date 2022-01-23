@@ -28,7 +28,9 @@ Remove the “-” sign.
 We can approach it by checking if the type has a “-” sign in its template literal type, and if so, we infer the part without the “-” sign, otherwise return the type itself:
 
 ```typescript
-type Absolute<T extends number | string | bigint> = T extends `-${infer N}` ? N : T;
+type Absolute<T extends number | string | bigint> = T extends `-${infer N}`
+  ? N
+  : T;
 ```
 
 So, e.g. if we provide the type `T = “-50”`, it will match the `“-<N>”`, where `N` will become just “50”.
@@ -41,7 +43,9 @@ When providing a positive number, it will not match the literal type and return 
 Let us fix that by wrapping our `T` in template literal type:
 
 ```typescript
-type Absolute<T extends number | string | bigint> = T extends `-${infer N}` ? N : `${T}`;
+type Absolute<T extends number | string | bigint> = T extends `-${infer N}`
+  ? N
+  : `${T}`;
 ```
 
 Still, some tests are failing.
@@ -50,7 +54,9 @@ Number will not match the template literal type of condition, so it will return 
 To overcome this, we can convert the number to string:
 
 ```typescript
-type Absolute<T extends number | string | bigint> = `${T}` extends `-${infer N}` ? N : `${T}`;
+type Absolute<T extends number | string | bigint> = `${T}` extends `-${infer N}`
+  ? N
+  : `${T}`;
 ```
 
 As a result, we got a type that takes any `number`, `string`, `bigint` and converts it to the string.

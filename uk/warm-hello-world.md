@@ -14,12 +14,12 @@ tags: warm-up
 
 ```ts
 // expected to be string
-type HelloWorld = any
+type HelloWorld = any;
 ```
 
 ```ts
 // you should make this work
-type test = Expect<Equal<HelloWorld, string>>
+type test = Expect<Equal<HelloWorld, string>>;
 ```
 
 ## Розв'язок
@@ -28,7 +28,7 @@ type test = Expect<Equal<HelloWorld, string>>
 Все, що треба було зробити в цьому завданні, це присвоїти тип `string` замість `any`:
 
 ```ts
-type HelloWorld = string
+type HelloWorld = string;
 ```
 
 ## Посилання

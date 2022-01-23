@@ -16,17 +16,17 @@ For example:
 
 ```ts
 interface Todo {
-  title: string
-  description: string
+  title: string;
+  description: string;
 }
 
 const todo: MyReadonly<Todo> = {
   title: "Hey",
-  description: "foobar"
-}
+  description: "foobar",
+};
 
-todo.title = "Hello" // Error: cannot reassign a readonly property
-todo.description = "barFoo" // Error: cannot reassign a readonly property
+todo.title = "Hello"; // Error: cannot reassign a readonly property
+todo.description = "barFoo"; // Error: cannot reassign a readonly property
 ```
 
 ## Solution
@@ -38,7 +38,7 @@ We are going to use the usual [Mapped Type](https://www.typescriptlang.org/docs/
 For each property in the type, we take its key and add a `readonly` modifier to it:
 
 ```ts
-type MyReadonly<T> = { readonly [K in keyof T]: T[K] }
+type MyReadonly<T> = { readonly [K in keyof T]: T[K] };
 ```
 
 ## References

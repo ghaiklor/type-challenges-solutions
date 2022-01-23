@@ -13,7 +13,7 @@ Implement `ReplaceAll<S, From, To>` which replace the all the substring `From` w
 For example:
 
 ```ts
-type replaced = ReplaceAll<'t y p e s', ' ', ''> // expected to be 'types'
+type replaced = ReplaceAll<"t y p e s", " ", "">; // expected to be 'types'
 ```
 
 ## Solution
@@ -31,7 +31,11 @@ type ReplaceAll<
   S extends string,
   From extends string,
   To extends string
-> = From extends '' ? S : S extends `${infer L}${From}${infer R}` ? `${L}${To}${R}` : S;
+> = From extends ""
+  ? S
+  : S extends `${infer L}${From}${infer R}`
+  ? `${L}${To}${R}`
+  : S;
 ```
 
 This solution will replace a single match, but we need to replace all the matches.
@@ -42,7 +46,11 @@ type ReplaceAll<
   S extends string,
   From extends string,
   To extends string
-> = From extends '' ? S : S extends `${infer L}${From}${infer R}` ? ReplaceAll<`${L}${To}${R}`, From, To> : S;
+> = From extends ""
+  ? S
+  : S extends `${infer L}${From}${infer R}`
+  ? ReplaceAll<`${L}${To}${R}`, From, To>
+  : S;
 ```
 
 However, on the next recursive call, characters can be replaced in not expected way.
@@ -58,8 +66,8 @@ type ReplaceAll<
 > = From extends ""
   ? S
   : S extends `${Before}${infer L}${From}${infer R}`
-    ? ReplaceAll<`${Before}${L}${To}${R}`, From, To, `${Before}${L}${To}`>
-    : S
+  ? ReplaceAll<`${Before}${L}${To}${R}`, From, To, `${Before}${L}${To}`>
+  : S;
 ```
 
 ## References

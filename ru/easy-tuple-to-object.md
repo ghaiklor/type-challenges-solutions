@@ -12,10 +12,10 @@ tags: tuple
 Например:
 
 ```typescript
-const tuple = ['tesla', 'model 3', 'model X', 'model Y'] as const
+const tuple = ["tesla", "model 3", "model X", "model Y"] as const;
 
 // expected { tesla: 'tesla', 'model 3': 'model 3', 'model X': 'model X', 'model Y': 'model Y'}
-const result: TupleToObject<typeof tuple>
+const result: TupleToObject<typeof tuple>;
 ```
 
 ## Решение
@@ -28,7 +28,7 @@ const result: TupleToObject<typeof tuple>
 А уже при помощи сопоставляющих типов, создать новый объект, ключами и значениями которого будут элементы нашего объединения `T[number]`.
 
 ```typescript
-type TupleToObject<T extends readonly any[]> = { [K in T[number]]: K }
+type TupleToObject<T extends readonly any[]> = { [K in T[number]]: K };
 ```
 
 ## Что почитать

@@ -13,11 +13,17 @@ tags: tuple
 예시:
 
 ```ts
-type tesla = ['tesla', 'model 3', 'model X', 'model Y']
-type spaceX = ['FALCON 9', 'FALCON HEAVY', 'DRAGON', 'STARSHIP', 'HUMAN SPACEFLIGHT']
+type tesla = ["tesla", "model 3", "model X", "model Y"];
+type spaceX = [
+  "FALCON 9",
+  "FALCON HEAVY",
+  "DRAGON",
+  "STARSHIP",
+  "HUMAN SPACEFLIGHT"
+];
 
-type teslaLength = Length<tesla> // expected 4
-type spaceXLength = Length<spaceX> // expected 5
+type teslaLength = Length<tesla>; // expected 4
+type spaceXLength = Length<spaceX>; // expected 5
 ```
 
 ## Solution
@@ -26,14 +32,14 @@ JavaScript에서는 `length` 프로퍼티를 사용하여 배열의 길이에 �
 타입 내에서도 똑같이 사용할 수 있습니다:
 
 ```ts
-type Length<T extends any> = T['length']
+type Length<T extends any> = T["length"];
 ```
 
 이렇게만 할 경우 “Type 'length' cannot be used to index type 'T'.”라는 컴파일 에러를 얻습니다.
 따라서 TypeScript에게 입력으로 주어진 타입변수가 해당 프로퍼티를 가지고 있음을 알려주어야 합니다:
 
 ```ts
-type Length<T extends { length: number }> = T['length']
+type Length<T extends { length: number }> = T["length"];
 ```
 
 ## 참고

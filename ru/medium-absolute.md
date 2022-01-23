@@ -28,7 +28,9 @@ type Result = Absolute<Test>; // expected to be "100"
 В случае, знака "-" нету, значит у нас положительное число, поэтому возвращаем его без изменений.
 
 ```typescript
-type Absolute<T extends number | string | bigint> = T extends `-${infer N}` ? N : T;
+type Absolute<T extends number | string | bigint> = T extends `-${infer N}`
+  ? N
+  : T;
 ```
 
 Таким образом, если укажем `T = "-50"`, это совпадёт с нашим шаблоном `-<N>`, где `N` станет "50" и мы его вернём.
@@ -40,7 +42,9 @@ type Absolute<T extends number | string | bigint> = T extends `-${infer N}` ? N 
 Починим это, обернув `T` в строчный тип-литерал, перед тем как его возвращать:
 
 ```typescript
-type Absolute<T extends number | string | bigint> = T extends `-${infer N}` ? N : `${T}`;
+type Absolute<T extends number | string | bigint> = T extends `-${infer N}`
+  ? N
+  : `${T}`;
 ```
 
 Всё ещё падают тесты...
@@ -49,7 +53,9 @@ type Absolute<T extends number | string | bigint> = T extends `-${infer N}` ? N 
 Чтобы обработать этот случай, обернём `T` в строчный тип-литерал и в начале:
 
 ```typescript
-type Absolute<T extends number | string | bigint> = `${T}` extends `-${infer N}` ? N : `${T}`;
+type Absolute<T extends number | string | bigint> = `${T}` extends `-${infer N}`
+  ? N
+  : `${T}`;
 ```
 
 В результате, мы получили тип, который принимает `number`, `string` или `bigint` и конвертирует в строку.

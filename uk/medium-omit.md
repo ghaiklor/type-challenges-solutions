@@ -13,16 +13,16 @@ tags: union built-in
 
 ```typescript
 interface Todo {
-  title: string
-  description: string
-  completed: boolean
+  title: string;
+  description: string;
+  completed: boolean;
 }
 
-type TodoPreview = MyOmit<Todo, 'description' | 'title'>
+type TodoPreview = MyOmit<Todo, "description" | "title">;
 
 const todo: TodoPreview = {
   completed: false,
-}
+};
 ```
 
 ## Розв'язок
@@ -31,14 +31,14 @@ const todo: TodoPreview = {
 Очевидно, що для вирішення цього завдання ми використаємо [типи зіставлення](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html).
 
 ```typescript
-type MyOmit<T, K> = { [P in keyof T]: T[P] }
+type MyOmit<T, K> = { [P in keyof T]: T[P] };
 ```
 
 Залишається відфільтрувати властивості, які необхідно залишити в об'єкті.
 Для цього використаємо [перепризначення ключів в типах зіставлення](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#key-remapping-in-mapped-types):
 
 ```typescript
-type MyOmit<T, K> = { [P in keyof T as P extends K ? never : P]: T[P] }
+type MyOmit<T, K> = { [P in keyof T as P extends K ? never : P]: T[P] };
 ```
 
 В результаті ми отримаємо тип, який перебирає властивості з `T` та перевизначає ті, що не входять в `K`, на `never`.

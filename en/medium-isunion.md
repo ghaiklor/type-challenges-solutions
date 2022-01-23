@@ -12,9 +12,9 @@ Implement a type `IsUnion`, which takes an input type `T` and returns whether `T
 For example:
 
 ```typescript
-type case1 = IsUnion<string> // false
-type case2 = IsUnion<string | number> // true
-type case3 = IsUnion<[string | number]> // false
+type case1 = IsUnion<string>; // false
+type case2 = IsUnion<string | number>; // true
+type case3 = IsUnion<[string | number]>; // false
 ```
 
 ## Solution
@@ -41,13 +41,15 @@ When you write the construct `T extends string ? true : false`, where `T` is a u
 Roughly, it looks like different conditional types for each element from the union.
 
 ```typescript
-type IsString<T> = T extends string ? true : false
+type IsString<T> = T extends string ? true : false;
 
 // For example, we provide type T = string | number
 // It is the same as this
-type IsStringDistributive =
-    string extends string ? true : false
-  | number extends string ? true : false
+type IsStringDistributive = string extends string
+  ? true
+  : false | number extends string
+  ? true
+  : false;
 ```
 
 You see where I’m heading with this?
@@ -60,14 +62,14 @@ At first, we will make a copy of input type `T`, so we can preserve the input ty
 We will compare them to each other later.
 
 ```typescript
-type IsUnion<T, C = T> = never
+type IsUnion<T, C = T> = never;
 ```
 
 By applying the conditional type, we get the distributive semantics.
 Inside the “true” branch of the conditional type, we will get each item from the union.
 
 ```typescript
-type IsUnion<T, C = T> = T extends C ? never : never
+type IsUnion<T, C = T> = T extends C ? never : never;
 ```
 
 Now, the most important part - compare the item with the original input type `T`.
@@ -75,7 +77,7 @@ In case, these types are the same, it means no distributive iteration was applie
 Otherwise, distributive iteration was applied and we compare the single item from the union with the union itself, meaning it is a union, hence `true`.
 
 ```typescript
-type IsUnion<T, C = T> = T extends C ? [C] extends [T] ? false : true : never
+type IsUnion<T, C = T> = T extends C ? ([C] extends [T] ? false : true) : never;
 ```
 
 Done!
@@ -85,8 +87,7 @@ When we pass not a union, e.g. `string`, they hold the same types.
 Meaning, it is not union; we return `false`.
 
 ```typescript
-[T] = [string]
-[C] = [string]
+[T] = [string][C] = [string];
 ```
 
 But, if we pass a union, e.g. `string | number`, they hold different types.

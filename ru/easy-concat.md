@@ -15,7 +15,7 @@ tags: array
 Например:
 
 ```typescript
-type Result = Concat<[1], [2]> // expected to be [1, 2]
+type Result = Concat<[1], [2]>; // expected to be [1, 2]
 ```
 
 ## Решение
@@ -40,7 +40,7 @@ function concat(arr1, arr2) {
 Когда нам нужно объединить два массива на уровне типов, мы можем вернуть новый тип, который будет содержать в себе элементы из двух входных массивов.
 
 ```typescript
-type Concat<T, U> = [...T, ...U]
+type Concat<T, U> = [...T, ...U];
 ```
 
 Получаем ошибку “A rest element type must be an array type.”.
@@ -48,7 +48,7 @@ TypeScript говорит нам, что он не может применить
 Решить это можно, указав, что эти тип параметры это массивы.
 
 ```typescript
-type Concat<T extends unknown[], U extends unknown[]> = [...T, ...U]
+type Concat<T extends unknown[], U extends unknown[]> = [...T, ...U];
 ```
 
 ## Что почитать

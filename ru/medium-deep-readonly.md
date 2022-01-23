@@ -14,21 +14,21 @@ tags: readonly object-keys deep
 ```typescript
 type X = {
   x: {
-    a: 1
-    b: 'hi'
-  }
-  y: 'hey'
-}
+    a: 1;
+    b: "hi";
+  };
+  y: "hey";
+};
 
 type Expected = {
   readonly x: {
-    readonly a: 1
-    readonly b: 'hi'
-  }
-  readonly y: 'hey'
-}
+    readonly a: 1;
+    readonly b: "hi";
+  };
+  readonly y: "hey";
+};
 
-const todo: DeepReadonly<X> // should be same as `Expected`
+const todo: DeepReadonly<X>; // should be same as `Expected`
 ```
 
 ## Решение
@@ -39,7 +39,7 @@ const todo: DeepReadonly<X> // should be same as `Expected`
 Начнём с классической реализации и сделаем [`Readonly<T>`](./easy-readonly.md):
 
 ```typescript
-type DeepReadonly<T> = { readonly [P in keyof T]: T[P] }
+type DeepReadonly<T> = { readonly [P in keyof T]: T[P] };
 ```
 
 Но, как вы уже догадались, этот тип не сделает все свойства неизменяемыми, а только те, что находятся на первом уровне вложенности.
@@ -51,7 +51,11 @@ type DeepReadonly<T> = { readonly [P in keyof T]: T[P] }
 В случае, если `T[P]` это объект, идём вглубь и вызываем `DeepReadonly`, иначе - возвращаем `T[P]` без изменений.
 
 ```typescript
-type DeepReadonly<T> = { readonly [P in keyof T]: T[P] extends Record<string, unknown> ? DeepReadonly<T[P]> : T[P] }
+type DeepReadonly<T> = {
+  readonly [P in keyof T]: T[P] extends Record<string, unknown>
+    ? DeepReadonly<T[P]>
+    : T[P];
+};
 ```
 
 ## Что почитать

@@ -15,9 +15,9 @@ For example:
 type Foo = {
   [key: string]: any;
   foo(): void;
-}
+};
 
-type A = RemoveIndexSignature<Foo> // expected { foo(): void }
+type A = RemoveIndexSignature<Foo>; // expected { foo(): void }
 ```
 
 ## Solution
@@ -33,7 +33,7 @@ By calling `keyof` operator we can take a peek into it.
 E.g. having a type “Bar” and calling `keyof` on it results in:
 
 ```typescript
-type Bar = { [key: number]: any; bar(): void; } // number | “bar”
+type Bar = { [key: number]: any; bar(): void }; // number | “bar”
 ```
 
 Interesting, so it turns out that they represent any key on the object as a string type literal.
@@ -62,14 +62,22 @@ We skip it by returning the `never` type.
 Otherwise, let us check the same for the `number` type:
 
 ```typescript
-type TypeLiteralOnly<T> = string extends T ? never : number extends T ? never : never;
+type TypeLiteralOnly<T> = string extends T
+  ? never
+  : number extends T
+  ? never
+  : never;
 ```
 
 What if `T` is neither a `string` nor `number`?
 It means we got a type literal here, so we return it back to the caller:
 
 ```typescript
-type TypeLiteralOnly<T> = string extends T ? never : number extends T ? never : T;
+type TypeLiteralOnly<T> = string extends T
+  ? never
+  : number extends T
+  ? never
+  : T;
 ```
 
 Now, we have a wrapper that can filter out index signature and return type literals only.
@@ -79,21 +87,25 @@ By using mapped types!
 At first, let us create a copy of the type:
 
 ```typescript
-type RemoveIndexSignature<T> = { [P in keyof T]: T[P] }
+type RemoveIndexSignature<T> = { [P in keyof T]: T[P] };
 ```
 
 While iterating on the keys, we can remap them by using our wrapper.
 We call `TypeLiteralOnly` on each key:
 
 ```typescript
-type RemoveIndexSignature<T> = { [P in keyof T as TypeLiteralOnly<P>]: T[P] }
+type RemoveIndexSignature<T> = { [P in keyof T as TypeLiteralOnly<P>]: T[P] };
 ```
 
 That way, we have an iteration on the keys that filters out index signature, leaving type literals only.
 
 ```typescript
-type TypeLiteralOnly<T> = string extends T ? never : number extends T ? never : T;
-type RemoveIndexSignature<T> = { [P in keyof T as TypeLiteralOnly<P>]: T[P] }
+type TypeLiteralOnly<T> = string extends T
+  ? never
+  : number extends T
+  ? never
+  : T;
+type RemoveIndexSignature<T> = { [P in keyof T as TypeLiteralOnly<P>]: T[P] };
 ```
 
 ## References

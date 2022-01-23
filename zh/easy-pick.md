@@ -16,17 +16,17 @@ tags: union built-in
 
 ```ts
 interface Todo {
-  title: string
-  description: string
-  completed: boolean
+  title: string;
+  description: string;
+  completed: boolean;
 }
 
-type TodoPreview = MyPick<Todo, 'title' | 'completed'>
+type TodoPreview = MyPick<Todo, "title" | "completed">;
 
 const todo: TodoPreview = {
-  title: 'Clean room',
+  title: "Clean room",
   completed: false,
-}
+};
 ```
 
 ## 解法
@@ -37,9 +37,9 @@ const todo: TodoPreview = {
 
 映射类型允许我们将一个类型中的每个属性转换为一个新类型。
 
-你可以在TypeScript网站[lookup types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types)和[mapped types](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)上了解更多它们得信息，并了解它们在做什么。
+你可以在 TypeScript 网站[lookup types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types)和[mapped types](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)上了解更多它们得信息，并了解它们在做什么。
 
-现在，我们知道TypeScript中有查找类型和映射类型。
+现在，我们知道 TypeScript 中有查找类型和映射类型。
 如何实现所需的类型?
 
 我们需要从联合（union）`K`取得所有内容，进行遍历，并返回一个仅包含这些键的新类型。这正是映射类型所做的事。
@@ -47,7 +47,7 @@ const todo: TodoPreview = {
 尽管我们需要从原始类型中获取它的类型，值的类型本身并没有变化。这就是查找类型的用处所在：
 
 ```ts
-type MyPick<T, K extends keyof T> = { [P in K]: T[P] }
+type MyPick<T, K extends keyof T> = { [P in K]: T[P] };
 ```
 
 我们说“从`K`中获取所有内容，命名为`P`并将其作为我们新对象的一个新键，其值类型取自输入类型”。一开始理解很难，所以你一旦不理解什么，就尝试重读一遍，再一步步的在脑海里思考。

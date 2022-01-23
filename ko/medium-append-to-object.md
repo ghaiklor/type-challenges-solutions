@@ -15,8 +15,8 @@ tags: object-keys
 예시:
 
 ```ts
-type Test = { id: '1' }
-type Result = AppendToObject<Test, 'value', 4> // expected to be { id: '1', value: 4 }
+type Test = { id: "1" };
+type Result = AppendToObject<Test, "value", 4>; // expected to be { id: '1', value: 4 }
 ```
 
 ## 해답
@@ -26,7 +26,7 @@ type Result = AppendToObject<Test, 'value', 4> // expected to be { id: '1', valu
 기존의 오브젝트 `T`와 새로운 프로퍼티로 만든 오브젝트를 더하는 타입을 작성해보겠습니다:
 
 ```typescript
-type AppendToObject<T, U, V> = T & { [P in U]: V }
+type AppendToObject<T, U, V> = T & { [P in U]: V };
 ```
 
 아쉽지만 이 풀이는 테스트를 통과하지 못합니다.
@@ -35,7 +35,7 @@ type AppendToObject<T, U, V> = T & { [P in U]: V }
 우선 `T`의 프로퍼티들을 매핑하는 것부터 시작하겠습니다:
 
 ```typescript
-type AppendToObject<T, U, V> = { [P in keyof T]: T[P] }
+type AppendToObject<T, U, V> = { [P in keyof T]: T[P] };
 ```
 
 이제 `T`의 프로퍼티들에 새 프로퍼티인 `U`를 추가해야 합니다.
@@ -43,21 +43,23 @@ type AppendToObject<T, U, V> = { [P in keyof T]: T[P] }
 `in` 연산자에 유니온을 전달하는 방법입니다:
 
 ```typescript
-type AppendToObject<T, U, V> = { [P in keyof T | U]: T[P] }
+type AppendToObject<T, U, V> = { [P in keyof T | U]: T[P] };
 ```
 
 이 방식으로 `T`의 모든 프로퍼티와 `U`의 프로퍼티를 얻을 수 있습니다.
 `U`에 제약조건을 추가하여 사소한 에러를 해결해 줍시다:
 
 ```typescript
-type AppendToObject<T, U extends string, V> = { [P in keyof T | U]: T[P] }
+type AppendToObject<T, U extends string, V> = { [P in keyof T | U]: T[P] };
 ```
 
 `P`는 `T`와 `U`의 유니온이기 때문에 타입스크립트가 `T`에 속하지 않는 `P`에 대해서도 다룰 수 있게 해주어야 합니다.
 조건을 검사하여 `P`가 `T`에 속한다면 `T[P]`를 반환하고 그렇지 않다면 `V`를 반환할 수 있도록 설정합니다:
 
 ```typescript
-type AppendToObject<T, U extends string, V> = { [P in keyof T | U]: P extends keyof T ? T[P] : V }
+type AppendToObject<T, U extends string, V> = {
+  [P in keyof T | U]: P extends keyof T ? T[P] : V;
+};
 ```
 
 ## 참고

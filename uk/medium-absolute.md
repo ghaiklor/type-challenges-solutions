@@ -27,7 +27,9 @@ type Result = Absolute<Test>; // expected to be "100"
 В інакшому випадку, у нас додатне число, тому повертаємо його без змін:
 
 ```typescript
-type Absolute<T extends number | string | bigint> = T extends `-${infer N}` ? N : T;
+type Absolute<T extends number | string | bigint> = T extends `-${infer N}`
+  ? N
+  : T;
 ```
 
 Таким чином, якщо вкажемо `T = “-50”`, це відповідатиме нашому шаблону `“-<N>”` де `N` буде `"50"`, й ми його повернемо.
@@ -39,7 +41,9 @@ type Absolute<T extends number | string | bigint> = T extends `-${infer N}` ? N 
 Виправимо це, загорнувши тип `T` в рядковий тип-літерал, перед тим, як його повертати.
 
 ```typescript
-type Absolute<T extends number | string | bigint> = T extends `-${infer N}` ? N : `${T}`;
+type Absolute<T extends number | string | bigint> = T extends `-${infer N}`
+  ? N
+  : `${T}`;
 ```
 
 Все ще не проходять тести...
@@ -48,7 +52,9 @@ type Absolute<T extends number | string | bigint> = T extends `-${infer N}` ? N 
 Щоб подолати це, загорнемо число в рядковий тип-літерал на початку:
 
 ```typescript
-type Absolute<T extends number | string | bigint> = `${T}` extends `-${infer N}` ? N : `${T}`;
+type Absolute<T extends number | string | bigint> = `${T}` extends `-${infer N}`
+  ? N
+  : `${T}`;
 ```
 
 В результаті, ми отримали тип, який приймає `number`, `string` або `bigint` і конвертує їх в рядок.

@@ -12,7 +12,7 @@ Convert a string to kebab-case.
 For example:
 
 ```typescript
-type kebabCase = KebabCase<'FooBarBaz'> // expected "foo-bar-baz"
+type kebabCase = KebabCase<"FooBarBaz">; // expected "foo-bar-baz"
 ```
 
 ## Solution
@@ -21,18 +21,14 @@ This challenge has a lot in common with the ["CamelCase"](./medium-camelcase.md)
 We start from inferring; we need to know the first character and the tail.
 
 ```typescript
-type KebabCase<S> = S extends `${infer C}${infer T}`
-  ? never
-  : never;
+type KebabCase<S> = S extends `${infer C}${infer T}` ? never : never;
 ```
 
 Once there is no pattern for character and tail, it means that we are done with the string and there is nothing left.
 So we just return the input string with no changes.
 
 ```typescript
-type KebabCase<S> = S extends `${infer C}${infer T}`
-  ? never
-  : S;
+type KebabCase<S> = S extends `${infer C}${infer T}` ? never : S;
 ```
 
 But, in case we have the pattern, we need to handle two cases.
@@ -41,7 +37,9 @@ To check this, we can use `Uncapitalize` type.
 
 ```typescript
 type KebabCase<S> = S extends `${infer C}${infer T}`
-  ? T extends Uncapitalize<T> ? never : never
+  ? T extends Uncapitalize<T>
+    ? never
+    : never
   : S;
 ```
 
@@ -52,7 +50,9 @@ Do not forget that we need to continue to apply the type to process other charac
 
 ```typescript
 type KebabCase<S> = S extends `${infer C}${infer T}`
-  ? T extends Uncapitalize<T> ? `${Uncapitalize<C>}${KebabCase<T>}` : never
+  ? T extends Uncapitalize<T>
+    ? `${Uncapitalize<C>}${KebabCase<T>}`
+    : never
   : S;
 ```
 
@@ -62,7 +62,9 @@ We do not need to “uncapitalize” the tail here because it will be uncapitali
 
 ```typescript
 type KebabCase<S> = S extends `${infer C}${infer T}`
-  ? T extends Uncapitalize<T> ? `${Uncapitalize<C>}${KebabCase<T>}` : `${Uncapitalize<C>}-${KebabCase<T>}`
+  ? T extends Uncapitalize<T>
+    ? `${Uncapitalize<C>}${KebabCase<T>}`
+    : `${Uncapitalize<C>}-${KebabCase<T>}`
   : S;
 ```
 

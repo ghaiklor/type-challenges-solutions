@@ -13,7 +13,7 @@ Implement `Replace<S, From, To>` which replace the string `From` with `To` once 
 For example:
 
 ```ts
-type replaced = Replace<'types are fun!', 'fun', 'awesome'> // expected to be 'types are awesome!'
+type replaced = Replace<"types are fun!", "fun", "awesome">; // expected to be 'types are awesome!'
 ```
 
 ## Solution
@@ -25,14 +25,22 @@ Let us start with it.
 We infer the left part of the string until `From` is found, the `From` itself and everything after it as a right part:
 
 ```ts
-type Replace<S, From extends string, To> = S extends `${infer L}${From}${infer R}` ? S : S;
+type Replace<
+  S,
+  From extends string,
+  To
+> = S extends `${infer L}${From}${infer R}` ? S : S;
 ```
 
 Once the inferring successful, `From` is found and we have parts of the surrounding string.
 So we can return a new template literal type by constructing its parts and replacing the match:
 
 ```ts
-type Replace<S, From extends string, To extends string> = S extends `${infer L}${From}${infer R}` ? `${L}${To}${R}` : S;
+type Replace<
+  S,
+  From extends string,
+  To extends string
+> = S extends `${infer L}${From}${infer R}` ? `${L}${To}${R}` : S;
 ```
 
 Solution works with no issues, except the case when the `From` is an empty string.
@@ -44,7 +52,11 @@ type Replace<
   S extends string,
   From extends string,
   To extends string
-> = From extends '' ? S : S extends `${infer L}${From}${infer R}` ? `${L}${To}${R}` : S;
+> = From extends ""
+  ? S
+  : S extends `${infer L}${From}${infer R}`
+  ? `${L}${To}${R}`
+  : S;
 ```
 
 ## References

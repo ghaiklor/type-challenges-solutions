@@ -13,8 +13,8 @@ tags: object-keys
 Например:
 
 ```typescript
-type Test = { id: '1' }
-type Result = AppendToObject<Test, 'value', 4> // expected to be { id: '1', value: 4 }
+type Test = { id: "1" };
+type Result = AppendToObject<Test, "value", 4>; // expected to be { id: '1', value: 4 }
 ```
 
 ## Решение
@@ -24,7 +24,7 @@ type Result = AppendToObject<Test, 'value', 4> // expected to be { id: '1', valu
 Пробуем реализовать тип, который принимает входной объект и делает пересечение с новым объектом, в котором находится искомое свойство.
 
 ```typescript
-type AppendToObject<T, U, V> = T & { [P in U]: V }
+type AppendToObject<T, U, V> = T & { [P in U]: V };
 ```
 
 Я надеялся, но такое решение не устроило тесты.
@@ -35,7 +35,7 @@ type AppendToObject<T, U, V> = T & { [P in U]: V }
 Начнём с сопоставляющих типов и вернём объект со свойствами из входного объекта:
 
 ```typescript
-type AppendToObject<T, U, V> = { [P in keyof T]: T[P] }
+type AppendToObject<T, U, V> = { [P in keyof T]: T[P] };
 ```
 
 Теперь, добавим новое свойство из `U` к свойствам в `T`.
@@ -43,7 +43,7 @@ type AppendToObject<T, U, V> = { [P in keyof T]: T[P] }
 TypeScript не запрещает передавать оператору `in` объединения типов.
 
 ```typescript
-type AppendToObject<T, U, V> = { [P in keyof T | U]: T[P] }
+type AppendToObject<T, U, V> = { [P in keyof T | U]: T[P] };
 ```
 
 С таким трюком, получаем свойства из объекта `T` и свойство из `U`.
@@ -51,7 +51,7 @@ type AppendToObject<T, U, V> = { [P in keyof T | U]: T[P] }
 Добавим ограничение, что `U` должно быть строкой, так как ключами объекта могут быть только строки.
 
 ```typescript
-type AppendToObject<T, U extends string, V> = { [P in keyof T | U]: T[P] }
+type AppendToObject<T, U extends string, V> = { [P in keyof T | U]: T[P] };
 ```
 
 Единственное, что осталось починить, это ошибку компиляции.
@@ -62,7 +62,9 @@ TypeScript не гарантирует что обращение `T[P]` буде
 Если элемент из `P` присутствует в свойствах `T`, обращаемся к `T`, иначе, типом значения будет тип, который мы добавляем к объекту.
 
 ```typescript
-type AppendToObject<T, U extends string, V> = { [P in keyof T | U]: P extends keyof T ? T[P] : V }
+type AppendToObject<T, U extends string, V> = {
+  [P in keyof T | U]: P extends keyof T ? T[P] : V;
+};
 ```
 
 ## Что почитать

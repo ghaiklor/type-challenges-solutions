@@ -17,21 +17,21 @@ tags: application
 Например:
 
 ```typescript
-declare const config: Chainable
+declare const config: Chainable;
 
 const result = config
-  .option('foo', 123)
-  .option('name', 'type-challenges')
-  .option('bar', { value: 'Hello World' })
-  .get()
+  .option("foo", 123)
+  .option("name", "type-challenges")
+  .option("bar", { value: "Hello World" })
+  .get();
 
 // expect the type of result to be:
 interface Result {
-  foo: number
-  name: string
+  foo: number;
+  name: string;
   bar: {
-    value: string
-  }
+    value: string;
+  };
 }
 ```
 
@@ -49,9 +49,9 @@ interface Result {
 
 ```typescript
 type Chainable = {
-  option(key: string, value: any): any
-  get(): any
-}
+  option(key: string, value: any): any;
+  get(): any;
+};
 ```
 
 Прежде чем начнём аккумулировать информацию о типах, это было бы очень кстати начать её получать.
@@ -60,9 +60,9 @@ type Chainable = {
 
 ```typescript
 type Chainable = {
-  option<K, V>(key: K, value: V): any
-  get(): any
-}
+  option<K, V>(key: K, value: V): any;
+  get(): any;
+};
 ```
 
 У нас есть информация о типах `key` и `value`.
@@ -77,9 +77,9 @@ TypeScript выведёт `key` как строчный тип литерал, �
 
 ```typescript
 type Chainable<O = {}> = {
-  option<K, V>(key: K, value: V): any
-  get(): any
-}
+  option<K, V>(key: K, value: V): any;
+  get(): any;
+};
 ```
 
 Нужно, чтобы `option(key, value)` возвращал сам тип `Chainable` (мы же хотим иметь возможность вызывать методы по цепочке) но с информацией о типах предыдущих вызовов вместе с текущим.
@@ -87,9 +87,9 @@ type Chainable<O = {}> = {
 
 ```typescript
 type Chainable<O = {}> = {
-  option<K, V>(key: K, value: V): Chainable<O & { [P in K]: V }>
-  get(): any
-}
+  option<K, V>(key: K, value: V): Chainable<O & { [P in K]: V }>;
+  get(): any;
+};
 ```
 
 Остались мелкие детали!
@@ -98,9 +98,9 @@ type Chainable<O = {}> = {
 
 ```typescript
 type Chainable<O = {}> = {
-  option<K extends string, V>(key: K, value: V): Chainable<O & { [P in K]: V }>
-  get(): any
-}
+  option<K extends string, V>(key: K, value: V): Chainable<O & { [P in K]: V }>;
+  get(): any;
+};
 ```
 
 Всё готово к финальному аккорду!
@@ -109,9 +109,9 @@ type Chainable<O = {}> = {
 
 ```typescript
 type Chainable<O = {}> = {
-  option<K extends string, V>(key: K, value: V): Chainable<O & { [P in K]: V }>
-  get(): O
-}
+  option<K extends string, V>(key: K, value: V): Chainable<O & { [P in K]: V }>;
+  get(): O;
+};
 ```
 
 ## Что почитать

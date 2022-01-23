@@ -16,7 +16,7 @@ Javascript의 `Array.includes` 함수를 타입 시스템 내에서 구현해보
 
 ```typescript
 // expected to be `false`
-type isPillarMen = Includes<['Kars', 'Esidisi', 'Wamuu', 'Santana'], 'Dio'>
+type isPillarMen = Includes<["Kars", "Esidisi", "Wamuu", "Santana"], "Dio">;
 ```
 
 ## 해답

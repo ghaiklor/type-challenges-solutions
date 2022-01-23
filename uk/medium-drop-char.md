@@ -12,7 +12,7 @@ tags: template-literal infer
 Наприклад:
 
 ```typescript
-type Butterfly = DropChar<' b u t t e r f l y ! ', ' '> // 'butterfly!'
+type Butterfly = DropChar<" b u t t e r f l y ! ", " ">; // 'butterfly!'
 ```
 
 ## Розв'язок
@@ -25,9 +25,7 @@ type Butterfly = DropChar<' b u t t e r f l y ! ', ' '> // 'butterfly!'
 А розділювачем буде сам символ, який нам потрібно видалити.
 
 ```typescript
-type DropChar<S, C> = S extends `${infer L}${C}${infer R}`
-  ? never
-  : never;
+type DropChar<S, C> = S extends `${infer L}${C}${infer R}` ? never : never;
 ```
 
 З таким записом, ми отримаємо помилку компіляції `Type ‘C’ is not assignable to type ‘string | number | bigint | boolean | null | undefined’.`.

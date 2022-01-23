@@ -14,17 +14,17 @@ tags: union built-in
 
 ```typescript
 interface Todo {
-  title: string
-  description: string
-  completed: boolean
+  title: string;
+  description: string;
+  completed: boolean;
 }
 
-type TodoPreview = MyPick<Todo, 'title' | 'completed'>
+type TodoPreview = MyPick<Todo, "title" | "completed">;
 
 const todo: TodoPreview = {
-  title: 'Clean room',
+  title: "Clean room",
   completed: false,
-}
+};
 ```
 
 ## Решение
@@ -48,7 +48,7 @@ const todo: TodoPreview = {
 Чтобы взять типы отдельно взятых свойств из `T`, воспользуемся типами поиска.
 
 ```typescript
-type MyPick<T, K extends keyof T> = { [P in K]: T[P] }
+type MyPick<T, K extends keyof T> = { [P in K]: T[P] };
 ```
 
 Таким образом, мы говорим "возьми всё, что есть в `K`, сопоставь это к `P` и сделай ключом нашего нового объекта, а значение возьми без изменений из `T`".

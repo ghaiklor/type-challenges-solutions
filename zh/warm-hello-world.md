@@ -8,18 +8,18 @@ tags: warm-up
 
 ## 挑战
 
-在Type Challenges，我们使用类型系统自身去做断言。
+在 Type Challenges，我们使用类型系统自身去做断言。
 
 在这个挑战中，你需要改变下面的代码使它能够通过测试（没有类型检查错误）。
 
 ```ts
 // expected to be string
-type HelloWorld = any
+type HelloWorld = any;
 ```
 
 ```ts
 // you should make this work
-type test = Expect<Equal<HelloWorld, string>>
+type test = Expect<Equal<HelloWorld, string>>;
 ```
 
 ## 解法
@@ -28,7 +28,7 @@ type test = Expect<Equal<HelloWorld, string>>
 我们在这里需要做的只是将类型设置为' string '替代原来的' any ':
 
 ```ts
-type HelloWorld = string
+type HelloWorld = string;
 ```
 
 ## 参考

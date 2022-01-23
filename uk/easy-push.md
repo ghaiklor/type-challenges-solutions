@@ -12,7 +12,7 @@ tags: array
 Наприклад:
 
 ```typescript
-type Result = Push<[1, 2], '3'> // [1, 2, '3']
+type Result = Push<[1, 2], "3">; // [1, 2, '3']
 ```
 
 ## Розв'язок
@@ -26,7 +26,7 @@ type Result = Push<[1, 2], '3'> // [1, 2, '3']
 Давайте це і зробимо й повернемо масив з елементами із масиву `T`:
 
 ```typescript
-type Push<T, U> = [...T]
+type Push<T, U> = [...T];
 ```
 
 Отримаємо помилку компіляції "A rest element type must be an array type".
@@ -34,14 +34,14 @@ type Push<T, U> = [...T]
 Тому додамо обмеження на дженерику й скажемо, що ми працюємо з масивами:
 
 ```typescript
-type Push<T extends unknown[], U> = [...T]
+type Push<T extends unknown[], U> = [...T];
 ```
 
 Тепер, у нас є копія вхідного масиву `T`.
 Єдине, що залишається, це додати до цих елементів елемент `U`:
 
 ```typescript
-type Push<T extends unknown[], U> = [...T, U]
+type Push<T extends unknown[], U> = [...T, U];
 ```
 
 Таким чином, ми реалізували операцію додавання нового елементу в масив на рівні типів.

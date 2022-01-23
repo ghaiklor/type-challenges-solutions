@@ -12,11 +12,17 @@ tags: tuple
 Например:
 
 ```typescript
-type tesla = ['tesla', 'model 3', 'model X', 'model Y']
-type spaceX = ['FALCON 9', 'FALCON HEAVY', 'DRAGON', 'STARSHIP', 'HUMAN SPACEFLIGHT']
+type tesla = ["tesla", "model 3", "model X", "model Y"];
+type spaceX = [
+  "FALCON 9",
+  "FALCON HEAVY",
+  "DRAGON",
+  "STARSHIP",
+  "HUMAN SPACEFLIGHT"
+];
 
-type teslaLength = Length<tesla> // expected 4
-type spaceXLength = Length<spaceX> // expected 5
+type teslaLength = Length<tesla>; // expected 4
+type spaceXLength = Length<spaceX>; // expected 5
 ```
 
 ## Решение
@@ -24,7 +30,7 @@ type spaceXLength = Length<spaceX> // expected 5
 В этом случае, элементы кортежа предопределены, поэтому мы можем использовать свойство `length`, чтобы получить количество элементов в нём.
 
 ```typescript
-type Length<T extends any> = T['length']
+type Length<T extends any> = T["length"];
 ```
 
 Но обращаясь к свойству `length` напрямую, мы получим ошибку компиляции “Type 'length' cannot be used to index type 'T'.”
@@ -33,7 +39,7 @@ type Length<T extends any> = T['length']
 Чтобы решить эту проблему и помочь компилятору, нам нужно указать ограничения над `T`, а именно, указать что у типа `T` есть свойство `length`.
 
 ```typescript
-type Length<T extends { length: number }> = T['length']
+type Length<T extends { length: number }> = T["length"];
 ```
 
 ## Что почитать

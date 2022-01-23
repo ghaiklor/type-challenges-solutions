@@ -19,21 +19,21 @@ For example:
 ```ts
 type X = {
   x: {
-    a: 1
-    b: 'hi'
-  }
-  y: 'hey'
-}
+    a: 1;
+    b: "hi";
+  };
+  y: "hey";
+};
 
 type Expected = {
   readonly x: {
-    readonly a: 1
-    readonly b: 'hi'
-  }
-  readonly y: 'hey'
-}
+    readonly a: 1;
+    readonly b: "hi";
+  };
+  readonly y: "hey";
+};
 
-const todo: DeepReadonly<X> // should be same as `Expected`
+const todo: DeepReadonly<X>; // should be same as `Expected`
 ```
 
 ## Solution
@@ -44,7 +44,7 @@ The only difference is that we need to make it recursive.
 Let us start from classic and implement the regular [`Readonly<T>`](./easy-readonly.md) type:
 
 ```ts
-type DeepReadonly<T> = { readonly [P in keyof T]: T[P] }
+type DeepReadonly<T> = { readonly [P in keyof T]: T[P] };
 ```
 
 But, as you already aware, this type will not make everything read-only, but only the fields that are not in depth.
@@ -57,7 +57,11 @@ The algorithm is simple.
 In case `T[P]` is an object, we are going deeper into `DeepReadonly`, otherwise - return `T[P]`:
 
 ```ts
-type DeepReadonly<T> = { readonly [P in keyof T]: T[P] extends Record<string, unknown> ? DeepReadonly<T[P]> : T[P] }
+type DeepReadonly<T> = {
+  readonly [P in keyof T]: T[P] extends Record<string, unknown>
+    ? DeepReadonly<T[P]>
+    : T[P];
+};
 ```
 
 ## References

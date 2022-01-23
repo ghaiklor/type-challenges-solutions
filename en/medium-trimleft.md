@@ -13,7 +13,7 @@ Implement `TrimLeft<T>` which takes an exact string type and returns a new strin
 For example:
 
 ```ts
-type trimmed = TrimLeft<'  Hello World  '> // expected to be 'Hello World  '
+type trimmed = TrimLeft<"  Hello World  ">; // expected to be 'Hello World  '
 ```
 
 ## Solution
@@ -37,7 +37,7 @@ That is because we do not handle the newline and tabs.
 Let us fix that by replacing the white space with a union of those three:
 
 ```ts
-type TrimLeft<S> = S extends `${' ' | '\n' | '\t'}${infer T}` ? TrimLeft<T> : S;
+type TrimLeft<S> = S extends `${" " | "\n" | "\t"}${infer T}` ? TrimLeft<T> : S;
 ```
 
 ## References

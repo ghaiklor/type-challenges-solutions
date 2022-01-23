@@ -13,7 +13,7 @@ Implement `Capitalize<T>` which converts the first letter of a string to upperca
 For example:
 
 ```ts
-type capitalized = Capitalize<'hello world'> // expected to be 'Hello world'
+type capitalized = Capitalize<"hello world">; // expected to be 'Hello world'
 ```
 
 ## Solution
@@ -23,7 +23,7 @@ We can’t implement the generic solution for capitalizing characters in string 
 So, if using the built-in type `Capitalize`, it’s pretty straightforward:
 
 ```ts
-type MyCapitalize<S extends string> = Capitalize<S>
+type MyCapitalize<S extends string> = Capitalize<S>;
 ```
 
 That was not the intent, I believe.
@@ -34,7 +34,9 @@ By using a dictionary, of course!
 To make a solution more simple I made a dictionary only for needed characters, that is `f`:
 
 ```ts
-interface CapitalizedChars { 'f': 'F' };
+interface CapitalizedChars {
+  f: "F";
+}
 ```
 
 We have a dictionary, now, let us infer the first character of the type.
@@ -49,8 +51,12 @@ We need to check if the character is present in our dictionary.
 If so, we return the capitalized character from the dictionary, otherwise we return the first character without changes:
 
 ```ts
-interface CapitalizedChars { 'f': 'F' };
-type Capitalize<S> = S extends `${infer C}${infer T}` ? `${C extends keyof CapitalizedChars ? CapitalizedChars[C] : C}${T}` : S;
+interface CapitalizedChars {
+  f: "F";
+}
+type Capitalize<S> = S extends `${infer C}${infer T}`
+  ? `${C extends keyof CapitalizedChars ? CapitalizedChars[C] : C}${T}`
+  : S;
 ```
 
 ## References

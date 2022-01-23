@@ -12,12 +12,15 @@ From `T`, pick a set of properties whose type are assignable to `U`.
 For example:
 
 ```typescript
-type OnlyBoolean = PickByType<{
-  name: string
-  count: number
-  isReadonly: boolean
-  isEnable: boolean
-}, boolean> // { isReadonly: boolean; isEnable: boolean; }
+type OnlyBoolean = PickByType<
+  {
+    name: string;
+    count: number;
+    isReadonly: boolean;
+    isEnable: boolean;
+  },
+  boolean
+>; // { isReadonly: boolean; isEnable: boolean; }
 ```
 
 ## Solution
@@ -28,7 +31,7 @@ It is obvious that we definitely need to start from the mapped types.
 So that we begin with creating an object that copies all the keys from the `T`:
 
 ```typescript
-type PickByType<T, U> = { [P in keyof T]: T[P] }
+type PickByType<T, U> = { [P in keyof T]: T[P] };
 ```
 
 First, we got all the keys from the `T` and applied an iteration to them.
@@ -40,7 +43,9 @@ When I’m saying “filter”, I mean the key remapping in this case.
 We can apply key remapping and check if the key is the key we need:
 
 ```typescript
-type PickByType<T, U> = { [P in keyof T as T[P] extends U ? never : never]: T[P] }
+type PickByType<T, U> = {
+  [P in keyof T as T[P] extends U ? never : never]: T[P];
+};
 ```
 
 Notice the `as` keyword, it is the keyword that shows the start of key remapping.
@@ -49,7 +54,7 @@ In case the value type is assignable to the type `U`, we will return the key as 
 However, in case the value type is not assignable to `U`, we leave `never`:
 
 ```typescript
-type PickByType<T, U> = { [P in keyof T as T[P] extends U ? P : never]: T[P] }
+type PickByType<T, U> = { [P in keyof T as T[P] extends U ? P : never]: T[P] };
 ```
 
 That way, we made a type that filters out the keys by its value type.
