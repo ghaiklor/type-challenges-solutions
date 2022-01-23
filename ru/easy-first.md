@@ -12,11 +12,11 @@ tags: array
 Например:
 
 ```typescript
-type arr1 = ['a', 'b', 'c']
-type arr2 = [3, 2, 1]
+type arr1 = ["a", "b", "c"];
+type arr2 = [3, 2, 1];
 
-type head1 = First<arr1> // expected to be 'a'
-type head2 = First<arr2> // expected to be 3
+type head1 = First<arr1>; // expected to be 'a'
+type head2 = First<arr2>; // expected to be 3
 ```
 
 ## Решение
@@ -24,7 +24,7 @@ type head2 = First<arr2> // expected to be 3
 Первая мысль, которая меня посетила, это использовать типы поиска и написать `T[0]`:
 
 ```typescript
-type First<T extends any[]> = T[0]
+type First<T extends any[]> = T[0];
 ```
 
 Но это решение не учитывает один случай.

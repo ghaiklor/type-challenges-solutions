@@ -14,11 +14,11 @@ tags: union utils
 예시:
 
 ```typescript
-type A = IsNever<never> // expected to be true
-type B = IsNever<undefined> // expected to be false
-type C = IsNever<null> // expected to be false
-type D = IsNever<[]> // expected to be false
-type E = IsNever<number> // expected to be false
+type A = IsNever<never>; // expected to be true
+type B = IsNever<undefined>; // expected to be false
+type C = IsNever<null>; // expected to be false
+type D = IsNever<[]>; // expected to be false
+type E = IsNever<number>; // expected to be false
 ```
 
 ## 해답
@@ -27,7 +27,7 @@ type E = IsNever<number> // expected to be false
 타입 `T`를 `never`에 할당할 수 있다면 `true`를 반환하고 반대의 경우 `false`를 반환합니다.
 
 ```typescript
-type IsNever<T> = T extends never ? true : false
+type IsNever<T> = T extends never ? true : false;
 ```
 
 아쉽지만 `never`의 경우 테스트 케이스를 통과할 수 없습니다.
@@ -45,7 +45,7 @@ type IsNever<T> = T extends never ? true : false
 이 경우엔 형식상 `never`에 어떤 타입을 할당하려는 것이 아닙니다.
 
 ```typescript
-type IsNever<T> = [T] extends [never] ? true : false
+type IsNever<T> = [T] extends [never] ? true : false;
 ```
 
 위와 같은 참신한 방법을 통해 주어진 타입이 `never` 타입인지 확인하는 제네릭 타입을 구현하여 테스트를 통과할 수 있습니다.

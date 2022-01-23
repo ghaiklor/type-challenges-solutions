@@ -14,17 +14,17 @@ For example:
 
 ```typescript
 type Foo = {
-  name: string
-  age: string
-}
+  name: string;
+  age: string;
+};
 
 type Bar = {
-  name: string
-  age: string
-  gender: number
-}
+  name: string;
+  age: string;
+  gender: number;
+};
 
-type test0 = Diff<Foo, Bar> // expected { gender: number }
+type test0 = Diff<Foo, Bar>; // expected { gender: number }
 ```
 
 ## Solution
@@ -36,14 +36,20 @@ Let us start with the mapped type where we iterate over the union of properties 
 Before calculating the difference, we need to gather all the properties from both objects after all.
 
 ```typescript
-type Diff<O, O1> = { [P in keyof O | keyof O1]: never }
+type Diff<O, O1> = { [P in keyof O | keyof O1]: never };
 ```
 
 When iterating over the properties, we need to check if the property exists on `O` or `O1`.
 So we need to add a conditional type here to find out where from we need to get the value type.
 
 ```typescript
-type Diff<O, O1> = { [P in keyof O | keyof O1]: P extends keyof O ? O[P] : P extends keyof O1 ? O1[P] : never }
+type Diff<O, O1> = {
+  [P in keyof O | keyof O1]: P extends keyof O
+    ? O[P]
+    : P extends keyof O1
+    ? O1[P]
+    : never;
+};
 ```
 
 Great!
@@ -55,7 +61,13 @@ Intersection types!
 We get the intersection type and exclude it from our mapped type `P`.
 
 ```typescript
-type Diff<O, O1> = { [P in keyof O | keyof O1 as Exclude<P, keyof O & keyof O1>]: P extends keyof O ? O[P] : P extends keyof O1 ? O1[P] : never }
+type Diff<O, O1> = {
+  [P in keyof O | keyof O1 as Exclude<P, keyof O & keyof O1>]: P extends keyof O
+    ? O[P]
+    : P extends keyof O1
+    ? O1[P]
+    : never;
+};
 ```
 
 ## References

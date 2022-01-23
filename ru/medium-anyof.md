@@ -34,12 +34,10 @@ type Sample2 = AnyOf<[0, "", false, [], {}]>; // expected to be false
 
 ```typescript
 type AnyOf<T extends readonly any[], I = T[number]> = (
-  I extends any ?
-  I extends Falsy ?
-  false :
-  true :
-  never
-) extends false ? false : true;
+  I extends any ? (I extends Falsy ? false : true) : never
+) extends false
+  ? false
+  : true;
 ```
 
 Поэтому я задумался, а можем ли мы решить это более простым способом?
@@ -61,7 +59,7 @@ type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T]
 Для начала, давайте создадим новый тип, в котором укажем какие элементы мы считаем за `false`:
 
 ```typescript
-type Falsy = 0 | '' | false | [] | { [P in any]: never }
+type Falsy = 0 | "" | false | [] | { [P in any]: never };
 ```
 
 Имея такой тип, мы можем использовать условный тип для проверки, входит ли `H` в их число:
@@ -69,8 +67,8 @@ type Falsy = 0 | '' | false | [] | { [P in any]: never }
 ```typescript
 type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T]
   ? H extends Falsy
-  ? never
-  : never
+    ? never
+    : never
   : never;
 ```
 
@@ -81,8 +79,8 @@ type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T]
 ```typescript
 type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T]
   ? H extends Falsy
-  ? AnyOf<T>
-  : never
+    ? AnyOf<T>
+    : never
   : never;
 ```
 
@@ -94,8 +92,8 @@ type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T]
 ```typescript
 type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T]
   ? H extends Falsy
-  ? AnyOf<T>
-  : true
+    ? AnyOf<T>
+    : true
   : never;
 ```
 
@@ -106,8 +104,8 @@ type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T]
 ```typescript
 type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T]
   ? H extends Falsy
-  ? AnyOf<T>
-  : true
+    ? AnyOf<T>
+    : true
   : false;
 ```
 
@@ -115,12 +113,12 @@ type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T]
 Вот полное решение проблемы:
 
 ```typescript
-type Falsy = 0 | '' | false | [] | { [P in any]: never }
+type Falsy = 0 | "" | false | [] | { [P in any]: never };
 
 type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T]
   ? H extends Falsy
-  ? AnyOf<T>
-  : true
+    ? AnyOf<T>
+    : true
   : false;
 ```
 

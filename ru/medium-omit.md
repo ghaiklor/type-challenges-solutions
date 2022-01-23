@@ -12,16 +12,16 @@ tags: union built-in
 
 ```typescript
 interface Todo {
-  title: string
-  description: string
-  completed: boolean
+  title: string;
+  description: string;
+  completed: boolean;
 }
 
-type TodoPreview = MyOmit<Todo, 'description' | 'title'>
+type TodoPreview = MyOmit<Todo, "description" | "title">;
 
 const todo: TodoPreview = {
   completed: false,
-}
+};
 ```
 
 ## Решение
@@ -33,7 +33,7 @@ const todo: TodoPreview = {
 Переберём его свойства и вернём новый с такими же свойствами.
 
 ```typescript
-type MyOmit<T, K> = { [P in keyof T]: T[P] }
+type MyOmit<T, K> = { [P in keyof T]: T[P] };
 ```
 
 Остается отфильтровать те свойства, которые необходимо оставить при переборе.
@@ -41,7 +41,7 @@ type MyOmit<T, K> = { [P in keyof T]: T[P] }
 В результате, получим тип, который перебирает свойства из `T` и переназначает те, что находятся в `K` на `never`.
 
 ```typescript
-type MyOmit<T, K> = { [P in keyof T as P extends K ? never : P]: T[P] }
+type MyOmit<T, K> = { [P in keyof T as P extends K ? never : P]: T[P] };
 ```
 
 ## Что почитать

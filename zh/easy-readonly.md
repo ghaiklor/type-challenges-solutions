@@ -16,17 +16,17 @@ tags: built-in readonly object-keys
 
 ```ts
 interface Todo {
-  title: string
-  description: string
+  title: string;
+  description: string;
 }
 
 const todo: MyReadonly<Todo> = {
   title: "Hey",
-  description: "foobar"
-}
+  description: "foobar",
+};
 
-todo.title = "Hello" // Error: cannot reassign a readonly property
-todo.description = "barFoo" // Error: cannot reassign a readonly property
+todo.title = "Hello"; // Error: cannot reassign a readonly property
+todo.description = "barFoo"; // Error: cannot reassign a readonly property
 ```
 
 ## 解法
@@ -38,7 +38,7 @@ todo.description = "barFoo" // Error: cannot reassign a readonly property
 对于该类型的每个属性，我们获取它的键并为其添加一个`readonly`修饰符：
 
 ```ts
-type MyReadonly<T> = { readonly [K in keyof T]: T[K] }
+type MyReadonly<T> = { readonly [K in keyof T]: T[K] };
 ```
 
 ## 参考

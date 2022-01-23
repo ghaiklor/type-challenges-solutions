@@ -14,7 +14,7 @@ tags: promise
 
 ## 解法
 
-这是一个非常有趣的挑战，它要求我们了解TypeScript的一个被低估的特性，恕我直言。
+这是一个非常有趣的挑战，它要求我们了解 TypeScript 的一个被低估的特性，恕我直言。
 
 但是，在说明我的意思之前，让我们来分析一下这个挑战。
 作者要求我们展开类型。
@@ -30,7 +30,7 @@ tags: promise
 
 现在，言归正传。
 我将从最简单的例子开始。
-如果我们的`Awaited`类型得到`Promise<string>`，我们需要返回`string`，否则我们返回`T`本身，因为它不是一个Promise:
+如果我们的`Awaited`类型得到`Promise<string>`，我们需要返回`string`，否则我们返回`T`本身，因为它不是一个 Promise:
 
 ```ts
 type Awaited<T> = T extends Promise<string> ? string : T;
@@ -41,7 +41,7 @@ type Awaited<T> = T extends Promise<string> ? string : T;
 怎么做呢?
 在我们不知道类型的情况下，如何从`Promise`获取类型?
 
-出于这些目的，TypeScript在条件类型中有类型推断功能!
+出于这些目的，TypeScript 在条件类型中有类型推断功能!
 你可以对编译器说"嘿，一旦你知道了类型是什么，请把它赋给我的类型参数"。
 你可以在这里阅读更多关于[条件类型中的类型推断](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html#type-inference-in-conditional-types)。
 
@@ -49,7 +49,7 @@ type Awaited<T> = T extends Promise<string> ? string : T;
 我们没有在条件类型中检查`Promise<string>`，而是将`string`替换为`infer R`，因为我们不知道那里必须有什么。
 我们只知道它是`Promise<T>`，其内部包含某种类型。
 
-一旦TypeScript确定了`Promise`中的类型，它就会把它赋给我们的类型参数`R`，并在“true”分支中可用。
+一旦 TypeScript 确定了`Promise`中的类型，它就会把它赋给我们的类型参数`R`，并在“true”分支中可用。
 我们正是从这里返回它的：
 
 ```ts

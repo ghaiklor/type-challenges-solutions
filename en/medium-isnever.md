@@ -14,11 +14,11 @@ If the type of `T` resolves to `never`, return `true`, otherwise `false`.
 For example:
 
 ```typescript
-type A = IsNever<never> // expected to be true
-type B = IsNever<undefined> // expected to be false
-type C = IsNever<null> // expected to be false
-type D = IsNever<[]> // expected to be false
-type E = IsNever<number> // expected to be false
+type A = IsNever<never>; // expected to be true
+type B = IsNever<undefined>; // expected to be false
+type C = IsNever<null>; // expected to be false
+type D = IsNever<[]>; // expected to be false
+type E = IsNever<number>; // expected to be false
 ```
 
 ## Solution
@@ -27,7 +27,7 @@ The most obvious solution here is to check if the type is assignable to `never` 
 If we can assign the type `T` to `never`, we return `true`, otherwise `false`.
 
 ```typescript
-type IsNever<T> = T extends never ? true : false
+type IsNever<T> = T extends never ? true : false;
 ```
 
 Unfortunately, we do not pass the test case for `never` itself.
@@ -45,7 +45,7 @@ What if we check that type `T` is assignable not to `never`, but to the tuple th
 In such case, formally, we are not trying to assign any type to `never`.
 
 ```typescript
-type IsNever<T> = [T] extends [never] ? true : false
+type IsNever<T> = [T] extends [never] ? true : false;
 ```
 
 With this workaround, hack, genuine solution, you name it; we can pass the test and implement a generic type to check if the type is `never`.

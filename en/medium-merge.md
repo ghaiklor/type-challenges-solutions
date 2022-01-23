@@ -43,13 +43,21 @@ We start with `S` because it has a higher precedence, it can override the value 
 But also we need to check if the property exists on `S`:
 
 ```typescript
-type Merge<F, S> = { [P in keyof F | keyof S]: P extends keyof S ? S[P] : never };
+type Merge<F, S> = {
+  [P in keyof F | keyof S]: P extends keyof S ? S[P] : never;
+};
 ```
 
 In case, there is no property in `S`, we check if the property exists on `F` and if so; we get the value type from there:
 
 ```typescript
-type Merge<F, S> = { [P in keyof F | keyof S]: P extends keyof S ? S[P] : P extends keyof F ? F[P] : never };
+type Merge<F, S> = {
+  [P in keyof F | keyof S]: P extends keyof S
+    ? S[P]
+    : P extends keyof F
+    ? F[P]
+    : never;
+};
 ```
 
 That way we merge two objects with `S` having a higher precedence.

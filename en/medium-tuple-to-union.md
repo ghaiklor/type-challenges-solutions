@@ -13,9 +13,9 @@ Implement a generic `TupleToUnion<T>` which covers the values of a tuple to its 
 For example:
 
 ```ts
-type Arr = ['1', '2', '3']
+type Arr = ["1", "2", "3"];
 
-const a: TupleToUnion<Arr> // expected to be '1' | '2' | '3'
+const a: TupleToUnion<Arr>; // expected to be '1' | '2' | '3'
 ```
 
 ## Solution
@@ -26,7 +26,7 @@ Luckily, TypeScript already has it in its type system - [lookup types](https://w
 We can use the construct `T[number]` to get the union of all elements of `T`:
 
 ```ts
-type TupleToUnion<T> = T[number]
+type TupleToUnion<T> = T[number];
 ```
 
 But, we will get an error “Type ‘number’ cannot be used to index type ‘T’“.
@@ -34,7 +34,7 @@ That is because we don’t have a constraint over `T` that is saying to the comp
 Let us fix that by adding `extends unknown[]`:
 
 ```ts
-type TupleToUnion<T extends unknown[]> = T[number]
+type TupleToUnion<T extends unknown[]> = T[number];
 ```
 
 ## References

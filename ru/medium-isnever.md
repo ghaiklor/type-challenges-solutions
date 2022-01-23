@@ -13,11 +13,11 @@ tags: union utils
 Например:
 
 ```typescript
-type A = IsNever<never> // expected to be true
-type B = IsNever<undefined> // expected to be false
-type C = IsNever<null> // expected to be false
-type D = IsNever<[]> // expected to be false
-type E = IsNever<number> // expected to be false
+type A = IsNever<never>; // expected to be true
+type B = IsNever<undefined>; // expected to be false
+type C = IsNever<null>; // expected to be false
+type D = IsNever<[]>; // expected to be false
+type E = IsNever<number>; // expected to be false
 ```
 
 ## Решение
@@ -26,7 +26,7 @@ type E = IsNever<number> // expected to be false
 Если `T` присваиваемый к `never`, возвращаем `true`, иначе `false`.
 
 ```typescript
-type IsNever<T> = T extends never ? true : false
+type IsNever<T> = T extends never ? true : false;
 ```
 
 К сожалению, не проходим тест с `never`.
@@ -44,7 +44,7 @@ type IsNever<T> = T extends never ? true : false
 В таком случае, формально, мы не будем пытаться присвоить каждый тип к `never`.
 
 ```typescript
-type IsNever<T> = [T] extends [never] ? true : false
+type IsNever<T> = [T] extends [never] ? true : false;
 ```
 
 С таким костылем, хаком, креативным решением, называйте как хотите; мы реализовали тип, который может проверить, является ли `T` типом `never`.

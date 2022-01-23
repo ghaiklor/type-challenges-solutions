@@ -16,7 +16,7 @@ tags: array
 
 ```typescript
 // expected to be `false`
-type isPillarMen = Includes<['Kars', 'Esidisi', 'Wamuu', 'Santana'], 'Dio'>
+type isPillarMen = Includes<["Kars", "Esidisi", "Wamuu", "Santana"], "Dio">;
 ```
 
 ## Розв'язок

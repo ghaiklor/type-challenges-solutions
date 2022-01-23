@@ -16,17 +16,17 @@ If it is not captured, the default is an empty string.
 For example:
 
 ```typescript
-type PString1=''
-type PString2='+85%'
-type PString3='-85%'
-type PString4='85%'
-type PString5='85'
+type PString1 = "";
+type PString2 = "+85%";
+type PString3 = "-85%";
+type PString4 = "85%";
+type PString5 = "85";
 
-type R1=PercentageParser<PString1> // expected ['', '', '']
-type R2=PercentageParser<PString2> // expected ["+", "85", "%"]
-type R3=PercentageParser<PString3> // expected ["-", "85", "%"]
-type R4=PercentageParser<PString4> // expected ["", "85", "%"]
-type R5=PercentageParser<PString5> // expected ["", "85", ""]
+type R1 = PercentageParser<PString1>; // expected ['', '', '']
+type R2 = PercentageParser<PString2>; // expected ["+", "85", "%"]
+type R3 = PercentageParser<PString3>; // expected ["-", "85", "%"]
+type R4 = PercentageParser<PString4>; // expected ["", "85", "%"]
+type R5 = PercentageParser<PString5>; // expected ["", "85", ""]
 ```
 
 ## Solution
@@ -45,9 +45,7 @@ We need to check if the first sign in the string is the plus or minus.
 To do so, we need to infer the first character:
 
 ```typescript
-type ParseSign<T extends string> = T extends `${infer S}${any}`
-  ? never
-  : never
+type ParseSign<T extends string> = T extends `${infer S}${any}` ? never : never;
 ```
 
 Having a first character in type parameter `S`, we can check if the character is a plus or minus.
@@ -56,8 +54,10 @@ In all other cases, we return an empty string, meaning there is no plus or minus
 
 ```typescript
 type ParseSign<T extends string> = T extends `${infer S}${any}`
-  ? S extends '+' | '-' ? S : ''
-  : ''
+  ? S extends "+" | "-"
+    ? S
+    : ""
+  : "";
 ```
 
 That way, we got a type that returns a sign in case it is present in the string.
@@ -66,18 +66,14 @@ Now, we can do the same for a percent sign.
 Let us check if the incoming string has a percent sign at the end of the string:
 
 ```typescript
-type ParsePercent<T extends string> = T extends `${any}%`
-  ? never
-  : never
+type ParsePercent<T extends string> = T extends `${any}%` ? never : never;
 ```
 
 In case there is a percent sign, well... we return a percent sign, otherwise an empty string.
 Simple as that.
 
 ```typescript
-type ParsePercent<T extends string> = T extends `${any}%`
-  ? '%'
-  : ''
+type ParsePercent<T extends string> = T extends `${any}%` ? "%" : "";
 ```
 
 Having two parsers responsible for getting signs, we can start thinking about the number itself.
@@ -94,9 +90,8 @@ But we are lucky, we already did it in our parsers before.
 All we need to do is combine them together and infer the number:
 
 ```typescript
-type ParseNumber<T extends string> = T extends `${ParseSign<T>}${infer N}${ParsePercent<T>}`
-  ? never
-  : never
+type ParseNumber<T extends string> =
+  T extends `${ParseSign<T>}${infer N}${ParsePercent<T>}` ? never : never;
 ```
 
 You see what’s happening?
@@ -109,9 +104,8 @@ That leaves us with number only, that we are inferring via `infer` keyword.
 Let’s return it now:
 
 ```typescript
-type ParseNumber<T extends string> = T extends `${ParseSign<T>}${infer N}${ParsePercent<T>}`
-  ? N
-  : ''
+type ParseNumber<T extends string> =
+  T extends `${ParseSign<T>}${infer N}${ParsePercent<T>}` ? N : "";
 ```
 
 I bet you already understand how can we combine these together now.
@@ -122,8 +116,8 @@ So let’s do that and fill them with our types:
 type PercentageParser<A extends string> = [
   ParseSign<A>,
   ParseNumber<A>,
-  ParsePercent<A>,
-]
+  ParsePercent<A>
+];
 ```
 
 Congratulations!

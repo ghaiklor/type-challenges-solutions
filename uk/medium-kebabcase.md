@@ -12,7 +12,7 @@ tags: template-literal
 Наприклад:
 
 ```typescript
-type kebabCase = KebabCase<'FooBarBaz'> // expected "foo-bar-baz"
+type kebabCase = KebabCase<"FooBarBaz">; // expected "foo-bar-baz"
 ```
 
 ## Розв'язок
@@ -22,18 +22,14 @@ type kebabCase = KebabCase<'FooBarBaz'> // expected "foo-bar-baz"
 Нам потрібно дізнатись перший символ рядка та решту (хвіст).
 
 ```typescript
-type KebabCase<S> = S extends `${infer C}${infer T}`
-  ? never
-  : never;
+type KebabCase<S> = S extends `${infer C}${infer T}` ? never : never;
 ```
 
 Коли тип не відповідає шаблону "перший символ та решта (хвіст)", це означає кінець рядка.
 Тому повертаємо вхідний параметр без змін.
 
 ```typescript
-type KebabCase<S> = S extends `${infer C}${infer T}`
-  ? never
-  : S;
+type KebabCase<S> = S extends `${infer C}${infer T}` ? never : S;
 ```
 
 Але, коли наш шаблон спрацював, ми повинні обробити два випадки.
@@ -42,7 +38,9 @@ type KebabCase<S> = S extends `${infer C}${infer T}`
 
 ```typescript
 type KebabCase<S> = S extends `${infer C}${infer T}`
-  ? T extends Uncapitalize<T> ? never : never
+  ? T extends Uncapitalize<T>
+    ? never
+    : never
   : S;
 ```
 
@@ -53,7 +51,9 @@ type KebabCase<S> = S extends `${infer C}${infer T}`
 
 ```typescript
 type KebabCase<S> = S extends `${infer C}${infer T}`
-  ? T extends Uncapitalize<T> ? `${Uncapitalize<C>}${KebabCase<T>}` : never
+  ? T extends Uncapitalize<T>
+    ? `${Uncapitalize<C>}${KebabCase<T>}`
+    : never
   : S;
 ```
 
@@ -63,7 +63,9 @@ type KebabCase<S> = S extends `${infer C}${infer T}`
 
 ```typescript
 type KebabCase<S> = S extends `${infer C}${infer T}`
-  ? T extends Uncapitalize<T> ? `${Uncapitalize<C>}${KebabCase<T>}` : `${Uncapitalize<C>}-${KebabCase<T>}`
+  ? T extends Uncapitalize<T>
+    ? `${Uncapitalize<C>}${KebabCase<T>}`
+    : `${Uncapitalize<C>}-${KebabCase<T>}`
   : S;
 ```
 

@@ -12,7 +12,7 @@ tags: template-literal
 Например:
 
 ```typescript
-type replaced = Replace<'types are fun!', 'fun', 'awesome'> // expected to be 'types are awesome!'
+type replaced = Replace<"types are fun!", "fun", "awesome">; // expected to be 'types are awesome!'
 ```
 
 ## Решение
@@ -21,14 +21,22 @@ type replaced = Replace<'types are fun!', 'fun', 'awesome'> // expected to be 't
 Используя условные типы этого легко добиться:
 
 ```typescript
-type Replace<S, From extends string, To> = S extends `${infer L}${From}${infer R}` ? S : S;
+type Replace<
+  S,
+  From extends string,
+  To
+> = S extends `${infer L}${From}${infer R}` ? S : S;
 ```
 
 Как только TypeScript вывел типы, это означает что `From` найден и окружающие его части попадают в тип параметры `L` и `R`.
 Вернём новый строчный тип литерал, который создаем из этих выведенных кусков и строки `To`.
 
 ```typescript
-type Replace<S, From extends string, To extends string> = S extends `${infer L}${From}${infer R}` ? `${L}${To}${R}` : S;
+type Replace<
+  S,
+  From extends string,
+  To extends string
+> = S extends `${infer L}${From}${infer R}` ? `${L}${To}${R}` : S;
 ```
 
 Решение работает без проблем, кроме случая, когда `From` это пустая строка.
@@ -40,7 +48,11 @@ type Replace<
   S extends string,
   From extends string,
   To extends string
-> = From extends '' ? S : S extends `${infer L}${From}${infer R}` ? `${L}${To}${R}` : S;
+> = From extends ""
+  ? S
+  : S extends `${infer L}${From}${infer R}`
+  ? `${L}${To}${R}`
+  : S;
 ```
 
 ## Что почитать

@@ -12,7 +12,7 @@ tags: template-literal
 Наприклад:
 
 ```typescript
-type length = LengthOfString<"Hello, World"> // expected to be 12
+type length = LengthOfString<"Hello, World">; // expected to be 12
 ```
 
 ## Розв'язок
@@ -21,7 +21,7 @@ type length = LengthOfString<"Hello, World"> // expected to be 12
 Сподівався, що TypeScript достатньо розумний, щоб повернути значення:
 
 ```typescript
-type LengthOfString<S extends string> = S['length']
+type LengthOfString<S extends string> = S["length"];
 ```
 
 На жаль, ні.
@@ -33,14 +33,18 @@ type LengthOfString<S extends string> = S['length']
 Почнемо з типу, який виводить перший символ та решту рядка (хвіст):
 
 ```typescript
-type LengthOfString<S extends string> = S extends `${infer C}${infer T}` ? never : never;
+type LengthOfString<S extends string> = S extends `${infer C}${infer T}`
+  ? never
+  : never;
 ```
 
 В тип-параметрі `C` отримуємо перший символ та у `T` отримуємо хвіст.
 Викликаючи тип `LengthOfString` рекурсивно з рештою рядка, ми зупинимось у випадку, коли символів більше не залишиться.
 
 ```typescript
-type LengthOfString<S extends string> = S extends `${infer C}${infer T}` ? LengthOfString<T> : never;
+type LengthOfString<S extends string> = S extends `${infer C}${infer T}`
+  ? LengthOfString<T>
+  : never;
 ```
 
 Проблема в тому, що ми не знаємо, де зберігати наш лічильник.
@@ -49,14 +53,22 @@ type LengthOfString<S extends string> = S extends `${infer C}${infer T}` ? Lengt
 Замість чисел створимо кортеж і будемо додавати по одному символу на кожній ітерації.
 
 ```typescript
-type LengthOfString<S extends string, A extends string[]> = S extends `${infer C}${infer T}` ? LengthOfString<T, [C, ...A]> : never;
+type LengthOfString<
+  S extends string,
+  A extends string[]
+> = S extends `${infer C}${infer T}` ? LengthOfString<T, [C, ...A]> : never;
 ```
 
 Перетворюємо рядковий літерал в кортеж символів цього рядкового літерала.
 Як тільки в рядковому літералі не залишається символів – повертаємо довжину кортежу.
 
 ```typescript
-type LengthOfString<S extends string, A extends string[]> = S extends `${infer C}${infer T}` ? LengthOfString<T, [C, ...A]> : A['length'];
+type LengthOfString<
+  S extends string,
+  A extends string[]
+> = S extends `${infer C}${infer T}`
+  ? LengthOfString<T, [C, ...A]>
+  : A["length"];
 ```
 
 Додавши новий тип параметр ми зламали тести.
@@ -64,7 +76,12 @@ type LengthOfString<S extends string, A extends string[]> = S extends `${infer C
 Виправляємо це, додавши до другого параметру значення за замовчуванням – порожній кортеж.
 
 ```typescript
-type LengthOfString<S extends string, A extends string[] = []> = S extends `${infer C}${infer T}` ? LengthOfString<T, [C, ...A]> : A['length'];
+type LengthOfString<
+  S extends string,
+  A extends string[] = []
+> = S extends `${infer C}${infer T}`
+  ? LengthOfString<T, [C, ...A]>
+  : A["length"];
 ```
 
 ## Посилання

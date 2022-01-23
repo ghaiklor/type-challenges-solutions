@@ -11,7 +11,7 @@ tags: union
 Реалізуйте тип `Permutation<U>`, який перетворює об'єднання в масив, що включає перестановки елементів.
 
 ```typescript
-type perm = Permutation<'A' | 'B' | 'C'>;
+type perm = Permutation<"A" | "B" | "C">;
 // expected ['A', 'B', 'C'] | ['A', 'C', 'B'] | ['B', 'A', 'C'] | ['B', 'C', 'A'] | ['C', 'A', 'B'] | ['C', 'B', 'A']
 ```
 
@@ -30,7 +30,7 @@ type perm = Permutation<'A' | 'B' | 'C'>;
 Виразимо це використовуючи умовні типи:
 
 ```typescript
-type Permutation<T> = T extends never ? [] : [T]
+type Permutation<T> = T extends never ? [] : [T];
 ```
 
 Це рішення навіть проходить один тест.
@@ -58,7 +58,11 @@ Permutation<‘A’ | ‘B’> -> [‘A’, ...Permutation<‘B’>] + [‘B’,
 Знаючи, які елементи потрібно виключити, ми можемо реалізувати алгоритм "розділяй і володарюй", замінивши `[T]`.
 
 ```typescript
-type Permutation<T> = T extends never ? [] : T extends infer U ? [U, ...Permutation<Exclude<T, U>>] : []
+type Permutation<T> = T extends never
+  ? []
+  : T extends infer U
+  ? [U, ...Permutation<Exclude<T, U>>]
+  : [];
 ```
 
 Ми близькі до рішення.
@@ -68,7 +72,11 @@ type Permutation<T> = T extends never ? [] : T extends infer U ? [U, ...Permutat
 Після деяких роздумів, я зрозумів, що треба огорнути наш умовний тип `T` у масив:
 
 ```typescript
-type Permutation<T> = [T] extends [never] ? [] : T extends infer U ? [U, ...Permutation<Exclude<T, U>>] : []
+type Permutation<T> = [T] extends [never]
+  ? []
+  : T extends infer U
+  ? [U, ...Permutation<Exclude<T, U>>]
+  : [];
 ```
 
 Якщо чесно, я так і не зрозумів в чому була проблема.
@@ -76,7 +84,11 @@ type Permutation<T> = [T] extends [never] ? [] : T extends infer U ? [U, ...Perm
 Я був дуже здивований, коли просте копіювання параметра типу `T` в інший розв'язує проблему:
 
 ```typescript
-type Permutation<T, C = T> = [T] extends [never] ? [] : C extends infer U ? [U, ...Permutation<Exclude<T, U>>] : []
+type Permutation<T, C = T> = [T] extends [never]
+  ? []
+  : C extends infer U
+  ? [U, ...Permutation<Exclude<T, U>>]
+  : [];
 ```
 
 ## Посилання

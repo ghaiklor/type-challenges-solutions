@@ -12,9 +12,9 @@ tags: template-literal
 Наприклад:
 
 ```typescript
-type R0 = EndsWith<'abc', 'bc'> // true
-type R1 = EndsWith<'abc', 'abc'> // true
-type R2 = EndsWith<'abc', 'd'> // false
+type R0 = EndsWith<"abc", "bc">; // true
+type R1 = EndsWith<"abc", "abc">; // true
+type R2 = EndsWith<"abc", "d">; // false
 ```
 
 ## Розв'язок
@@ -30,10 +30,9 @@ type R2 = EndsWith<'abc', 'd'> // false
 Так як нам зміст, поки що, не цікавий, використаємо тип `any`:
 
 ```typescript
-type EndsWith<
-  T extends string,
-  U extends string
-> = T extends `${any}` ? never : never
+type EndsWith<T extends string, U extends string> = T extends `${any}`
+  ? never
+  : never;
 ```
 
 За допомогою цього виразу ми кажемо компілятору перевірити, чи тип `T` привласнюється до `any`.
@@ -44,20 +43,18 @@ type EndsWith<
 Давайте так і зробимо:
 
 ```typescript
-type EndsWith<
-  T extends string,
-  U extends string
-> = T extends `${any}${U}` ? never : never
+type EndsWith<T extends string, U extends string> = T extends `${any}${U}`
+  ? never
+  : never;
 ```
 
 Використовуючи таку конструкцію, ми перевіряємо, що рядок привласнюється до всього, що закінчується на `U` - просто.
 Все що залишається це повернути `true` або `false` літерали в залежності від результату:
 
 ```typescript
-type EndsWith<
-  T extends string,
-  U extends string
-> = T extends `${any}${U}` ? true : false
+type EndsWith<T extends string, U extends string> = T extends `${any}${U}`
+  ? true
+  : false;
 ```
 
 ## Посилання

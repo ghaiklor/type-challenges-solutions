@@ -14,11 +14,11 @@ tags: array built-in
 const promise1 = Promise.resolve(3);
 const promise2 = 42;
 const promise3 = new Promise<string>((resolve, reject) => {
-  setTimeout(resolve, 100, 'foo');
+  setTimeout(resolve, 100, "foo");
 });
 
 // expected to be `Promise<[number, number, string]>`
-const p = Promise.all([promise1, promise2, promise3] as const)
+const p = Promise.all([promise1, promise2, promise3] as const);
 ```
 
 ## Розв'язок
@@ -26,7 +26,7 @@ const p = Promise.all([promise1, promise2, promise3] as const)
 Почнемо з простого – функція що повертає `Promise<T>`.
 
 ```typescript
-declare function PromiseAll<T>(values: T): Promise<T>
+declare function PromiseAll<T>(values: T): Promise<T>;
 ```
 
 Тепер треба придумати, як вирахувати типи з виконаних `Promise`.
@@ -36,7 +36,7 @@ declare function PromiseAll<T>(values: T): Promise<T>
 Використовуючи [варіативні типи](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types) вказуємо, що `values` це масив, а `T` елементи цього масиву:
 
 ```typescript
-declare function PromiseAll<T extends unknown[]>(values: [...T]): Promise<T>
+declare function PromiseAll<T extends unknown[]>(values: [...T]): Promise<T>;
 ```
 
 Отримуємо помилку “Argument of type ‘readonly [1, 2, 3]’ is not assignable to parameter of type ‘[1, 2, 3]’.“.
@@ -44,7 +44,9 @@ declare function PromiseAll<T extends unknown[]>(values: [...T]): Promise<T>
 Виправимо це, додавши модифікатор до параметра функції:
 
 ```typescript
-declare function PromiseAll<T extends unknown[]>(values: readonly [...T]): Promise<T>
+declare function PromiseAll<T extends unknown[]>(
+  values: readonly [...T]
+): Promise<T>;
 ```
 
 В нас є рішення, яке проходить один з тестів.
@@ -57,14 +59,18 @@ declare function PromiseAll<T extends unknown[]>(values: readonly [...T]): Promi
 Якщо елемент це `Promise` то повертаємо внутрішній тип, інакше – тип без змін.
 
 ```typescript
-declare function PromiseAll<T extends unknown[]>(values: readonly [...T]): Promise<T extends Promise<infer R> ? R : T>
+declare function PromiseAll<T extends unknown[]>(
+  values: readonly [...T]
+): Promise<T extends Promise<infer R> ? R : T>;
 ```
 
 Рішення досі помилкове, тому що `T`, не об'єднання, а кортеж.
 Тож, потрібно проітерувати всі елементи кортежу і перевірити, є поточний елемент `Promise` чи ні.
 
 ```typescript
-declare function PromiseAll<T extends unknown[]>(values: readonly [...T]): Promise<{ [P in keyof T]: T[P] extends Promise<infer R> ? R : T[P] }>
+declare function PromiseAll<T extends unknown[]>(
+  values: readonly [...T]
+): Promise<{ [P in keyof T]: T[P] extends Promise<infer R> ? R : T[P] }>;
 ```
 
 ## Посилання

@@ -13,7 +13,7 @@ tags: template-literal
 예시:
 
 ```ts
-type capitalized = Capitalize<'hello world'> // expected to be 'Hello world'
+type capitalized = Capitalize<"hello world">; // expected to be 'Hello world'
 ```
 
 ## 해답
@@ -23,7 +23,7 @@ type capitalized = Capitalize<'hello world'> // expected to be 'Hello world'
 내장 타입인 `Capitalize`를 이용한다면 쉽게 해결할 수 있긴 합니다:
 
 ```ts
-type MyCapitalize<S extends string> = Capitalize<S>
+type MyCapitalize<S extends string> = Capitalize<S>;
 ```
 
 하지만 이게 챌린지의 의도는 아닐 것입니다.
@@ -35,7 +35,9 @@ type MyCapitalize<S extends string> = Capitalize<S>
 지금은 `f`를 사용하겠습니다:
 
 ```ts
-interface CapitalizedChars { 'f': 'F' };
+interface CapitalizedChars {
+  f: "F";
+}
 ```
 
 딕셔너리를 만든 후에 문자열 타입에서 첫 문자를 타입 추론합니다.
@@ -50,8 +52,12 @@ type Capitalize<S> = S extends `${infer C}${infer T}` ? C : S;
 존재할 경우 대문자화 된 문자를 딕셔너리에서 반환해 줄 것입니다. 반대의 경우에는 첫 문자를 아무 변화 없이 반환합니다:
 
 ```ts
-interface CapitalizedChars { 'f': 'F' };
-type Capitalize<S> = S extends `${infer C}${infer T}` ? `${C extends keyof CapitalizedChars ? CapitalizedChars[C] : C}${T}` : S;
+interface CapitalizedChars {
+  f: "F";
+}
+type Capitalize<S> = S extends `${infer C}${infer T}`
+  ? `${C extends keyof CapitalizedChars ? CapitalizedChars[C] : C}${T}`
+  : S;
 ```
 
 ## 참고

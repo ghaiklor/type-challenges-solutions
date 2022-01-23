@@ -13,12 +13,12 @@ tags: warm-up
 
 ```typescript
 // expected to be string
-type HelloWorld = any
+type HelloWorld = any;
 ```
 
 ```typescript
 // you should make this work
-type test = Expect<Equal<HelloWorld, string>>
+type test = Expect<Equal<HelloWorld, string>>;
 ```
 
 ## Решение
@@ -29,7 +29,7 @@ type test = Expect<Equal<HelloWorld, string>>
 Всё что нам нужно здесь сделать, это заменить `any` на `string` и увидеть, что в песочнице компиляция проходит успешно.
 
 ```typescript
-type HelloWorld = string
+type HelloWorld = string;
 ```
 
 ## Что почитать

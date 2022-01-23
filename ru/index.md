@@ -4,7 +4,7 @@ description: >-
   Этот проект призван помочь вам разобраться с системой типов TypeScript. Здесь
   собраны решения большинства задач, которые требуют знания тех или иных
   возможностей языка.
-keywords: 'type, challenges, typescript, javascript, решения, объяснения'
+keywords: "type, challenges, typescript, javascript, решения, объяснения"
 lang: ru
 comments: false
 ---

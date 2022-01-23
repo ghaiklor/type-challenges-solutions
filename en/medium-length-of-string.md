@@ -13,7 +13,7 @@ Compute the length of a string literal, which behaves like `String#length`.
 For example:
 
 ```typescript
-type length = LengthOfString<"Hello, World"> // expected to be 12
+type length = LengthOfString<"Hello, World">; // expected to be 12
 ```
 
 ## Solution
@@ -22,7 +22,7 @@ At first, I tried to go with a trivial solution - access the property `length` v
 I thought, maybe TypeScript is smart enough to get the value:
 
 ```typescript
-type LengthOfString<S extends string> = S['length']
+type LengthOfString<S extends string> = S["length"];
 ```
 
 Unfortunately, no.
@@ -34,14 +34,18 @@ That way, the recursion itself will be our counter.
 Let us start by writing a type that will infer the first character and the tail of the string:
 
 ```typescript
-type LengthOfString<S extends string> = S extends `${infer C}${infer T}` ? never : never;
+type LengthOfString<S extends string> = S extends `${infer C}${infer T}`
+  ? never
+  : never;
 ```
 
 Type parameter `C` gets the first character of the string and `T` gets the tail.
 Calling the type itself recursively with a tail, we will stop sometimes on the case when there are no characters:
 
 ```typescript
-type LengthOfString<S extends string> = S extends `${infer C}${infer T}` ? LengthOfString<T> : never;
+type LengthOfString<S extends string> = S extends `${infer C}${infer T}`
+  ? LengthOfString<T>
+  : never;
 ```
 
 The problem with it is that we don’t know where to store the counter.
@@ -51,14 +55,22 @@ It would be great to add another type parameter and just increment its value.
 Instead, we can make the type parameter a tuple with characters and fill it in with the first character on each recursive call:
 
 ```typescript
-type LengthOfString<S extends string, A extends string[]> = S extends `${infer C}${infer T}` ? LengthOfString<T, [C, ...A]> : never;
+type LengthOfString<
+  S extends string,
+  A extends string[]
+> = S extends `${infer C}${infer T}` ? LengthOfString<T, [C, ...A]> : never;
 ```
 
 We “convert” the string literal type into a tuple with its characters that are stored inside our new type parameter.
 Once we hit the case when there are no characters (the base case for a recursion) we just return the length of the tuple:
 
 ```typescript
-type LengthOfString<S extends string, A extends string[]> = S extends `${infer C}${infer T}` ? LengthOfString<T, [C, ...A]> : A['length'];
+type LengthOfString<
+  S extends string,
+  A extends string[]
+> = S extends `${infer C}${infer T}`
+  ? LengthOfString<T, [C, ...A]>
+  : A["length"];
 ```
 
 By introducing another type parameter, we broke the tests.
@@ -66,7 +78,12 @@ Because our type now requires having two type parameters instead of one.
 Let us fix this by making our type parameter an empty tuple by default:
 
 ```typescript
-type LengthOfString<S extends string, A extends string[] = []> = S extends `${infer C}${infer T}` ? LengthOfString<T, [C, ...A]> : A['length'];
+type LengthOfString<
+  S extends string,
+  A extends string[] = []
+> = S extends `${infer C}${infer T}`
+  ? LengthOfString<T, [C, ...A]>
+  : A["length"];
 ```
 
 ## References

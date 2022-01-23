@@ -12,7 +12,7 @@ tags: template-literal
 Наприклад:
 
 ```typescript
-type trimmed = Trim<'  Hello World  '> // expected to be 'Hello World'
+type trimmed = Trim<"  Hello World  ">; // expected to be 'Hello World'
 ```
 
 ## Розв'язок
@@ -34,7 +34,11 @@ type Trim<S> = S extends ` ${infer R}` ? Trim<R> : S;
 Коли пробіли з лівого боку прибрані, перевіримо чи є пробіли з правого боку й зробимо те саме.
 
 ```typescript
-type Trim<S> = S extends ` ${infer R}` ? Trim<R> : S extends `${infer L} ` ? Trim<L> : S;
+type Trim<S> = S extends ` ${infer R}`
+  ? Trim<R>
+  : S extends `${infer L} `
+  ? Trim<L>
+  : S;
 ```
 
 В такий спосіб прибираємо пробіли з лівого боку, потім — з правого боку.
@@ -47,8 +51,12 @@ type Trim<S> = S extends ` ${infer R}` ? Trim<R> : S extends `${infer L} ` ? Tri
 Щоб уникнути дублювання, винесемо це в окремий тип:
 
 ```typescript
-type Whitespace = ' ' | '\n' | '\t';
-type Trim<S> = S extends `${Whitespace}${infer R}` ? Trim<R> : S extends `${infer L}${Whitespace}` ? Trim<L> : S;
+type Whitespace = " " | "\n" | "\t";
+type Trim<S> = S extends `${Whitespace}${infer R}`
+  ? Trim<R>
+  : S extends `${infer L}${Whitespace}`
+  ? Trim<L>
+  : S;
 ```
 
 ## Посилання

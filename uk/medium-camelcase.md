@@ -12,7 +12,7 @@ tags: template-literal
 Наприклад:
 
 ```typescript
-type camelCased = CamelCase<'foo-bar-baz'> // expected "fooBarBaz"
+type camelCased = CamelCase<"foo-bar-baz">; // expected "fooBarBaz"
 ```
 
 ## Розв'язок
@@ -21,17 +21,13 @@ type camelCased = CamelCase<'foo-bar-baz'> // expected "fooBarBaz"
 Давайте виведемо частини до та після дефісу.
 
 ```typescript
-type CamelCase<S> = S extends `${infer H}-${infer T}`
-  ? never
-  : never;
+type CamelCase<S> = S extends `${infer H}-${infer T}` ? never : never;
 ```
 
 Якщо такого шаблону немає - повертаємо рядок без змін.
 
 ```typescript
-type CamelCase<S> = S extends `${infer H}-${infer T}`
-  ? never
-  : S;
+type CamelCase<S> = S extends `${infer H}-${infer T}` ? never : S;
 ```
 
 Але коли такий шаблон знайдений нам потрібно видалити дефіс та зробити першу букву великою.
@@ -49,7 +45,9 @@ type CamelCase<S> = S extends `${infer H}-${infer T}`
 
 ```typescript
 type CamelCase<S> = S extends `${infer H}-${infer T}`
-  ? T extends Capitalize<T> ? never : `${H}${CamelCase<Capitalize<T>>}`
+  ? T extends Capitalize<T>
+    ? never
+    : `${H}${CamelCase<Capitalize<T>>}`
   : S;
 ```
 
@@ -59,7 +57,9 @@ type CamelCase<S> = S extends `${infer H}-${infer T}`
 
 ```typescript
 type CamelCase<S> = S extends `${infer H}-${infer T}`
-  ? T extends Capitalize<T> ? `${H}-${CamelCase<T>}` : `${H}${CamelCase<Capitalize<T>>}`
+  ? T extends Capitalize<T>
+    ? `${H}-${CamelCase<T>}`
+    : `${H}${CamelCase<Capitalize<T>>}`
   : S;
 ```
 

@@ -12,7 +12,7 @@ tags: template-literal
 Например:
 
 ```typescript
-type kebabCase = KebabCase<'FooBarBaz'> // expected "foo-bar-baz"
+type kebabCase = KebabCase<"FooBarBaz">; // expected "foo-bar-baz"
 ```
 
 ## Решение
@@ -22,18 +22,14 @@ type kebabCase = KebabCase<'FooBarBaz'> // expected "foo-bar-baz"
 Узнаем первую букву строки и остальную часть (хвост).
 
 ```typescript
-type KebabCase<S> = S extends `${infer C}${infer T}`
-  ? never
-  : never;
+type KebabCase<S> = S extends `${infer C}${infer T}` ? never : never;
 ```
 
 Когда попадаем в ситуацию, где нету шаблона для "первая буква и хвост", это значит что строка закончилась.
 Поэтому, возвращаем входной параметр без изменений.
 
 ```typescript
-type KebabCase<S> = S extends `${infer C}${infer T}`
-  ? never
-  : S;
+type KebabCase<S> = S extends `${infer C}${infer T}` ? never : S;
 ```
 
 Но, если шаблон сработал, то здесь два случая.
@@ -42,7 +38,9 @@ type KebabCase<S> = S extends `${infer C}${infer T}`
 
 ```typescript
 type KebabCase<S> = S extends `${infer C}${infer T}`
-  ? T extends Uncapitalize<T> ? never : never
+  ? T extends Uncapitalize<T>
+    ? never
+    : never
   : S;
 ```
 
@@ -53,7 +51,9 @@ type KebabCase<S> = S extends `${infer C}${infer T}`
 
 ```typescript
 type KebabCase<S> = S extends `${infer C}${infer T}`
-  ? T extends Uncapitalize<T> ? `${Uncapitalize<C>}${KebabCase<T>}` : never
+  ? T extends Uncapitalize<T>
+    ? `${Uncapitalize<C>}${KebabCase<T>}`
+    : never
   : S;
 ```
 
@@ -64,7 +64,9 @@ type KebabCase<S> = S extends `${infer C}${infer T}`
 
 ```typescript
 type KebabCase<S> = S extends `${infer C}${infer T}`
-  ? T extends Uncapitalize<T> ? `${Uncapitalize<C>}${KebabCase<T>}` : `${Uncapitalize<C>}-${KebabCase<T>}`
+  ? T extends Uncapitalize<T>
+    ? `${Uncapitalize<C>}${KebabCase<T>}`
+    : `${Uncapitalize<C>}-${KebabCase<T>}`
   : S;
 ```
 

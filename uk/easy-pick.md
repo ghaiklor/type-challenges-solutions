@@ -16,17 +16,17 @@ tags: union built-in
 
 ```ts
 interface Todo {
-  title: string
-  description: string
-  completed: boolean
+  title: string;
+  description: string;
+  completed: boolean;
 }
 
-type TodoPreview = MyPick<Todo, 'title' | 'completed'>
+type TodoPreview = MyPick<Todo, "title" | "completed">;
 
 const todo: TodoPreview = {
-  title: 'Clean room',
+  title: "Clean room",
   completed: false,
-}
+};
 ```
 
 ## Розв'язок
@@ -48,7 +48,7 @@ const todo: TodoPreview = {
 Хоча, нам доведеться взяти їх з початкового `T` і для цього будуть корисні типи пошуку:
 
 ```ts
-type MyPick<T, K extends keyof T> = { [P in K]: T[P] }
+type MyPick<T, K extends keyof T> = { [P in K]: T[P] };
 ```
 
 Ми кажемо: "Візьми всі елементи з `К`, назви `Р` і зроби це ключем в новому об'єкті зі значенням з початкового типу".

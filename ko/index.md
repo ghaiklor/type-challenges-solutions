@@ -2,7 +2,7 @@
 title: Type Challenges Solutions
 description: >-
   이 프로젝트는 타입 시스템이 어떻게 작동하는지 더 잘 이해하는 것을 돕고, 스스로 유틸리티 타입을 만들어보거나 혹은 새롭고 즐거운 문제들을 경험해보는 것을 목표로 합니다.
-keywords: 'type, challenges, solutions, typescript, javascript'
+keywords: "type, challenges, solutions, typescript, javascript"
 lang: ko
 comments: false
 ---

@@ -22,7 +22,7 @@ type flatten = Flatten<[1, 2, [3, 4], [[[5]]]> // [1, 2, 3, 4, 5]
 В інакшому випадку, повернемо сам `T` (поки що):
 
 ```typescript
-type Flatten<T> = T extends [] ? [] : T
+type Flatten<T> = T extends [] ? [] : T;
 ```
 
 Але, що, якщо `T` буде не порожнім масивом?
@@ -31,7 +31,11 @@ type Flatten<T> = T extends [] ? [] : T
 Після виведення, повертаємо новий масив, з виведеними елементами.
 
 ```typescript
-type Flatten<T> = T extends [] ? [] : T extends [infer H, ...infer T] ? [H, T] : [T]
+type Flatten<T> = T extends []
+  ? []
+  : T extends [infer H, ...infer T]
+  ? [H, T]
+  : [T];
 ```
 
 До речі, зверніть увагу, що у випадку, якщо у нас не порожній масив і не масив з елементами, то очікуємо що це елемент з масиву.
@@ -45,7 +49,11 @@ type Flatten<T> = T extends [] ? [] : T extends [infer H, ...infer T] ? [H, T] :
 Завдяки варіативним типам, ці кортежі зливаються в один, який і дає нам плоский масив.
 
 ```typescript
-type Flatten<T> = T extends [] ? [] : T extends [infer H, ...infer T] ? [...Flatten<H>, ...Flatten<T>] : [T]
+type Flatten<T> = T extends []
+  ? []
+  : T extends [infer H, ...infer T]
+  ? [...Flatten<H>, ...Flatten<T>]
+  : [T];
 ```
 
 ## Посилання

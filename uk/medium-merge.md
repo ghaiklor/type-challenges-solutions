@@ -42,14 +42,22 @@ type Merge<F, S> = { [P in keyof F | keyof S]: never };
 Також перевіряємо наявність властивостей у типі `S`:
 
 ```typescript
-type Merge<F, S> = { [P in keyof F | keyof S]: P extends keyof S ? S[P] : never };
+type Merge<F, S> = {
+  [P in keyof F | keyof S]: P extends keyof S ? S[P] : never;
+};
 ```
 
 У випадку, коли властивість відсутня, ми перевіряємо її наявність у типі `F`.
 Якщо є, то беремо значення звідти.
 
 ```typescript
-type Merge<F, S> = { [P in keyof F | keyof S]: P extends keyof S ? S[P] : P extends keyof F ? F[P] : never };
+type Merge<F, S> = {
+  [P in keyof F | keyof S]: P extends keyof S
+    ? S[P]
+    : P extends keyof F
+    ? F[P]
+    : never;
+};
 ```
 
 ## Посилання

@@ -17,21 +17,21 @@ tags: application
 Наприклад:
 
 ```typescript
-declare const config: Chainable
+declare const config: Chainable;
 
 const result = config
-  .option('foo', 123)
-  .option('name', 'type-challenges')
-  .option('bar', { value: 'Hello World' })
-  .get()
+  .option("foo", 123)
+  .option("name", "type-challenges")
+  .option("bar", { value: "Hello World" })
+  .get();
 
 // expect the type of result to be:
 interface Result {
-  foo: number
-  name: string
+  foo: number;
+  name: string;
   bar: {
-    value: string
-  }
+    value: string;
+  };
 }
 ```
 
@@ -49,9 +49,9 @@ interface Result {
 
 ```typescript
 type Chainable = {
-  option(key: string, value: any): any
-  get(): any
-}
+  option(key: string, value: any): any;
+  get(): any;
+};
 ```
 
 Перш ніж почнемо акумулювати інформацію про типи, було б не погано якось її отримувати.
@@ -60,9 +60,9 @@ type Chainable = {
 
 ```typescript
 type Chainable = {
-  option<K, V>(key: K, value: V): any
-  get(): any
-}
+  option<K, V>(key: K, value: V): any;
+  get(): any;
+};
 ```
 
 У нас є інформація про типи `key` і `value`.
@@ -77,9 +77,9 @@ TypeScript виведе `key` як рядковий тип-літерал, а `v
 
 ```typescript
 type Chainable<O = {}> = {
-  option<K, V>(key: K, value: V): any
-  get(): any
-}
+  option<K, V>(key: K, value: V): any;
+  get(): any;
+};
 ```
 
 Потрібно, щоб `option(key, value)` повертав сам тип `Chainable` (ми ж хочемо мати можливість викликати методи один за одним), але з інформацією про типи попередніх викликів разом з поточним.
@@ -87,9 +87,9 @@ type Chainable<O = {}> = {
 
 ```typescript
 type Chainable<O = {}> = {
-  option<K, V>(key: K, value: V): Chainable<O & { [P in K]: V }>
-  get(): any
-}
+  option<K, V>(key: K, value: V): Chainable<O & { [P in K]: V }>;
+  get(): any;
+};
 ```
 
 Залишилися дрібниці!
@@ -98,9 +98,9 @@ type Chainable<O = {}> = {
 
 ```typescript
 type Chainable<O = {}> = {
-  option<K extends string, V>(key: K, value: V): Chainable<O & { [P in K]: V }>
-  get(): any
-}
+  option<K extends string, V>(key: K, value: V): Chainable<O & { [P in K]: V }>;
+  get(): any;
+};
 ```
 
 Все готово до фінального акорду!
@@ -109,9 +109,9 @@ type Chainable<O = {}> = {
 
 ```typescript
 type Chainable<O = {}> = {
-  option<K extends string, V>(key: K, value: V): Chainable<O & { [P in K]: V }>
-  get(): O
-}
+  option<K extends string, V>(key: K, value: V): Chainable<O & { [P in K]: V }>;
+  get(): O;
+};
 ```
 
 ## Посилання

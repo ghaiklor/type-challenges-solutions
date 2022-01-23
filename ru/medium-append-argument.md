@@ -12,10 +12,10 @@ tags: arguments
 Например:
 
 ```typescript
-type Fn = (a: number, b: string) => number
+type Fn = (a: number, b: string) => number;
 
 // expected be (a: number, b: string, x: boolean) => number
-type Result = AppendArgument<Fn, boolean>
+type Result = AppendArgument<Fn, boolean>;
 ```
 
 ## Решение
@@ -27,7 +27,9 @@ type Result = AppendArgument<Fn, boolean>
 Как только мы выведем типы, вернём новую сигнатуру функции, которая копирует входную, но с использованием наших выведенных типов.
 
 ```typescript
-type AppendArgument<Fn, A> = Fn extends (args: infer P) => infer R ? (args: P) => R : never;
+type AppendArgument<Fn, A> = Fn extends (args: infer P) => infer R
+  ? (args: P) => R
+  : never;
 ```
 
 Очевидно, это решение ещё не готовое.
@@ -38,7 +40,9 @@ type AppendArgument<Fn, A> = Fn extends (args: infer P) => infer R ? (args: P) =
 Чтобы починить эту проблему, воспользуемся `...` оператором:
 
 ```typescript
-type AppendArgument<Fn, A> = Fn extends (...args: infer P) => infer R ? (args: P) => R : never;
+type AppendArgument<Fn, A> = Fn extends (...args: infer P) => infer R
+  ? (args: P) => R
+  : never;
 ```
 
 Теперь, наше условие в условном типе срабатывает и мы попадаем в ветку, где у нас есть `P` (типы параметров функции) и `R` (тип возврата функции).
@@ -50,21 +54,27 @@ type AppendArgument<Fn, A> = Fn extends (...args: infer P) => infer R ? (args: P
 Применяя вариативные типы к этому кортежу, мы можем разложить его на отдельные параметры:
 
 ```typescript
-type AppendArgument<Fn, A> = Fn extends (...args: [...infer P]) => infer R ? (args: P) => R : never;
+type AppendArgument<Fn, A> = Fn extends (...args: [...infer P]) => infer R
+  ? (args: P) => R
+  : never;
 ```
 
 Имея нужные нам данные, давайте доработаем новую сигнатуру функции, которую мы возвращаем.
 Используем те же вариативные типы и `...` оператор.
 
 ```typescript
-type AppendArgument<Fn, A> = Fn extends (...args: [...infer P]) => infer R ? (...args: [...P]) => R : never;
+type AppendArgument<Fn, A> = Fn extends (...args: [...infer P]) => infer R
+  ? (...args: [...P]) => R
+  : never;
 ```
 
 На этом этапе, тип принимает входную функцию и возвращает такую же функцию, используя выведенные типы.
 Всё, что нам остается сделать, это добавить к кортежу с параметрами новый параметр `A`.
 
 ```typescript
-type AppendArgument<Fn, A> = Fn extends (...args: [...infer P]) => infer R ? (...args: [...P, A]) => R : never;
+type AppendArgument<Fn, A> = Fn extends (...args: [...infer P]) => infer R
+  ? (...args: [...P, A]) => R
+  : never;
 ```
 
 ## Что почитать

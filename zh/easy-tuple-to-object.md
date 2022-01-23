@@ -13,10 +13,10 @@ tags: tuple
 例如：
 
 ```ts
-const tuple = ['tesla', 'model 3', 'model X', 'model Y'] as const
+const tuple = ["tesla", "model 3", "model X", "model Y"] as const;
 
 // expected { tesla: 'tesla', 'model 3': 'model 3', 'model X': 'model X', 'model Y': 'model Y'}
-const result: TupleToObject<typeof tuple>
+const result: TupleToObject<typeof tuple>;
 ```
 
 ## 解法
@@ -28,7 +28,7 @@ const result: TupleToObject<typeof tuple>
 在映射类型的帮助下，我们可以迭代`T[number]`中的这些值，并返回一个新的类型，其中键和值是`T[number]`的类型:
 
 ```ts
-type TupleToObject<T extends readonly any[]> = { [K in T[number]]: K }
+type TupleToObject<T extends readonly any[]> = { [K in T[number]]: K };
 ```
 
 ## 参考

@@ -13,17 +13,17 @@ tags: object
 
 ```typescript
 type Foo = {
-  name: string
-  age: string
-}
+  name: string;
+  age: string;
+};
 
 type Bar = {
-  name: string
-  age: string
-  gender: number
-}
+  name: string;
+  age: string;
+  gender: number;
+};
 
-type test0 = Diff<Foo, Bar> // expected { gender: number }
+type test0 = Diff<Foo, Bar>; // expected { gender: number }
 ```
 
 ## Решение
@@ -35,14 +35,20 @@ type test0 = Diff<Foo, Bar> // expected { gender: number }
 Прежде чем искать разницу двух объектов, нужно же собрать все их свойства в один.
 
 ```typescript
-type Diff<O, O1> = { [P in keyof O | keyof O1]: never }
+type Diff<O, O1> = { [P in keyof O | keyof O1]: never };
 ```
 
 Когда мы перебираем ключи первого или второго объекта, проверяем, а существует ли свойство на том или ином объекте.
 Добавим условный тип, в котором проверим наличие свойств в объектах:
 
 ```typescript
-type Diff<O, O1> = { [P in keyof O | keyof O1]: P extends keyof O ? O[P] : P extends keyof O1 ? O1[P] : never }
+type Diff<O, O1> = {
+  [P in keyof O | keyof O1]: P extends keyof O
+    ? O[P]
+    : P extends keyof O1
+    ? O1[P]
+    : never;
+};
 ```
 
 Отлично!
@@ -54,7 +60,13 @@ type Diff<O, O1> = { [P in keyof O | keyof O1]: P extends keyof O ? O[P] : P ext
 Возьмем пересечение свойств двух объектов и исключим типы в пересечении из нашего сопоставляющего типа `P`:
 
 ```typescript
-type Diff<O, O1> = { [P in keyof O | keyof O1 as Exclude<P, keyof O & keyof O1>]: P extends keyof O ? O[P] : P extends keyof O1 ? O1[P] : never }
+type Diff<O, O1> = {
+  [P in keyof O | keyof O1 as Exclude<P, keyof O & keyof O1>]: P extends keyof O
+    ? O[P]
+    : P extends keyof O1
+    ? O1[P]
+    : never;
+};
 ```
 
 ## Что почитать

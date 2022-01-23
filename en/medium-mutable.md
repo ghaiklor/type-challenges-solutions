@@ -13,13 +13,13 @@ For example:
 
 ```typescript
 interface Todo {
-  readonly title: string
-  readonly description: string
-  readonly completed: boolean
+  readonly title: string;
+  readonly description: string;
+  readonly completed: boolean;
 }
 
 // { title: string; description: string; completed: boolean; }
-type MutableTodo = Mutable<T>
+type MutableTodo = Mutable<T>;
 ```
 
 ## Solution
@@ -35,7 +35,7 @@ However, in this case, we have been asked to remove it from the type.
 Let’s start with the simplest thing, just copy the type as it is, using mapped types:
 
 ```typescript
-type Mutable<T> = { [P in keyof T]: T[P] }
+type Mutable<T> = { [P in keyof T]: T[P] };
 ```
 
 Now it is a copy of `T` with the read only modifiers.
@@ -43,14 +43,14 @@ How can we get rid of them?
 Well, remember that to add them, in the previous challenges, we just used the keyword `readonly` added to the mapped type:
 
 ```typescript
-type Mutable<T> = { readonly [P in keyof T]: T[P] }
+type Mutable<T> = { readonly [P in keyof T]: T[P] };
 ```
 
 Implicitly, TypeScript has added a `+` to the `readonly` keyword, meaning that we want to add the modifier to the property.
 But in our case, we want to discard it, so we can use `-` instead:
 
 ```typescript
-type Mutable<T> = { -readonly [P in keyof T]: T[P] }
+type Mutable<T> = { -readonly [P in keyof T]: T[P] };
 ```
 
 That way, we’ve implemented a type that discards the read only modifier from the properties.

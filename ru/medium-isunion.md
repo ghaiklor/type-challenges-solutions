@@ -12,9 +12,9 @@ tags: union
 Например:
 
 ```typescript
-type case1 = IsUnion<string> // false
-type case2 = IsUnion<string | number> // true
-type case3 = IsUnion<[string | number]> // false
+type case1 = IsUnion<string>; // false
+type case2 = IsUnion<string | number>; // true
+type case3 = IsUnion<[string | number]>; // false
 ```
 
 ## Решение
@@ -41,13 +41,15 @@ type case3 = IsUnion<[string | number]> // false
 Грубо говоря, это будет выглядеть вот так.
 
 ```typescript
-type IsString<T> = T extends string ? true : false
+type IsString<T> = T extends string ? true : false;
 
 // Например, передаем параметр T = string | number
 // Дистрибутивное применение условного типа будет выглядеть как-то так
-type IsStringDistributive =
-    string extends string ? true : false
-  | number extends string ? true : false
+type IsStringDistributive = string extends string
+  ? true
+  : false | number extends string
+  ? true
+  : false;
 ```
 
 Видите к чему я хочу подвести?
@@ -60,14 +62,14 @@ type IsStringDistributive =
 Сначала, сделаем копию входного параметра `T`, чтобы сравнивать с изначальным объединением без изменений.
 
 ```typescript
-type IsUnion<T, C = T> = never
+type IsUnion<T, C = T> = never;
 ```
 
 Применяя условные типы, получаем дистрибутивную семантику.
 Внутри правдивой ветки условного типа, получим каждый элемент из объединения по отдельности.
 
 ```typescript
-type IsUnion<T, C = T> = T extends C ? never : never
+type IsUnion<T, C = T> = T extends C ? never : never;
 ```
 
 Теперь, важная часть - сравнить элемент из объединения с изначальным входным тип параметром `T`.
@@ -75,7 +77,7 @@ type IsUnion<T, C = T> = T extends C ? never : never
 Иначе, дистрибутивные условные типы сделали дело и мы сравниваем один элемент из объединения с изначальным объединением - значит это объединение.
 
 ```typescript
-type IsUnion<T, C = T> = T extends C ? [C] extends [T] ? false : true : never
+type IsUnion<T, C = T> = T extends C ? ([C] extends [T] ? false : true) : never;
 ```
 
 Готово!
@@ -85,8 +87,7 @@ type IsUnion<T, C = T> = T extends C ? [C] extends [T] ? false : true : never
 Следовательно, это не объединение, возвращаем `false`.
 
 ```typescript
-[T] = [string]
-[C] = [string]
+[T] = [string][C] = [string];
 ```
 
 Но, если передаём объединение, например `string | number`, они держат разные типы.

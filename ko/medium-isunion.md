@@ -13,9 +13,9 @@ tags: union
 예시:
 
 ```typescript
-type case1 = IsUnion<string> // false
-type case2 = IsUnion<string | number> // true
-type case3 = IsUnion<[string | number]> // false
+type case1 = IsUnion<string>; // false
+type case2 = IsUnion<string | number>; // true
+type case3 = IsUnion<[string | number]>; // false
 ```
 
 ## 해답
@@ -42,13 +42,15 @@ type case3 = IsUnion<[string | number]> // false
 이는 유니온의 각 원소에 조건부 타입이 적용되는 것처럼 볼 수 있습니다.
 
 ```typescript
-type IsString<T> = T extends string ? true : false
+type IsString<T> = T extends string ? true : false;
 
 // For example, we provide type T = string | number
 // It is the same as this
-type IsStringDistributive =
-    string extends string ? true : false
-  | number extends string ? true : false
+type IsStringDistributive = string extends string
+  ? true
+  : false | number extends string
+  ? true
+  : false;
 ```
 
 이제 풀이가 어떤 방향으로 나아가고 있는지 보이시나요?
@@ -61,14 +63,14 @@ type IsStringDistributive =
 이 타입을 나중에 비교하는 데에 사용할 것입니다.
 
 ```typescript
-type IsUnion<T, C = T> = never
+type IsUnion<T, C = T> = never;
 ```
 
 조건부 타입을 적용하여 분산을 표현할 수 있습니다.
 조건부 타입의 "true" 분기 내에서 유니온의 각 원소를 얻을 수 있습니다.
 
 ```typescript
-type IsUnion<T, C = T> = T extends C ? never : never
+type IsUnion<T, C = T> = T extends C ? never : never;
 ```
 
 이제 가장 중요한 부분입니다. 각 원소를 원래 입력 타입인 `T`와 비교합니다.
@@ -76,7 +78,7 @@ type IsUnion<T, C = T> = T extends C ? never : never
 반대의 경우 분산이 적용된 것이고 유니온의 각 원소는 유니온과 비교됩니다. 그 경우 유니온인 것이므로 `true`를 반환합니다.
 
 ```typescript
-type IsUnion<T, C = T> = T extends C ? [C] extends [T] ? false : true : never
+type IsUnion<T, C = T> = T extends C ? ([C] extends [T] ? false : true) : never;
 ```
 
 끝입니다!
@@ -86,8 +88,7 @@ type IsUnion<T, C = T> = T extends C ? [C] extends [T] ? false : true : never
 그 결과로 `false`를 반환합니다.
 
 ```typescript
-[T] = [string]
-[C] = [string]
+[T] = [string][C] = [string];
 ```
 
 `string | number`와 같은 유니온을 전달할 경우 두 타입은 달라집니다.

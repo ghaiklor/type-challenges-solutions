@@ -23,7 +23,7 @@ type flatten = Flatten<[1, 2, [3, 4], [[[5]]]> // [1, 2, 3, 4, 5]
 그렇지 않을 경우에는 `T` 자신을 반환해줍니다:
 
 ```typescript
-type Flatten<T> = T extends [] ? [] : T
+type Flatten<T> = T extends [] ? [] : T;
 ```
 
 만약 `T`가 빈 배열이 아닐 경우에 `T`는 원소를 가진 배열이거나 원소일 수 있습니다.
@@ -32,7 +32,11 @@ type Flatten<T> = T extends [] ? [] : T
 지금은 추론한 타입을 그대로 반환하는 것으로 작성합니다:
 
 ```typescript
-type Flatten<T> = T extends [] ? [] : T extends [infer H, ...infer T] ? [H, T] : [T]
+type Flatten<T> = T extends []
+  ? []
+  : T extends [infer H, ...infer T]
+  ? [H, T]
+  : [T];
 ```
 
 배열이 아닐 경우도 생각해야 합니다.
@@ -42,7 +46,11 @@ type Flatten<T> = T extends [] ? [] : T extends [infer H, ...infer T] ? [H, T] :
 위 방식으로 타입이 평탄화 될 때까지 수행한 뒤 원소 형태의 최종 타입이 `[T]`를 반환하도록 합니다:
 
 ```typescript
-type Flatten<T> = T extends [] ? [] : T extends [infer H, ...infer T] ? [...Flatten<H>, ...Flatten<T>] : [T]
+type Flatten<T> = T extends []
+  ? []
+  : T extends [infer H, ...infer T]
+  ? [...Flatten<H>, ...Flatten<T>]
+  : [T];
 ```
 
 ## 참고

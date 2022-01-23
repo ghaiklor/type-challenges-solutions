@@ -13,11 +13,11 @@ tags: array
 예시:
 
 ```ts
-type arr1 = ['a', 'b', 'c']
-type arr2 = [3, 2, 1]
+type arr1 = ["a", "b", "c"];
+type arr2 = [3, 2, 1];
 
-type head1 = First<arr1> // expected to be 'a'
-type head2 = First<arr2> // expected to be 3
+type head1 = First<arr1>; // expected to be 'a'
+type head2 = First<arr2>; // expected to be 3
 ```
 
 ## 해답
@@ -25,7 +25,7 @@ type head2 = First<arr2> // expected to be 3
 가장 먼저 떠오르는 것은 인덱스 접근 연산자를 사용해서 `T[0]`과 같이 작성하는 것입니다:
 
 ```ts
-type First<T extends any[]> = T[0]
+type First<T extends any[]> = T[0];
 ```
 
 여기서는 더 신경써서 다뤄야 할 케이스가 남아있습니다.

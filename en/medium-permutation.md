@@ -11,7 +11,7 @@ tags: union
 Implement permutation type that transforms union types into the array that includes permutations of unions.
 
 ```typescript
-type perm = Permutation<'A' | 'B' | 'C'>;
+type perm = Permutation<"A" | "B" | "C">;
 // expected ['A', 'B', 'C'] | ['A', 'C', 'B'] | ['B', 'A', 'C'] | ['B', 'C', 'A'] | ['C', 'A', 'B'] | ['C', 'B', 'A']
 ```
 
@@ -30,7 +30,7 @@ Otherwise, `T` holds a single element and as we know, the permutation of a singl
 Let us model it in conditional types:
 
 ```typescript
-type Permutation<T> = T extends never ? [] : [T]
+type Permutation<T> = T extends never ? [] : [T];
 ```
 
 With the solution above, we even pass one test already, the test that validates a proper permutation over a union with one element in it.
@@ -64,7 +64,11 @@ Knowing about union elements and knowing what we need to exclude from the recurs
 Let us replace the case `[T]` with our algorithm:
 
 ```typescript
-type Permutation<T> = T extends never ? [] : T extends infer U ? [U, ...Permutation<Exclude<T, U>>] : []
+type Permutation<T> = T extends never
+  ? []
+  : T extends infer U
+  ? [U, ...Permutation<Exclude<T, U>>]
+  : [];
 ```
 
 We are close to the solution.
@@ -74,7 +78,11 @@ We get `never` instead of permutations.
 After some digging, I’ve found that we need to wrap our `T` into arrays:
 
 ```typescript
-type Permutation<T> = [T] extends [never] ? [] : T extends infer U ? [U, ...Permutation<Exclude<T, U>>] : []
+type Permutation<T> = [T] extends [never]
+  ? []
+  : T extends infer U
+  ? [U, ...Permutation<Exclude<T, U>>]
+  : [];
 ```
 
 The most counterintuitive thing left and I still not getting what happened there, honestly.
@@ -82,7 +90,11 @@ When working with the construct `T extends infer U`, in our case, it does not wo
 I was utterly shocked, when just copying the type parameter `T` into another one solves the issue:
 
 ```typescript
-type Permutation<T, C = T> = [T] extends [never] ? [] : C extends infer U ? [U, ...Permutation<Exclude<T, U>>] : []
+type Permutation<T, C = T> = [T] extends [never]
+  ? []
+  : C extends infer U
+  ? [U, ...Permutation<Exclude<T, U>>]
+  : [];
 ```
 
 ## References

@@ -12,7 +12,7 @@ tags: array
 Наприклад:
 
 ```typescript
-type Result = Unshift<[1, 2], 0> // [0, 1, 2]
+type Result = Unshift<[1, 2], 0>; // [0, 1, 2]
 ```
 
 ## Розв'язок
@@ -24,21 +24,21 @@ type Result = Unshift<[1, 2], 0> // [0, 1, 2]
 Спочатку, давайте візьмемо всі елементи з вхідного масиву:
 
 ```typescript
-type Unshift<T, U> = [...T]
+type Unshift<T, U> = [...T];
 ```
 
 З цією частиною коду, ми отримуємо помилку компіляції "A rest element type must be an array type".
 Полагодимо її, додавши обмеження на тип параметрі:
 
 ```typescript
-type Unshift<T extends unknown[], U> = [...T]
+type Unshift<T extends unknown[], U> = [...T];
 ```
 
 Тепер у нас є елементи вхідного масиву в нашому кортежі.
 Все, що нам потрібно, це додати новий елемент в початок кортежу:
 
 ```typescript
-type Unshift<T extends unknown[], U> = [U, ...T]
+type Unshift<T extends unknown[], U> = [U, ...T];
 ```
 
 Таким чином, ми реалізували функцію `unshift()` в системі типів TypeScript!

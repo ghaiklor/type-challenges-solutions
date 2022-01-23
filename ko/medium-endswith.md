@@ -11,9 +11,9 @@ tags: template-literal
 문자열 `T`와 `U`를 받아 `T`가 `U`로 끝나는지 반환하는 제네릭 `EndsWith<T, U>`을 구현해 보세요:
 
 ```typescript
-type R0 = EndsWith<'abc', 'bc'> // true
-type R1 = EndsWith<'abc', 'abc'> // true
-type R2 = EndsWith<'abc', 'd'> // false
+type R0 = EndsWith<"abc", "bc">; // true
+type R1 = EndsWith<"abc", "abc">; // true
+type R2 = EndsWith<"abc", "d">; // false
 ```
 
 ## 해답
@@ -28,10 +28,9 @@ type R2 = EndsWith<'abc', 'd'> // false
 이 시점에 문자열의 내용은 신경 쓰지 않기 때문에 `any` 타입을 넣습니다:
 
 ```typescript
-type EndsWith<
-  T extends string,
-  U extends string
-> = T extends `${any}` ? never : never
+type EndsWith<T extends string, U extends string> = T extends `${any}`
+  ? never
+  : never;
 ```
 
 위의 타입은 컴파일러에게 "문자열 리터럴 타입 `T`가 `any` 타입을 확장하고 있는지 검사해줘."라고 물어보는 것과 같습니다.
@@ -43,20 +42,18 @@ type EndsWith<
 다음과 같습니다:
 
 ```typescript
-type EndsWith<
-  T extends string,
-  U extends string
-> = T extends `${any}${U}` ? never : never
+type EndsWith<T extends string, U extends string> = T extends `${any}${U}`
+  ? never
+  : never;
 ```
 
 위의 구조를 통해 문자열이 어떤 문자열이든 확장할 수 있지만 끝부분이 `U`인지를 검사할 수 있습니다.
 결과에 따라 불린 타입을 반환해주면 완성입니다:
 
 ```typescript
-type EndsWith<
-  T extends string,
-  U extends string
-> = T extends `${any}${U}` ? true : false
+type EndsWith<T extends string, U extends string> = T extends `${any}${U}`
+  ? true
+  : false;
 ```
 
 ## 참고

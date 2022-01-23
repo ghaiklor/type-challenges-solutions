@@ -16,17 +16,17 @@ tags: built-in readonly object-keys
 
 ```ts
 interface Todo {
-  title: string
-  description: string
+  title: string;
+  description: string;
 }
 
 const todo: MyReadonly<Todo> = {
   title: "Hey",
-  description: "foobar"
-}
+  description: "foobar",
+};
 
-todo.title = "Hello" // Error: cannot reassign a readonly property
-todo.description = "barFoo" // Error: cannot reassign a readonly property
+todo.title = "Hello"; // Error: cannot reassign a readonly property
+todo.description = "barFoo"; // Error: cannot reassign a readonly property
 ```
 
 ## Розв'язок
@@ -38,7 +38,7 @@ todo.description = "barFoo" // Error: cannot reassign a readonly property
 Ми візьмемо ключ кожної властивості та додамо йому модифікатор `readonly`:
 
 ```ts
-type MyReadonly<T> = { readonly [K in keyof T]: T[K] }
+type MyReadonly<T> = { readonly [K in keyof T]: T[K] };
 ```
 
 ## Посилання

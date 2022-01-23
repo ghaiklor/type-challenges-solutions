@@ -12,7 +12,7 @@ tags: template-literal
 Например:
 
 ```typescript
-type trimmed = Trim<'  Hello World  '> // expected to be 'Hello World'
+type trimmed = Trim<"  Hello World  ">; // expected to be 'Hello World'
 ```
 
 ## Решение
@@ -34,7 +34,11 @@ type Trim<S> = S extends ` ${infer R}` ? Trim<R> : S;
 Когда пробелы слева убраны, проверим, есть ли пробелы по правую сторону строки и сделаем то же.
 
 ```typescript
-type Trim<S> = S extends ` ${infer R}` ? Trim<R> : S extends `${infer L} ` ? Trim<L> : S;
+type Trim<S> = S extends ` ${infer R}`
+  ? Trim<R>
+  : S extends `${infer L} `
+  ? Trim<L>
+  : S;
 ```
 
 Таким образом, убираем пробелы с левой стороны, после, убираем с правой стороны.
@@ -47,8 +51,12 @@ type Trim<S> = S extends ` ${infer R}` ? Trim<R> : S extends `${infer L} ` ? Tri
 Чтобы избежать дублирования, вынесём это в отдельный тип:
 
 ```typescript
-type Whitespace = ' ' | '\n' | '\t';
-type Trim<S> = S extends `${Whitespace}${infer R}` ? Trim<R> : S extends `${infer L}${Whitespace}` ? Trim<L> : S;
+type Whitespace = " " | "\n" | "\t";
+type Trim<S> = S extends `${Whitespace}${infer R}`
+  ? Trim<R>
+  : S extends `${infer L}${Whitespace}`
+  ? Trim<L>
+  : S;
 ```
 
 ## Что почитать

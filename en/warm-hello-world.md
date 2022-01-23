@@ -14,12 +14,12 @@ For this challenge, you will need to change the following code to make the tests
 
 ```ts
 // expected to be string
-type HelloWorld = any
+type HelloWorld = any;
 ```
 
 ```ts
 // you should make this work
-type test = Expect<Equal<HelloWorld, string>>
+type test = Expect<Equal<HelloWorld, string>>;
 ```
 
 ## Solution
@@ -28,7 +28,7 @@ This challenge is a warm-up challenge to get familiar with their playground, how
 All we asked to do here is literally to set the type of `string` instead of `any`:
 
 ```ts
-type HelloWorld = string
+type HelloWorld = string;
 ```
 
 ## References

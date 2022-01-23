@@ -22,7 +22,7 @@ type flatten = Flatten<[1, 2, [3, 4], [[[5]]]> // [1, 2, 3, 4, 5]
 Иначе, вернём сам `T` (пока что):
 
 ```typescript
-type Flatten<T> = T extends [] ? [] : T
+type Flatten<T> = T extends [] ? [] : T;
 ```
 
 Но, что если `T` будет не пустым массивом?
@@ -31,7 +31,11 @@ type Flatten<T> = T extends [] ? [] : T
 После вывода, возвращаем новый массив, с выведенными элементами.
 
 ```typescript
-type Flatten<T> = T extends [] ? [] : T extends [infer H, ...infer T] ? [H, T] : [T]
+type Flatten<T> = T extends []
+  ? []
+  : T extends [infer H, ...infer T]
+  ? [H, T]
+  : [T];
 ```
 
 Кстати, обратите внимание, что в случае, если у нас не пустой массив и не массив с элементами, то ожидаем что это элемент из массива.
@@ -45,7 +49,11 @@ type Flatten<T> = T extends [] ? [] : T extends [infer H, ...infer T] ? [H, T] :
 Благодаря вариативным типам, эти кортежи сливаются в один, который и даёт нам плоский массив.
 
 ```typescript
-type Flatten<T> = T extends [] ? [] : T extends [infer H, ...infer T] ? [...Flatten<H>, ...Flatten<T>] : [T]
+type Flatten<T> = T extends []
+  ? []
+  : T extends [infer H, ...infer T]
+  ? [...Flatten<H>, ...Flatten<T>]
+  : [T];
 ```
 
 ## Что почитать

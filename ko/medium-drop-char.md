@@ -13,7 +13,7 @@ tags: template-literal infer
 예시:
 
 ```typescript
-type Butterfly = DropChar<' b u t t e r f l y ! ', ' '> // 'butterfly!'
+type Butterfly = DropChar<" b u t t e r f l y ! ", " ">; // 'butterfly!'
 ```
 
 ## 해답
@@ -26,9 +26,7 @@ type Butterfly = DropChar<' b u t t e r f l y ! ', ' '> // 'butterfly!'
 두 부분 사이의 구분자가 기대하는 문자가 됩니다.
 
 ```typescript
-type DropChar<S, C> = S extends `${infer L}${C}${infer R}`
-  ? never
-  : never;
+type DropChar<S, C> = S extends `${infer L}${C}${infer R}` ? never : never;
 ```
 
 위와 같이 표기했을 때엔 다음과 같은 컴파일 에러를 얻습니다. “Type ‘C’ is not assignable to type ‘string | number | bigint | boolean | null | undefined’.“.
@@ -40,7 +38,7 @@ type DropChar<S, C extends string> = S extends `${infer L}${C}${infer R}`
   : never;
 ```
 
-모든 부분과 그 사이의 문자 `C`를 얻을 수 있음을  확인했습니다.
+모든 부분과 그 사이의 문자 `C`를 얻을 수 있음을 확인했습니다.
 `C`를 제외하는 것이 목표이기 때문에 `C`를 제외한 왼편과 오른편을 반환합니다.
 
 ```typescript

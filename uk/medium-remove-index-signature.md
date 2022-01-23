@@ -15,9 +15,9 @@ tags: object-keys
 type Foo = {
   [key: string]: any;
   foo(): void;
-}
+};
 
-type A = RemoveIndexSignature<Foo> // expected { foo(): void }
+type A = RemoveIndexSignature<Foo>; // expected { foo(): void }
 ```
 
 ## Розв'язок
@@ -33,7 +33,7 @@ type A = RemoveIndexSignature<Foo> // expected { foo(): void }
 Наприклад, маючи тип "Bar", на якому викличемо `keyof`, ми побачимо наступну картину:
 
 ```typescript
-type Bar = { [key: number]: any; bar(): void; } // number | “bar”
+type Bar = { [key: number]: any; bar(): void }; // number | “bar”
 ```
 
 Виходить, що кожен ключ на об'єкті представлений як рядковий тип літерал.
@@ -65,14 +65,22 @@ type TypeLiteralOnly<T> = string extends T ? never : never;
 Застосуємо цю ж логіку й до другого типу - `number`.
 
 ```typescript
-type TypeLiteralOnly<T> = string extends T ? never : number extends T ? never : never;
+type TypeLiteralOnly<T> = string extends T
+  ? never
+  : number extends T
+  ? never
+  : never;
 ```
 
 Що якщо `T` не `string` і не `number`?
 Це означає що у нас зараз тип літерал, який ми можемо повернути як результат.
 
 ```typescript
-type TypeLiteralOnly<T> = string extends T ? never : number extends T ? never : T;
+type TypeLiteralOnly<T> = string extends T
+  ? never
+  : number extends T
+  ? never
+  : T;
 ```
 
 В нас на руках є обгортка, як повертає нам тільки тип літерал й пропускає загальний тип.
@@ -80,22 +88,26 @@ type TypeLiteralOnly<T> = string extends T ? never : number extends T ? never : 
 Зробимо копію об'єкта, з якою будемо працювати:
 
 ```typescript
-type RemoveIndexSignature<T> = { [P in keyof T]: T[P] }
+type RemoveIndexSignature<T> = { [P in keyof T]: T[P] };
 ```
 
 Під час ітерації по ключах, ми можемо змінити його тип, використовуючи оператор `as`.
 Скористаємося цим й додамо нашу обгортку:
 
 ```typescript
-type RemoveIndexSignature<T> = { [P in keyof T as TypeLiteralOnly<P>]: T[P] }
+type RemoveIndexSignature<T> = { [P in keyof T as TypeLiteralOnly<P>]: T[P] };
 ```
 
 Таким чином, на кожній ітерації, ми викликаємо допоміжний тип `TypeLiteralOnly`.
 Який, в свою чергу, повертає переданий тип, якщо це літерал, і `never`, якщо це індексна сигнатура.
 
 ```typescript
-type TypeLiteralOnly<T> = string extends T ? never : number extends T ? never : T;
-type RemoveIndexSignature<T> = { [P in keyof T as TypeLiteralOnly<P>]: T[P] }
+type TypeLiteralOnly<T> = string extends T
+  ? never
+  : number extends T
+  ? never
+  : T;
+type RemoveIndexSignature<T> = { [P in keyof T as TypeLiteralOnly<P>]: T[P] };
 ```
 
 ## Посилання

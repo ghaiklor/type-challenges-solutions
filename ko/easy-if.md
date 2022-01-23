@@ -14,8 +14,8 @@ tags: utils
 예시:
 
 ```ts
-type A = If<true, 'a', 'b'> // expected to be 'a'
-type B = If<false, 'a', 'b'> // expected to be 'b'
+type A = If<true, "a", "b">; // expected to be 'a'
+type B = If<false, "a", "b">; // expected to be 'b'
 ```
 
 ## 해답

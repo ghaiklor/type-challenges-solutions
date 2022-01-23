@@ -13,13 +13,13 @@ tags: readonly object-keys
 
 ```typescript
 interface Todo {
-  readonly title: string
-  readonly description: string
-  readonly completed: boolean
+  readonly title: string;
+  readonly description: string;
+  readonly completed: boolean;
 }
 
 // { title: string; description: string; completed: boolean; }
-type MutableTodo = Mutable<T>
+type MutableTodo = Mutable<T>;
 ```
 
 ## Решение
@@ -36,7 +36,7 @@ type MutableTodo = Mutable<T>
 Скопируем входной тип без каких-либо изменений:
 
 ```typescript
-type Mutable<T> = { [P in keyof T]: T[P] }
+type Mutable<T> = { [P in keyof T]: T[P] };
 ```
 
 Теперь у нас есть копия `T` с модификаторами `readonly`.
@@ -44,7 +44,7 @@ type Mutable<T> = { [P in keyof T]: T[P] }
 Помните, что мы использовали ключевое слово `readonly`, чтобы добавлять их к свойствам?
 
 ```typescript
-type Mutable<T> = { readonly [P in keyof T]: T[P] }
+type Mutable<T> = { readonly [P in keyof T]: T[P] };
 ```
 
 Неявно, TypeScript добавляет к этим ключевым словам `+`.
@@ -52,7 +52,7 @@ type Mutable<T> = { readonly [P in keyof T]: T[P] }
 Но, в нашем случае, мы хотим его отменить, поэтому используем `-`:
 
 ```typescript
-type Mutable<T> = { -readonly [P in keyof T]: T[P] }
+type Mutable<T> = { -readonly [P in keyof T]: T[P] };
 ```
 
 Таким образом, мы реализовали тип, который отменяет модификатор `readonly` на входном типе.

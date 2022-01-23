@@ -18,21 +18,21 @@ We should about to access the final result via `get()`.
 For example:
 
 ```ts
-declare const config: Chainable
+declare const config: Chainable;
 
 const result = config
-  .option('foo', 123)
-  .option('name', 'type-challenges')
-  .option('bar', { value: 'Hello World' })
-  .get()
+  .option("foo", 123)
+  .option("name", "type-challenges")
+  .option("bar", { value: "Hello World" })
+  .get();
 
 // expect the type of result to be:
 interface Result {
-  foo: number
-  name: string
+  foo: number;
+  name: string;
   bar: {
-    value: string
-  }
+    value: string;
+  };
 }
 ```
 
@@ -55,9 +55,9 @@ Let us start with the interface author provides to us:
 
 ```ts
 type Chainable = {
-  option(key: string, value: any): any
-  get(): any
-}
+  option(key: string, value: any): any;
+  get(): any;
+};
 ```
 
 Before we can start accumulating the type information, it would be great to get it first.
@@ -65,9 +65,9 @@ So we replace `string` in `key` and `any` in `value` parameters with type parame
 
 ```ts
 type Chainable = {
-  option<K, V>(key: K, value: V): any
-  get(): any
-}
+  option<K, V>(key: K, value: V): any;
+  get(): any;
+};
 ```
 
 Good!
@@ -83,9 +83,9 @@ Let us add a new type parameter `O` to the `Chainable` type and do not forget th
 
 ```ts
 type Chainable<O = {}> = {
-  option<K, V>(key: K, value: V): any
-  get(): any
-}
+  option<K, V>(key: K, value: V): any;
+  get(): any;
+};
 ```
 
 The most interesting part now, pay attention!
@@ -94,9 +94,9 @@ Let us use [intersection types](https://www.typescriptlang.org/docs/handbook/2/o
 
 ```ts
 type Chainable<O = {}> = {
-  option<K, V>(key: K, value: V): Chainable<O & { [P in K]: V }>
-  get(): any
-}
+  option<K, V>(key: K, value: V): Chainable<O & { [P in K]: V }>;
+  get(): any;
+};
 ```
 
 Small things left.
@@ -105,9 +105,9 @@ That’s because we don’t have a constraint over type parameter `K` that says 
 
 ```ts
 type Chainable<O = {}> = {
-  option<K extends string, V>(key: K, value: V): Chainable<O & { [P in K]: V }>
-  get(): any
-}
+  option<K extends string, V>(key: K, value: V): Chainable<O & { [P in K]: V }>;
+  get(): any;
+};
 ```
 
 Everything is ready to rock!
@@ -115,9 +115,9 @@ Now, when the developer will call the `get()` method, it must return the type pa
 
 ```ts
 type Chainable<O = {}> = {
-  option<K extends string, V>(key: K, value: V): Chainable<O & { [P in K]: V }>
-  get(): O
-}
+  option<K extends string, V>(key: K, value: V): Chainable<O & { [P in K]: V }>;
+  get(): O;
+};
 ```
 
 ## References

@@ -13,10 +13,10 @@ tags: tuple
 예시:
 
 ```ts
-const tuple = ['tesla', 'model 3', 'model X', 'model Y'] as const
+const tuple = ["tesla", "model 3", "model X", "model Y"] as const;
 
 // expected { tesla: 'tesla', 'model 3': 'model 3', 'model X': 'model X', 'model Y': 'model Y'}
-const result: TupleToObject<typeof tuple>
+const result: TupleToObject<typeof tuple>;
 ```
 
 ## 해답
@@ -27,7 +27,7 @@ const result: TupleToObject<typeof tuple>
 mapped type을 사용하면, `T[number]`로 얻은 값들을 순회하며 기존의 원소를 키와 값으로 하는 새로운 타입을 만들 수 있습니다:
 
 ```ts
-type TupleToObject<T extends readonly any[]> = { [K in T[number]]: K }
+type TupleToObject<T extends readonly any[]> = { [K in T[number]]: K };
 ```
 
 ## 참고

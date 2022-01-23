@@ -14,17 +14,17 @@ tags: built-in readonly object-keys
 
 ```typescript
 interface Todo {
-  title: string
-  description: string
+  title: string;
+  description: string;
 }
 
 const todo: MyReadonly<Todo> = {
   title: "Hey",
-  description: "foobar"
-}
+  description: "foobar",
+};
 
-todo.title = "Hello" // Error: cannot reassign a readonly property
-todo.description = "barFoo" // Error: cannot reassign a readonly property
+todo.title = "Hello"; // Error: cannot reassign a readonly property
+todo.description = "barFoo"; // Error: cannot reassign a readonly property
 ```
 
 ## Решение
@@ -36,7 +36,7 @@ todo.description = "barFoo" // Error: cannot reassign a readonly property
 Для каждого ключа из объекта, добавляем модификатор `readonly`, а значение берём без изменений из `T`.
 
 ```typescript
-type MyReadonly<T> = { readonly [K in keyof T]: T[K] }
+type MyReadonly<T> = { readonly [K in keyof T]: T[K] };
 ```
 
 ## Что почитать

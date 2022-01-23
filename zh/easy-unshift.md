@@ -13,7 +13,7 @@ tags: array
 例如：
 
 ```typescript
-type Result = Unshift<[1, 2], 0> // [0, 1, 2]
+type Result = Unshift<[1, 2], 0>; // [0, 1, 2]
 ```
 
 ## 解法
@@ -25,14 +25,14 @@ type Result = Unshift<[1, 2], 0> // [0, 1, 2]
 首先，让我们从传入的数组中获取所有元素:
 
 ```typescript
-type Unshift<T, U> = [...T]
+type Unshift<T, U> = [...T];
 ```
 
 在这段代码中，我们得到了编译错误“A rest element type must be an array type”。
 让我们通过在类型参数上添加一个约束来修正这个错误:
 
 ```typescript
-type Unshift<T extends unknown[], U> = [...T]
+type Unshift<T extends unknown[], U> = [...T];
 ```
 
 现在，我们有了与传入的数组相同的数组。
@@ -40,7 +40,7 @@ type Unshift<T extends unknown[], U> = [...T]
 让我们这样做:
 
 ```typescript
-type Unshift<T extends unknown[], U> = [U, ...T]
+type Unshift<T extends unknown[], U> = [U, ...T];
 ```
 
 这样，我们在类型系统中创建了一个“unshift”函数!

@@ -15,20 +15,20 @@ tags: readonly object-keys
 
 ```typescript
 interface Todo {
-  title: string
-  description: string
-  completed: boolean
+  title: string;
+  description: string;
+  completed: boolean;
 }
 
-const todo: MyReadonly2<Todo, 'title' | 'description'> = {
+const todo: MyReadonly2<Todo, "title" | "description"> = {
   title: "Hey",
   description: "foobar",
   completed: false,
-}
+};
 
-todo.title = "Hello" // Error: cannot reassign a readonly property
-todo.description = "barFoo" // Error: cannot reassign a readonly property
-todo.completed = true // OK
+todo.title = "Hello"; // Error: cannot reassign a readonly property
+todo.description = "barFoo"; // Error: cannot reassign a readonly property
+todo.completed = true; // OK
 ```
 
 ## Решение
@@ -66,7 +66,9 @@ type MyReadonly2<T, K extends keyof T> = T & { readonly [P in K]: T[P] };
 Добавим к `K` тип параметр по умолчанию "все ключи из `T`".
 
 ```typescript
-type MyReadonly2<T, K extends keyof T = keyof T> = T & { readonly [P in K]: T[P] };
+type MyReadonly2<T, K extends keyof T = keyof T> = T & {
+  readonly [P in K]: T[P];
+};
 ```
 
 ## Что почитать

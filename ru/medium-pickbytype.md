@@ -12,12 +12,15 @@ tags: object
 Например:
 
 ```typescript
-type OnlyBoolean = PickByType<{
-  name: string
-  count: number
-  isReadonly: boolean
-  isEnable: boolean
-}, boolean> // { isReadonly: boolean; isEnable: boolean; }
+type OnlyBoolean = PickByType<
+  {
+    name: string;
+    count: number;
+    isReadonly: boolean;
+    isEnable: boolean;
+  },
+  boolean
+>; // { isReadonly: boolean; isEnable: boolean; }
 ```
 
 ## Решение
@@ -29,7 +32,7 @@ type OnlyBoolean = PickByType<{
 Так что давайте начнём с того, что сделаем просто копию входящего объекта:
 
 ```typescript
-type PickByType<T, U> = { [P in keyof T]: T[P] }
+type PickByType<T, U> = { [P in keyof T]: T[P] };
 ```
 
 Сначала, мы получили все ключи из `T` и применили к ним итерацию.
@@ -41,7 +44,9 @@ type PickByType<T, U> = { [P in keyof T]: T[P] }
 Мы можем переопределить ключ на каждой итерации и оставить только интересующие нас:
 
 ```typescript
-type PickByType<T, U> = { [P in keyof T as T[P] extends U ? never : never]: T[P] }
+type PickByType<T, U> = {
+  [P in keyof T as T[P] extends U ? never : never]: T[P];
+};
 ```
 
 Обратите внимание на ключевое слово `as`.
@@ -53,7 +58,7 @@ type PickByType<T, U> = { [P in keyof T as T[P] extends U ? never : never]: T[P]
 Но, если тип оказывается не присваиваемый, то в таком случае мы должны его игнорировать - возвращаем `never`:
 
 ```typescript
-type PickByType<T, U> = { [P in keyof T as T[P] extends U ? P : never]: T[P] }
+type PickByType<T, U> = { [P in keyof T as T[P] extends U ? P : never]: T[P] };
 ```
 
 Таким образом, мы реализовали тип, который может фильтровать ключи объектов по их типам.

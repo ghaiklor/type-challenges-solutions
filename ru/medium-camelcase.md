@@ -12,7 +12,7 @@ tags: template-literal
 Например:
 
 ```typescript
-type camelCased = CamelCase<'foo-bar-baz'> // expected "fooBarBaz"
+type camelCased = CamelCase<"foo-bar-baz">; // expected "fooBarBaz"
 ```
 
 ## Решение
@@ -22,9 +22,7 @@ type camelCased = CamelCase<'foo-bar-baz'> // expected "fooBarBaz"
 Давайте выведем эти части.
 
 ```typescript
-type CamelCase<S> = S extends `${infer H}-${infer T}`
-  ? never
-  : never;
+type CamelCase<S> = S extends `${infer H}-${infer T}` ? never : never;
 ```
 
 Что если нету такого шаблона "голова-дефис-хвост"?
@@ -32,9 +30,7 @@ type CamelCase<S> = S extends `${infer H}-${infer T}`
 Дефисов нету, а значит и строку к CamelCase формату приводить не нужно.
 
 ```typescript
-type CamelCase<S> = S extends `${infer H}-${infer T}`
-  ? never
-  : S;
+type CamelCase<S> = S extends `${infer H}-${infer T}` ? never : S;
 ```
 
 Но, если такой шаблон в строке присутствует, то выведение сработает и мы получим две части строки без дефиса.
@@ -53,7 +49,9 @@ type CamelCase<S> = S extends `${infer H}-${infer T}`
 
 ```typescript
 type CamelCase<S> = S extends `${infer H}-${infer T}`
-  ? T extends Capitalize<T> ? never : `${H}${CamelCase<Capitalize<T>>}`
+  ? T extends Capitalize<T>
+    ? never
+    : `${H}${CamelCase<Capitalize<T>>}`
   : S;
 ```
 
@@ -62,7 +60,9 @@ type CamelCase<S> = S extends `${infer H}-${infer T}`
 
 ```typescript
 type CamelCase<S> = S extends `${infer H}-${infer T}`
-  ? T extends Capitalize<T> ? `${H}-${CamelCase<T>}` : `${H}${CamelCase<Capitalize<T>>}`
+  ? T extends Capitalize<T>
+    ? `${H}-${CamelCase<T>}`
+    : `${H}${CamelCase<Capitalize<T>>}`
   : S;
 ```
 

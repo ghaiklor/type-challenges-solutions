@@ -15,7 +15,7 @@ The output should be a new array that includes inputs in ltr order.
 For example:
 
 ```ts
-type Result = Concat<[1], [2]> // expected to be [1, 2]
+type Result = Concat<[1], [2]>; // expected to be [1, 2]
 ```
 
 ## Solution
@@ -40,14 +40,14 @@ Variadic Tuple Types allows us to model the same behavior in the type system.
 If we want to concatenate two generic arrays, we can return the new array where both arrays are behind the spread operator:
 
 ```ts
-type Concat<T, U> = [...T, ...U]
+type Concat<T, U> = [...T, ...U];
 ```
 
 We are getting the error “A rest element type must be an array type.”, though.
 Let us fix that by letting compiler know those types are arrays:
 
 ```ts
-type Concat<T extends unknown[], U extends unknown[]> = [...T, ...U]
+type Concat<T extends unknown[], U extends unknown[]> = [...T, ...U];
 ```
 
 ## References

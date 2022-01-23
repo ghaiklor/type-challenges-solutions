@@ -13,7 +13,7 @@ Implement `Trim<T>` which takes an exact string type and returns a new string wi
 For example:
 
 ```ts
-type trimmed = Trim<'  Hello World  '> // expected to be 'Hello World'
+type trimmed = Trim<"  Hello World  ">; // expected to be 'Hello World'
 ```
 
 ## Solution
@@ -34,7 +34,11 @@ type Trim<S> = S extends ` ${infer R}` ? Trim<R> : S;
 Once there are no white spaces on the left, we need to check if there are some on the right of the string and do the same:
 
 ```ts
-type Trim<S> = S extends ` ${infer R}` ? Trim<R> : S extends `${infer L} ` ? Trim<L> : S;
+type Trim<S> = S extends ` ${infer R}`
+  ? Trim<R>
+  : S extends `${infer L} `
+  ? Trim<L>
+  : S;
 ```
 
 That way, we split the white spaces on the left, then split on the right.
@@ -46,8 +50,12 @@ That is because we do not handle the newlines and tabs.
 I don’t want to duplicate the union type, so I made a separate type and replaced white space with its type union:
 
 ```ts
-type Whitespace = ' ' | '\n' | '\t';
-type Trim<S> = S extends `${Whitespace}${infer R}` ? Trim<R> : S extends `${infer L}${Whitespace}` ? Trim<L> : S;
+type Whitespace = " " | "\n" | "\t";
+type Trim<S> = S extends `${Whitespace}${infer R}`
+  ? Trim<R>
+  : S extends `${infer L}${Whitespace}`
+  ? Trim<L>
+  : S;
 ```
 
 ## References

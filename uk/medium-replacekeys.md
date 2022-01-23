@@ -15,30 +15,34 @@ tags: object-keys
 
 ```typescript
 type NodeA = {
-  type: 'A'
-  name: string
-  flag: number
-}
+  type: "A";
+  name: string;
+  flag: number;
+};
 
 type NodeB = {
-  type: 'B'
-  id: number
-  flag: number
-}
+  type: "B";
+  id: number;
+  flag: number;
+};
 
 type NodeC = {
-  type: 'C'
-  name: string
-  flag: number
-}
+  type: "C";
+  name: string;
+  flag: number;
+};
 
-type Nodes = NodeA | NodeB | NodeC
+type Nodes = NodeA | NodeB | NodeC;
 
 // would replace name from string to number, replace flag from number to string
-type ReplacedNodes = ReplaceKeys<Nodes, 'name' | 'flag', { name: number, flag: string }>
+type ReplacedNodes = ReplaceKeys<
+  Nodes,
+  "name" | "flag",
+  { name: number; flag: string }
+>;
 
 // would replace name to never
-type ReplacedNotExistKeys = ReplaceKeys<Nodes, 'name', { aa: number }>
+type ReplacedNotExistKeys = ReplaceKeys<Nodes, "name", { aa: number }>;
 ```
 
 ## Розв'язок
@@ -65,7 +69,7 @@ type ReplacedNotExistKeys = ReplaceKeys<Nodes, 'name', { aa: number }>
 Візьмемо кожен елемент із `U` (дякую дистрибутивності) і на кожному елементі візьмемо список ключів, разом з його типами значень.
 
 ```typescript
-type ReplaceKeys<U, T, Y> = { [P in keyof U]: U[P] }
+type ReplaceKeys<U, T, Y> = { [P in keyof U]: U[P] };
 ```
 
 Таким чином, ми скопіювали один в один все, що прийшло через параметр `U`.
@@ -75,8 +79,8 @@ type ReplaceKeys<U, T, Y> = { [P in keyof U]: U[P] }
 
 ```typescript
 type ReplaceKeys<U, T, Y> = {
-  [P in keyof U]: P extends T ? never : never
-}
+  [P in keyof U]: P extends T ? never : never;
+};
 ```
 
 Якщо це так, то це означає що розробник попросив нас змінити вказаний ключ.
@@ -86,8 +90,8 @@ type ReplaceKeys<U, T, Y> = {
 
 ```typescript
 type ReplaceKeys<U, T, Y> = {
-  [P in keyof U]: P extends T ? P extends keyof Y ? never : never : never
-}
+  [P in keyof U]: P extends T ? (P extends keyof Y ? never : never) : never;
+};
 ```
 
 І тільки в ситуації, коли обидві умови правдиві, ми можемо бути впевненими в необхідності заміни.
@@ -95,8 +99,8 @@ type ReplaceKeys<U, T, Y> = {
 
 ```typescript
 type ReplaceKeys<U, T, Y> = {
-  [P in keyof U]: P extends T ? P extends keyof Y ? Y[P] : never : never
-}
+  [P in keyof U]: P extends T ? (P extends keyof Y ? Y[P] : never) : never;
+};
 ```
 
 Проте, якщо виявиться, що такого ключа немає у `Y`, але він є в `T`, нам потрібно повернути `never` (відповідно до завдання).
@@ -105,8 +109,8 @@ type ReplaceKeys<U, T, Y> = {
 
 ```typescript
 type ReplaceKeys<U, T, Y> = {
-  [P in keyof U]: P extends T ? P extends keyof Y ? Y[P] : never : U[P]
-}
+  [P in keyof U]: P extends T ? (P extends keyof Y ? Y[P] : never) : U[P];
+};
 ```
 
 Маючи дистрибутивні типи зіставлення, ми змогли реалізувати дуже зрозуміле рішення.

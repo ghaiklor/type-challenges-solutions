@@ -44,14 +44,22 @@ type Merge<F, S> = { [P in keyof F | keyof S]: never };
 Если да, через индексы поиска получаем тип его значения.
 
 ```typescript
-type Merge<F, S> = { [P in keyof F | keyof S]: P extends keyof S ? S[P] : never };
+type Merge<F, S> = {
+  [P in keyof F | keyof S]: P extends keyof S ? S[P] : never;
+};
 ```
 
 В случае, свойства нету, проверяем есть ли такое же свойство на типе `F`.
 И если да, берём тип значения оттуда.
 
 ```typescript
-type Merge<F, S> = { [P in keyof F | keyof S]: P extends keyof S ? S[P] : P extends keyof F ? F[P] : never };
+type Merge<F, S> = {
+  [P in keyof F | keyof S]: P extends keyof S
+    ? S[P]
+    : P extends keyof F
+    ? F[P]
+    : never;
+};
 ```
 
 ## Что почитать

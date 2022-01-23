@@ -12,9 +12,9 @@ tags: template-literal
 Например:
 
 ```typescript
-type R0 = EndsWith<'abc', 'bc'> // true
-type R1 = EndsWith<'abc', 'abc'> // true
-type R2 = EndsWith<'abc', 'd'> // false
+type R0 = EndsWith<"abc", "bc">; // true
+type R1 = EndsWith<"abc", "abc">; // true
+type R2 = EndsWith<"abc", "d">; // false
 ```
 
 ## Решение
@@ -30,10 +30,9 @@ type R2 = EndsWith<'abc', 'd'> // false
 Так как нам содержимое, пока что, не интересно, используем тип `any`:
 
 ```typescript
-type EndsWith<
-  T extends string,
-  U extends string
-> = T extends `${any}` ? never : never
+type EndsWith<T extends string, U extends string> = T extends `${any}`
+  ? never
+  : never;
 ```
 
 С помощью этого выражения мы говорим компилятору проверить, присваиваемый ли тип `T` к `any`.
@@ -44,20 +43,18 @@ type EndsWith<
 Давайте так и сделаем:
 
 ```typescript
-type EndsWith<
-  T extends string,
-  U extends string
-> = T extends `${any}${U}` ? never : never
+type EndsWith<T extends string, U extends string> = T extends `${any}${U}`
+  ? never
+  : never;
 ```
 
 Используя такую конструкцию, мы проверяем, что строка присваиваемая ко всему, но что должно заканчиваться на `U` - просто.
 Всё что остается это вернуть `true` или `false` литералы в зависимости от результата:
 
 ```typescript
-type EndsWith<
-  T extends string,
-  U extends string
-> = T extends `${any}${U}` ? true : false
+type EndsWith<T extends string, U extends string> = T extends `${any}${U}`
+  ? true
+  : false;
 ```
 
 ## Что почитать

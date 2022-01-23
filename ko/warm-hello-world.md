@@ -14,12 +14,12 @@ Type Challenges에서는 타입을 표명하기 위해 타입시스템을 사용
 
 ```ts
 // expected to be string
-type HelloWorld = any
+type HelloWorld = any;
 ```
 
 ```ts
 // you should make this work
-type test = Expect<Equal<HelloWorld, string>>
+type test = Expect<Equal<HelloWorld, string>>;
 ```
 
 ## 해답
@@ -28,7 +28,7 @@ type test = Expect<Equal<HelloWorld, string>>
 우리는 단순히 `any` 대신에 `string`으로 타입을 바꿔주기만 하면 됩니다.
 
 ```ts
-type HelloWorld = string
+type HelloWorld = string;
 ```
 
 ## 참고

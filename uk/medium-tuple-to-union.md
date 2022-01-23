@@ -12,8 +12,8 @@ tags: infer tuple union
 Наприклад:
 
 ```typescript
-type Arr = ['1', '2', '3']
-const a: TupleToUnion<Arr> // expected to be '1' | '2' | '3'
+type Arr = ["1", "2", "3"];
+const a: TupleToUnion<Arr>; // expected to be '1' | '2' | '3'
 ```
 
 ## Розв'язок
@@ -24,7 +24,7 @@ const a: TupleToUnion<Arr> // expected to be '1' | '2' | '3'
 Використовуючи конструкцію `T[number]` ми отримаємо об'єднання всіх елементів масиву `T`:
 
 ```typescript
-type TupleToUnion<T> = T[number]
+type TupleToUnion<T> = T[number];
 ```
 
 Але, цей розв'язок не компілюється через “Type ‘number’ cannot be used to index type ‘T’“.
@@ -32,7 +32,7 @@ type TupleToUnion<T> = T[number]
 Виправимо це, додавши обмеження:
 
 ```typescript
-type TupleToUnion<T extends unknown[]> = T[number]
+type TupleToUnion<T extends unknown[]> = T[number];
 ```
 
 ## Посилання

@@ -12,9 +12,9 @@ tags: union
 Наприклад:
 
 ```typescript
-type case1 = IsUnion<string> // false
-type case2 = IsUnion<string | number> // true
-type case3 = IsUnion<[string | number]> // false
+type case1 = IsUnion<string>; // false
+type case2 = IsUnion<string | number>; // true
+type case3 = IsUnion<[string | number]>; // false
 ```
 
 ## Розв'язок
@@ -41,13 +41,15 @@ type case3 = IsUnion<[string | number]> // false
 Грубо кажучи, це буде виглядати так.
 
 ```typescript
-type IsString<T> = T extends string ? true : false
+type IsString<T> = T extends string ? true : false;
 
 // Наприклад, передаємо параметр T = string | number
 // Дистрибутивне застосування умовного типу буде виглядати якось так
-type IsStringDistributive =
-    string extends string ? true : false
-  | number extends string ? true : false
+type IsStringDistributive = string extends string
+  ? true
+  : false | number extends string
+  ? true
+  : false;
 ```
 
 Бачите до чого я веду?
@@ -60,14 +62,14 @@ type IsStringDistributive =
 Спочатку, зробимо копію вхідного параметра `T`, щоб порівняти з початковим об'єднанням без змін.
 
 ```typescript
-type IsUnion<T, C = T> = never
+type IsUnion<T, C = T> = never;
 ```
 
 Застосовуючи умовні типи, отримуємо дистрибутивну семантику.
 Всередині правдивої гілки умовного типу, отримаємо кожен елемент з об'єднання окремо.
 
 ```typescript
-type IsUnion<T, C = T> = T extends C ? never : never
+type IsUnion<T, C = T> = T extends C ? never : never;
 ```
 
 Тепер, важлива частина — порівняти елемент з об'єднання з початковим вхідним тип-параметром `T`.
@@ -75,7 +77,7 @@ type IsUnion<T, C = T> = T extends C ? never : never
 Інакше, дистрибутивні умовні типи зробили свою справу й ми порівнюємо один елемент з об'єднання з початковим об'єднанням — тобто це об'єднання.
 
 ```typescript
-type IsUnion<T, C = T> = T extends C ? [C] extends [T] ? false : true : never
+type IsUnion<T, C = T> = T extends C ? ([C] extends [T] ? false : true) : never;
 ```
 
 Готово!
@@ -84,8 +86,7 @@ type IsUnion<T, C = T> = T extends C ? [C] extends [T] ? false : true : never
 Відповідно, це не об'єднання — повертаємо `false`.
 
 ```typescript
-[T] = [string]
-[C] = [string]
+[T] = [string][C] = [string];
 ```
 
 Але, якщо передамо об'єднання, наприклад `string | number`, вони містять різні типи.

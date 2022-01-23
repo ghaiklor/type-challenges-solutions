@@ -3,7 +3,7 @@ title: Розв'язки Type Challenges
 description: >-
   Проект має на меті допомогти вам краще зрозуміти, як працює система типів, як
   писати свої типи, або просто гарно провести вечір за задачками.
-keywords: 'type, challenges, розв''язок, typescript, javascript'
+keywords: "type, challenges, розв'язок, typescript, javascript"
 lang: uk
 comments: false
 ---

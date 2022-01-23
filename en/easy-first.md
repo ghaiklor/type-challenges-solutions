@@ -13,11 +13,11 @@ Implement a generic `First<T>` that takes an Array `T` and returns it's first el
 For example:
 
 ```ts
-type arr1 = ['a', 'b', 'c']
-type arr2 = [3, 2, 1]
+type arr1 = ["a", "b", "c"];
+type arr2 = [3, 2, 1];
 
-type head1 = First<arr1> // expected to be 'a'
-type head2 = First<arr2> // expected to be 3
+type head1 = First<arr1>; // expected to be 'a'
+type head2 = First<arr2>; // expected to be 3
 ```
 
 ## Solution
@@ -25,7 +25,7 @@ type head2 = First<arr2> // expected to be 3
 The first thing that could come up is to use lookup types and just write `T[0]`:
 
 ```ts
-type First<T extends any[]> = T[0]
+type First<T extends any[]> = T[0];
 ```
 
 But there is an edge case that we need to handle.

@@ -34,12 +34,10 @@ I don’t like it, take a look:
 
 ```typescript
 type AnyOf<T extends readonly any[], I = T[number]> = (
-  I extends any ?
-  I extends Falsy ?
-  false :
-  true :
-  never
-) extends false ? false : true;
+  I extends any ? (I extends Falsy ? false : true) : never
+) extends false
+  ? false
+  : true;
 ```
 
 So I’ve started thinking, can we make it more maintainable?
@@ -60,7 +58,7 @@ First, we can construct a type that represents false-y types.
 Let’s call it `Falsy`:
 
 ```typescript
-type Falsy = 0 | '' | false | [] | { [P in any]: never }
+type Falsy = 0 | "" | false | [] | { [P in any]: never };
 ```
 
 Having a type that represents false-y values, we can just use a conditional type to check if the `H` extends from the type:
@@ -68,8 +66,8 @@ Having a type that represents false-y values, we can just use a conditional type
 ```typescript
 type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T]
   ? H extends Falsy
-  ? never
-  : never
+    ? never
+    : never
   : never;
 ```
 
@@ -80,8 +78,8 @@ So we can continue recursively:
 ```typescript
 type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T]
   ? H extends Falsy
-  ? AnyOf<T>
-  : never
+    ? AnyOf<T>
+    : never
   : never;
 ```
 
@@ -92,8 +90,8 @@ So we just exit from recursion by returning `true` type literal:
 ```typescript
 type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T]
   ? H extends Falsy
-  ? AnyOf<T>
-  : true
+    ? AnyOf<T>
+    : true
   : never;
 ```
 
@@ -104,8 +102,8 @@ We can return `false` in such case:
 ```typescript
 type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T]
   ? H extends Falsy
-  ? AnyOf<T>
-  : true
+    ? AnyOf<T>
+    : true
   : false;
 ```
 
@@ -113,12 +111,12 @@ That’s how we made an implementation of `AnyOf` function in the type system.
 For the reference here is the whole implementation:
 
 ```typescript
-type Falsy = 0 | '' | false | [] | { [P in any]: never }
+type Falsy = 0 | "" | false | [] | { [P in any]: never };
 
 type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T]
   ? H extends Falsy
-  ? AnyOf<T>
-  : true
+    ? AnyOf<T>
+    : true
   : false;
 ```
 
