@@ -2,7 +2,7 @@
 
 ![Makefile](https://github.com/ghaiklor/type-challenges-solutions/actions/workflows/make.yml/badge.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/ghaiklor/type-challenges-solutions)
-![Maintenance](https://img.shields.io/maintenance/yes/2021)
+![Maintenance](https://img.shields.io/maintenance/yes/2022)
 
 [![GitHub followers](https://img.shields.io/github/followers/ghaiklor?label=Follow&style=social)](https://github.com/ghaiklor)
 [![Twitter Follow](https://img.shields.io/twitter/follow/ghaiklor?label=Follow&style=social)](https://twitter.com/ghaiklor)
