@@ -1,7 +1,7 @@
 ---
 id: 459
 title: Flatten
-lang: en
+lang: zh
 level: medium
 tags: array
 ---
