@@ -12,7 +12,7 @@ tags: promise
 我们如何获得包装类型的内部类型?
 例如，如果我们有`Promise<ExampleType>`如何得到`ExampleType` ?
 
-## 解法
+## 解答
 
 这是一个非常有趣的挑战，它要求我们了解 TypeScript 的一个被低估的特性，恕我直言。
 
@@ -45,7 +45,7 @@ type Awaited<T> = T extends Promise<string> ? string : T;
 你可以对编译器说"嘿，一旦你知道了类型是什么，请把它赋给我的类型参数"。
 你可以在这里阅读更多关于[条件类型中的类型推断](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html#type-inference-in-conditional-types)。
 
-了解了类型推断之后，我们可以更新我们的解法。
+了解了类型推断之后，我们可以更新我们的解答。
 我们没有在条件类型中检查`Promise<string>`，而是将`string`替换为`infer R`，因为我们不知道那里必须有什么。
 我们只知道它是`Promise<T>`，其内部包含某种类型。
 

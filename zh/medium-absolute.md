@@ -17,7 +17,7 @@ type Test = -100;
 type Result = Absolute<Test>; // expected to be "100"
 ```
 
-## 解法
+## 解答
 
 获得一个数字的绝对值最简单的方法是将其转换为字符串并去掉“-”号。我不是在开玩笑，只是去掉“-”号。
 

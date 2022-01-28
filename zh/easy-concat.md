@@ -16,7 +16,7 @@ tags: array
 type Result = Concat<[1], [2]>; // expected to be [1, 2]
 ```
 
-## 解法
+## 解答
 
 在 TypeScript 中处理数组时，变参元组类型通常会在某些情况下发挥作用。他们允许我们进行泛型展开。稍后我会试着说明。
 

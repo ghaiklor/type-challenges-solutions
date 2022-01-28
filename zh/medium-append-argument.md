@@ -19,7 +19,7 @@ type Fn = (a: number, b: string) => number;
 type Result = AppendArgument<Fn, boolean>;
 ```
 
-## 解法
+## 解答
 
 这是一个有趣的挑战, 其中包含了类型推断，可变元组类型，条件类型以及其他很多有趣的东西。
 

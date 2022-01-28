@@ -20,7 +20,7 @@ type head1 = First<arr1>; // expected to be 'a'
 type head2 = First<arr2>; // expected to be 3
 ```
 
-## 解法
+## 解答
 
 首先我们想到的就是使用查询类型，然后写出`T[0]`：
 
