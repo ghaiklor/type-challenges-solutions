@@ -26,7 +26,7 @@ type teslaLength = Length<tesla>; // expected 4
 type spaceXLength = Length<spaceX>; // expected 5
 ```
 
-## 解法
+## 解答
 
 我们知道在 JavaScript 中可以使用属性`length`来访问数组的长度。
 我们也可以在类型上做同样的事情:

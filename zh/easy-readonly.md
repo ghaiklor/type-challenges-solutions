@@ -29,7 +29,7 @@ todo.title = "Hello"; // Error: cannot reassign a readonly property
 todo.description = "barFoo"; // Error: cannot reassign a readonly property
 ```
 
-## 解法
+## 解答
 
 我们需要使对象中的所有属性都是只读的。
 因此，我们需要迭代所有的属性，并为它们添加一个修饰符。

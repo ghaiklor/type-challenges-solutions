@@ -17,7 +17,7 @@ tags: array
 type isPillarMen = Includes<["Kars", "Esidisi", "Wamuu", "Santana"], "Dio">;
 ```
 
-## 解法
+## 解答
 
 我们首先编写接受两个参数的类型:`T`(元组)和`U`(我们正在寻找的)。
 

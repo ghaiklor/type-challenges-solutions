@@ -19,7 +19,7 @@ const tuple = ["tesla", "model 3", "model X", "model Y"] as const;
 const result: TupleToObject<typeof tuple>;
 ```
 
-## 解法
+## 解答
 
 我们需要从数组中获取所有的值，并将其作为新对象中的键和值。
 

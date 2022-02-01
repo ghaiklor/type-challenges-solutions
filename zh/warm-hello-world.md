@@ -22,7 +22,7 @@ type HelloWorld = any;
 type test = Expect<Equal<HelloWorld, string>>;
 ```
 
-## 解法
+## 解答
 
 这是一个热身挑战，让你熟悉他们的练习场，如何接受挑战等等。
 我们在这里需要做的只是将类型设置为' string '替代原来的' any ':

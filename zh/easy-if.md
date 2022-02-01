@@ -17,7 +17,7 @@ type A = If<true, "a", "b">; // expected to be 'a'
 type B = If<false, "a", "b">; // expected to be 'b'
 ```
 
-## 解法
+## 解答
 
 如果你不确定什么时候在 TypeScript 中使用[条件类型](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)，那就是你需要对类型使用“if”语句的时候。这正是我们这里要做的。
 

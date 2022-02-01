@@ -16,7 +16,7 @@ tags: array
 type Result = Unshift<[1, 2], 0>; // [0, 1, 2]
 ```
 
-## 解法
+## 解答
 
 这个挑战和[Push challenge](./easy-push.md)有很多相似之处。
 在这里，我们使用可变元组类型（Variadic Tuple Types）来获取数组中的所有元素。
