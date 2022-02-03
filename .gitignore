@@ -79,3 +79,6 @@ _site/
 .sass-cache/
 .jekyll-cache/
 .jekyll-metadata
+
+# rbenv
+.ruby-version
