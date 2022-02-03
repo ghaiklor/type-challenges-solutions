@@ -43,7 +43,7 @@ type AnyOf<T extends readonly any[], I = T[number]> = (
 所以我开始思考，我们是否可以让它更易于维护呢？
 事实证明我们可以。
 让我们回忆一下从元组类型中推断与可变元组类型相结合的情况。
-记得我们在解 [Last](./medium-last.md) 挑战或 [Pop](./medium-pop.md) 之类的问题时使用过这些。
+记得我们在解 [Last](../en/medium-last.md) 挑战或 [Pop](../en/medium-pop.md) 之类的问题时使用过这些。
 
 我们从推断元组中的单一元素开始，并推断族中其余的元素：
 
