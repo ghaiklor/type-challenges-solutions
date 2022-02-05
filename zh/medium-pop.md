@@ -32,7 +32,7 @@ type re2 = Pop<arr2>; // expected to be [3, 2]
 type Pop<T extends any[]> = T extends [...infer H, infer T] ? H : never;
 ```
 
-如果 `T` 是可分配给可分成两部分的数组类型的，则我们返回除最后一个以外的所有内容，否则返回 `never`。
+如果 `T` 是可拆分为两部分的数组类型，则我们返回除最后一个以外的所有内容，否则返回 `never`。
 
 ## 参考
 
