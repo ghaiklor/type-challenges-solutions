@@ -54,7 +54,7 @@ type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T]
 ```
 
 我们如何检查推断的元素 `H` 是否为 false-y？
-首先，我们可以构造一个表示 falsy-y 的类型。
+首先，我们可以构造一个表示 false-y 的类型。
 我们称它为 `Falsy`：
 
 ```typescript
@@ -83,9 +83,9 @@ type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T]
   : never;
 ```
 
-最后，一量我们看到有元素不是 false-y，就意味着它是 true-y。
+最后，一旦我们看到有元素不是 false-y，就意味着它是 true-y。
 由于我们已经知道存在 true-y 元素，因此继续递归就没有意思了。
-所以我们只需要通过返回 `true` 类型字面量来既定出递归：
+所以我们只需要通过返回 `true` 类型字面量来退出递归：
 
 ```typescript
 type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T]
@@ -95,7 +95,7 @@ type AnyOf<T extends readonly any[]> = T extends [infer H, ...infer T]
   : never;
 ```
 
-最后的状态是当我们有一个空无组时。
+最后的状态是当我们有一个空元组时。
 在这种情况下，我们的推断将不起作用，这意味着绝对没有 true-y 元素。
 在这种情况下，我们可以返回 `false`。
 
