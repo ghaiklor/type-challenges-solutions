@@ -25,7 +25,6 @@ type Result = AppendToObject<Test, "value", 4>; // expected to be { id: '1', val
 这一挑战也不例外。
 我试着写了一个类型，它接受整个`T`和一个带有新属性的对象:
 
-
 ```typescript
 type AppendToObject<T, U, V> = T & { [P in U]: V };
 ```
