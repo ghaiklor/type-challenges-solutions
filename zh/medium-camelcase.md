@@ -6,34 +6,34 @@ level: medium
 tags: template-literal
 ---
 
-## Challenge
+## 挑战
 
-Convert a string to CamelCase.
-For example:
+将字符串转换为驼峰式。
+例如：
 
 ```typescript
 type camelCased = CamelCase<"foo-bar-baz">; // expected "fooBarBaz"
 ```
 
-## Solution
+## 解答
 
-There is a common pattern that we can use for inferring the parts of the string - hyphen.
-We can have everything before the hyphen - head, and everything after the hyphen - tail.
-Let us infer those parts.
+有一个常见的模式，我们可以用来推断字符串的连字符（-）部分。
+我们可以取得连字符（-）之前的部分-头部，和连字符（-）之后的部分-尾部。
+让我们来推断这些部分。
 
 ```typescript
 type CamelCase<S> = S extends `${infer H}-${infer T}` ? never : never;
 ```
 
-What if there is no such pattern?
-We return the input string with no changes.
+如果没有这种模式呢？
+我们返回输入的字符串，不做任何更改。
 
 ```typescript
 type CamelCase<S> = S extends `${infer H}-${infer T}` ? never : S;
 ```
 
-But if there is such a pattern, we need to remove the hyphen and capitalize the tail.
-Also, we don’t forget that there are possibly other substring we need to process, so we do it recursively.
+但是如果有这样的模式，我们需要删除连字符并将尾部首字母大写。
+另外，我们不会忘记可能还有其他子字符串需要处理，所以我们递归地处理。
 
 ```typescript
 type CamelCase<S> = S extends `${infer H}-${infer T}`
@@ -41,8 +41,8 @@ type CamelCase<S> = S extends `${infer H}-${infer T}`
   : S;
 ```
 
-The problem now is that we do not handle the cases when the tail already capitalized.
-We can fix that by checking if we can assign the tail to capitalized tail.
+现在的问题是我们不处理尾部已经首字母大写的情况。
+我们可以通过检查尾部首字母是否大写来解决这个问题。
 
 ```typescript
 type CamelCase<S> = S extends `${infer H}-${infer T}`
@@ -52,9 +52,9 @@ type CamelCase<S> = S extends `${infer H}-${infer T}`
   : S;
 ```
 
-What will we do if we get the capitalized tail?
-We need to preserve the hyphen and just skip this one.
-Sure, we need to do it recursively as well.
+如果我们得到首字母大写的尾部，我们会怎么做?
+我们需要保留连字符，跳过这个。
+当然，我们也需要递归。
 
 ```typescript
 type CamelCase<S> = S extends `${infer H}-${infer T}`
@@ -64,9 +64,9 @@ type CamelCase<S> = S extends `${infer H}-${infer T}`
   : S;
 ```
 
-We got a type that can "camelCase" template literal types, neat!
+我们得到了一个可以“驼峰式”模板文字的类型，很好!
 
-## References
+## 参考
 
 - [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 - [Type inference in conditional types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types)
