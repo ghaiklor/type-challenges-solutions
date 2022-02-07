@@ -6,15 +6,15 @@ level: medium
 tags: readonly object-keys deep
 ---
 
-## Challenge
+## 挑战
 
-Implement a generic `DeepReadonly<T>` which makes every parameter of an object and its sub-objects `readonly` recursively.
+实现一个通用的 `DeepReadonly<T>` 以递归的方式只读化（`readonly`）对象及其子对象的每个属性。
 
-You can assume that we are only dealing with Objects in this challenge.
-Arrays, Functions, Classes and so on are no need to take into consideration.
-However, you can still challenge yourself by covering different cases as many as possbile.
+你可以假设在这个挑战中我们只处理对象。
+无需要考虑数组、函数、类等。
+但是，你仍然可以通过尽可能多的覆盖不同的案例来挑战自己。
 
-For example:
+例如：
 
 ```ts
 type X = {
@@ -36,25 +36,25 @@ type Expected = {
 const todo: DeepReadonly<X>; // should be same as `Expected`
 ```
 
-## Solution
+## 解答
 
-In this challenge, we need to create the same [`Readonly<T>`](./easy-readonly.md) type.
-The only difference is that we need to make it recursive.
+在这个挑战中，我们需要创建相同中的 [`Readonly<T>`](./easy-readonly.md) 类型。
+唯一的区别是我们需要使它递归化。
 
-Let us start from classic and implement the regular [`Readonly<T>`](./easy-readonly.md) type:
+让我们从经典开始，实现常规的 [`Readonly<T>`](./easy-readonly.md) 类型：
 
 ```ts
 type DeepReadonly<T> = { readonly [P in keyof T]: T[P] };
 ```
 
-But, as you already aware, this type will not make everything read-only, but only the fields that are not in depth.
-The reason is that when our `T[P]` is not a primitive, but an object, it will just pass it as is, without making its properties read-only.
+但是，正如你已经知道的，这个类型不会将所有内容都设为只读，而只是不深入的字段。
+原因是当我们的 `T[P]` 不是原始类型，而是一个对象时，它会按原样传递它，且不会将其属性设为只读。
 
-Therefore, we need to replace `T[P]` with a recursive usage of `DeepReadonly<T>`.
-Do not forget about basic case when using recursions, though.
+因此，我们需要将 `T[P]` 替换为 `DeepReadonly<T>` 的递归用法。
+不过，在使用递归时不要忘记基本情况。
 
-The algorithm is simple.
-In case `T[P]` is an object, we are going deeper into `DeepReadonly`, otherwise - return `T[P]`:
+算法很简单。
+如果 `T[P]` 是一个对象，我们继续调用 `DeepReadonly`，否则 -- 返回 `T[P]`
 
 ```ts
 type DeepReadonly<T> = {
@@ -64,7 +64,7 @@ type DeepReadonly<T> = {
 };
 ```
 
-## References
+## 参考
 
 - [Index Types](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html)
 - [Mapped Types](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
