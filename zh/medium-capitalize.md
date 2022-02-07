@@ -6,32 +6,32 @@ level: medium
 tags: template-literal
 ---
 
-## Challenge
+## 挑战
 
-Implement `Capitalize<T>` which converts the first letter of a string to uppercase and leave the rest as-is.
+实现 `Capitalize<T>` 将字符串的第一个字母转换为大写，其余部分保持原样。
 
-For example:
+例如：
 
 ```ts
 type capitalized = Capitalize<"hello world">; // expected to be 'Hello world'
 ```
 
-## Solution
+## 解答
 
-At first, I didn’t get the challenge.
-We can’t implement the generic solution for capitalizing characters in string literal type.
-So, if using the built-in type `Capitalize`, it’s pretty straightforward:
+起初，我并不明白这个挑战。
+我们无法为字符串字面量实现字符大写的通用解答。
+因此，如果使用内置的 `Capitalize` 类型，就很直接了当了：
 
 ```ts
 type MyCapitalize<S extends string> = Capitalize<S>;
 ```
 
-That was not the intent, I believe.
-We can’t use built-in `Capitalize` type, we can’t implement the generic solution.
-How can we make characters capitalized without those?
-By using a dictionary, of course!
+我相信，这不是本意。
+我们不能使用内置的 `Capitalize` 类型，我们也无法实现通用的解答。
+没有这些，我们怎么能让字符大写呢？
+当然，使用字典！
 
-To make a solution more simple I made a dictionary only for needed characters, that is `f`:
+为了使解答更简单，我只为需要的字符制作了一个字典，即 `f`：
 
 ```ts
 interface CapitalizedChars {
@@ -39,16 +39,16 @@ interface CapitalizedChars {
 }
 ```
 
-We have a dictionary, now, let us infer the first character of the type.
-We use the classic construct with a conditional type and inferring:
+现在，我们有了一个字典，让我们来推断类型的第一个字符。
+我们使用经典的条件类型来构造并推断：
 
 ```ts
 type Capitalize<S> = S extends `${infer C}${infer T}` ? C : S;
 ```
 
-Type parameter `C` has the first character now.
-We need to check if the character is present in our dictionary.
-If so, we return the capitalized character from the dictionary, otherwise we return the first character without changes:
+现在类型参数 `C` 有了第一个字符。
+我们需要检查这个字符是否存在于我们的字典中。
+如果是，我们从字典中返回大写的字符，否则我们返回第一个字符且不做任何变更。
 
 ```ts
 interface CapitalizedChars {
@@ -59,7 +59,7 @@ type Capitalize<S> = S extends `${infer C}${infer T}`
   : S;
 ```
 
-## References
+## 参考
 
 - [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 - [Type inference in conditional types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types)
