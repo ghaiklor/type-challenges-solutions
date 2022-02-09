@@ -38,7 +38,7 @@ const todo: DeepReadonly<X>; // should be same as `Expected`
 
 ## 解答
 
-在这个挑战中，我们需要创建相同中的 [`Readonly<T>`](./easy-readonly.md) 类型。
+在这个挑战，我们需要创建相同中的 [`Readonly<T>`](./easy-readonly.md) 类型。
 唯一的区别是我们需要使它递归化。
 
 让我们从经典开始，实现常规的 [`Readonly<T>`](./easy-readonly.md) 类型：
@@ -47,14 +47,14 @@ const todo: DeepReadonly<X>; // should be same as `Expected`
 type DeepReadonly<T> = { readonly [P in keyof T]: T[P] };
 ```
 
-但是，正如你已经知道的，这个类型不会将所有内容都设为只读，而只是不深入的字段。
+但是，正如你已经知道的，这个类型不会将所有内容都设为只读，仅是没有深度的字段。
 原因是当我们的 `T[P]` 不是原始类型，而是一个对象时，它会按原样传递它，且不会将其属性设为只读。
 
 因此，我们需要将 `T[P]` 替换为 `DeepReadonly<T>` 的递归用法。
 不过，在使用递归时不要忘记基本情况。
 
 算法很简单。
-如果 `T[P]` 是一个对象，我们继续调用 `DeepReadonly`，否则 -- 返回 `T[P]`
+如果 `T[P]` 是一个对象，我们继续调用 `DeepReadonly`，否则返回 `T[P]`
 
 ```ts
 type DeepReadonly<T> = {
