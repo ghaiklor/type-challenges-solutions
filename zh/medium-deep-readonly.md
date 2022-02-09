@@ -38,7 +38,7 @@ const todo: DeepReadonly<X>; // should be same as `Expected`
 
 ## 解答
 
-在这个挑战，我们需要创建相同中的 [`Readonly<T>`](./easy-readonly.md) 类型。
+在这个挑战中，我们需要创建相同的 [`Readonly<T>`](./easy-readonly.md) 类型。
 唯一的区别是我们需要使它递归化。
 
 让我们从经典开始，实现常规的 [`Readonly<T>`](./easy-readonly.md) 类型：
