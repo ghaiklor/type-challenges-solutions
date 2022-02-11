@@ -6,16 +6,16 @@ level: medium
 tags: application
 ---
 
-## Challenge
+## 挑战
 
-Chainable options are commonly used in JavaScript.
-But when we switch to TypeScript, can you properly type it?
+在 JavaScript 中我们通常会使用到可串联（Chainable/Pipline）的函数构造一个对象，
+但在 TypeScript 中，你能合理的给它附上类型吗？
 
-In this challenge, you need to type an object or a class - whatever you like - to provide two functions `option(key, value)` and `get()`.
-In `option(key, value)`, you can extend the current config type by the given key and value.
-We should about to access the final result via `get()`.
+在这个挑战中，你可以使用任何你喜欢的方式实现这个类型 -- Interface, Type 或 Class 都行。你需要提供两个函数 `option(key, value)` 和 `get()`。
+在 `option` 中你需要使用提供的 key 和 value 来扩展当前的对象类型，
+通过 `get()` 获取最终结果。
 
-For example:
+例如：
 
 ```ts
 declare const config: Chainable;
@@ -36,22 +36,22 @@ interface Result {
 }
 ```
 
-You don't need to write any JS/TS logic to handle the problem - just in type level.
+你只需要在类型层面实现这个功能，不需要实现任何 JS/TS 的实际逻辑。
 
-You can assume that `key` only accept `string` and the `value` can be anything - just leave it as-is.
-Same `key` won't be passed twice.
+你可以假设 `key` 只接受字符串而 `value` 接受任何类型，你只需要暴露它传递的类型而不需要进行任何处理。
+同样的 `key` 只会被使用一次。
 
-## Solution
+## 解答
 
-That’s a really interesting challenge with a practical usage in a real world.
-Personally, I’ve used it a lot when implementing different Builder patterns.
+这是一个非常有趣的挑战，并且在现实世界中也实际使用。
+就我个人而言，我在实现不同的 Builder 模式时经常使用它。
 
-What does author ask us to do?
-We need to implement two methods `option(key, value)` and `get()`.
-Every next call of the `option(key, value)` must accumulate type information about `key` and `value` somewhere.
-Accumulation must proceed until the method `get()` was called that returns an accumulated type information as an object type.
+作者要求我们做什么？
+我们需要实现两个方法 `options(key, value)` 和 `get()`。
+每次调用 `option(key, value)` 都必须在某处累加 `key` 和 `value` 的类型信息。
+累加操作必须持续进行，直到调用 `get` 函数将累加的信息作为一个对象类型返回。
 
-Let us start with the interface author provides to us:
+让我们从作者提供的接口开始：
 
 ```ts
 type Chainable = {
@@ -60,8 +60,8 @@ type Chainable = {
 };
 ```
 
-Before we can start accumulating the type information, it would be great to get it first.
-So we replace `string` in `key` and `any` in `value` parameters with type parameters, so TypeScript could infer their types and assign it to type parameters:
+在我们开始累加类型信息前，如果能先得到它，那就太好了。
+所以我们把 `key` 的 `string` 和 `value` 的 `any` 替换成类型参数，以便 TypeScript 可以推断出它们的类型并将其分配给类型参数：
 
 ```ts
 type Chainable = {
@@ -70,16 +70,16 @@ type Chainable = {
 };
 ```
 
-Good!
-We have a type information about `key` and `value` now.
-TypeScript will infer the `key` as a string literal type, while the `value` as the common type.
-E.g. calling `option(‘foo’, 123)` will result into having types for `key = ‘foo’` and `value = number`.
+很好！
+我们现在有了关于 `key` 和 `value` 的类型信息。
+TypeScript 会将 `key` 推断为字符串字面量类型，而将 `value` 推断为常见的类型。
+例如，调用 `opiton('foo', 123)` 将得出的类型为：`key = 'foo'` 和 `value = number`。
 
-We have the information, but where can we store it?
-It must be the place that persists its state across different method calls.
-The only place here is on the type `Chainable` itself!
+我们有了信息后，把它存储在哪里呢？
+它必须是一个在若干次方法调用中保持其状态的地方。
+唯一的地方便是 `Chainable` 类型本身！
 
-Let us add a new type parameter `O` to the `Chainable` type and do not forget that it is by default an empty object:
+让我们为 `Chainable` 类型添加一个新的类型参数 `O`，并且不能忘记默认它是一个空对象。
 
 ```ts
 type Chainable<O = {}> = {
@@ -88,9 +88,9 @@ type Chainable<O = {}> = {
 };
 ```
 
-The most interesting part now, pay attention!
-We want `option(key, value)` to return `Chainable` type itself (we want to have a possibility to chain the calls, right) but with the type information accumulated to its type parameter.
-Let us use [intersection types](https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types) to add new types into accumulator:
+现在最有趣的部分来了，注意！
+我们希望 `option(key, value)` 返回 `Chainable` 类型本身（我们希望有可能进行链式调用，对吧），但是要将类型信息累加到其类型参数中。
+让我们使用 [intersection types](https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types) 将新的类型添加到累加器中：
 
 ```ts
 type Chainable<O = {}> = {
@@ -99,9 +99,9 @@ type Chainable<O = {}> = {
 };
 ```
 
-Small things left.
-We are getting the compilation error “Type ‘K’ is not assignable to type ‘string | number | symbol’.“.
-That’s because we don’t have a constraint over type parameter `K` that says it must be a `string`:
+还有一些小事情。
+我们收到编译错误 "Type ‘K’ is not assignable to type ‘string | number | symbol’."。
+这是因为我们没有约束类型参数 `K`，即它必须是一个 `string`；
 
 ```ts
 type Chainable<O = {}> = {
@@ -110,8 +110,8 @@ type Chainable<O = {}> = {
 };
 ```
 
-Everything is ready to rock!
-Now, when the developer will call the `get()` method, it must return the type parameter `O` from `Chainable` that has an accumulated type information from previous `option(key, value)` calls:
+一切都准备好了！
+现在，当开发人员调用 `get()` 函数时，它必须从 `Chainable` 返回类型参数 `O`，该参数有之前的 `option(key, value)` 数次调用后累加的类型信息：
 
 ```ts
 type Chainable<O = {}> = {
@@ -120,7 +120,7 @@ type Chainable<O = {}> = {
 };
 ```
 
-## References
+## 参考
 
 - [Intersection Types](https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types)
 - [Mapped Types](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
