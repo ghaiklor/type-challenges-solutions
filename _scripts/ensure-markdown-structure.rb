@@ -2,6 +2,8 @@ require 'front_matter_parser'
 
 languages = Dir.glob('??')
 sources = languages.map { |language| Dir.glob(language + '/' + '*.md') }.flatten
+sources = sources.filter { |source| !source.include?('README.md') }
+
 errors = []
 fields = {
   'index.md' => %w[title description keywords lang comments],
