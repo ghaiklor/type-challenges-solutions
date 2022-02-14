@@ -2,7 +2,6 @@ require 'front_matter_parser'
 
 languages = Dir.glob('??')
 sources = languages.map { |language| Dir.glob(language + '/' + '*.md') }.flatten
-
 errors = []
 fields = {
   'index.md' => %w[title description keywords lang comments],
