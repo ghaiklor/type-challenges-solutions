@@ -6,43 +6,44 @@ level: easy
 tags: infer tuple built-in
 ---
 
-## Challenge
+## 挑战
 
-Implement the built-in `Parameters<T>` generic without using it.
+实现内置的 `Parameters<T>` 泛型而不使用它。
 
-## Solution
+## 解答
 
-This challenge requires us to get part of the information from the function.
-To be more precise, parameters of the function.
-Let’s start with declaring a type that accepts a generic type `T` that we will use to get the parameters:
+这个挑战要求我们从函数中获取部分信息。
+更确切地说，是函数的参数。
+我们首先声明一个接受泛型类型 `T` 的类型，我们将使用它来获取参数:
 
 ```typescript
 type MyParameters<T> = any
 ```
 
-Now, what is the proper way of “getting the type we don’t know about yet”?
-By using inferring!
-But before using it, let’s start with a simple conditional type to match the function:
+那么，“获得我们还不知道的类型”的正确方法是什么?
+通过使用推断!
+但在使用它之前，让我们先从一个简单的条件类型来匹配函数:
 
 ```typescript
 type MyParameters<T> = T extends (...args: any[]) => any ? never : never
 ```
 
-Here, we check if the type `T` matches the function with any arguments and any return type.
+这里，我们检查类型 `T` 是否与函数的任何参数和任何返回类型匹配。
 Now, we can replace `any[]` in our parameters list with the inferring:
+现在，我们可以利用推断替换掉参数列表中的 `any[]`:
 
 ```typescript
 type MyParameters<T> = T extends (...args: infer P) => any ? never : never
 ```
 
-That way, the TypeScript compiler infers the parameters list of the function and will assign it to the type `P`.
-What’s left is to return the type from the branch:
+这样，TypeScript编译器就会推断出函数的参数列表，并将其赋值给类型 `P`。
+剩下的就是从分支返回类型:
 
 ```typescript
 type MyParameters<T> = T extends (...args: infer P) => any ? P : never
 ```
 
-## References
+## 参考
 
 - [Generics](https://www.typescriptlang.org/docs/handbook/2/generics.html)
 - [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
