@@ -5,14 +5,14 @@ This document exists as a glossary of the terms between English and the target l
 
 ## Chinese
 
-|       English        |   Chinese    | Meaning |
-| :------------------: | :----------: | :-----: |
-|      Challenge       |     挑战     |   TK    |
-|       Solution       |     解答     |   TK    |
-|      References      |     参考     |   TK    |
-| Variadic Tuple Types | 可变元组类型 |   TK    |
-|    Type Inference    |   类型推导   |   TK    |
-|  Conditional Types   |   条件类型   |   TK    |
-|       Generic        |     泛型     |   TK    |
-|      Flat Type       |   普通类型   |   TK    |
-|  Intersection Types  |   交叉类型   |   TK    |
+|       English        |   Chinese    |                                                           Meaning                                                            |
+| :------------------: | :----------: | :--------------------------------------------------------------------------------------------------------------------------: |
+|      Challenge       |     挑战     |                                作为名词用，邀请多方也包括自己参与竞争，完成某项有难度的任务。                                |
+|       Solution       |     解答     |                                       相比“解法”更为书面化，即可用作名词也可用作动动。                                       |
+|      References      |     参考     |                                              学术名词名词，参考、参考文献之意。                                              |
+| Variadic Tuple Types | 可变元组类型 |                                                              TK                                                              |
+|    Type Inference    |   类型推导   |                                        指名词，编程语言在编译期自动推导出值的数据类型                                        |
+|  Conditional Types   |   条件类型   |                                                              TK                                                              |
+|       Generic        |     泛型     | 编译语言中的专有名词，指允许程序员在强类型程序设计语言中编写代码时使用一些以后才指定的类型，在实例化时作为参数指明这些类型。 |
+|      Flat Type       |   普通类型   |                                                              TK                                                              |
+|  Intersection Types  |   交叉类型   |                                            类型论中的概念，指一类复合的数据类型。                                            |
