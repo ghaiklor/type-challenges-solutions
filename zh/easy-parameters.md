@@ -29,7 +29,6 @@ type MyParameters<T> = T extends (...args: any[]) => any ? never : never
 ```
 
 这里，我们检查类型 `T` 是否与函数的任何参数和任何返回类型匹配。
-Now, we can replace `any[]` in our parameters list with the inferring:
 现在，我们可以利用推断替换掉参数列表中的 `any[]`:
 
 ```typescript
