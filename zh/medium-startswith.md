@@ -6,10 +6,10 @@ level: medium
 tags: template-literal
 ---
 
-## Challenge
+## 挑战
 
-Implement `StartsWith<T, U>` which takes two exact string types and returns whether `T` starts with `U`.
-For example:
+实现 `StartsWith<T, U>`，接受2个字符串类型并返回 `T` 是否以 `U` 开头。
+例如：
 
 ```typescript
 type a = StartsWith<'abc', 'ac'> // expected to be false
@@ -17,17 +17,17 @@ type b = StartsWith<'abc', 'ab'> // expected to be true
 type c = StartsWith<'abc', 'abcd'> // expected to be false
 ```
 
-## Solution
+## 解答
 
-Knowing about template literal types in TypeScript, the solution becomes really obvious.
-Let’s start with an initial type that holds `any` type:
+了解Typescript中的模板字面量类型，解决方案就变得十分明显了。
+让我们从保存 `any` 类型的初始类型开始：
 
 ```typescript
 type StartsWith<T, U> = any
 ```
 
-We need to check if the input type parameter `T` starts with a string literal from `U`.
-I’ll do it simpler and just check if the `T` is `U` by using conditional types:
+我们需要检查输入类型参数 `T` 是否以字面量 `U` 开始。
+我会先做的简单一些，通过使用条件类型来检查 `T` 是否为 `U`：
 
 ```typescript
 type StartsWith<T, U> = T extends `${U}`
@@ -35,11 +35,11 @@ type StartsWith<T, U> = T extends `${U}`
   : never
 ```
 
-If the input type parameter `T` is the same as in type parameter `U`, we will go into the true branch of the conditional type.
-But, we don’t need them to be equal.
-We need to check if it starts with `U`.
-In other words; we don’t care if there will be something after the `U` in our literal type.
-So that, use `any` type there:
+如果输入类型参数 `T` 和类型参数 `U` 相同，我们会进入条件类型的 true 分支。
+但是，我们不需要它们相等。
+我们需要检查它是否以 `U` 开始。
+换句话说，我们不关心字面量 `U` 后面是否有其它东西。
+因此，在这里使用 `any` 类型：
 
 ```typescript
 type StartsWith<T, U> = T extends `${U}${any}`
@@ -47,8 +47,7 @@ type StartsWith<T, U> = T extends `${U}${any}`
   : never
 ```
 
-If type `T` matches the pattern of a string that starts with `U`, we return the `true` literal type.
-Otherwise, return `false`:
+如果类型 `T` 匹配以 `U` 开始的字符串模块，则返回 `true` 类型，否则返回 `false`：
 
 ```typescript
 type StartsWith<T, U> = T extends `${U}${any}`
@@ -56,9 +55,9 @@ type StartsWith<T, U> = T extends `${U}${any}`
   : false
 ```
 
-We got all the test cases passed, but we still got a compilation error saying “Type ‘U’ is not assignable to type ‘string | number | bigint | boolean | null | undefined’.“.
-That’s because we didn’t add a constraint over generic to show that `U` is a string.
-Let’s add it:
+我们通过了所有的测试用例，但是我们仍然得到了一个编译错误，说“Type ‘U’ is not assignable to type ‘string | number | bigint | boolean | null | undefined’.”。
+那是因为我们没有在泛型上添加一个约束来表明 `U` 是一个字符串。
+让我们添加它：
 
 ```typescript
 type StartsWith<T, U extends string> = T extends `${U}${any}`
@@ -66,7 +65,7 @@ type StartsWith<T, U extends string> = T extends `${U}${any}`
   : false
 ```
 
-## References
+## 参考
 
 - [Generics](https://www.typescriptlang.org/docs/handbook/2/generics.html)
 - [Generic Constraints](https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-constraints)
