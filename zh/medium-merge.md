@@ -6,12 +6,12 @@ level: medium
 tags: object
 ---
 
-## Challenge
+## 挑战
 
-Merge two types into a new type.
-Keys of the second type overrides keys of the first type.
+将两个类型合并为一个新类型。
+第二个类型的键将覆盖第一个类型的键。
 
-For example:
+例如：
 
 ```typescript
 type Foo = {
@@ -26,21 +26,21 @@ type Bar = {
 type merged = Merge<Foo, Bar>; // expected { a: number; b: number }
 ```
 
-## Solution
+## 解答
 
-This challenge reminds me [“append to object”](./medium-append-to-object.md) challenge.
-There we were using union operator to gather all the properties from the object and string.
+这个挑战让我想起了[“append to object”](./medium-append-to-object.md)。
+我们使用联合操作符从对象和字符串中收集所有属性。
 
-We can use the same trick here, to gather all the properties names from both objects.
-So that our mapped type holds properties from both objects:
+在这里，我们可以使用相同的技巧来收集两个对象的所有属性名称。
+因此，我们的映射类型保存来自两个对象的属性:
 
 ```typescript
 type Merge<F, S> = { [P in keyof F | keyof S]: never };
 ```
 
-Having properties names from both objects, we can start getting their value types.
-We start with `S` because it has a higher precedence, it can override the value type from `F`.
-But also we need to check if the property exists on `S`:
+有了两个对象的属性名，我们就可以开始获取它们的值类型了。
+我们从 `S` 开始，因为它具有更高的优先级，它可以覆盖 `F` 中的值类型。
+但我们还需要检查属性是否存在于 `S` 上:
 
 ```typescript
 type Merge<F, S> = {
@@ -48,7 +48,7 @@ type Merge<F, S> = {
 };
 ```
 
-In case, there is no property in `S`, we check if the property exists on `F` and if so; we get the value type from there:
+如果 `S` 中没有该属性，我们检查 `F` 上是否存在该属性，如果存在，我们从这里获得值类型:
 
 ```typescript
 type Merge<F, S> = {
@@ -60,9 +60,9 @@ type Merge<F, S> = {
 };
 ```
 
-That way we merge two objects with `S` having a higher precedence.
+这样我们就可以合并两个对象，并使 `S` 具有更高优先级。
 
-## References
+## 参考
 
 - [Union Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types)
 - [keyof and Lookup Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types)
