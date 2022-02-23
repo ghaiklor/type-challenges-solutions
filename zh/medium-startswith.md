@@ -47,7 +47,7 @@ type StartsWith<T, U> = T extends `${U}${any}`
   : never
 ```
 
-如果类型 `T` 匹配以 `U` 开始的字符串模块，则返回 `true` 类型，否则返回 `false`：
+如果类型 `T` 匹配以 `U` 开头的字符串的模式，则返回 `true` 类型，否则返回 `false`：
 
 ```typescript
 type StartsWith<T, U> = T extends `${U}${any}`
