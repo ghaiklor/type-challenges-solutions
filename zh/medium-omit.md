@@ -6,11 +6,11 @@ level: medium
 tags: union built-in
 ---
 
-## Challenge
+## 挑战
 
-Implement the built-in `Omit<T, K>` generic without using it.
-Constructs a type by picking all properties from `T` and then removing `K`.
-For example:
+实现内置的 `Omit<T, K>` 泛型而不使用它。
+通过从 `T` 中选取所有属性，然后删除 `K` 来构造一个类型。
+例如：
 
 ```ts
 interface Todo {
@@ -26,31 +26,32 @@ const todo: TodoPreview = {
 };
 ```
 
-## Solution
+## 解答
 
-We need to return a new object type here, but without specified keys.
-Obviously, it is a hint that we need to use [mapped types](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html) here.
-We need to map each property in object and construct a new type.
+我们这里需要返回一个新的对象类型，但不指定键。
+显然，这提示我们需要在这里使用[映射类型（mapped types）](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)。
 
-Let us start with the basic block and construct the same object:
+我们需要映射对象的每个属性并构造一个新类型。
+让我们从基础开始，构建相同的对象：
 
 ```ts
 type MyOmit<T, K> = { [P in keyof T]: T[P] };
 ```
 
-Here, we iterate over all the keys in `T`, map it to the type `P` and make it a key in our new object type, while value type is the type from `T[P]`.
+在这里，我们遍历了 `T` 中的所有键，将其映射到类型 `P`，并使其成为新对象的键，同时值为 `T[P]` 类型。
 
-That way, we iterate over all the keys, but we need to filter out those that we are not interested in.
-To achieve that, we can [remap the key type using “as” syntax](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#key-remapping-in-mapped-types):
+这样，我们就可以遍历所有的键，但是我们需要过滤掉那些我们不感兴趣的键。
+
+为了实现这一点，我们可以[使用 “as” 语法重新映射键类型](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#key-remapping-in-mapped-types):
 
 ```ts
 type MyOmit<T, K> = { [P in keyof T as P extends K ? never : P]: T[P] };
 ```
 
-We map all the properties from `T` and if the property is in `K` union, we return “never” type as its key, otherwise the key itself.
-That way, we filter out the properties and got the required object type.
+我们映射 `T` 的所有属性，如果属性在 `K` 联合中，我们返回 “never” 类型作为它的键，否则返回键本身。
+这样，我们就可以过滤掉属性并获得所需的对象类型。
 
-## References
+## 参考
 
 - [Mapped Types](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
 - [Index Types](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html)
