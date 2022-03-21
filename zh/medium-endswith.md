@@ -26,7 +26,7 @@ type R2 = EndsWith<"abc", "d">; // false
 很明显模板字面量类型会很有用。
 
 让我们从模板字面量类型开始，它可以包含任何字符串。
-在这一点上，我们不关心内容，所以我们在这里使用 `any` 类型：
+目前，我们不关心内容，所以我们在这里使用 `any` 类型：
 
 ```typescript
 type EndsWith<T extends string, U extends string> = T extends `${any}`
