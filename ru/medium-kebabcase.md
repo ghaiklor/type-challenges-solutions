@@ -17,7 +17,7 @@ type kebabCase = KebabCase<"FooBarBaz">; // expected "foo-bar-baz"
 
 ## Решение
 
-Эта проблема имеет много общего с проблемой [`CamelCase`](./medium-camelcase.md).
+Эта проблема имеет много общего с проблемой [`CamelCase`](./hard-camelcase.md).
 Начнём с вывода типов.
 Узнаем первую букву строки и остальную часть (хвост).
 

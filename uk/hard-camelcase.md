@@ -1,8 +1,8 @@
 ---
-id: 610
+id: 114
 title: CamelCase
 lang: uk
-level: medium
+level: hard
 tags: template-literal
 ---
 
