@@ -17,7 +17,7 @@ type kebabCase = KebabCase<"FooBarBaz">; // expected "foo-bar-baz"
 
 ## Розв'язок
 
-Це завдання дуже схоже з завданням ["CamelCase"](./medium-camelcase.md).
+Це завдання дуже схоже з завданням ["CamelCase"](./hard-camelcase.md).
 Почнемо з виводу типів.
 Нам потрібно дізнатись перший символ рядка та решту (хвіст).
 

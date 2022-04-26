@@ -17,7 +17,7 @@ type kebabCase = KebabCase<"FooBarBaz">; // expected "foo-bar-baz"
 
 ## Solution
 
-This challenge has a lot in common with the ["CamelCase"](./medium-camelcase.md) challenge.
+This challenge has a lot in common with the ["CamelCase"](./hard-camelcase.md) challenge.
 We start from inferring; we need to know the first character and the tail.
 
 ```typescript

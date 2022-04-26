@@ -18,7 +18,7 @@ type kebabCase = KebabCase<"FooBarBaz">; // expected "foo-bar-baz"
 
 ## 해답
 
-이번 챌린지는 ["CamelCase"](./medium-camelcase.md)와 비슷한 유형입니다.
+이번 챌린지는 ["CamelCase"](./hard-camelcase.md)와 비슷한 유형입니다.
 타입 추론으로부터 시작할 것이고 문자열의 첫 문자와 그 뒷부분을 알아내야 합니다.
 
 ```typescript
