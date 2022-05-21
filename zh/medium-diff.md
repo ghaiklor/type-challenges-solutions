@@ -1,7 +1,7 @@
 ---
 id: 645
 title: Diff
-lang: en
+lang: zh
 level: medium
 tags: object
 ---
@@ -32,7 +32,6 @@ type test0 = Diff<Foo, Bar>; // expected { gender: number }
 这个挑战要求我们基于对象进行操作。
 所以有极大可能，映射类型可以发挥作用。
 
-
 让我们从映射类型开始，在这里我们迭代两个对象的属性联合（union）。
 毕竟在计算差值之前，我们需要收集两个对象的所有属性。
 
@@ -40,8 +39,8 @@ type test0 = Diff<Foo, Bar>; // expected { gender: number }
 type Diff<O, O1> = { [P in keyof O | keyof O1]: never };
 ```
 
-When iterating over the properties, we need to check if the property exists on `O` or `O1`.
-So we need to add a conditional type here to find out where from we need to get the value type.
+当我们遍历这些属性的时候，我们需要检查这个属性是否存在于`O` 或者 `O1`。
+所以我们在这里需要添加一个条件类型来找出我们需要从哪里获取值类型。
 
 ```typescript
 type Diff<O, O1> = {
