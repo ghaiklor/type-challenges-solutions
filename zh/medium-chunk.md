@@ -10,7 +10,7 @@ tags: tuple
 
 你知道 `loadsh` 吗？
 `Chunk` 是其中一个非常有用的函数，现在我们来实现它。
-`Chunk<T, N>` 接受两个必要类型参数，`T` 必须是一个 `tuple`，`N` 必须是 `integer >= 1`。
+`Chunk<T, N>` 接受两个必要类型参数，`T` 必须是一个元组，`N` 必须是大于等于 1 的整型。
 比如说：
 
 ```typescript
@@ -45,9 +45,9 @@ type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
   : never
 ```
 
-有部分元组 `T`，我们可以检查我们的累加器是否有必要的大小。
+有部分元组 `T`，我们可以检查累加器的大小是否符合要求。
 为了达到这个目的，我们在其类型上查询 `length` 属性。
-这很有效，因为我们有一对类型参数 `A` 的能用约束，说它是一个元组。
+这有效，因为我们对类型参数 `A` 有一个通用约束，它表示一个元组。
 
 ```typescript
 type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
