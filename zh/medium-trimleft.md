@@ -31,7 +31,7 @@ type trimmed = TrimLeft<"  Hello World  ">; // expected to be 'Hello World  '
 type TrimLeft<S> = S extends ` ${infer T}` ? TrimLeft<T> : S;
 ```
 
-事实证明，这不是解决方案。
+事实证明，这不是完整的解答。
 一些测试用例没有通过。
 那是因为我们没有处理换行符和制表符。
 让我们用这三个的联合替换空格来解决这个问题：
