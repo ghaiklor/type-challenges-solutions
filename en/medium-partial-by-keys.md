@@ -5,7 +5,7 @@ lang: en
 level: medium
 tags: object-keys union
 ---
- 
+
 ## Challenge
 
 Implement a generic `PartialByKeys<T, K>` which takes two type arguments `T` and `K`.
@@ -26,7 +26,7 @@ That's right. We can use the `Omit` type utility exposed by TypeScript or create
 
 ```typescript
 type MyOmit<F, S> = {[P in keyof F as P extends S ? never: P]: F[P]}
- 
+
 type EverythingFromTExceptK<T, K> = MyOmit<T, K>
 ```
 
@@ -47,7 +47,7 @@ Note that this still does not solve our problem. Taking a closer look at the gen
 
 ```typescript
 type MyMerge<T> = {[P in keyof T]: T[P]}
- 
+
 type PartialByKeys<T, K = keyof T> = MyMerge<OptionalProperties<T, K> & EverythingFromTExceptK<T, K>>
 ```
 
