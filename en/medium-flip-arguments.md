@@ -3,7 +3,7 @@ id: 3196
 title: Flip Arguments
 lang: en
 level: medium
-tags: array 
+tags: array
 ---
 
 ## Challenge
@@ -15,7 +15,7 @@ Type `FlipArguments<T>` requires a function type `T` and returns a new function 
 For example:
 
 ```ts
-type Flipped = FlipArguments<(arg0: string, arg1: number, arg2: boolean) => void> 
+type Flipped = FlipArguments<(arg0: string, arg1: number, arg2: boolean) => void>
 // (arg0: boolean, arg1: number, arg2: string) => void
 ```
 
