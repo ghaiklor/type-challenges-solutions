@@ -8,7 +8,7 @@ tags: object-keys
 
 ## Challenge
 
-Implement the type version of `Object.entries`
+Implement the type version of `Object.entries`.
 
 For example:
 
