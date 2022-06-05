@@ -41,7 +41,7 @@ type ObjectEntries<T> = {[P in keyof T]: [P, T[P]]}[keyof T]
 
 Notice how some of the test cases have passed. Taking a closer look at the test cases which have failed, we find that:
 
-- All of the optional keys have to be converted into required. We can do so by using `Mapping Modifier`.
+- All of the optional keys have to be converted into required. We can do so by using "Mapping Modifier".
 - Since the `Partial` type appends undefined to a type, we have to take care of that.
 
 ```ts
