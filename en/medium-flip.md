@@ -34,7 +34,7 @@ type Flip<T> = {[P in keyof T as T[P] extends AllowedTypes ? T[P] : never]: P}
 // {value: key, ...}
 ```
 
-Our type helper `AllowedType` should contain all the types which can be used as a key in an object. Looking at the test cases, we see that string, number and boolean can be used as keys.
+Our type helper `AllowedTypes` should contain all the types which can be used as a key in an object. Looking at the test cases, we see that string, number and boolean can be used as keys.
 
 ```ts
 type AllowedTypes = string | number | boolean
