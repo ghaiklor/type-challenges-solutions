@@ -50,9 +50,6 @@ type DropChar<S, C extends string> = S extends `${infer L}${C}${infer R}`
   : never;
 ```
 
-We covered all the cases, except the case when there are no patterns we look for.
-If so, we just passing through the incoming string itself.
-
 我们涵盖了所有的情况，除了要剔除的目标字符串为空, 这时我们将整个字符串返回即可。
 
 ```typescript
