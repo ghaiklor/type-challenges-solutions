@@ -8,7 +8,7 @@ tags: readonly object-keys
 
 ## Challenge
 
-实现一个通用的`MyReadonly2<T, K>`，它带有两种类型的参数`T`和`K`。`K`指定为`T`的属性的子集，对应的属性是只读（`readonly`）的。如果未提供`K`，则应使所有属性都变为只读，就像普通的`Readonly<T>`一样。
+实现一个通用的`MyReadonly2<T, K>`，它带有两种类型的参数`T`和`K`。`K`指定的`T`的属性集，应该设置为只读。如果未提供`K`，则应使所有属性都变为只读，就像普通的`Readonly<T>`一样。
 
 例如:
 
@@ -32,7 +32,7 @@ todo.completed = true; // OK
 
 ## 解答
 
-这个挑战是`Readonly<T>`挑战的延续，一切都非常相同，除了需要添加一个新的类型参数`K`，以便我们可以将指定的对应属性设为只读。
+这个挑战是`Readonly<T>`挑战的延续，除了需要添加一个新的类型参数`K`，以便我们可以将指定的属性设为只读外，一切都基本相同。
 
 我们从最简单的例子开始，即`K`是一个空集合，因此没有任何属性需要设置为只读。我们只需要返回`T`就好了。
 
@@ -46,7 +46,7 @@ type MyReadonly2<T, K> = T;
 type MyReadonly2<T, K> = T & { readonly [P in K]: T[P] };
 ```
 
-看起来是一种解决方案，但是我们得到一个编译错误：`Type ‘P’ cannot be used to index type ‘T’`。这是对的，因为我们没有对`K`设置约束，它应该是  “`T`中的每一个键”  组成的联合类型的子类型。
+看起来是一种解决方案，但是我们得到一个编译错误：`Type ‘P’ cannot be used to index type ‘T’`。这是对的，因为我们没有对`K`设置约束，它应该是  “`T`中的每一个键”  :
 
 ```ts
 type MyReadonly2<T, K extends keyof T> = T & { readonly [P in K]: T[P] };
