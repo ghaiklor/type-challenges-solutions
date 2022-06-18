@@ -72,9 +72,7 @@ type MyReadonly2<T, K extends keyof T = keyof T> = T & {
 };
 ```
 
-you maybe find that the solution-1 doesn't work in TypeScript 4.5+， because the original behavior is a bug in TypeScript, filed at [microsoft/TypeScript#45122](https://github.com/microsoft/TypeScript/issues/45122), fixed in [microsoft/TypeScript#45263](https://github.com/microsoft/TypeScript/pull/45263), which was released in TypeScript 4.5. Intersections conceptually mean "and", so `{readonly a: string} & {a: string}` should be equivalent to `{a: string}`,  i.e., the property `a ` is writable and readable.  
-
-Before TypeScript 4.5, TypeScript had the opposite and incorrect behavior, where a final object property is `readonly` if it is `readonly` in some intersection members. This was wrong, and it was fixed. So this is the reason why the solution-1 doesn't work. To fix this, you can write like this:
+you maybe find that the solution-1 doesn't work in TypeScript 4.5+， because the original behavior is a bug in TypeScript, filed at [microsoft/TypeScript#45122](https://github.com/microsoft/TypeScript/issues/45122), fixed in [microsoft/TypeScript#45263](https://github.com/microsoft/TypeScript/pull/45263), which was released in TypeScript 4.5. Intersections conceptually mean "and", so `{readonly a: string} & {a: string}` should be equivalent to `{a: string}`,  i.e., the property `a` is writable and readable.  Before TypeScript 4.5, TypeScript had the opposite and incorrect behavior, where a final object property is `readonly` if it is `readonly` in some intersection members. This was wrong, and it was fixed. So this is the reason why the solution-1 doesn't work. To fix this, you can write like this:
 
 ```ts
 //Solution-2
