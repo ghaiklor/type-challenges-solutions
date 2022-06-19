@@ -55,12 +55,12 @@ make
 ## What solutions are missing
 
 You can sync up with the original repository `type-challenges` to know what solution is missing in the repository.
-To do that, there is a script called `sync-challenges.rb` in [`_scripts`](../_scripts/sync-challenges.rb) folder.
+To do that, there is a script called `sync_challenges.rb` in [`_scripts`](../_scripts/sync_challenges.rb) folder.
 
 Calling that script via `ruby` will print all the challenges that are exists in `type-challenges` repo but are missing in ours.
 
 ```shell
-bundle exec ruby _scripts/sync-challenges.rb
+bundle exec ruby _scripts/sync_challenges.rb
 ```
 
 E.g. it prints out `en/easy-awaited.md`.
@@ -70,5 +70,5 @@ Also, you can specify an optional language to filter out.
 For instance, if you want to sync only the solutions that are written in English, you can pass it as an argument.
 
 ```shell
-bundle exec ruby _scripts/sync-challenges.rb en
+bundle exec ruby _scripts/sync_challenges.rb en
 ```
