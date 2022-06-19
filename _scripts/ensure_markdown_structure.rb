@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'front_matter_parser'
 
 languages = Dir.glob('??')
-sources = languages.map { |language| Dir.glob(language + '/' + '*.md') }.flatten
+sources = languages.map { |language| Dir.glob("#{language}/*.md") }.flatten
 errors = []
 fields = {
   'index.md' => %w[title description keywords lang comments],
@@ -20,5 +22,5 @@ end
 
 print "\n--- Front Matter data in #{sources.size} files have been checked ---\n\n"
 
-errors.each { |error| print "#{error}\n" } if errors.size > 0
-exit(errors.size === 0)
+errors.each { |error| print "#{error}\n" }
+exit(errors.size.zero?)

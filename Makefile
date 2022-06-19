@@ -11,7 +11,7 @@ test: build
 
 lint: clean
 	find . -name '*.md' ! -path './vendor/*' | xargs bundle exec mdl
-	bundle exec ruby _scripts/ensure-markdown-structure.rb
+	bundle exec ruby _scripts/ensure_markdown_structure.rb
 
 serve:
 	bundle exec jekyll serve
