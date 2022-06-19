@@ -18,7 +18,7 @@ type Arr = ["1", "2", "3"];
 const a: TupleToUnion<Arr>; // expected to be '1' | '2' | '3'
 ```
 
-## 解法
+## 解答
 
 我们需要获取一个数组中的所有元素并将其转化为联合类型。幸运的是，TypeScript 已经在其类型系统中实现了这种功能—— [lookup types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types)。我们可以使用构造`T[number]`得到由`T`的所有元素所组成的联合类型。
 
