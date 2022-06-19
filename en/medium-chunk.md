@@ -14,9 +14,9 @@ Do you know `lodash`?
 For instance:
 
 ```typescript
-type R0 = Chunk<[1, 2, 3], 2> // expected to be [[1, 2], [3]]
-type R1 = Chunk<[1, 2, 3], 4> // expected to be [[1, 2, 3]]
-type R2 = Chunk<[1, 2, 3], 1> // expected to be [[1], [2], [3]]
+type R0 = Chunk<[1, 2, 3], 2>; // expected to be [[1, 2], [3]]
+type R1 = Chunk<[1, 2, 3], 4>; // expected to be [[1, 2, 3]]
+type R2 = Chunk<[1, 2, 3], 1>; // expected to be [[1], [2], [3]]
 ```
 
 ## Solution
@@ -26,14 +26,14 @@ But in the end, I came up with a solution that is easy to understand, IMHO.
 We start with an initial type that declares the contract:
 
 ```typescript
-type Chunk<T, N> = any
+type Chunk<T, N> = any;
 ```
 
 Since we need to accumulate chunks of the tuple, it seems reasonable to have an optional type parameter `A` that accumulates the chunk of size `N`.
 By default, the type parameter `A` will be an empty tuple:
 
 ```typescript
-type Chunk<T, N, A extends unknown[] = []> = any
+type Chunk<T, N, A extends unknown[] = []> = any;
 ```
 
 Having an empty accumulator that we will use for a temporary chunk, we can start splitting the `T` into parts.
@@ -42,7 +42,7 @@ The parts are the first element of the tuple and the rest of it:
 ```typescript
 type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
   ? never
-  : never
+  : never;
 ```
 
 Having parts of the tuple `T`, we can check if our accumulator has a required size.
@@ -51,10 +51,10 @@ It works, because we have a generic constraint over the type parameter `A` that 
 
 ```typescript
 type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
-  ? A['length'] extends N
-  ? never
-  : never
-  : never
+  ? A["length"] extends N
+    ? never
+    : never
+  : never;
 ```
 
 In case our accumulator is empty or has not enough items in it, we need to continue slicing the `T` until the accumulator has the required size.
@@ -63,10 +63,10 @@ In this accumulator, we push the previous one from `A` and the item `H` from the
 
 ```typescript
 type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
-  ? A['length'] extends N
-  ? never
-  : Chunk<T, N, [...A, H]>
-  : never
+  ? A["length"] extends N
+    ? never
+    : Chunk<T, N, [...A, H]>
+  : never;
 ```
 
 The recursive call continues until we got a case when the accumulator size has the required `N`.
@@ -76,10 +76,10 @@ So we return a new tuple with accumulator in it:
 
 ```typescript
 type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
-  ? A['length'] extends N
-  ? [A]
-  : Chunk<T, N, [...A, H]>
-  : never
+  ? A["length"] extends N
+    ? [A]
+    : Chunk<T, N, [...A, H]>
+  : never;
 ```
 
 Doing so, we ignore the rest of the tuple `T`.
@@ -87,10 +87,10 @@ So we need to add another recursive call to our result `[A]` that will clear the
 
 ```typescript
 type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
-  ? A['length'] extends N
-  ? [A, Chunk<T, N>]
-  : Chunk<T, N, [...A, H]>
-  : never
+  ? A["length"] extends N
+    ? [A, Chunk<T, N>]
+    : Chunk<T, N, [...A, H]>
+  : never;
 ```
 
 This recursive magic continues until we get the case when there are no more elements in tuple `T`.
@@ -100,10 +100,10 @@ So not returning the accumulator in such case means losing the items.
 
 ```typescript
 type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
-  ? A['length'] extends N
-  ? [A, Chunk<T, N>]
-  : Chunk<T, N, [...A, H]>
-  : [A]
+  ? A["length"] extends N
+    ? [A, Chunk<T, N>]
+    : Chunk<T, N, [...A, H]>
+  : [A];
 ```
 
 There is also another case when we lose the element of `H`.
@@ -113,10 +113,10 @@ To fix that, we need to not forget about `H` element when having an accumulator 
 
 ```typescript
 type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
-  ? A['length'] extends N
-  ? [A, Chunk<[H, ...T], N>]
-  : Chunk<T, N, [...A, H]>
-  : [A]
+  ? A["length"] extends N
+    ? [A, Chunk<[H, ...T], N>]
+    : Chunk<T, N, [...A, H]>
+  : [A];
 ```
 
 The solution solves some cases, which is great.
@@ -125,10 +125,10 @@ To overcome that, let’s add a spread to our `Chunk<[H, ...T], N>`:
 
 ```typescript
 type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
-  ? A['length'] extends N
-  ? [A, ...Chunk<[H, ...T], N>]
-  : Chunk<T, N, [...A, H]>
-  : [A]
+  ? A["length"] extends N
+    ? [A, ...Chunk<[H, ...T], N>]
+    : Chunk<T, N, [...A, H]>
+  : [A];
 ```
 
 All the test cases are passed!
@@ -139,10 +139,12 @@ Otherwise, we return the accumulator itself as before:
 
 ```typescript
 type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
-  ? A['length'] extends N
-  ? [A, ...Chunk<[H, ...T], N>]
-  : Chunk<T, N, [...A, H]>
-  : A[number] extends never ? [] : [A]
+  ? A["length"] extends N
+    ? [A, ...Chunk<[H, ...T], N>]
+    : Chunk<T, N, [...A, H]>
+  : A[number] extends never
+  ? []
+  : [A];
 ```
 
 That’s all we need to implement a lodash version of `.chunk()` function in the type system!

@@ -51,7 +51,9 @@ type Element<E extends string[]> = E[number] extends never ? `` : never;
 Once we know an array is not empty, we need to add a prefix `__` and then combine those elements in a template literal type:
 
 ```typescript
-type Element<E extends string[]> = E[number] extends never ? `` : `__${E[number]}`;
+type Element<E extends string[]> = E[number] extends never
+  ? ``
+  : `__${E[number]}`;
 ```
 
 The same logic we apply to the last one - Modifier.
@@ -59,22 +61,36 @@ In case the array with modifiers is empty - return empty literal type.
 Otherwise, return a prefix with the union of modifiers:
 
 ```typescript
-type Modifier<M extends string[]> = M[number] extends never ? `` : `--${M[number]}`;
+type Modifier<M extends string[]> = M[number] extends never
+  ? ``
+  : `--${M[number]}`;
 ```
 
 What’s left is to combine those 3 types in our initial type:
 
 ```typescript
-type BEM<B extends string, E extends string[], M extends string[]> = `${Block<B>}${Element<E>}${Modifier<M>}`
+type BEM<
+  B extends string,
+  E extends string[],
+  M extends string[]
+> = `${Block<B>}${Element<E>}${Modifier<M>}`;
 ```
 
 The full solution, including all 4 types, looks like that:
 
 ```typescript
 type Block<B extends string> = `${B}`;
-type Element<E extends string[]> = E[number] extends never ? `` : `__${E[number]}`;
-type Modifier<M extends string[]> = M[number] extends never ? `` : `--${M[number]}`;
-type BEM<B extends string, E extends string[], M extends string[]> = `${Block<B>}${Element<E>}${Modifier<M>}`;
+type Element<E extends string[]> = E[number] extends never
+  ? ``
+  : `__${E[number]}`;
+type Modifier<M extends string[]> = M[number] extends never
+  ? ``
+  : `--${M[number]}`;
+type BEM<
+  B extends string,
+  E extends string[],
+  M extends string[]
+> = `${Block<B>}${Element<E>}${Modifier<M>}`;
 ```
 
 ## References

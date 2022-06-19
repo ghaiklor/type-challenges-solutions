@@ -12,7 +12,7 @@ In this challenge, you should implement a type `Zip<T, U>`, `T` and `U` must be 
 
 ```typescript
 // expected to be [[1, true], [2, false]]
-type R = Zip<[1, 2], [true, false]>
+type R = Zip<[1, 2], [true, false]>;
 ```
 
 ## Solution
@@ -21,7 +21,7 @@ Let’s start with declaring the initial type that we will use to implement the 
 The type parameter `T` is used to get the first tuple we need to zip and `U` is used to get the second one:
 
 ```typescript
-type Zip<T, U> = any
+type Zip<T, U> = any;
 ```
 
 Before diving into implementation, let me give you an example of what zipping means here.
@@ -35,9 +35,7 @@ We can do that by using an inference!
 Take the first tuple `T` and infer the item (`TI`) from there and the tail (`TT`):
 
 ```typescript
-type Zip<T, U> = T extends [infer TI, ...infer TT]
-  ? never
-  : never;
+type Zip<T, U> = T extends [infer TI, ...infer TT] ? never : never;
 ```
 
 But we have another tuple that we didn’t consider.
@@ -46,8 +44,8 @@ So take another tuple `U` and do the same - infer the item (`UI`) and the tail (
 ```typescript
 type Zip<T, U> = T extends [infer TI, ...infer TT]
   ? U extends [infer UI, ...infer UT]
-  ? never
-  : never
+    ? never
+    : never
   : never;
 ```
 
@@ -57,8 +55,8 @@ To do that, we return a tuple with `TI` and `UI`:
 ```typescript
 type Zip<T, U> = T extends [infer TI, ...infer TT]
   ? U extends [infer UI, ...infer UT]
-  ? [TI, UI]
-  : never
+    ? [TI, UI]
+    : never
   : never;
 ```
 
@@ -70,8 +68,8 @@ Also, don’t forget that we need to have a tuple of tuples, so we are wrapping 
 ```typescript
 type Zip<T, U> = T extends [infer TI, ...infer TT]
   ? U extends [infer UI, ...infer UT]
-  ? [[TI, UI], Zip<TT, UT>]
-  : never
+    ? [[TI, UI], Zip<TT, UT>]
+    : never
   : never;
 ```
 
@@ -83,8 +81,8 @@ We need it unwrapped here, so we can use the variadic tuple type to unwrap the t
 ```typescript
 type Zip<T, U> = T extends [infer TI, ...infer TT]
   ? U extends [infer UI, ...infer UT]
-  ? [[TI, UI], ...Zip<TT, UT>]
-  : never
+    ? [[TI, UI], ...Zip<TT, UT>]
+    : never
   : never;
 ```
 
@@ -95,8 +93,8 @@ So that our spread will add nothing to the tuple.
 ```typescript
 type Zip<T, U> = T extends [infer TI, ...infer TT]
   ? U extends [infer UI, ...infer UT]
-  ? [[TI, UI], ...Zip<TT, UT>]
-  : []
+    ? [[TI, UI], ...Zip<TT, UT>]
+    : []
   : [];
 ```
 

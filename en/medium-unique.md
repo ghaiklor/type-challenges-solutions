@@ -26,7 +26,7 @@ We need to filter out the duplicates from there and leave only a unique set of e
 I’ll start with the initial type:
 
 ```typescript
-type Unique<T> = any
+type Unique<T> = any;
 ```
 
 In order to check if the element is unique in the tuple, first, we need to get it.
@@ -38,9 +38,7 @@ If we do it as `[infer H, ...infer T]`, our ending result will not be in the cor
 So that, I’m using the last element of the tuple as an item and the rest of the tuple goes into head:
 
 ```typescript
-type Unique<T> = T extends [...infer H, infer T]
-  ? never
-  : never
+type Unique<T> = T extends [...infer H, infer T] ? never : never;
 ```
 
 Now, having the element in type parameter `T`, what should we check?
@@ -49,9 +47,9 @@ We should check if the element `T` is present in other part of the tuple - in it
 ```typescript
 type Unique<T> = T extends [...infer H, infer T]
   ? T extends H[number]
-  ? never
-  : never
-  : never
+    ? never
+    : never
+  : never;
 ```
 
 By having a conditional type `T extends H[number]` we can check if the type `T` is present in union of elements of `H`.
@@ -61,9 +59,9 @@ Meaning, we just return whatever is left in the head:
 ```typescript
 type Unique<T> = T extends [...infer H, infer T]
   ? T extends H[number]
-  ? [...Unique<H>]
-  : never
-  : never
+    ? [...Unique<H>]
+    : never
+  : never;
 ```
 
 But if it’s not present in the head - it is a unique element!
@@ -72,9 +70,9 @@ We include the `T` in the tuple in this case:
 ```typescript
 type Unique<T> = T extends [...infer H, infer T]
   ? T extends H[number]
-  ? [...Unique<H>]
-  : [...Unique<H>, T]
-  : never
+    ? [...Unique<H>]
+    : [...Unique<H>, T]
+  : never;
 ```
 
 The last case is when the input type parameter `T` does not match the tuple.
@@ -83,9 +81,9 @@ Here, we just return an empty tuple to not break the spread in recursive call:
 ```typescript
 type Unique<T> = T extends [...infer H, infer T]
   ? T extends H[number]
-  ? [...Unique<H>]
-  : [...Unique<H>, T]
-  : []
+    ? [...Unique<H>]
+    : [...Unique<H>, T]
+  : [];
 ```
 
 That way, we have implemented a type that can return a tuple with unique elements in it.

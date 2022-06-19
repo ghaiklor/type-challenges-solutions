@@ -24,15 +24,13 @@ We need to implement the type that can filter out items from a tuple.
 We start with the initial type:
 
 ```typescript
-type Without<T, U> = any
+type Without<T, U> = any;
 ```
 
 Since we need to work with the specific items in the tuple, I’m using the inferring to get the specific item and the rest of the tuple:
 
 ```typescript
-type Without<T, U> = T extends [infer H, ...infer T]
-  ? never
-  : never
+type Without<T, U> = T extends [infer H, ...infer T] ? never : never;
 ```
 
 Having an item from the tuple, we can check if the item is the type `U`.
@@ -41,9 +39,9 @@ We need this check in order to decide, should we add the element to the result o
 ```typescript
 type Without<T, U> = T extends [infer H, ...infer T]
   ? H extends U
-  ? never
-  : never
-  : never
+    ? never
+    : never
+  : never;
 ```
 
 In case it is “extends” from the input type `U`, it means that we don’t need it in our resulting type.
@@ -53,9 +51,9 @@ But, since we need to process other items as well, we return not an empty tuple,
 ```typescript
 type Without<T, U> = T extends [infer H, ...infer T]
   ? H extends U
-  ? [...Without<T, U>]
-  : never
-  : never
+    ? [...Without<T, U>]
+    : never
+  : never;
 ```
 
 That way, we skip anything that is specified as `U` in our `T`.
@@ -64,9 +62,9 @@ However, once we get a check that says we shouldn’t skip the element, we retur
 ```typescript
 type Without<T, U> = T extends [infer H, ...infer T]
   ? H extends U
-  ? [...Without<T, U>]
-  : [H, ...Without<T, U>]
-  : never
+    ? [...Without<T, U>]
+    : [H, ...Without<T, U>]
+  : never;
 ```
 
 There is the last `never` type left we need to address.
@@ -75,9 +73,9 @@ Since we are working with the variadic tuple types and spreading them, instead o
 ```typescript
 type Without<T, U> = T extends [infer H, ...infer T]
   ? H extends U
-  ? [...Without<T, U>]
-  : [H, ...Without<T, U>]
-  : []
+    ? [...Without<T, U>]
+    : [H, ...Without<T, U>]
+  : [];
 ```
 
 We got a working solution for a case, when `U` specified as a primitive type.
@@ -89,9 +87,9 @@ If `U` is a tuple of numbers, we return all the items in there as a union, other
 ```typescript
 type Without<T, U> = T extends [infer H, ...infer T]
   ? H extends (U extends number[] ? U[number] : U)
-  ? [...Without<T, U>]
-  : [H, ...Without<T, U>]
-  : []
+    ? [...Without<T, U>]
+    : [H, ...Without<T, U>]
+  : [];
 ```
 
 Congratulations!

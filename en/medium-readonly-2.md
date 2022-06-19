@@ -66,24 +66,24 @@ That is the case when our type must behave as an usual `Readonly<T>` type.
 To fix that, we are just specifying the default type parameter for `K` to be “all the keys from `T`”:
 
 ```ts
-// solution-1
 type MyReadonly2<T, K extends keyof T = keyof T> = T & {
   readonly [P in K]: T[P];
 };
 ```
 
-you maybe find that the solution-1 doesn't work in TypeScript 4.5+， because the original behavior is a bug in TypeScript, filed at [microsoft/TypeScript#45122](https://github.com/microsoft/TypeScript/issues/45122), fixed in [microsoft/TypeScript#45263](https://github.com/microsoft/TypeScript/pull/45263), which was released in TypeScript 4.5. Intersections conceptually mean "and", so `{readonly a: string} & {a: string}` should be equivalent to `{a: string}`,  i.e., the property `a` is writable and readable.  Before TypeScript 4.5, TypeScript had the opposite and incorrect behavior, where a final object property is `readonly` if it is `readonly` in some intersection members. This was wrong, and it was fixed. So this is the reason why the solution-1 doesn't work. To fix this, you can write like this:
+The solution above does not work in TypeScript 4.5+, because the original behavior is a bug in TypeScript, filed at [microsoft/TypeScript#45122](https://github.com/microsoft/TypeScript/issues/45122) and fixed at [microsoft/TypeScript#45263](https://github.com/microsoft/TypeScript/pull/45263).
+
+Intersections conceptually mean “and”, so `{readonly a: string} & {a: string}` should be equivalent to `{a: string}`, i.e., the property `a` is writable and readable.
+Before TypeScript 4.5, TypeScript had the opposite and incorrect behavior, where a final object property is `readonly` if it is `readonly` in some intersection members.
+So this is the reason the solution above does not work.
+
+To fix this, we omit the keys:
 
 ```ts
-//Solution-2
 type MyReadonly2<T, K extends keyof T = keyof T> = Omit<T, K> & {
-  readonly [P in K]: T[P]
-}
-//i.e.
-type MyReadonly2<T, K extends keyof T = keyof T> = Omit<T, K> & Readonly<T>
+  readonly [P in K]: T[P];
+};
 ```
-
-The solution-2 can add `readonly` modifiers because none of the keys in `K` present in `keyof Omit<T, K>`.
 
 ## References
 
