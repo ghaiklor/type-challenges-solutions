@@ -12,8 +12,8 @@ tags: tuple
 예시:
 
 ```typescript
-type a = Reverse<['a', 'b']> // ['b', 'a']
-type b = Reverse<['a', 'b', 'c']> // ['c', 'b', 'a']
+type a = Reverse<["a", "b"]>; // ['b', 'a']
+type b = Reverse<["a", "b", "c"]>; // ['c', 'b', 'a']
 ```
 
 ## 해답
@@ -25,16 +25,14 @@ type b = Reverse<['a', 'b', 'c']> // ['c', 'b', 'a']
 먼저 형태를 잡고 구현을 시작하겠습니다:
 
 ```typescript
-type Reverse<T> = any
+type Reverse<T> = any;
 ```
 
 위에서 언급했던 것처럼 튜플의 마지막 원소와 그 나머지를 구분해서 얻어야 합니다.
 그러기 위해서 조건부 타입의 타입 추론을 적용하겠습니다:
 
 ```typescript
-type Reverse<T> = T extends [...infer H, infer T]
-  ? never
-  : never
+type Reverse<T> = T extends [...infer H, infer T] ? never : never;
 ```
 
 튜플의 첫 부분에 스프레드 연산자를 사용한 것을 주목해주세요.
@@ -42,9 +40,7 @@ type Reverse<T> = T extends [...infer H, infer T]
 튜플의 마지막 원소를 얻었다면 새로운 튜플을 만들어 `T`를 넣습니다:
 
 ```typescript
-type Reverse<T> = T extends [...infer H, infer T]
-  ? [T]
-  : never
+type Reverse<T> = T extends [...infer H, infer T] ? [T] : never;
 ```
 
 이 과정을 통해 마지막 원소를 첫번째 자리에 넣었습니다.
@@ -52,9 +48,7 @@ type Reverse<T> = T extends [...infer H, infer T]
 `Reverse` 타입을 재귀적으로 호출하여 이 작업을 쉽게 처리할 수 있습니다:
 
 ```typescript
-type Reverse<T> = T extends [...infer H, infer T]
-  ? [T, Reverse<H>]
-  : never
+type Reverse<T> = T extends [...infer H, infer T] ? [T, Reverse<H>] : never;
 ```
 
 단 `Reverse` 타입을 호출하는 것은 튜플 내부에 튜플을 반환하므로 호출할 때마다 튜플이 더 깊어질 것입니다.
@@ -62,18 +56,14 @@ type Reverse<T> = T extends [...infer H, infer T]
 `Reverse` 타입의 결과에 스프레드 연산자를 적용하여 평탄화할 수 있습니다:
 
 ```typescript
-type Reverse<T> = T extends [...infer H, infer T]
-  ? [T, ...Reverse<H>]
-  : never
+type Reverse<T> = T extends [...infer H, infer T] ? [T, ...Reverse<H>] : never;
 ```
 
 주어지는 타입 매개변수 `T`가 조건에 맞지 않는다면 어떻게 해야할까요?
 이 경우 빈 배열을 반환하여 스프레드 연산자가 올바르게 작동할 수 있도록 합니다:
 
 ```typescript
-type Reverse<T> = T extends [...infer H, infer T]
-  ? [T, ...Reverse<H>]
-  : []
+type Reverse<T> = T extends [...infer H, infer T] ? [T, ...Reverse<H>] : [];
 ```
 
 ## 참고

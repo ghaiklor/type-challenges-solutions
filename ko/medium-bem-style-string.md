@@ -50,29 +50,45 @@ type Element<E extends string[]> = E[number] extends never ? `` : never;
 배열이 비어있지 않은 것을 확인했다면 접두사 `__`를 엘리먼트와 연결하여 템플릿 리터럴 타입으로 만듭니다:
 
 ```typescript
-type Element<E extends string[]> = E[number] extends never ? `` : `__${E[number]}`;
+type Element<E extends string[]> = E[number] extends never
+  ? ``
+  : `__${E[number]}`;
 ```
 
 같은 로직을 마지막 조건인 모디파이어에도 적용할 수 있습니다.
 모디파이어 배열이 비어있을 경우에는 빈 문자열을 반환합니다. 그렇지 않은 경우에는 접두사가 붙은 모디파이어의 유니온을 반환합니다:
 
 ```typescript
-type Modifier<M extends string[]> = M[number] extends never ? `` : `--${M[number]}`;
+type Modifier<M extends string[]> = M[number] extends never
+  ? ``
+  : `--${M[number]}`;
 ```
 
 남은 것은 세 타입을 처음 만든 타입에 합치는 것입니다:
 
 ```typescript
-type BEM<B extends string, E extends string[], M extends string[]> = `${Block<B>}${Element<E>}${Modifier<M>}`
+type BEM<
+  B extends string,
+  E extends string[],
+  M extends string[]
+> = `${Block<B>}${Element<E>}${Modifier<M>}`;
 ```
 
 네 타입을 모두 합친 최종 풀이는 다음과 같습니다:
 
 ```typescript
 type Block<B extends string> = `${B}`;
-type Element<E extends string[]> = E[number] extends never ? `` : `__${E[number]}`;
-type Modifier<M extends string[]> = M[number] extends never ? `` : `--${M[number]}`;
-type BEM<B extends string, E extends string[], M extends string[]> = `${Block<B>}${Element<E>}${Modifier<M>}`;
+type Element<E extends string[]> = E[number] extends never
+  ? ``
+  : `__${E[number]}`;
+type Modifier<M extends string[]> = M[number] extends never
+  ? ``
+  : `--${M[number]}`;
+type BEM<
+  B extends string,
+  E extends string[],
+  M extends string[]
+> = `${Block<B>}${Element<E>}${Modifier<M>}`;
 ```
 
 ## 참고
