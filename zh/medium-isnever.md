@@ -8,7 +8,7 @@ tags: union utils
 
 ## 挑战
 
-实现类型 `IsNever<T>`，该类型接受输入类型`T`。如果T的类型解析为`never`，请返回`true`，否则返回`false`。
+实现类型 `IsNever<T>`，该类型接受输入类型`T`。如果 T 的类型解析为`never`，请返回`true`，否则返回`false`。
 
 例如：
 
@@ -32,7 +32,7 @@ type IsNever<T> = T extends never ? true : false;
 
 遗憾的是，我们没有通过`never`本身的测试用例，这是为什么呢？
 
- `never`类型表示从未出现的值的类型。`never`类型是TypeScript中任何其他类型的子类型，因此可以将`never`类型赋值给任何类型。然而，没有类型是`never`的子类型，这意味着除了`never`本身以外，不能将其他类型赋值给`never`。
+`never`类型表示从未出现的值的类型。`never`类型是 TypeScript 中任何其他类型的子类型，因此可以将`never`类型赋值给任何类型。然而，没有类型是`never`的子类型，这意味着除了`never`本身以外，不能将其他类型赋值给`never`。
 
 这就引出了另一个问题：如果我们不能将除`never`外的其他类型赋值给`never`，那么我们如何检查某类型是否可以赋值给`never`呢？
 

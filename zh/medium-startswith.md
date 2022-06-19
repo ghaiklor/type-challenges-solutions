@@ -8,31 +8,29 @@ tags: template-literal
 
 ## 挑战
 
-实现 `StartsWith<T, U>`，接受2个字符串类型并返回 `T` 是否以 `U` 开头。
+实现 `StartsWith<T, U>`，接受 2 个字符串类型并返回 `T` 是否以 `U` 开头。
 例如：
 
 ```typescript
-type a = StartsWith<'abc', 'ac'> // expected to be false
-type b = StartsWith<'abc', 'ab'> // expected to be true
-type c = StartsWith<'abc', 'abcd'> // expected to be false
+type a = StartsWith<"abc", "ac">; // expected to be false
+type b = StartsWith<"abc", "ab">; // expected to be true
+type c = StartsWith<"abc", "abcd">; // expected to be false
 ```
 
 ## 解答
 
-了解Typescript中的模板字面量类型，解决方案就变得十分明显了。
+了解 Typescript 中的模板字面量类型，解决方案就变得十分明显了。
 让我们从保存 `any` 类型的初始类型开始：
 
 ```typescript
-type StartsWith<T, U> = any
+type StartsWith<T, U> = any;
 ```
 
 我们需要检查输入类型参数 `T` 是否以字面量 `U` 开始。
 我会先做的简单一些，通过使用条件类型来检查 `T` 是否为 `U`：
 
 ```typescript
-type StartsWith<T, U> = T extends `${U}`
-  ? never
-  : never
+type StartsWith<T, U> = T extends `${U}` ? never : never;
 ```
 
 如果输入类型参数 `T` 和类型参数 `U` 相同，我们会进入条件类型的 true 分支。
@@ -42,17 +40,13 @@ type StartsWith<T, U> = T extends `${U}`
 因此，在这里使用 `any` 类型：
 
 ```typescript
-type StartsWith<T, U> = T extends `${U}${any}`
-  ? never
-  : never
+type StartsWith<T, U> = T extends `${U}${any}` ? never : never;
 ```
 
 如果类型 `T` 匹配以 `U` 开头的字符串的模式，则返回 `true` 类型，否则返回 `false`：
 
 ```typescript
-type StartsWith<T, U> = T extends `${U}${any}`
-  ? true
-  : false
+type StartsWith<T, U> = T extends `${U}${any}` ? true : false;
 ```
 
 我们通过了所有的测试用例，但是我们仍然得到了一个编译错误，说“Type ‘U’ is not assignable to type ‘string | number | bigint | boolean | null | undefined’.”。
@@ -60,9 +54,7 @@ type StartsWith<T, U> = T extends `${U}${any}`
 让我们添加它：
 
 ```typescript
-type StartsWith<T, U extends string> = T extends `${U}${any}`
-  ? true
-  : false
+type StartsWith<T, U extends string> = T extends `${U}${any}` ? true : false;
 ```
 
 ## 参考

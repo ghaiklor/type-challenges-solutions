@@ -18,7 +18,7 @@ tags: template-literal union tuple
 ## 解答
 
 在这个挑战中，我们被要求按照规则来制作一个特定的字符串。
-我们必须遵循3条规则：块、元素和修饰符。
+我们必须遵循 3 条规则：块、元素和修饰符。
 为了简化解决方案的整体外观，我提议将它们分为三个独立的类型。
 
 我们从第一条开始 - 块（Block）：
@@ -51,7 +51,9 @@ type Element<E extends string[]> = E[number] extends never ? `` : never;
 一旦我们知道一个数组不是空的，我们需要添加一个前缀 `__`，然后在一个模板字面量类型中组合这些元素：
 
 ```typescript
-type Element<E extends string[]> = E[number] extends never ? `` : `__${E[number]}`;
+type Element<E extends string[]> = E[number] extends never
+  ? ``
+  : `__${E[number]}`;
 ```
 
 同样的逻辑我们也适用于最后一个 -- 修饰符（Modifier）。
@@ -59,22 +61,36 @@ type Element<E extends string[]> = E[number] extends never ? `` : `__${E[number]
 否则，返回一个带有修饰符的联合的前缀：
 
 ```typescript
-type Modifier<M extends string[]> = M[number] extends never ? `` : `--${M[number]}`;
+type Modifier<M extends string[]> = M[number] extends never
+  ? ``
+  : `--${M[number]}`;
 ```
 
 剩下的就是在我们的初始类型中结合这三个类型：
 
 ```typescript
-type BEM<B extends string, E extends string[], M extends string[]> = `${Block<B>}${Element<E>}${Modifier<M>}`
+type BEM<
+  B extends string,
+  E extends string[],
+  M extends string[]
+> = `${Block<B>}${Element<E>}${Modifier<M>}`;
 ```
 
-完整的解答，包括所有4个类型，像这样：
+完整的解答，包括所有 4 个类型，像这样：
 
 ```typescript
 type Block<B extends string> = `${B}`;
-type Element<E extends string[]> = E[number] extends never ? `` : `__${E[number]}`;
-type Modifier<M extends string[]> = M[number] extends never ? `` : `--${M[number]}`;
-type BEM<B extends string, E extends string[], M extends string[]> = `${Block<B>}${Element<E>}${Modifier<M>}`;
+type Element<E extends string[]> = E[number] extends never
+  ? ``
+  : `__${E[number]}`;
+type Modifier<M extends string[]> = M[number] extends never
+  ? ``
+  : `--${M[number]}`;
+type BEM<
+  B extends string,
+  E extends string[],
+  M extends string[]
+> = `${Block<B>}${Element<E>}${Modifier<M>}`;
 ```
 
 ## 参考

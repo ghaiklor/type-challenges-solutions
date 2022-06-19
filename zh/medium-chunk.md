@@ -14,9 +14,9 @@ tags: tuple
 比如说：
 
 ```typescript
-type R0 = Chunk<[1, 2, 3], 2> // expected to be [[1, 2], [3]]
-type R1 = Chunk<[1, 2, 3], 4> // expected to be [[1, 2, 3]]
-type R2 = Chunk<[1, 2, 3], 1> // expected to be [[1], [2], [3]]
+type R0 = Chunk<[1, 2, 3], 2>; // expected to be [[1, 2], [3]]
+type R1 = Chunk<[1, 2, 3], 4>; // expected to be [[1, 2, 3]]
+type R2 = Chunk<[1, 2, 3], 1>; // expected to be [[1], [2], [3]]
 ```
 
 ## 解答
@@ -26,14 +26,14 @@ type R2 = Chunk<[1, 2, 3], 1> // expected to be [[1], [2], [3]]
 我们从一个声明契约的初始类型开始：
 
 ```typescript
-type Chunk<T, N> = any
+type Chunk<T, N> = any;
 ```
 
 因为我们需要积累元组的块，所以有一个可选类型参数 `A` 来积累大小为 `N` 的块似乎是合理的。
 默认情况下，类型参数 `A` 将是一个空元组：
 
 ```typescript
-type Chunk<T, N, A extends unknown[] = []> = any
+type Chunk<T, N, A extends unknown[] = []> = any;
 ```
 
 有一个空的累加器，我们将用于一个临时的大块，我们可以开始将 `T` 分割成若干部分。
@@ -42,7 +42,7 @@ type Chunk<T, N, A extends unknown[] = []> = any
 ```typescript
 type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
   ? never
-  : never
+  : never;
 ```
 
 有部分元组 `T`，我们可以检查累加器的大小是否符合要求。
@@ -51,10 +51,10 @@ type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
 
 ```typescript
 type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
-  ? A['length'] extends N
-  ? never
-  : never
-  : never
+  ? A["length"] extends N
+    ? never
+    : never
+  : never;
 ```
 
 如果我们的累加器是空的或没有足够的项目，我们需要继续切分 `T` 直到累加器达到所需要的大小。
@@ -63,10 +63,10 @@ type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
 
 ```typescript
 type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
-  ? A['length'] extends N
-  ? never
-  : Chunk<T, N, [...A, H]>
-  : never
+  ? A["length"] extends N
+    ? never
+    : Chunk<T, N, [...A, H]>
+  : never;
 ```
 
 递归调用继续进行，直到我们得到一种情况，即累加器的大小达到了所需的 `N`。
@@ -76,10 +76,10 @@ type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
 
 ```typescript
 type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
-  ? A['length'] extends N
-  ? [A]
-  : Chunk<T, N, [...A, H]>
-  : never
+  ? A["length"] extends N
+    ? [A]
+    : Chunk<T, N, [...A, H]>
+  : never;
 ```
 
 这样做，我们忽略了其余的元组 `T`。
@@ -87,10 +87,10 @@ type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
 
 ```typescript
 type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
-  ? A['length'] extends N
-  ? [A, Chunk<T, N>]
-  : Chunk<T, N, [...A, H]>
-  : never
+  ? A["length"] extends N
+    ? [A, Chunk<T, N>]
+    : Chunk<T, N, [...A, H]>
+  : never;
 ```
 
 这个递归魔法一直持续到我们得到元组 `T` 中没有更多元素的情况。
@@ -100,10 +100,10 @@ type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
 
 ```typescript
 type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
-  ? A['length'] extends N
-  ? [A, Chunk<T, N>]
-  : Chunk<T, N, [...A, H]>
-  : [A]
+  ? A["length"] extends N
+    ? [A, Chunk<T, N>]
+    : Chunk<T, N, [...A, H]>
+  : [A];
 ```
 
 还有一种情况是我们失去了 `H` 的元素。
@@ -113,10 +113,10 @@ type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
 
 ```typescript
 type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
-  ? A['length'] extends N
-  ? [A, Chunk<[H, ...T], N>]
-  : Chunk<T, N, [...A, H]>
-  : [A]
+  ? A["length"] extends N
+    ? [A, Chunk<[H, ...T], N>]
+    : Chunk<T, N, [...A, H]>
+  : [A];
 ```
 
 这个解答解决了一些情况，这很棒。
@@ -125,10 +125,10 @@ type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
 
 ```typescript
 type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
-  ? A['length'] extends N
-  ? [A, ...Chunk<[H, ...T], N>]
-  : Chunk<T, N, [...A, H]>
-  : [A]
+  ? A["length"] extends N
+    ? [A, ...Chunk<[H, ...T], N>]
+    : Chunk<T, N, [...A, H]>
+  : [A];
 ```
 
 所以有的测试案例都通过了！
@@ -139,10 +139,12 @@ type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
 
 ```typescript
 type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
-  ? A['length'] extends N
-  ? [A, ...Chunk<[H, ...T], N>]
-  : Chunk<T, N, [...A, H]>
-  : A[number] extends never ? [] : [A]
+  ? A["length"] extends N
+    ? [A, ...Chunk<[H, ...T], N>]
+    : Chunk<T, N, [...A, H]>
+  : A[number] extends never
+  ? []
+  : [A];
 ```
 
 这就是我们在类型系统中实现的 lodash 版本的 `.chunk()` 函数所需要的全部内容！

@@ -37,4 +37,3 @@ type TupleToUnion<T extends unknown[]> = T[number];
 ## 参考
 
 - [Lookup Types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types)
-
