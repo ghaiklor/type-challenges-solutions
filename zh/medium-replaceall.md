@@ -18,7 +18,7 @@ type replaced = ReplaceAll<"t y p e s", " ", "">; // expected to be 'types'
 
 ## 解答
 
-本解答将基于 [`Replace`](./medium-replace.md)类型的解答。
+本解答将基于 [`Replace`](../en/medium-replace.md)类型的解答。
 
 输入字符串 `S` 必须被分成三部分。在`From`之前的最左边部分，From本身，From之后的最右边部分。我们可以用条件类型和类型推断来做到这一点。
 
