@@ -29,18 +29,20 @@ type test0 = Diff<Foo, Bar>; // expected { gender: number }
 
 ## Solution
 
-We see that this challenge requires us to do the manipulation with objects.
-So highly possible, mapped types are for the rescue here.
+We see that this challenge requires us to do the manipulation with objects. So
+highly possible, mapped types are for the rescue here.
 
-Let us start with the mapped type where we iterate over the union of properties for both objects.
-Before calculating the difference, we need to gather all the properties from both objects after all.
+Let us start with the mapped type where we iterate over the union of properties
+for both objects. Before calculating the difference, we need to gather all the
+properties from both objects after all.
 
 ```typescript
 type Diff<O, O1> = { [P in keyof O | keyof O1]: never };
 ```
 
-When iterating over the properties, we need to check if the property exists on `O` or `O1`.
-So we need to add a conditional type here to find out where from we need to get the value type.
+When iterating over the properties, we need to check if the property exists on
+`O` or `O1`. So we need to add a conditional type here to find out where from we
+need to get the value type.
 
 ```typescript
 type Diff<O, O1> = {
@@ -52,13 +54,12 @@ type Diff<O, O1> = {
 };
 ```
 
-Great!
-We have an object here, that is a union of all properties from both objects.
-The last thing remains is to filter out those properties that are existing on both objects.
+Great! We have an object here, that is a union of all properties from both
+objects. The last thing remains is to filter out those properties that are
+existing on both objects.
 
-How can we get all the properties that are exist on both objects?
-Intersection types!
-We get the intersection type and exclude it from our mapped type `P`.
+How can we get all the properties that are exist on both objects? Intersection
+types! We get the intersection type and exclude it from our mapped type `P`.
 
 ```typescript
 type Diff<O, O1> = {

@@ -8,7 +8,8 @@ tags: array
 
 ## Challenge
 
-Given a tuple type `T` that only contains string type, and a type `U`, build an object recursively.
+Given a tuple type `T` that only contains string type, and a type `U`, build an
+object recursively.
 
 ```ts
 type a = TupleToNestedObject<["a"], string>; // {a: string}
@@ -32,7 +33,8 @@ What if the `T` is empty? In that case, we return the type `U` as it is.
 type TupleToNestedObject<T, U> = T extends [infer F, ...infer R] ? never : U;
 ```
 
-Since keys for an `object` can only be of the type `string`, we have to check whether `F` is a string.
+Since keys for an `object` can only be of the type `string`, we have to check
+whether `F` is a string.
 
 ```ts
 type TupleToNestedObject<T, U> = T extends [infer F, ...infer R]
@@ -42,8 +44,10 @@ type TupleToNestedObject<T, U> = T extends [infer F, ...infer R]
   : U;
 ```
 
-If `F` is a typeof `string`, we would want to create an `object` and recursively traverse the remaining tuple.
-This way we iterate over the entire tuple and create nested objects until we reach the last entry of the tuple at which point we simply return `U` as its type.
+If `F` is a typeof `string`, we would want to create an `object` and recursively
+traverse the remaining tuple. This way we iterate over the entire tuple and
+create nested objects until we reach the last entry of the tuple at which point
+we simply return `U` as its type.
 
 ```ts
 type TupleToNestedObject<T, U> = T extends [infer F, ...infer R]

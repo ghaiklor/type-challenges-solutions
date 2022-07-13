@@ -8,8 +8,7 @@ tags: object-keys
 
 ## Challenge
 
-Implement the type version of binary tree in-order traversal.
-For example:
+Implement the type version of binary tree in-order traversal. For example:
 
 ```typescript
 const tree1 = {
@@ -31,8 +30,9 @@ type A = InOrderTraversal<typeof tree1>; // [1, 3, 2]
 
 ## Solution
 
-In an in-order traversal of a binary tree, we traverse one subtree of a node, then "visit" the node, and then traverse its other subtree.
-Usually, we traverse the node's left subtree first and then traverse the node's right subtree.
+In an in-order traversal of a binary tree, we traverse one subtree of a node,
+then "visit" the node, and then traverse its other subtree. Usually, we traverse
+the node's left subtree first and then traverse the node's right subtree.
 
 Below is the pseudocode for in-order traversal of a binary tree:
 
@@ -74,9 +74,11 @@ type InOrderTraversal<T extends TreeNode | null> = T extends TreeNode
   : [];
 ```
 
-As per our pseudocode, we recursively traverse the left subtree until we hit `null` and when we do, we print the root node and traverse its right subtree.
+As per our pseudocode, we recursively traverse the left subtree until we hit
+`null` and when we do, we print the root node and traverse its right subtree.
 
-Let's create a type helper which will recursively in-order traverse a node until it hits `null` at which point we'll return an empty array.
+Let's create a type helper which will recursively in-order traverse a node until
+it hits `null` at which point we'll return an empty array.
 
 ```ts
 type Traverse<F, S extends keyof F> = F[S] extends TreeNode

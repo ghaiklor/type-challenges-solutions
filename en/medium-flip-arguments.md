@@ -10,7 +10,8 @@ tags: array
 
 Implement the type version of lodash's `_.flip`.
 
-Type `FlipArguments<T>` requires a function type `T` and returns a new function type which has the same return type of `T` but reversed parameters.
+Type `FlipArguments<T>` requires a function type `T` and returns a new function
+type which has the same return type of `T` but reversed parameters.
 
 For example:
 
@@ -23,7 +24,8 @@ type Flipped = FlipArguments<
 
 ## Solution
 
-The solution for this challenge is very straightforward. Check if the type `T` is a function type and if it is then reverse its arguments.
+The solution for this challenge is very straightforward. Check if the type `T`
+is a function type and if it is then reverse its arguments.
 
 ```ts
 type FlipArguments<T> = T extends (...args: [...infer P]) => infer R
@@ -31,7 +33,8 @@ type FlipArguments<T> = T extends (...args: [...infer P]) => infer R
   : never;
 ```
 
-Having captured the function arguments in `P` and its return type in `R`, let's reverse the arguments and return the same from our expression above.
+Having captured the function arguments in `P` and its return type in `R`, let's
+reverse the arguments and return the same from our expression above.
 
 ```ts
 type MyReverse<T extends unknown[]> = T extends [...infer F, infer S]

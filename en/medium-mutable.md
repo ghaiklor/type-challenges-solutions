@@ -24,36 +24,40 @@ type MutableTodo = Mutable<T>;
 
 ## Solution
 
-Again, the challenge that is not supposed to be in medium category, IMHO.
-I’ve solved it with no issues.
-But, anyway, we are solving all of them, so why bothering about it.
+Again, the challenge that is not supposed to be in medium category, IMHO. I’ve
+solved it with no issues. But, anyway, we are solving all of them, so why
+bothering about it.
 
 We know that there is a type with read only modifiers on object’s properties.
-The same modifiers we used some time ago to solve [Readonly challenge](./easy-readonly.md).
-However, in this case, we have been asked to remove it from the type.
+The same modifiers we used some time ago to solve
+[Readonly challenge](./easy-readonly.md). However, in this case, we have been
+asked to remove it from the type.
 
-Let’s start with the simplest thing, just copy the type as it is, using mapped types:
+Let’s start with the simplest thing, just copy the type as it is, using mapped
+types:
 
 ```typescript
 type Mutable<T> = { [P in keyof T]: T[P] };
 ```
 
-Now it is a copy of `T` with the read only modifiers.
-How can we get rid of them?
-Well, remember that to add them, in the previous challenges, we just used the keyword `readonly` added to the mapped type:
+Now it is a copy of `T` with the read only modifiers. How can we get rid of
+them? Well, remember that to add them, in the previous challenges, we just used
+the keyword `readonly` added to the mapped type:
 
 ```typescript
 type Mutable<T> = { readonly [P in keyof T]: T[P] };
 ```
 
-Implicitly, TypeScript has added a `+` to the `readonly` keyword, meaning that we want to add the modifier to the property.
-But in our case, we want to discard it, so we can use `-` instead:
+Implicitly, TypeScript has added a `+` to the `readonly` keyword, meaning that
+we want to add the modifier to the property. But in our case, we want to discard
+it, so we can use `-` instead:
 
 ```typescript
 type Mutable<T> = { -readonly [P in keyof T]: T[P] };
 ```
 
-That way, we’ve implemented a type that discards the read only modifier from the properties.
+That way, we’ve implemented a type that discards the read only modifier from the
+properties.
 
 ## References
 

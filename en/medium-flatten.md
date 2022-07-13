@@ -8,7 +8,8 @@ tags: array
 
 ## Challenge
 
-In this challenge, you would need to write a type that takes an array and emitted the flatten array type.
+In this challenge, you would need to write a type that takes an array and
+emitted the flatten array type.
 
 For example:
 
@@ -18,18 +19,18 @@ type flatten = Flatten<[1, 2, [3, 4], [[[5]]]> // [1, 2, 3, 4, 5]
 
 ## Solution
 
-The base case for the challenge here is an empty array.
-When we get an empty array, we return an empty array; it is already flatten anyway.
-Otherwise, `T` itself:
+The base case for the challenge here is an empty array. When we get an empty
+array, we return an empty array; it is already flatten anyway. Otherwise, `T`
+itself:
 
 ```typescript
 type Flatten<T> = T extends [] ? [] : T;
 ```
 
-But, if `T` will not be an empty array, it means that we have an array with elements inside or the element itself.
-What we need to do when it is an array with elements?
-We need to infer one item from it and the tail.
-For now, we can just return inferred items:
+But, if `T` will not be an empty array, it means that we have an array with
+elements inside or the element itself. What we need to do when it is an array
+with elements? We need to infer one item from it and the tail. For now, we can
+just return inferred items:
 
 ```typescript
 type Flatten<T> = T extends []
@@ -39,11 +40,13 @@ type Flatten<T> = T extends []
   : [T];
 ```
 
-BTW, pay attention to the case when it is not an array with elements.
-It means it is not an array at all, so we treat it as the element itself and just return it wrapped in a tuple.
+BTW, pay attention to the case when it is not an array with elements. It means
+it is not an array at all, so we treat it as the element itself and just return
+it wrapped in a tuple.
 
-Knowing our array’s head and tail, we can recursively call `Flatten` again and again and pass there these inferred items.
-That way, we flatten the item until it is not an array and return the item itself `[T]`:
+Knowing our array’s head and tail, we can recursively call `Flatten` again and
+again and pass there these inferred items. That way, we flatten the item until
+it is not an array and return the item itself `[T]`:
 
 ```typescript
 type Flatten<T> = T extends []

@@ -16,18 +16,21 @@ Flip<{ a: 1; b: 2; c: 3 }>; // {1: 'a', 2: 'b', 3: 'c'}
 Flip<{ a: false; b: true }>; // {false: 'a', true: 'b'}
 ```
 
-No need to support nested objects and values which cannot be object keys such as arrays.
+No need to support nested objects and values which cannot be object keys such as
+arrays.
 
 ## Solution
 
-Let us start with the basic block and construct the same object but instead of returning the value, we'll return the key itself.
+Let us start with the basic block and construct the same object but instead of
+returning the value, we'll return the key itself.
 
 ```ts
 type Flip<T> = { [P in keyof T]: P };
 // {key: key, ...}
 ```
 
-Now let's remap the keys of our generated type with their values by using the [“as” syntax](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#key-remapping-in-mapped-types):
+Now let's remap the keys of our generated type with their values by using the
+[“as” syntax](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#key-remapping-in-mapped-types):
 
 ```ts
 type Flip<T> = {
@@ -36,13 +39,17 @@ type Flip<T> = {
 // {value: key, ...}
 ```
 
-Our type helper `AllowedTypes` should contain all the types which can be used as a key in an object. Looking at the test cases, we see that string, number and boolean can be used as keys.
+Our type helper `AllowedTypes` should contain all the types which can be used as
+a key in an object. Looking at the test cases, we see that string, number and
+boolean can be used as keys.
 
 ```ts
 type AllowedTypes = string | number | boolean;
 ```
 
-Notice, this still doesn't pass all the test cases. The reason is because the keys of an object can only be of the type string. So we need to stringify our keys.
+Notice, this still doesn't pass all the test cases. The reason is because the
+keys of an object can only be of the type string. So we need to stringify our
+keys.
 
 ```ts
 type Flip<T> = {

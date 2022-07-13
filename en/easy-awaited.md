@@ -8,56 +8,59 @@ tags: promise
 
 ## Challenge
 
-If we have a type which is wrapped type like `Promise`.
-How we can get a type which is inside the wrapped type?
-For example if we have `Promise<ExampleType>` how to get `ExampleType`?
+If we have a type which is wrapped type like `Promise`. How we can get a type
+which is inside the wrapped type? For example if we have `Promise<ExampleType>`
+how to get `ExampleType`?
 
 ## Solution
 
-Pretty interesting challenge that requires us to know about one of the underrated TypeScript features, IMHO.
+Pretty interesting challenge that requires us to know about one of the
+underrated TypeScript features, IMHO.
 
-But, before explaining what I mean, let us analyze the challenge.
-The author asks us to unwrap the type.
-What is unwrap?
-Unwrap is extracting the inner type from another type.
+But, before explaining what I mean, let us analyze the challenge. The author
+asks us to unwrap the type. What is unwrap? Unwrap is extracting the inner type
+from another type.
 
-Let me explain it with an example.
-If you have a type `Promise<string>`, unwrapping the `Promise` type will result into type `string`.
-We got the inner type from the outer type.
+Let me explain it with an example. If you have a type `Promise<string>`,
+unwrapping the `Promise` type will result into type `string`. We got the inner
+type from the outer type.
 
-Note that you also need to unwrap the type recursively.
-For example, if you have type `Promise<Promise<string>>`, you need to return type `string`.
+Note that you also need to unwrap the type recursively. For example, if you have
+type `Promise<Promise<string>>`, you need to return type `string`.
 
-Now, to the challenge.
-I’ll start with the simplest case.
-If our `Awaited` type gets `Promise<string>`, we need to return the `string`, otherwise we return the `T` itself, because it is not a Promise:
+Now, to the challenge. I’ll start with the simplest case. If our `Awaited` type
+gets `Promise<string>`, we need to return the `string`, otherwise we return the
+`T` itself, because it is not a Promise:
 
 ```ts
 type Awaited<T> = T extends Promise<string> ? string : T;
 ```
 
-But there is a problem.
-That way, we can handle only strings in `Promise` while we need to handle any case.
-So how to do that?
-How to get the type from `Promise` if we don’t know what is there?
+But there is a problem. That way, we can handle only strings in `Promise` while
+we need to handle any case. So how to do that? How to get the type from
+`Promise` if we don’t know what is there?
 
-For these purposes, TypeScript has type inference in conditional types!
-You can say to the compiler “hey, once you know what the type is, assign it to my type parameter, please”.
-You can read more about [type inference in conditional types here](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html#type-inference-in-conditional-types).
+For these purposes, TypeScript has type inference in conditional types! You can
+say to the compiler “hey, once you know what the type is, assign it to my type
+parameter, please”. You can read more about
+[type inference in conditional types here](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html#type-inference-in-conditional-types).
 
-Knowing about type inference, we can update our solution.
-Instead of checking for `Promise<string>` in our conditional type, we replace a `string` with `infer R`, because we don’t know what must be there.
-The only thing we know is that it is a `Promise<T>` with some type inside.
+Knowing about type inference, we can update our solution. Instead of checking
+for `Promise<string>` in our conditional type, we replace a `string` with
+`infer R`, because we don’t know what must be there. The only thing we know is
+that it is a `Promise<T>` with some type inside.
 
-Once the TypeScript figures out the type inside the `Promise`, it will assign it to our type parameter `R` and becomes available in “true” branch.
-Exactly where we return it:
+Once the TypeScript figures out the type inside the `Promise`, it will assign it
+to our type parameter `R` and becomes available in “true” branch. Exactly where
+we return it:
 
 ```ts
 type Awaited<T> = T extends Promise<infer R> ? R : T;
 ```
 
-We are almost done, but yet from type `Promise<Promise<string>>` we get type `Promise<string>`.
-So, we need to repeat the same process recursively, which is achieved by using `Awaited` type itself:
+We are almost done, but yet from type `Promise<Promise<string>>` we get type
+`Promise<string>`. So, we need to repeat the same process recursively, which is
+achieved by using `Awaited` type itself:
 
 ```ts
 type Awaited<T> = T extends Promise<infer R> ? Awaited<R> : T;

@@ -8,9 +8,8 @@ tags: union string
 
 ## Challenge
 
-Implement the `StringToUnion` type.
-Type take `string` argument.
-The output should be a union of input letters.
+Implement the `StringToUnion` type. Type take `string` argument. The output
+should be a union of input letters.
 
 For example:
 
@@ -21,9 +20,10 @@ type Result = StringToUnion<Test>; // expected to be "1" | "2" | "3"
 
 ## Solution
 
-In this challenge, we need to iterate over each character and add it to the union.
-It is easy to iterate over the characters, let us start with that.
-All we need to do is just infer two parts of the string: the first character and the tail:
+In this challenge, we need to iterate over each character and add it to the
+union. It is easy to iterate over the characters, let us start with that. All we
+need to do is just infer two parts of the string: the first character and the
+tail:
 
 ```typescript
 type StringToUnion<T extends string> = T extends `${infer C}${infer T}`
@@ -31,8 +31,9 @@ type StringToUnion<T extends string> = T extends `${infer C}${infer T}`
   : never;
 ```
 
-Here, we will get two type parameters `C` and `T` (character and tail appropriately).
-To continue iterating over the characters, we need to call our type recursively and provide the tail to it:
+Here, we will get two type parameters `C` and `T` (character and tail
+appropriately). To continue iterating over the characters, we need to call our
+type recursively and provide the tail to it:
 
 ```typescript
 type StringToUnion<T extends string> = T extends `${infer C}${infer T}`
@@ -40,8 +41,9 @@ type StringToUnion<T extends string> = T extends `${infer C}${infer T}`
   : never;
 ```
 
-The only thing left is the union itself.
-We need to add the first character to the union and since in the base case `StringToUnion` returns a `C | never`, we can just add union with `C`:
+The only thing left is the union itself. We need to add the first character to
+the union and since in the base case `StringToUnion` returns a `C | never`, we
+can just add union with `C`:
 
 ```typescript
 type StringToUnion<T extends string> = T extends `${infer C}${infer T}`

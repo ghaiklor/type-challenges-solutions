@@ -10,7 +10,8 @@ tags: warm-up
 
 In Type Challenges, we use the type system itself to do the assertion.
 
-For this challenge, you will need to change the following code to make the tests pass (no type check errors).
+For this challenge, you will need to change the following code to make the tests
+pass (no type check errors).
 
 ```ts
 // expected to be string
@@ -24,8 +25,9 @@ type test = Expect<Equal<HelloWorld, string>>;
 
 ## Solution
 
-This challenge is a warm-up challenge to get familiar with their playground, how to take challenges and other stuff.
-All we asked to do here is literally to set the type of `string` instead of `any`:
+This challenge is a warm-up challenge to get familiar with their playground, how
+to take challenges and other stuff. All we asked to do here is literally to set
+the type of `string` instead of `any`:
 
 ```ts
 type HelloWorld = string;
