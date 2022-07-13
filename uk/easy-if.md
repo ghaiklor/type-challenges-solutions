@@ -20,14 +20,17 @@ type B = If<false, "a", "b">; // expected to be 'b'
 
 ## Розв'язок
 
-Використовуйте умовні типи [(conditional types)](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html) в TypeScript коли вам необхідно вжити “if” до типів.
-Якщо тип умови буде `true` то візьмемо тип з гілки “true” і навпаки.
+Використовуйте умовні типи
+[(conditional types)](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
+в TypeScript коли вам необхідно вжити “if” до типів. Якщо тип умови буде `true`
+то візьмемо тип з гілки “true” і навпаки.
 
 ```ts
 type If<C, T, F> = C extends true ? T : F;
 ```
 
-Але так ми отримаємо помилку при компіляції, тому що ми намагаємось привести `C` до булевого типу.
+Але так ми отримаємо помилку при компіляції, тому що ми намагаємось привести `C`
+до булевого типу.
 
 Виправимо це додавши обмеження `extends boolean` до параметру `C`.
 

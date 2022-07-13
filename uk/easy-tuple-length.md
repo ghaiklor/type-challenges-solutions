@@ -28,15 +28,16 @@ type spaceXLength = Length<spaceX>; // expected 5
 
 ## Розв'язок
 
-Ми знаємо, що можна використати властивість `length` для доступу до довжини масиву в JavaScript.
-Того ж можна досягти в типах:
+Ми знаємо, що можна використати властивість `length` для доступу до довжини
+масиву в JavaScript. Того ж можна досягти в типах:
 
 ```ts
 type Length<T extends any> = T["length"];
 ```
 
-Проте, якщо зробити так, ми отримаємо помилку компіляції “Type 'length' cannot be used to index type 'T'.”.
-Тож, треба дати TypeScript підказку, вказавши, що наш вхідний тип має таку властивість:
+Проте, якщо зробити так, ми отримаємо помилку компіляції “Type 'length' cannot
+be used to index type 'T'.”. Тож, треба дати TypeScript підказку, вказавши, що
+наш вхідний тип має таку властивість:
 
 ```ts
 type Length<T extends { length: number }> = T["length"];
