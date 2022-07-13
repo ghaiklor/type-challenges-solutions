@@ -25,14 +25,18 @@ type re2 = Pop<arr2>; // expected to be [3, 2]
 我们需要将数组分成两部份：从头部到最后一个元素之前的所有内容和最后一个元素本身。
 之后，我们就可以去掉最后一个元素并返回头部部分了。
 
-为此，我们可以使用 [variadic tuple types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)。
-结合 [type inference in conditional types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types)，我们可以推断出需要的部分：
+为此，我们可以使用
+[variadic tuple types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)。
+结合
+[type inference in conditional types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types)，
+我们可以推断出需要的部分：
 
 ```ts
 type Pop<T extends any[]> = T extends [...infer H, infer T] ? H : never;
 ```
 
-如果 `T` 是可拆分为两部分的数组类型，则我们返回除最后一个以外的所有内容，否则返回 `never`。
+如果 `T` 是可拆分为两部分的数组类型，则我们返回除最后一个以外的所有内容，否则返
+回 `never`。
 
 ## 参考
 

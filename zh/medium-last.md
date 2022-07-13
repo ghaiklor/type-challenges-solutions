@@ -22,12 +22,15 @@ type tail2 = Last<arr2>; // expected to be 1
 
 ## 解答
 
-当你想从数组中获取最后一个元素时，你需要从头开始获取所有元素，直到找到最后一个元素。
-这里提示使用 [variadic tuple types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)；我们有一个数组，我们需要处理它的元素。
+当你想从数组中获取最后一个元素时，你需要从头开始获取所有元素，直到找到最后一个元
+素。这里提示使用
+[variadic tuple types](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types)；
+我们有一个数组，我们需要处理它的元素。
 
-了解了可变元组类型，解答也就非常明显了。
-我们需要将数组中除最后一个元素的其余元素排除出去。
-结合 [type inference in conditional types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types) 可以很容易的推断出最后一个元素的类型了。
+了解了可变元组类型，解答也就非常明显了。我们需要将数组中除最后一个元素的其余元素
+排除出去。结合
+[type inference in conditional types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types)
+可以很容易的推断出最后一个元素的类型了。
 
 ```ts
 type Last<T extends any[]> = T extends [...infer X, infer L] ? L : never;

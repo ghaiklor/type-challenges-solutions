@@ -28,11 +28,15 @@ type head2 = First<arr2>; // expected to be 3
 type First<T extends any[]> = T[0];
 ```
 
-但是这里有个临界情况我们需要去处理。如果我们传入一个空数组，`T[0]`不能正常工作，因为它没有元素。
+但是这里有个临界情况我们需要去处理。如果我们传入一个空数组，`T[0]`不能正常工作，
+因为它没有元素。
 
-因此，在访问数组中的第一个元素之前，我们需要检查数组是否为空。为此，我们可以在 TypeScript 中使用[条件类型](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)。
+因此，在访问数组中的第一个元素之前，我们需要检查数组是否为空。为此，我们可以在
+TypeScript 中使
+用[条件类型](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)。
 
-它们背后的理念非常简单。如果我们可以将该类型分配给条件类型，它将进入“true”分支，否则它将采取“false”分支。
+它们背后的理念非常简单。如果我们可以将该类型分配给条件类型，它将进入“true”分支，
+否则它将采取“false”分支。
 
 我们接下来检查，如果数组为空，则什么也不返回，否则返回数组的第一个元素:
 

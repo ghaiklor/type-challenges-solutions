@@ -8,8 +8,7 @@ tags: template-literal
 
 ## 挑战
 
-将字符串转换为驼峰式。
-例如：
+将字符串转换为驼峰式。例如：
 
 ```typescript
 type camelCased = CamelCase<"foo-bar-baz">; // expected "fooBarBaz"
@@ -17,23 +16,21 @@ type camelCased = CamelCase<"foo-bar-baz">; // expected "fooBarBaz"
 
 ## 解答
 
-有一个常见的模式，我们可以用来推断字符串的连字符（-）部分。
-我们可以取得连字符（-）之前的部分-头部，和连字符（-）之后的部分-尾部。
-让我们来推断这些部分。
+有一个常见的模式，我们可以用来推断字符串的连字符（-）部分。我们可以取得连字符
+（-）之前的部分-头部，和连字符（-）之后的部分-尾部。让我们来推断这些部分。
 
 ```typescript
 type CamelCase<S> = S extends `${infer H}-${infer T}` ? never : never;
 ```
 
-如果没有这种模式呢？
-我们返回输入的字符串，不做任何更改。
+如果没有这种模式呢？我们返回输入的字符串，不做任何更改。
 
 ```typescript
 type CamelCase<S> = S extends `${infer H}-${infer T}` ? never : S;
 ```
 
-但是如果有这样的模式，我们需要删除连字符并将尾部首字母大写。
-另外，我们不会忘记可能还有其他子字符串需要处理，所以我们递归地处理。
+但是如果有这样的模式，我们需要删除连字符并将尾部首字母大写。另外，我们不会忘记可
+能还有其他子字符串需要处理，所以我们递归地处理。
 
 ```typescript
 type CamelCase<S> = S extends `${infer H}-${infer T}`
@@ -41,8 +38,8 @@ type CamelCase<S> = S extends `${infer H}-${infer T}`
   : S;
 ```
 
-现在的问题是我们不处理尾部已经首字母大写的情况。
-我们可以通过检查尾部首字母是否大写来解决这个问题。
+现在的问题是我们不处理尾部已经首字母大写的情况。我们可以通过检查尾部首字母是否大
+写来解决这个问题。
 
 ```typescript
 type CamelCase<S> = S extends `${infer H}-${infer T}`
@@ -52,9 +49,8 @@ type CamelCase<S> = S extends `${infer H}-${infer T}`
   : S;
 ```
 
-如果我们得到首字母大写的尾部，我们会怎么做?
-我们需要保留连字符，跳过这个。
-当然，我们也需要递归。
+如果我们得到首字母大写的尾部，我们会怎么做? 我们需要保留连字符，跳过这个。当然，
+我们也需要递归。
 
 ```typescript
 type CamelCase<S> = S extends `${infer H}-${infer T}`

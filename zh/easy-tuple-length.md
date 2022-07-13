@@ -28,15 +28,15 @@ type spaceXLength = Length<spaceX>; // expected 5
 
 ## 解答
 
-我们知道在 JavaScript 中可以使用属性`length`来访问数组的长度。
-我们也可以在类型上做同样的事情:
+我们知道在 JavaScript 中可以使用属性`length`来访问数组的长度。我们也可以在类型上
+做同样的事情:
 
 ```ts
 type Length<T extends any> = T["length"];
 ```
 
-但是按照这种方式，我们将得到编译错误“Type 'length' cannot be used to index type 'T'.”。
-所以我们需要给 TypeScript 一个提示，告知我们的输入类型参数有这个属性:
+但是按照这种方式，我们将得到编译错误“Type 'length' cannot be used to index type
+'T'.”。所以我们需要给 TypeScript 一个提示，告知我们的输入类型参数有这个属性:
 
 ```ts
 type Length<T extends { length: number }> = T["length"];
