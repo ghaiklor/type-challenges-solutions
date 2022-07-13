@@ -23,8 +23,9 @@ const result: TupleToObject<typeof tuple>;
 
 배열에 있는 모든 값들을 얻어 새 객체의 키와 값으로 만들어야합니다.
 
-이 경우 인덱스 타입을 이용하면 쉽습니다. 배열에 있는 값들은 `T[number]`로 얻을 수 있습니다.
-mapped type을 사용하면, `T[number]`로 얻은 값들을 순회하며 기존의 원소를 키와 값으로 하는 새로운 타입을 만들 수 있습니다:
+이 경우 인덱스 타입을 이용하면 쉽습니다. 배열에 있는 값들은 `T[number]`로 얻을수
+있습니다. mapped type을 사용하면, `T[number]`로 얻은 값들을 순회하며 기존의원소
+를 키와 값으로 하는 새로운 타입을 만들 수 있습니다:
 
 ```ts
 type TupleToObject<T extends readonly any[]> = { [K in T[number]]: K };

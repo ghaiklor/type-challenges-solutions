@@ -35,8 +35,9 @@ JavaScript에서는 `length` 프로퍼티를 사용하여 배열의 길이에 �
 type Length<T extends any> = T["length"];
 ```
 
-이렇게만 할 경우 “Type 'length' cannot be used to index type 'T'.”라는 컴파일 에러를 얻습니다.
-따라서 TypeScript에게 입력으로 주어진 타입변수가 해당 프로퍼티를 가지고 있음을 알려주어야 합니다:
+이렇게만 할 경우 “Type 'length' cannot be used to index type 'T'.”라는 컴파일 에
+러를 얻습니다. 따라서 TypeScript에게 입력으로 주어진 타입변수가 해당 프로퍼티를
+가지고 있음을 알려주어야 합니다:
 
 ```ts
 type Length<T extends { length: number }> = T["length"];
