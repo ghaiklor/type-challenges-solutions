@@ -1,5 +1,7 @@
 # Type Challenges Solutions
 
+[![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner-direct-single.svg)](https://stand-with-ukraine.pp.ua)
+
 ![Makefile](https://github.com/ghaiklor/type-challenges-solutions/actions/workflows/make.yml/badge.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/ghaiklor/type-challenges-solutions)
 ![Maintenance](https://img.shields.io/maintenance/yes/2022)
