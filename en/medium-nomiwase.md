@@ -187,6 +187,7 @@ The whole solution with two types being made here:
 type StringToUnion<S> = S extends `${infer C}${infer R}`
   ? C | StringToUnion<R>
   : never;
+
 type AllCombinations<S, U extends string = StringToUnion<S>> = [U] extends [
   never
 ]
