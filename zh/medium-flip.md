@@ -42,7 +42,7 @@ type Flip<T> = {
 type AllowedTypes = string | number | boolean;
 ```
 
-但目前我们还不能通过测试。因为根据 ECMAScript 规范，对象的键只能为字符串。因此我们需要把 `T[P]` 转成字符串：
+但目前我们还不能通过测试，因为在这个挑战中，新对象的键只能为字符串。因此我们只需要把 `T[P]` 转成字符串即可：
 
 ```ts
 type Flip<T> = {
