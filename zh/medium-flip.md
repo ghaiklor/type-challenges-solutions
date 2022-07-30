@@ -16,7 +16,8 @@ Flip<{ a: 1; b: 2; c: 3 }>; // {1: 'a', 2: 'b', 3: 'c'}
 Flip<{ a: false; b: true }>; // {false: 'a', true: 'b'}
 ```
 
-在这个挑战中，我们不需要处理对象嵌套的情况，也不需要处理原对象值（如数组）不能用作新对象键的情况。
+在这个挑战中，我们不需要处理对象嵌套的情况，也不需要处理原对象值（如数组）不能用
+作新对象键的情况。
 
 ## 解答
 
@@ -27,7 +28,8 @@ type Flip<T> = { [P in keyof T]: P };
 // {key: key, ...}
 ```
 
-接下来，我们只需要把新对象的键改成原对象的值即可完成挑战。这里我们需要使用 [“as” 语法](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#key-remapping-in-mapped-types)：
+接下来，我们只需要把新对象的键改成原对象的值即可完成挑战。这里我们需要使用
+[“as” 语法](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html#key-remapping-in-mapped-types)：
 
 ```ts
 type Flip<T> = {
@@ -36,13 +38,15 @@ type Flip<T> = {
 // {value: key, ...}
 ```
 
-这里 `AllowedTypes` 需包含可用作对象键的所有类型。根据题目的测试用例，我们需要包含 `string`、`number` 和 `boolean`：
+这里 `AllowedTypes` 需包含可用作对象键的所有类型。根据题目的测试用例，我们需要包
+含 `string`、`number` 和 `boolean`：
 
 ```ts
 type AllowedTypes = string | number | boolean;
 ```
 
-但目前我们还不能通过测试，因为在这个挑战中，新对象的键只能为字符串。因此我们只需要把 `T[P]` 转成字符串即可：
+但目前我们还不能通过测试，因为在这个挑战中，新对象的键只能为字符串。因此我们只需
+要把 `T[P]` 转成字符串即可：
 
 ```ts
 type Flip<T> = {
