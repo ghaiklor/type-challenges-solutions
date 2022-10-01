@@ -31,7 +31,7 @@ const result: TupleToObject<typeof tuple>;
 значеннями якого будуть відповідні елементи `T[number]`:
 
 ```ts
-type TupleToObject<T extends readonly any[]> = { [K in T[number]]: K };
+type TupleToObject<T extends readonly (string | number | symbol)[]> = { [K in T[number]]: K };
 ```
 
 ## Посилання
