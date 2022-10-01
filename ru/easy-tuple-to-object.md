@@ -27,10 +27,12 @@ const result: TupleToObject<typeof tuple>;
 элементы из кортежа в объединение, используя конструкцию `T[number]`.
 
 А уже при помощи сопоставляющих типов, создать новый объект, ключами и
-значениями которого будут элементы нашего объединения `T[number]`.
+значениями которого будут элементы нашего объединения `T[number]`. 
+
+Так же нужно убедиться, что ключи в переданном типе корректные. В TS допускаются три вида ключей: `string`, `number` или `symbol`.
 
 ```typescript
-type TupleToObject<T extends readonly any[]> = { [K in T[number]]: K };
+type TupleToObject<T extends readonly (string | number | symbol)[]> = { [K in T[number]]: K };
 ```
 
 ## Что почитать
