@@ -29,10 +29,10 @@ const result: TupleToObject<typeof tuple>;
 А уже при помощи сопоставляющих типов, создать новый объект, ключами и
 значениями которого будут элементы нашего объединения `T[number]`. 
 
-Так же нужно убедиться, что ключи в переданном типе корректные. В TS допускаются три вида ключей: `string`, `number` или `symbol`.
+Так же нужно убедиться, что ключи в переданном типе корректные. В TS допускаются три вида ключей: `string`, `number` или `symbol`. Так же, мы можем использовать встроенный тип `PropertyKey`.
 
 ```typescript
-type TupleToObject<T extends readonly (string | number | symbol)[]> = { [K in T[number]]: K };
+type TupleToObject<T extends readonly (PropertyKey)[]> = { [K in T[number]]: K };
 ```
 
 ## Что почитать
