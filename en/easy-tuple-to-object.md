@@ -30,7 +30,7 @@ using `T[number]` construct. With the help of mapped types, we can iterate over
 those values in `T[number]` and return a new type where the key and value is the
 type from `T[number]`:
 
-We need to make sure that we pass only types contain valid keys. As we know, valid keys in typescript are `string`, `number` or `symbol`. Also, we can you a built-in type `PropertyKey`.
+We need to make sure that we pass only types containing valid keys. As we know, valid keys in TypeScript are `string`, `number` or `symbol`. To achieve that, we can use the built-in type `PropertyKey`.
 
 ```ts
 type TupleToObject<T extends readonly (PropertyKey)[]> = { [K in T[number]]: K };
