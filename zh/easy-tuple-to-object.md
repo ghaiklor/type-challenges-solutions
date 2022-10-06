@@ -28,7 +28,7 @@ const result: TupleToObject<typeof tuple>;
 是`T[number]`的类型:
 
 ```ts
-type TupleToObject<T extends readonly any[]> = { [K in T[number]]: K };
+type TupleToObject<T extends readonly PropertyKey[]> = { [K in T[number]]: K };
 ```
 
 ## 参考

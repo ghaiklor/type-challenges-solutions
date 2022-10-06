@@ -30,7 +30,7 @@ const result: TupleToObject<typeof tuple>;
 значениями которого будут элементы нашего объединения `T[number]`.
 
 ```typescript
-type TupleToObject<T extends readonly any[]> = { [K in T[number]]: K };
+type TupleToObject<T extends readonly PropertyKey[]> = { [K in T[number]]: K };
 ```
 
 ## Что почитать

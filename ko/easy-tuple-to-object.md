@@ -28,7 +28,7 @@ const result: TupleToObject<typeof tuple>;
 를 키와 값으로 하는 새로운 타입을 만들 수 있습니다:
 
 ```ts
-type TupleToObject<T extends readonly any[]> = { [K in T[number]]: K };
+type TupleToObject<T extends readonly PropertyKey[]> = { [K in T[number]]: K };
 ```
 
 ## 참고

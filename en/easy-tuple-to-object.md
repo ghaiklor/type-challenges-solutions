@@ -31,7 +31,7 @@ those values in `T[number]` and return a new type where the key and value is the
 type from `T[number]`:
 
 ```ts
-type TupleToObject<T extends readonly any[]> = { [K in T[number]]: K };
+type TupleToObject<T extends readonly PropertyKey[]> = { [K in T[number]]: K };
 ```
 
 ## References
