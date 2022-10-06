@@ -9,5 +9,7 @@ main:
     url: /ko/
   - title: "中文"
     url: /zh/
+  - title: "日本語"
+    url: /ja/
   - title: "GitHub"
     url: https://github.com/ghaiklor/type-challenges-solutions
