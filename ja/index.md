@@ -7,7 +7,7 @@ lang: ja
 comments: false
 ---
 
-Type Challenges をご存知でしょうか? 
+Type Challenges をご存知でしょうか?
 [Type Challenges](https://github.com/type-challenges/type-challenges) は、Anthony Fu により開発・メンテナンスされているプロジェクトです。
 このプロジェクトの主要な目的は、TypeScript に関する面白い課題を集め、そして提供することです。
 しかし、その課題にはちょっとした特徴があります。
