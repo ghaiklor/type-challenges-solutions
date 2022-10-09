@@ -55,7 +55,7 @@ type Awaited<T> = T extends Promise<infer R> ? R : T;
 身来实现的:
 
 ```ts
-type Awaited<T> = T extends Promise<infer R> ? Awaited<R> : T;
+type Awaited<T extends Promise<any>> = T extends Promise<infer R> ? Awaited<R> : T;
 ```
 
 ## 参考

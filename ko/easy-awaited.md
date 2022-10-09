@@ -65,7 +65,7 @@ type Awaited<T> = T extends Promise<infer R> ? R : T;
 입을 얻는 절차를 재귀적으로 반복해주면 됩니다.
 
 ```ts
-type Awaited<T> = T extends Promise<infer R> ? Awaited<R> : T;
+type Awaited<T extends Promise<any>> = T extends Promise<infer R> ? Awaited<R> : T;
 ```
 
 ## 참고

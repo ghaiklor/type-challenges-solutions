@@ -66,6 +66,12 @@ achieved by using `Awaited` type itself:
 type Awaited<T> = T extends Promise<infer R> ? Awaited<R> : T;
 ```
 
+Let's make sure that we can pass only valid values to `Awaited` type:
+
+```ts
+type Awaited<T extends Promise<any>> = T extends Promise<infer R> ? Awaited<R> : T;
+```
+
 ## References
 
 - [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)

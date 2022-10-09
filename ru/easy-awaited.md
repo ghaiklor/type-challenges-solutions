@@ -55,6 +55,12 @@ type Awaited<T> = T extends Promise<string> ? string : T;
 type Awaited<T> = T extends Promise<infer R> ? R : T;
 ```
 
+Давайте удостоверимся, что мы можем передать только корректные значения в `Awaited`:
+
+```ts
+type Awaited<T extends Promise<any>> = T extends Promise<infer R> ? Awaited<R> : T;
+```
+
 ## Что почитать
 
 - [Условные типы](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)

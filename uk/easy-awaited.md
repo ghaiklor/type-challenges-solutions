@@ -52,7 +52,7 @@ type Awaited<T> = T extends Promise<string> ? string : T;
 типу, звідки ми його і повернемо.
 
 ```ts
-type Awaited<T> = T extends Promise<infer R> ? R : T;
+type Awaited<T extends Promise<any>> = T extends Promise<infer R> ? Awaited<R> : T;
 ```
 
 ## Посилання
