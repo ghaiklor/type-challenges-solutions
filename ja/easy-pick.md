@@ -35,7 +35,7 @@ Lookup 型により、名前を用いてある型から別の型を抽出する�
 
 Mapped 型により、ある型に含まれるプロパティを新しい型へと変換することができます。
 
-TypeScript のウェブサイト上で [Lookup 型](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types)と [Mapped 型](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)に関する説明をさらに読み、その挙動について理解しておきましょう。
+TypeScript のウェブサイト上で [Lookup 型](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html#keyof-and-lookup-types)と [Mapped 型](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)に関する説明を読み、その挙動について理解しておきましょう。
 
 以上で TypeScript には Lookup 型と Mapped 型が存在することがわかりました。では、要求された型をどのように実装すればいいでしょうか?
 
