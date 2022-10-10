@@ -35,6 +35,7 @@ If you are wondering how can you contribute to the repository, there are several
 
 - Do you know Italian, Brazilian, Korean, Chinese, etc? We would like to have another language here, why not?
 - Did you find a typo in existing content and want to fix it? Please do so!
+- If you are Russian and want to improve something for Russian language - don't.
 
 For these and others matter, if you want to hack in the repository, refer to our [contributing guide](./.github/CONTRIBUTING.md).
 
