@@ -24,13 +24,13 @@ type MyParameters<T> = any;
 type MyParameters<T> = T extends (...args: any[]) => any ? never : never;
 ```
 
-ここでは型 `T` が、任意の引数と任意の型の戻り値をもつ関数とマッチするかどうかをチェックしています。これにより、パラメータリストの `any[]` を `infer` により置き換えることができます:
+ここでは型 `T` が、任意の型の引数と戻り値をもつ関数とマッチするかどうかをチェックしています。これにより、パラメータリストの `any[]` を `infer` により置き換えることができます:
 
 ```typescript
 type MyParameters<T> = T extends (...args: infer P) => any ? never : never;
 ```
 
-こうすることで、TypeScript コンパイラは関数のパラメータリストを推論し、型 `P` に割り当てます。あとは true ブランチから型を返せば完了です:
+こうすることで、TypeScript コンパイラは関数のパラメータリストを推論し、それを型 `P` に割り当てます。あとは true ブランチから型を返せば完了です:
 
 ```typescript
 type MyParameters<T> = T extends (...args: infer P) => any ? P : never;
