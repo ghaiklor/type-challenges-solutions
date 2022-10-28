@@ -8,7 +8,8 @@ tags: built-in
 
 ## 課題
 
-`U` に割り当て可能な型を `T` から除外する、組み込みの `Exclude<T, U>` を実装してください。
+`U` に割り当て可能な型を `T` から除外する、組み込みの `Exclude<T, U>` を実装して
+ください。
 
 例:
 
@@ -19,11 +20,15 @@ type T1 = Exclude<"a" | "b" | "c", "a" | "b">; // expected "c"
 
 ## 解答
 
-ここで重要な知識は、TypeScript の Conditional 型が [distributive](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#distributive-conditional-types) であるということです。
+ここで重要な知識は、TypeScript の Conditional 型が
+[distributive](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#distributive-conditional-types)
+であるということです。
 
-これにより、`T` が Union 型である場合に `T extends U` と書くと、TypeScript は Union 型 `T` の各要素に対して条件を適用していきます。
+これにより、`T` が Union 型である場合に `T extends U` と書くと、TypeScript は
+Union 型 `T` の各要素に対して条件を適用していきます。
 
-よって、解決策はとてもシンプルなものとなります。`T` が `U` に割り当て可能である場合、その要素をスキップすればよいのです:
+よって、解決策はとてもシンプルなものとなります。`T` が `U` に割り当て可能である
+場合、その要素をスキップすればよいのです:
 
 ```ts
 type MyExclude<T, U> = T extends U ? never : T;

@@ -8,7 +8,8 @@ tags: tuple
 
 ## 課題
 
-タプルが与えられたとき、そのタプルの長さを返すような `Length` を実装してください。
+タプルが与えられたとき、そのタプルの長さを返すような `Length` を実装してください
+。
 
 例:
 
@@ -28,13 +29,16 @@ type spaceXLength = Length<spaceX>; // expected 5
 
 ## 解答
 
-JavaScript では `length` プロパティを使用して配列の長さにアクセスできることをご存知でしょう。型においても同様のことが可能です:
+JavaScript では `length` プロパティを使用して配列の長さにアクセスできることをご
+存知でしょう。型においても同様のことが可能です:
 
 ```ts
 type Length<T extends any> = T["length"];
 ```
 
-しかし、この方法では Type 'length' cannot be used to index type 'T' というコンパイルエラーが発生してしまいます。そのため、型変数がこのプロパティをもっていることを TypeScript に伝えておく必要があります:
+しかし、この方法では Type 'length' cannot be used to index type 'T' というコンパ
+イルエラーが発生してしまいます。そのため、型変数がこのプロパティをもっていること
+を TypeScript に伝えておく必要があります:
 
 ```ts
 type Length<T extends { length: number }> = T["length"];

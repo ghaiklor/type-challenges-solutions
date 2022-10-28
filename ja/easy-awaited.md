@@ -8,37 +8,60 @@ tags: promise
 
 ## 課題
 
-Promise などのラップされた型があるとき、その中にある型を取得するにはどうすればよいでしょうか? たとえば `Promise<ExampleType>` から `ExampleType` を取得するにはどうすればよいでしょうか?
+Promise などのラップされた型があるとき、その中にある型を取得するにはどうすればよ
+いでしょうか? たとえば `Promise<ExampleType>` から `ExampleType` を取得するには
+どうすればよいでしょうか?
 
 ## 解答
 
-TypeScript のそれほど知られていない機能を理解していることが要求される、興味深い課題です。
+TypeScript のそれほど知られていない機能を理解していることが要求される、興味深い
+課題です。
 
-しかし、そのことを説明する前に、まず課題を分析しましょう。この課題の作者は、型をアンラップすることを求めています。アンラップとは何でしょうか? アンラップとは、ある型から内部の型を抽出することです。
+しかし、そのことを説明する前に、まず課題を分析しましょう。この課題の作者は、型を
+アンラップすることを求めています。アンラップとは何でしょうか? アンラップとは、あ
+る型から内部の型を抽出することです。
 
-例により説明します。`Promise<string>` という型があるとき、`Promise` 型をアンラップすると、`string` 型を得ます。外側の型から内側の型を取得したのです。
+例により説明します。`Promise<string>` という型があるとき、`Promise` 型をアンラッ
+プすると、`string` 型を得ます。外側の型から内側の型を取得したのです。
 
-ここで、型を再帰的にアンラップする必要があることに注意してください。たとえば、`Promise<Promise<string>>` という型に対しては、`string` 型を返す必要があります。
+ここで、型を再帰的にアンラップする必要があることに注意してください。たとえば
+、`Promise<Promise<string>>` という型に対しては、`string` 型を返す必要があります
+。
 
-それでは課題に入りましょう。まずは最も単純なケースから始めます。`Awaited` という型を、`Promise<string>` を受け取ったとき `string` を返すように定義します。その他の場合については、Promise ではないため `T` 自体を返すようにします:
+それでは課題に入りましょう。まずは最も単純なケースから始めます。`Awaited` という
+型を、`Promise<string>` を受け取ったとき `string` を返すように定義します。その他
+の場合については、Promise ではないため `T` 自体を返すようにします:
 
 ```ts
 type Awaited<T> = T extends Promise<string> ? string : T;
 ```
 
-しかし、このアプローチには問題があります。この方法により対応できるのは文字列の `Promise` のみですが、実際は任意のケースについて対応できるようにする必要があるのです。そのためにはどうすればよいでしょうか? `Promise` に含まれる型が何であるかわからない場合、そこからどのように型を取得すればよいでしょうか?
+しかし、このアプローチには問題があります。この方法により対応できるのは文字列の
+`Promise` のみですが、実際は任意のケースについて対応できるようにする必要があるの
+です。そのためにはどうすればよいでしょうか? `Promise` に含まれる型が何であるかわ
+からない場合、そこからどのように型を取得すればよいでしょうか?
 
-こうした目的のために、TypeScript には Conditional 型の型推論があります! コンパイラに対し、「型の種類がわかったら、それを型変数に割り当ててください」と伝えることができるのです。詳しくは [Conditional 型の型推論について](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html#type-inference-in-conditional-types)をご覧ください。
+こうした目的のために、TypeScript には Conditional 型の型推論があります! コンパイ
+ラに対し、「型の種類がわかったら、それを型変数に割り当ててください」と伝えること
+ができるのです。詳しくは
+[Conditional 型の型推論について](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html#type-inference-in-conditional-types)を
+ご覧ください。
 
-型推論を用いて、上の解答を書き換えましょう。Conditional 型において `Promise<string>` についてチェックするのではなく、`string` を `infer R` へと置き換えます。そこに何が入るかわからないからです。わかっていることは、ある型を内部にもつ `Promise<T>` であるということだけです。
+型推論を用いて、上の解答を書き換えましょう。Conditional 型において
+`Promise<string>` についてチェックするのではなく、`string` を `infer R` へと置き
+換えます。そこに何が入るかわからないからです。わかっていることは、ある型を内部に
+もつ `Promise<T>` であるということだけです。
 
-TypeScript が `Promise` の内部の型を把握すると、その型は型変数 `R` に割り当てられ、true ブランチにおいて利用可能となります。そこで `R` を返却します:
+TypeScript が `Promise` の内部の型を把握すると、その型は型変数 `R` に割り当てら
+れ、true ブランチにおいて利用可能となります。そこで `R` を返却します:
 
 ```ts
 type Awaited<T> = T extends Promise<infer R> ? R : T;
 ```
 
-ほぼ完成ですが、このままでは `Promise<Promise<string>>` から `Promise<string>` が得られてしまいます。これを防ぐため、同じ処理を再帰的に繰り返す必要があります。これは `Awaited` 型自体を用いることで実現可能です:
+ほぼ完成ですが、このままでは `Promise<Promise<string>>` から `Promise<string>`
+が得られてしまいます。これを防ぐため、同じ処理を再帰的に繰り返す必要があります。
+これは `Awaited` 型自体を用いることで実現可能です:
 
 ```ts
 type Awaited<T> = T extends Promise<infer R> ? Awaited<R> : T;
