@@ -25,7 +25,7 @@ type modelEntries = ObjectEntries<Model>;
 
 Дивлячись на проблему, ідея полягає в тому, щоб використати
 [Типи зіставлення](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
-щоб перебрати кожен ключ в об'єкті та згенерувати `[key, typeof key]` для кожного ключа.
+аби перебрати кожен ключ в об'єкті та згенерувати `[key, typeof key]` для кожного ключа.
 
 ```ts
 type ObjectEntries<T> = { [P in keyof T]: [P, T[P]] };
