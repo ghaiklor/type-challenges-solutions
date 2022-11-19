@@ -6,10 +6,11 @@ level: medium
 tags: readonly object-keys
 ---
 
-## Challenge
+## 挑战
 
-Implement the generic `Mutable<T>` which makes all properties in `T` mutable.
-For example:
+实现泛型 `Mutable<T>` ，使 `T` 中所有属性都是可变的。
+
+比如：
 
 ```typescript
 interface Todo {
@@ -22,44 +23,37 @@ interface Todo {
 type MutableTodo = Mutable<T>;
 ```
 
-## Solution
+## 解答
 
-Again, the challenge that is not supposed to be in medium category, IMHO. I’ve
-solved it with no issues. But, anyway, we are solving all of them, so why
-bothering about it.
+我认为这个挑战不应该属于中等类别。我毫无困难的解决了它。不管怎样，我们将解出所有的挑战。
 
-We know that there is a type with read only modifiers on object’s properties.
-The same modifiers we used some time ago to solve
-[Readonly challenge](./easy-readonly.md). However, in this case, we have been
-asked to remove it from the type.
+我们知道有一种类型在对象的属性上带有只读的修饰符。
+这个修饰符和我们之前的[Readonly challenge](./easy-readonly.md)一样。
+然而，这次要求我们从类型中去掉该修饰符。
 
-Let’s start with the simplest thing, just copy the type as it is, using mapped
-types:
+让我们先从最简单的开始，使用映射类型原样复制这个类型：
 
 ```typescript
 type Mutable<T> = { [P in keyof T]: T[P] };
 ```
 
-Now it is a copy of `T` with the read only modifiers. How can we get rid of
-them? Well, remember that to add them, in the previous challenges, we just used
-the keyword `readonly` added to the mapped type:
+现在它是带有只读修饰符的 `T` 的副本。我们怎样去掉他们呢？
+好吧，记得在上一次的挑战中为了加上它们，我们只是把关键字 `readonly` 加到映射类型上：
 
 ```typescript
 type Mutable<T> = { readonly [P in keyof T]: T[P] };
 ```
 
-Implicitly, TypeScript has added a `+` to the `readonly` keyword, meaning that
-we want to add the modifier to the property. But in our case, we want to discard
-it, so we can use `-` instead:
+TypeScript隐式地给 `readonly` 关键字加了一个 `+`，意思是我们向属性添加修饰符。
+但在我们这个例子中，我们需要丢弃它，于是我们用 `-` 代替：
 
 ```typescript
 type Mutable<T> = { -readonly [P in keyof T]: T[P] };
 ```
 
-That way, we’ve implemented a type that discards the read only modifier from the
-properties.
+这样，我们实现了一种类型，可以从属性中丢弃只读修饰符。
 
-## References
+## 参考
 
 - [Mapped Types](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html)
 - [Mapping Modifiers](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html#mapping-modifiers)
