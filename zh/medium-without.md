@@ -6,10 +6,10 @@ level: medium
 tags: union array
 ---
 
-## Challenge
+## 挑战
 
-Implement the type version of lodash `.without()`. `Without<T, U>` takes an
-array `T`, number or array `U` and returns an array without the elements of `U`.
+实现 lodash `.without()` 的类型版本。
+`Without<T, U>` 参数 `T` 为数组、参数 `U` 为数字或数组，返回一个不包含`U`元素的数组。
 
 ```typescript
 type Res = Without<[1, 2], 1>; // expected to be [2]
@@ -17,24 +17,23 @@ type Res1 = Without<[1, 2, 4, 1, 5], [1, 2]>; // expected to be [4, 5]
 type Res2 = Without<[2, 3, 2, 3, 2, 3, 2, 3], [2, 3]>; // expected to be []
 ```
 
-## Solution
+## 解答
 
-This challenge was an interesting one, indeed. We need to implement the type
-that can filter out items from a tuple. We start with the initial type:
+这个挑战确实很有趣。我们需要实现该类型，可以从元组中过滤出元素。
+我们从初始类型开始：
 
 ```typescript
 type Without<T, U> = any;
 ```
 
-Since we need to work with the specific items in the tuple, I’m using the
-inferring to get the specific item and the rest of the tuple:
+因为我们需要处理元组中的特定元素，我使用类型推导获取特定元素和其余部分：
 
 ```typescript
 type Without<T, U> = T extends [infer H, ...infer T] ? never : never;
 ```
 
-Having an item from the tuple, we can check if the item is the type `U`. We need
-this check in order to decide, should we add the element to the result or not:
+元素是否来自元组，我们可以检查该元素是否为 `U` 类型。
+我们需要这个检查以确定是否应该将该元素添加到结果中：
 
 ```typescript
 type Without<T, U> = T extends [infer H, ...infer T]
@@ -44,10 +43,8 @@ type Without<T, U> = T extends [infer H, ...infer T]
   : never;
 ```
 
-In case it is “extends” from the input type `U`, it means that we don’t need it
-in our resulting type. So we just skip it and return a tuple without it. But,
-since we need to process other items as well, we return not an empty tuple, but
-a tuple with a recursive call to `Without` again:
+如果它 “extends” 于输入类型 `U`，就表明着我们结果中不需要它。于是我们跳过它，返回不含它的元组。
+但是，因为我们需要处理其它元素，我们不会返回一个空元组，而是返回通过递归调用 `Without` 后的元组：
 
 ```typescript
 type Without<T, U> = T extends [infer H, ...infer T]
@@ -57,9 +54,8 @@ type Without<T, U> = T extends [infer H, ...infer T]
   : never;
 ```
 
-That way, we skip anything that is specified as `U` in our `T`. However, once we
-get a check that says we shouldn’t skip the element, we return a tuple with the
-element itself:
+这样我们就在 `T` 中跳过了所有通过 `U` 指定的元素。
+然而，一旦我们检测到不应该跳过该元素，我们就返回包含这个元素的元组：
 
 ```typescript
 type Without<T, U> = T extends [infer H, ...infer T]
@@ -69,9 +65,8 @@ type Without<T, U> = T extends [infer H, ...infer T]
   : never;
 ```
 
-There is the last `never` type left we need to address. Since we are working
-with the variadic tuple types and spreading them, instead of `never` we must
-return an empty tuple:
+我们还需要处理最后一个 `never` 类型。
+因为我们处理可变元组类型（variadic tuple types）并展开它，我们必须返回一个空元组而非 `never`：
 
 ```typescript
 type Without<T, U> = T extends [infer H, ...infer T]
@@ -81,13 +76,10 @@ type Without<T, U> = T extends [infer H, ...infer T]
   : [];
 ```
 
-We got a working solution for a case, when `U` specified as a primitive type.
-But, in the challenge, there is also a case when it can be specified as a tuple
-of numbers. To support this case, we can extend our type `U` in `H extends U` to
-be a conditional type that checks that case.
+当 `U` 为基本类型时，我们得到了一个有效的方案。但是，这个挑战中还有一种情况是它可以是数字元组。
+为了支持这个情况，我们可以将 `H extends U` 中的类型 `U` 继续扩展，通过条件类型继续检测。
 
-If `U` is a tuple of numbers, we return all the items in there as a union,
-otherwise - just `U`:
+如果 `U` 是一个数字元组，我们以联合（union）的方式返回所有元素，否则就原样返回：
 
 ```typescript
 type Without<T, U> = T extends [infer H, ...infer T]
@@ -97,10 +89,9 @@ type Without<T, U> = T extends [infer H, ...infer T]
   : [];
 ```
 
-Congratulations! We have implemented a lodash version of `.without()` method in
-the type system.
+恭喜！我们实现了 lodash `.without()` 的类型版本。
 
-## References
+## 参考
 
 - [Generics](https://www.typescriptlang.org/docs/handbook/2/generics.html)
 - [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
