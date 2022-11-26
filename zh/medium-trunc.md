@@ -17,29 +17,33 @@ type A = Trunc<12.34>; // 12
 
 ## 解答
 
-如果一个数字本身是字符串，那么很容易得到小数点之前的部分。这种方式只是用点分割字符串得到第一部分。
+如果一个数字本身是字符串，那么很容易得到小数点之前的部分。这种方式只是用点分割字
+符串得到第一部分。
 
-多亏 Typescript 中的模板字面量类型, 这样做很容易。首先，我们将从需要实现的初始类型开始：
+多亏 Typescript 中的模板字面量类型, 这样做很容易。首先，我们将从需要实现的初始类
+型开始：
 
 ```typescript
 type Trunc<T> = any;
 ```
 
-我们有一个将接受数字本身的类型参数。我们讨论过，通过分割字符串容易得到第一部分，所以我们需要将数字转换成字符串：
+我们有一个将接受数字本身的类型参数。我们讨论过，通过分割字符串容易得到第一部分，
+所以我们需要将数字转换成字符串：
 
 ```typescript
 type Trunc<T> = `${T}`;
 ```
 
-得到一个报错，“Type 'T' is not assignable to type 'string | number | bigint
-| boolean | null | undefined”。为了解决这个问题，我们给类型参数 `T` 增加一个泛型约束限制其为数字或字符串：
+得到一个报错，“Type 'T' is not assignable to type 'string | number | bigint |
+boolean | null | undefined”。为了解决这个问题，我们给类型参数 `T` 增加一个泛型约
+束限制其为数字或字符串：
 
 ```typescript
 type Trunc<T extends number | string> = `${T}`;
 ```
 
-现在，我们有了数字的字符串表示。接下来，我们可以使用条件类型检查字符串是否带有小数点。
-如果有，我们将推断出它们：
+现在，我们有了数字的字符串表示。接下来，我们可以使用条件类型检查字符串是否带有小
+数点。如果有，我们将推断出它们：
 
 ```typescript
 type Trunc<T extends number | string> = `${T}` extends `${infer R}.${infer _}`
@@ -57,7 +61,8 @@ type Trunc<T extends number | string> = `${T}` extends `${infer R}.${infer _}`
   : never;
 ```
 
-但是如果字符串中没有小数点返回什么呢？它意味着没有什么需要截取，所以我们原样返回输入类型：
+但是如果字符串中没有小数点返回什么呢？它意味着没有什么需要截取，所以我们原样返回
+输入类型：
 
 ```typescript
 type Trunc<T extends number | string> = `${T}` extends `${infer R}.${infer _}`
