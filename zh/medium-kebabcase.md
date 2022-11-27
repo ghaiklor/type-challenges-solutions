@@ -6,35 +6,31 @@ level: medium
 tags: template-literal
 ---
 
-## Challenge
+## 挑战
 
-Convert a string to kebab-case. For example:
+将一个字符串转换为串式命名法（kebab-case）。例如：
 
 ```typescript
 type kebabCase = KebabCase<"FooBarBaz">; // expected "foo-bar-baz"
 ```
 
-## Solution
+## 解答
 
-This challenge has a lot in common with the ["CamelCase"](./hard-camelcase.md)
-challenge. We start from inferring; we need to know the first character and the
-tail.
+这个挑战与 ["CamelCase"](./hard-camelcase.md) 有很多共同之处。
+我们从类型推断开始，我们需要知道首字母和剩下的尾部。
 
 ```typescript
 type KebabCase<S> = S extends `${infer C}${infer T}` ? never : never;
 ```
 
-Once there is no pattern for character and tail, it means that we are done with
-the string and there is nothing left. So we just return the input string with no
-changes.
+一旦未匹配到就意味着我们全部转换完成。我们只需要原样返回输入的字符串。
 
 ```typescript
 type KebabCase<S> = S extends `${infer C}${infer T}` ? never : S;
 ```
 
-But, in case we have the pattern, we need to handle two cases. The first one is
-the case when we do not have the capitalized tail, and the second one is when we
-do. To check this, we can use `Uncapitalize` type.
+但是，一旦匹配到我们就需要处理 2 种情况。一种情况是没有首字母大写的尾部，一种情况是有。
+为了检测这个，我们可以用内置类型 `Uncapitalize`。
 
 ```typescript
 type KebabCase<S> = S extends `${infer C}${infer T}`
@@ -44,10 +40,9 @@ type KebabCase<S> = S extends `${infer C}${infer T}`
   : S;
 ```
 
-What do we do if we have the uncapitalized tail? It means that we can have e.g.
-“Foo” or “foo”. So we “uncapitalize” the first character and leave the tail
-without modifications. Do not forget that we need to continue to apply the type
-to process other characters.
+如果我们有非首字母大写的尾部怎么办？
+假设我们有 “Foo” 或 “foo”，我们将首字母变成小写，尾部保持不变。
+不要忘了继续处理剩余的字符串。
 
 ```typescript
 type KebabCase<S> = S extends `${infer C}${infer T}`
@@ -57,10 +52,9 @@ type KebabCase<S> = S extends `${infer C}${infer T}`
   : S;
 ```
 
-The last case we have now is the case when the tail is capitalized, e.g.
-“fooBar”. We need to “uncapitalize” the first character, add the hyphen, and
-continue processing the tail recursively. We do not need to “uncapitalize” the
-tail here because it will be uncapitalized anyway on `Uncapitalize<C>`.
+现在剩下的情况就是有首字母大写的尾部，比如“fooBar”。
+我们需要将首字母变小写，然后是连字符（-），然后继续递归的处理尾部。
+我们不需要使尾部首字母小写的原因是因为 `Uncapitalize<C>` 始终会使它变小写。
 
 ```typescript
 type KebabCase<S> = S extends `${infer C}${infer T}`
@@ -70,7 +64,7 @@ type KebabCase<S> = S extends `${infer C}${infer T}`
   : S;
 ```
 
-## References
+## 参考
 
 - [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 - [Type inference in conditional types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types)
