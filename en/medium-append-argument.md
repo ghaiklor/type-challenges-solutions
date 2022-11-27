@@ -52,23 +52,11 @@ type AppendArgument<Fn, A> = Fn extends (...args: infer P) => infer R
 
 Now, the condition in conditional type evaluates to true, hence going into
 “true” branch with a type parameter `P` (function parameters) and type parameter
-`R` (return type). Although, we still have a problem. Type parameter `P` has a
-tuple with function parameters, but we need to treat them as a separate
-parameters.
-
-By applying variadic tuple types, we can spread the tuple:
+`R` (return type). Type parameter `P` has what we need now. The only thing left
+is to construct our own new function signature from inferred types:
 
 ```ts
-type AppendArgument<Fn, A> = Fn extends (...args: [...infer P]) => infer R
-  ? (args: P) => R
-  : never;
-```
-
-Type parameter `P` has what we need now. The only thing left is to construct our
-own new function signature from inferred types:
-
-```ts
-type AppendArgument<Fn, A> = Fn extends (...args: [...infer P]) => infer R
+type AppendArgument<Fn, A> = Fn extends (...args: infer P) => infer R
   ? (...args: [...P]) => R
   : never;
 ```
@@ -78,7 +66,7 @@ inferred types. Having that we can add the required `A` parameter to the
 parameters list now:
 
 ```ts
-type AppendArgument<Fn, A> = Fn extends (...args: [...infer P]) => infer R
+type AppendArgument<Fn, A> = Fn extends (...args: infer P) => infer R
   ? (...args: [...P, A]) => R
   : never;
 ```
