@@ -45,13 +45,8 @@ type Includes<T extends unknown[], U> = T[number];
 ```
 
 We have a union of elements. How do we check if the element exists in a union?
-Distributive conditional types! We can write a conditional type for a union, and
-TypeScript will automatically apply the condition to each element of a union.
-
-E.g. if you write `1 | 2 extends 2`, what TypeScript will do is actually replace
-it with two conditionals `1 extends 2` and `2 extends 2`.
-
-We can use it to check if `U` is in `T[number]` and if so, return true.
+We can use `extends` keyword to check if `U` is in `T[number]` and if so, return
+true.
 
 ```typescript
 type Includes<T extends unknown[], U> = U extends T[number] ? true : false;
@@ -62,5 +57,4 @@ type Includes<T extends unknown[], U> = U extends T[number] ? true : false;
 - [Generics](https://www.typescriptlang.org/docs/handbook/2/generics.html)
 - [Generic Constraints](https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-constraints)
 - [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
-- [Distributive Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#distributive-conditional-types)
 - [Index Types](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html)
