@@ -6,9 +6,9 @@ level: medium
 tags: object-keys
 ---
 
-## Challenge
+## 挑战
 
-Implement the type version of binary tree in-order traversal. For example:
+实现类型版本的二叉树按顺序遍历。例如：
 
 ```typescript
 const tree1 = {
@@ -28,13 +28,11 @@ const tree1 = {
 type A = InOrderTraversal<typeof tree1>; // [1, 3, 2]
 ```
 
-## Solution
+## 解答
 
-In an in-order traversal of a binary tree, we traverse one subtree of a node,
-then "visit" the node, and then traverse its other subtree. Usually, we traverse
-the node's left subtree first and then traverse the node's right subtree.
+在二叉树的有序遍历中，我们遍历一个节点的子树，然后“访问”这个节点，然后遍历它的另一个子树。通常，我们会先遍历左子树，然后再遍历节点的右子树。
 
-Below is the pseudocode for in-order traversal of a binary tree:
+下面是二叉树按顺序遍历的伪代码：
 
 ```text
 procedure in_order(p : reference to a tree node)
@@ -46,7 +44,7 @@ procedure in_order(p : reference to a tree node)
 end procedure
 ```
 
-Here's an example of an in-order traversal of a binary tree:
+下面是一个二叉树有序遍历示例：
 
 ```text
       A
@@ -58,7 +56,7 @@ D     E
 In-order Traversal: D, B, E, A, C
 ```
 
-So let's start by implementing the pseudocode.
+所以让我们先从实现伪代码开始。
 
 ```ts
 type InOrderTraversal<T extends TreeNode | null> = T extends TreeNode
@@ -66,7 +64,7 @@ type InOrderTraversal<T extends TreeNode | null> = T extends TreeNode
   : never;
 ```
 
-In case we don't have a `TreeNode`, we return an empty array.
+如果没有 `TreeNode`，则返回一个空数组。
 
 ```ts
 type InOrderTraversal<T extends TreeNode | null> = T extends TreeNode
@@ -74,11 +72,9 @@ type InOrderTraversal<T extends TreeNode | null> = T extends TreeNode
   : [];
 ```
 
-As per our pseudocode, we recursively traverse the left subtree until we hit
-`null` and when we do, we print the root node and traverse its right subtree.
+根据伪代码，我们递归遍历左子树直到碰到 `null`，这个时候，我们打印根节点并遍历右子树。
 
-Let's create a type helper which will recursively in-order traverse a node until
-it hits `null` at which point we'll return an empty array.
+我们先创建一个帮助类型，它将递归遍历一个节点，直到遇到 `null`时返回一个空数组。
 
 ```ts
 type Traverse<F, S extends keyof F> = F[S] extends TreeNode
@@ -86,7 +82,7 @@ type Traverse<F, S extends keyof F> = F[S] extends TreeNode
   : [];
 ```
 
-Finally, let's utilize this type helper in our solution.
+最后，我们利用这个帮助类型完成挑战。
 
 ```ts
 type InOrderTraversal<T extends TreeNode | null> = T extends TreeNode
@@ -94,7 +90,7 @@ type InOrderTraversal<T extends TreeNode | null> = T extends TreeNode
   : [];
 ```
 
-## References
+## 参考
 
 - [Binary Tree Traversal](https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/)
 - [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
