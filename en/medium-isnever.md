@@ -35,7 +35,7 @@ Unfortunately, we do not pass the test case for `never` itself. Why is that?
 
 `extends` becomes distributive when the left-hand side is a generic and a union
 is supplied through it. `never` represents an empty union, so when `never` is
-supplied _through a generic_, nothing gets distributed to the right-hand side of 
+supplied _through a generic_, nothing gets distributed to the right-hand side of
 `extends`, and the whole thing resolves to `never`, i.e. an empty union.
 
 To avoid this distributivity, we can surround each side of `extends` with square
