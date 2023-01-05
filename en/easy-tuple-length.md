@@ -45,6 +45,7 @@ type Length<T extends { length: number }> = T["length"];
 ```
 
 An alternative solution:
+
 ```ts
 type Length<T extends readonly any[]> = T["length"];
 ```
