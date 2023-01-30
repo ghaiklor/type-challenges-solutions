@@ -44,12 +44,19 @@ is an array.
 type Includes<T extends unknown[], U> = T[number];
 ```
 
-We have a union of elements. How do we check if the element exists in a union?
-We can use `extends` keyword to check if `U` is in `T[number]` and if so, return
-true.
+we can use recursive method. first, we define basic conditional statement. if first element of array is Equal target(U), result is true. if not, result is false.  
+```typescript
+T extends [infer First, ...infer Rest] ? Equal<First, U> extends true : false
+```
+
+if first element is true, another element of array is evaluated by same method.
 
 ```typescript
-type Includes<T extends unknown[], U> = U extends T[number] ? true : false;
+type Includes<T extends unknown[], U> = T extends [infer First, ...infer Rest]
+? Equal<First, U> extends true 
+  ? true : Includes<Rest, U> 
+: false;
+
 ```
 
 ## References
