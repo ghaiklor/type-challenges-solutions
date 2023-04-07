@@ -17,11 +17,7 @@ tags: infer
 이 문제를 해결하기 위해서는 `infer` 라는 키워드에 대해서 알아야 합니다.
 조건부 타입에서 `infer` 키워드는 "참"값 분기에서 비교하는 타입을 추론할 수 있습니다.
 
-```ts
-type MyParameters<T> = T extends (...args: infer P) => any ? never : never;
-```
-
-만약 `T`가 `[number,string]` 일 경우, 타입스크립트 컴파일러는 함수의 매개변수 목록을 추론해서 `U`에 `[number,string]` 을 할당해줍니다.
+만약 `T`에 할당되는 매개변수가 `[number,string]` 일 경우, 타입스크립트 컴파일러는 함수의 매개변수 목록을 추론해서 `U`에 `[number,string]` 을 할당해줍니다.
 
 ```ts
 type MyParameters<T extends (...args: any[]) => any> = T extends (...args : infer U) => any ? U : never;
