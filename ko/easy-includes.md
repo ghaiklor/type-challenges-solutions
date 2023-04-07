@@ -49,7 +49,6 @@ type Includes<T extends unknown[], U> = T[number];
 type Includes<T extends unknown[], U> = U extends T[number] ? true : false;
 ```
 
-
 ## 참고
 
 - [Generics](https://www.typescriptlang.org/docs/handbook/2/generics.html)
