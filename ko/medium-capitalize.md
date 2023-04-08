@@ -59,6 +59,42 @@ type Capitalize<S> = S extends `${infer C}${infer T}`
   : S;
 ```
 
+전체 정답은 다음과 같습니다. 가독성을 위해 `SFirst`와 `SRest`로 구분했습니다.
+
+```ts
+interface CapitalizedChars {
+  a : 'A',
+  b : 'B',
+  c : 'C',
+  d : 'D',
+  e : 'E',
+  f : 'F',
+  g : 'G',
+  h : 'H',
+  i : 'I',
+  j : 'J',
+  k : 'K',
+  l : 'L',
+  m : 'M',
+  n : 'N',
+  o : 'O',
+  p : 'P',
+  q : 'Q',
+  r : 'R',
+  s : 'S',
+  t : 'T',
+  u : 'U',
+  v : 'V',
+  w : 'W',
+  x : 'X',
+  y : 'Y',
+  z : 'Z'
+}
+
+type MyCapitalize<S extends string> = S extends `${infer SFirst}${infer SRest}`
+                ? `${SFirst extends keyof CapitalizedChars ? `${CapitalizedChars[SFirst]}${SRest}` : S}` : S;
+```
+
 ## 참고
 
 - [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
