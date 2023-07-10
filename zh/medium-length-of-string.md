@@ -6,32 +6,30 @@ level: medium
 tags: template-literal
 ---
 
-## Challenge
+## 挑战
 
-Compute the length of a string literal, which behaves like `String#length`.
+计算字符串的长度，其行为类似于`String#length`。
 
-For example:
+例如：
 
 ```typescript
 type length = LengthOfString<"Hello, World">; // expected to be 12
 ```
 
-## Solution
+## 解答
 
-At first, I tried to go with a trivial solution - access the property `length`
-via index type. I thought, maybe TypeScript is smart enough to get the value:
+起初，我尝试使用一个简单的解决方案 - 通过索引类型访问属性`length`。
+我想，也许TypeScript足够聪明，可以获得该值。
 
 ```typescript
 type LengthOfString<S extends string> = S["length"];
 ```
 
-Unfortunately, no. The evaluated type will be a `number`, not the number literal
-type. So we need to think about something else.
+很不幸，不行。推导的类型是`number`而非数字字面量类型。所以我们需要考虑一些别的事情。
 
-What if we infer the first character and the tail of the string recursively
-until there are none first characters? That way, the recursion itself will be
-our counter. Let us start by writing a type that will infer the first character
-and the tail of the string:
+如果我们递归地推导第一个字符以及剩余的字符串直到没有第一个字符为止会怎样？
+那样，递归本身即是我们的计数器。
+让我们首先编写一个类型推导首字符和字符串的剩余部分：
 
 ```typescript
 type LengthOfString<S extends string> = S extends `${infer C}${infer T}`
@@ -39,9 +37,8 @@ type LengthOfString<S extends string> = S extends `${infer C}${infer T}`
   : never;
 ```
 
-Type parameter `C` gets the first character of the string and `T` gets the tail.
-Calling the type itself recursively with a tail, we will stop sometimes on the
-case when there are no characters:
+类型参数`C`获取字符串首字母，`T`获取剩余部分。
+我们对剩余部分递归调用类型本身，直到没有字符串时停止：
 
 ```typescript
 type LengthOfString<S extends string> = S extends `${infer C}${infer T}`
@@ -49,13 +46,11 @@ type LengthOfString<S extends string> = S extends `${infer C}${infer T}`
   : never;
 ```
 
-The problem with it is that we don’t know where to store the counter. Obviously,
-we can add another type parameter that will accumulate the count, but TypeScript
-does not provide options to manipulate with numbers in the type system. It would
-be great to add another type parameter and just increment its value.
+问题是我们不知道把计数器存放在哪里。
+显然，我们可以添加另一个类型参数来累积计数，但TypeScript不提供在类型系统中操作数字的选项。
+如果添加另一个类型参数并增加其值就太好了。
 
-Instead, we can make the type parameter a tuple with characters and fill it in
-with the first character on each recursive call:
+我们可以将类型参数设定为包含字符的元组，并在每次递归时使用首字符填充它：
 
 ```typescript
 type LengthOfString<
@@ -64,10 +59,8 @@ type LengthOfString<
 > = S extends `${infer C}${infer T}` ? LengthOfString<T, [C, ...A]> : never;
 ```
 
-We “convert” the string literal type into a tuple with its characters that are
-stored inside our new type parameter. Once we hit the case when there are no
-characters (the base case for a recursion) we just return the length of the
-tuple:
+我们将字符串字面量转换为包含其字符的元组，并将其保存在新的类型参数中。
+一旦我们遇到没有字符的情形（递归退出），我们只需要返回元组的长度：
 
 ```typescript
 type LengthOfString<
@@ -78,9 +71,8 @@ type LengthOfString<
   : A["length"];
 ```
 
-By introducing another type parameter, we broke the tests. Because our type now
-requires having two type parameters instead of one. Let us fix this by making
-our type parameter an empty tuple by default:
+通过引入另一个类型参数，我们破坏了测试。因为我们的类型目前需要2个类型参数而不再是1个。
+让我们通过给我们的类型参数增加空元组默认值来解决它。
 
 ```typescript
 type LengthOfString<
@@ -91,7 +83,7 @@ type LengthOfString<
   : A["length"];
 ```
 
-## References
+## 参考
 
 - [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 - [Type inference in conditional types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types)
