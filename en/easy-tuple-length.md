@@ -44,6 +44,12 @@ our input type parameter has this property:
 type Length<T extends { length: number }> = T["length"];
 ```
 
+An alternative solution:
+
+```ts
+type Length<T extends readonly any[]> = T["length"];
+```
+
 ## References
 
 - [Indexed Types](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html)

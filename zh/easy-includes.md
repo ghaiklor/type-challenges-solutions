@@ -8,7 +8,7 @@ tags: array
 
 ## 挑战
 
-在类型系统种实现 JavaScript 的`Array.includes`函数，接收 2 个参数。它的输出应该
+在类型系统中实现 JavaScript 的`Array.includes`函数，接收 2 个参数。它的输出应该
 是布尔类型`true`或`false`。例如：
 
 ```typescript
@@ -27,7 +27,7 @@ type Includes<T, U> = never;
 在我们真正能在元组中找到一些东西之前，将其“转换”为联合（union）比会元组（tuple）
 更容易一些。为此，我们可以使用索引类型（indexed types）。如果我们访
 问`T[number]`，TypeScript 会返回`T`中所有元素的联合（union）。例如，如果你有一
-个`T = [1, 2, 3]`，通过`T = [1, 2, 3]`访问将返回`1 | 2 | 3`。
+个`T = [1, 2, 3]`，通过`T = [number]`访问将返回`1 | 2 | 3`。
 
 ```typescript
 type Includes<T, U> = T[number];

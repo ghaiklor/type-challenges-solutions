@@ -7,7 +7,7 @@ build:
 	bundle exec jekyll build
 
 test: build
-	bundle exec htmlproofer --ignore-urls "/fonts.gstatic.com/" ./_site
+	bundle exec htmlproofer --ignore-urls "/fonts.gstatic.com/,/cdnjs.buymeacoffee.com/" ./_site
 
 lint: clean
 	find . -name '*.md' ! -path './vendor/*' | xargs bundle exec mdl

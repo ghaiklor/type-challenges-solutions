@@ -43,16 +43,7 @@ type Includes<T, U> = T[number];
 type Includes<T extends unknown[], U> = T[number];
 ```
 
-이제 원소들의 유니온을 갖게 되었습니다. 찾고자 하는 원소가 유니온에 존재하는지어
-떻게 확인할 수 있을까요? 분산 조건부 타입을 이용할 수 있습니다! 유니온에 조건부
-타입을 사용하면 Typescript는 알아서 유니온의 각 원소에 조건을 적용해 줄 것입니다
-.
-
-예시로 `2 extends 1 | 2`처럼 작성하면, 사실 Typescript는 `2 extends 1`과
-`2 extends 2`와 같이 두개의 조건으로 대체합니다.
-
-위와 같은 방법으로 `T[number]` 안에 `U`가 있는지 검사하고 존재한다면 참을 반환하
-도록 만들 수 있습니다.
+이제 원소들의 유니온을 갖게 되었습니다. 찾고자 하는 원소가 유니온에 존재하는지 어떻게 확인할 수 있을까요? `extends` 를 사용하면 `U`라는 원소가 `T[number]` 에서 반환한 원소들의 유니온에 존재하는지 알 수 있습니다.
 
 ```typescript
 type Includes<T extends unknown[], U> = U extends T[number] ? true : false;
@@ -63,5 +54,4 @@ type Includes<T extends unknown[], U> = U extends T[number] ? true : false;
 - [Generics](https://www.typescriptlang.org/docs/handbook/2/generics.html)
 - [Generic Constraints](https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-constraints)
 - [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
-- [Distributive Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#distributive-conditional-types)
 - [Index Types](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html)

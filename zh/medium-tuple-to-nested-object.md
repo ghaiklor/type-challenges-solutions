@@ -42,8 +42,8 @@ type TupleToNestedObject<T, U> = T extends [infer F, ...infer R]
   : U;
 ```
 
-如果 `F` 是 `string` 类型，我们想要创建一个 `object` 并递归的遍历剩余的元组。
-这样我们就遍历整个元组并创建了嵌套对象。当遍历到最后一个元素，我们返回类型 `U`。
+如果 `F` 是 `string` 类型，我们想要创建一个 `object` 并递归的遍历剩余的元组。这
+样我们就遍历整个元组并创建了嵌套对象。当遍历到最后一个元素，我们返回类型 `U`。
 
 ```ts
 type TupleToNestedObject<T, U> = T extends [infer F, ...infer R]
