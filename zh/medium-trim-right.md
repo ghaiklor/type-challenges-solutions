@@ -44,8 +44,8 @@ type TrimRight<S extends string> = S extends `${infer T} ` ? T : never;
 ```
 
 但是上面的方案只能处理结尾包含一个空格的情况，如果有多个空格该如何处理呢？要覆盖
-这种情况，我们需要不断去除尾部空格直至尾部没有空格，通过递归调用本身可以轻松实现
-：
+这种情况，我们需要不断去除尾部空格直至尾部没有空格，通过递归调用本身可以轻松实
+现：
 
 ```typescript
 type TrimRight<S extends string> = S extends `${infer T} `
@@ -53,8 +53,8 @@ type TrimRight<S extends string> = S extends `${infer T} `
   : never;
 ```
 
-现在，我们的类型将递归逐个删除尾部空格，直至尾部没有空格。然后进入 `false` 分支
-。此步骤中意味着尾部没有空格，我们可以不作处理直接返回输入的字符串：
+现在，我们的类型将递归逐个删除尾部空格，直至尾部没有空格。然后进入 `false` 分
+支。此步骤中意味着尾部没有空格，我们可以不作处理直接返回输入的字符串：
 
 ```typescript
 type TrimRight<S extends string> = S extends `${infer T} ` ? TrimRight<T> : S;

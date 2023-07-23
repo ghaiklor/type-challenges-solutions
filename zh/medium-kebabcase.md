@@ -16,8 +16,8 @@ type kebabCase = KebabCase<"FooBarBaz">; // expected "foo-bar-baz"
 
 ## 解答
 
-这个挑战与 ["CamelCase"](./hard-camelcase.md) 有很多共同之处。我们从类型推断开始
-，我们需要知道首字母和剩下的尾部。
+这个挑战与 ["CamelCase"](./hard-camelcase.md) 有很多共同之处。我们从类型推断开
+始，我们需要知道首字母和剩下的尾部。
 
 ```typescript
 type KebabCase<S> = S extends `${infer C}${infer T}` ? never : never;
