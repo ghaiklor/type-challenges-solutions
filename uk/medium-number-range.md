@@ -105,7 +105,7 @@ type NumberRange<L, H> = any;
 type NumberRange<
   L extends number,
   H extends number,
-  A extends number[] = Tuple<L>
+  A extends number[] = Tuple<L>,
 > = any;
 ```
 
@@ -118,7 +118,7 @@ type NumberRange<
 type NumberRange<
   L extends number,
   H extends number,
-  A extends number[] = Tuple<L>
+  A extends number[] = Tuple<L>,
 > = [...A, A["length"]];
 ```
 
@@ -131,7 +131,7 @@ type NumberRange<
 type NumberRange<
   L extends number,
   H extends number,
-  A extends number[] = Tuple<L>
+  A extends number[] = Tuple<L>,
 > = A["length"] extends H ? never : NumberRange<L, H, [...A, A["length"]]>;
 ```
 
@@ -143,7 +143,7 @@ type NumberRange<
 type NumberRange<
   L extends number,
   H extends number,
-  A extends number[] = Tuple<L>
+  A extends number[] = Tuple<L>,
 > = A["length"] extends H ? A : NumberRange<L, H, [...A, A["length"]]>;
 ```
 
@@ -154,7 +154,7 @@ type NumberRange<
 type NumberRange<
   L extends number,
   H extends number,
-  A extends number[] = Tuple<L>
+  A extends number[] = Tuple<L>,
 > = A["length"] extends H
   ? [...A, A["length"]]
   : NumberRange<L, H, [...A, A["length"]]>;
@@ -169,7 +169,7 @@ type NumberRange<
 type NumberRange<
   L extends number,
   H extends number,
-  A extends number[] = Tuple<L>
+  A extends number[] = Tuple<L>,
 > = A["length"] extends H
   ? [...A, A["length"]][number]
   : NumberRange<L, H, [...A, A["length"]]>;
@@ -185,7 +185,7 @@ type Tuple<L extends number, A extends never[] = []> = A["length"] extends L
 type NumberRange<
   L extends number,
   H extends number,
-  A extends number[] = Tuple<L>
+  A extends number[] = Tuple<L>,
 > = A["length"] extends H
   ? [...A, A["length"]][number]
   : NumberRange<L, H, [...A, A["length"]]>;
