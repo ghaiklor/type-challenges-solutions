@@ -8,13 +8,13 @@ comments: false
 ---
 
 Type Challenges をご存知でしょうか?
-[Type Challenges](https://github.com/type-challenges/type-challenges) は
-、Anthony Fu により開発・メンテナンスされているプロジェクトです。このプロジェク
-トの主要な目的は、TypeScript に関する面白い課題を集め、そして提供することです。
-しかし、その課題にはちょっとした特徴があります。それは、課題を解く際にランタイム
-を使用することができないということです。コードを書く唯一の場所は、TypeScript の
-型システムの中にあります。つまり、Type Challenges は、TypeScript の型システムに
-よってのみ解くことができるような課題であるといえます。
+[Type Challenges](https://github.com/type-challenges/type-challenges)
+は、Anthony Fu により開発・メンテナンスされているプロジェクトです。このプロジェ
+クトの主要な目的は、TypeScript に関する面白い課題を集め、そして提供することで
+す。しかし、その課題にはちょっとした特徴があります。それは、課題を解く際にランタ
+イムを使用することができないということです。コードを書く唯一の場所は、TypeScript
+の型システムの中にあります。つまり、Type Challenges は、TypeScript の型システム
+によってのみ解くことができるような課題であるといえます。
 
 型や TypeScript に関して不慣れである場合、一部の課題を難しく感じることがあるかも
 しれません。そこでこのサイトでは、各課題への解答と、解法に関する説明を提供しよう
@@ -22,8 +22,8 @@ Type Challenges をご存知でしょうか?
 す。 (このサイトの解法とは異なるような) 他の方法で課題を解いた場合は、コメント欄
 にその方法を残してみてください。
 
-質問や問題などがあれば
-、[リポジトリにて issue を開きましょう](https://github.com/ghaiklor/type-challenges-solutions/issues)。
+質問や問題などがあれ
+ば、[リポジトリにて issue を開きましょう](https://github.com/ghaiklor/type-challenges-solutions/issues)。
 
 まずは「ウォームアップ」から始めて、「エクストリーム」レベルまで順に進んでいくこ
 とをおすすめします。最初は「課題」のリンクを開いて、自分で解いてみましょう。わか

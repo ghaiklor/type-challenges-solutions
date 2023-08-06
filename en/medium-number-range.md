@@ -107,7 +107,7 @@ Creating a tuple of the length `L`, filled with `never`-s, will give us a range
 type NumberRange<
   L extends number,
   H extends number,
-  A extends number[] = Tuple<L>
+  A extends number[] = Tuple<L>,
 > = any;
 ```
 
@@ -120,7 +120,7 @@ value:
 type NumberRange<
   L extends number,
   H extends number,
-  A extends number[] = Tuple<L>
+  A extends number[] = Tuple<L>,
 > = [...A, A["length"]];
 ```
 
@@ -133,7 +133,7 @@ if not – recursion:
 type NumberRange<
   L extends number,
   H extends number,
-  A extends number[] = Tuple<L>
+  A extends number[] = Tuple<L>,
 > = A["length"] extends H ? never : NumberRange<L, H, [...A, A["length"]]>;
 ```
 
@@ -145,7 +145,7 @@ built accumulator in the case of length matches the `H`:
 type NumberRange<
   L extends number,
   H extends number,
-  A extends number[] = Tuple<L>
+  A extends number[] = Tuple<L>,
 > = A["length"] extends H ? A : NumberRange<L, H, [...A, A["length"]]>;
 ```
 
@@ -156,7 +156,7 @@ value to the tuple as well:
 type NumberRange<
   L extends number,
   H extends number,
-  A extends number[] = Tuple<L>
+  A extends number[] = Tuple<L>,
 > = A["length"] extends H
   ? [...A, A["length"]]
   : NumberRange<L, H, [...A, A["length"]]>;
@@ -171,7 +171,7 @@ lookup type with the `number` type and get the union:
 type NumberRange<
   L extends number,
   H extends number,
-  A extends number[] = Tuple<L>
+  A extends number[] = Tuple<L>,
 > = A["length"] extends H
   ? [...A, A["length"]][number]
   : NumberRange<L, H, [...A, A["length"]]>;
@@ -187,7 +187,7 @@ type Tuple<L extends number, A extends never[] = []> = A["length"] extends L
 type NumberRange<
   L extends number,
   H extends number,
-  A extends number[] = Tuple<L>
+  A extends number[] = Tuple<L>,
 > = A["length"] extends H
   ? [...A, A["length"]][number]
   : NumberRange<L, H, [...A, A["length"]]>;

@@ -51,7 +51,7 @@ by adding the modifier to the parameter:
 
 ```ts
 declare function PromiseAll<T extends unknown[]>(
-  values: readonly [...T]
+  values: readonly [...T],
 ): Promise<T>;
 ```
 
@@ -67,7 +67,7 @@ with no changes:
 
 ```ts
 declare function PromiseAll<T extends unknown[]>(
-  values: readonly [...T]
+  values: readonly [...T],
 ): Promise<T extends Promise<infer R> ? R : T>;
 ```
 
@@ -77,7 +77,7 @@ So we need to iterate over each element in the tuple and check if the value is a
 
 ```ts
 declare function PromiseAll<T extends unknown[]>(
-  values: readonly [...T]
+  values: readonly [...T],
 ): Promise<{ [P in keyof T]: T[P] extends Promise<infer R> ? R : T[P] }>;
 ```
 

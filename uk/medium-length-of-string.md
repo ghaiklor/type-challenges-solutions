@@ -59,7 +59,7 @@ type LengthOfString<S extends string> = S extends `${infer C}${infer T}`
 ```typescript
 type LengthOfString<
   S extends string,
-  A extends string[]
+  A extends string[],
 > = S extends `${infer C}${infer T}` ? LengthOfString<T, [C, ...A]> : never;
 ```
 
@@ -70,7 +70,7 @@ type LengthOfString<
 ```typescript
 type LengthOfString<
   S extends string,
-  A extends string[]
+  A extends string[],
 > = S extends `${infer C}${infer T}`
   ? LengthOfString<T, [C, ...A]>
   : A["length"];
@@ -83,7 +83,7 @@ type LengthOfString<
 ```typescript
 type LengthOfString<
   S extends string,
-  A extends string[] = []
+  A extends string[] = [],
 > = S extends `${infer C}${infer T}`
   ? LengthOfString<T, [C, ...A]>
   : A["length"];

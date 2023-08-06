@@ -14,8 +14,8 @@ tags: template-literal union tuple
 例如，块组件将被表示为 `btn`，依赖于块的元素将被表示为 `btn_price`，变更块的样式
 的修饰符将被表示为 `btn--big` 或 `btn__price-warning`。
 
-实现 `BEM<B, E, M>`，从这三个参数生成字符串联合。其中 `B` 是一个字符串字面量
-，`E` 和 `M` 是字符串数组（可以为空）。
+实现 `BEM<B, E, M>`，从这三个参数生成字符串联合。其中 `B` 是一个字符串字面
+量，`E` 和 `M` 是字符串数组（可以为空）。
 
 ## 解答
 
@@ -59,8 +59,8 @@ type Element<E extends string[]> = E[number] extends never
   : `__${E[number]}`;
 ```
 
-同样的逻辑我们也适用于最后一个 -- 修饰符（Modifier）。如果带有修饰符的数组是空的
-，就返回空的字符串字面量类型。否则，返回一个带有修饰符的联合的前缀：
+同样的逻辑我们也适用于最后一个 -- 修饰符（Modifier）。如果带有修饰符的数组是空
+的，就返回空的字符串字面量类型。否则，返回一个带有修饰符的联合的前缀：
 
 ```typescript
 type Modifier<M extends string[]> = M[number] extends never
@@ -74,7 +74,7 @@ type Modifier<M extends string[]> = M[number] extends never
 type BEM<
   B extends string,
   E extends string[],
-  M extends string[]
+  M extends string[],
 > = `${Block<B>}${Element<E>}${Modifier<M>}`;
 ```
 
@@ -91,7 +91,7 @@ type Modifier<M extends string[]> = M[number] extends never
 type BEM<
   B extends string,
   E extends string[],
-  M extends string[]
+  M extends string[],
 > = `${Block<B>}${Element<E>}${Modifier<M>}`;
 ```
 

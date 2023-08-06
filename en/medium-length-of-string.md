@@ -60,7 +60,7 @@ with the first character on each recursive call:
 ```typescript
 type LengthOfString<
   S extends string,
-  A extends string[]
+  A extends string[],
 > = S extends `${infer C}${infer T}` ? LengthOfString<T, [C, ...A]> : never;
 ```
 
@@ -72,7 +72,7 @@ tuple:
 ```typescript
 type LengthOfString<
   S extends string,
-  A extends string[]
+  A extends string[],
 > = S extends `${infer C}${infer T}`
   ? LengthOfString<T, [C, ...A]>
   : A["length"];
@@ -85,7 +85,7 @@ our type parameter an empty tuple by default:
 ```typescript
 type LengthOfString<
   S extends string,
-  A extends string[] = []
+  A extends string[] = [],
 > = S extends `${infer C}${infer T}`
   ? LengthOfString<T, [C, ...A]>
   : A["length"];
