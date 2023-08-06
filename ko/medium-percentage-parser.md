@@ -113,7 +113,7 @@ type ParseNumber<T extends string> =
 type PercentageParser<A extends string> = [
   ParseSign<A>,
   ParseNumber<A>,
-  ParsePercent<A>
+  ParsePercent<A>,
 ];
 ```
 

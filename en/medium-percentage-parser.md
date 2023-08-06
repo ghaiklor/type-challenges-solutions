@@ -114,7 +114,7 @@ let’s do that and fill them with our types:
 type PercentageParser<A extends string> = [
   ParseSign<A>,
   ParseNumber<A>,
-  ParsePercent<A>
+  ParsePercent<A>,
 ];
 ```
 

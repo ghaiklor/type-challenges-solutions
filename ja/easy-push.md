@@ -29,9 +29,10 @@ type Result = Push<[1, 2], "3">; // [1, 2, '3']
 type Push<T, U> = [...T];
 ```
 
-A rest element type must be an array type というコンパイルエラーが出ます。これは
-、Variadic Tuple 型を配列でない型に適用することはできないということを意味します
-。配列のみを取り扱うことを示すために、ジェネリクスに関する制約を追加しましょう:
+A rest element type must be an array type というコンパイルエラーが出ます。これ
+は、Variadic Tuple 型を配列でない型に適用することはできないということを意味しま
+す。配列のみを取り扱うことを示すために、ジェネリクスに関する制約を追加しましょ
+う:
 
 ```typescript
 type Push<T extends unknown[], U> = [...T];

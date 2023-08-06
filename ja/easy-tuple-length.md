@@ -8,8 +8,8 @@ tags: tuple
 
 ## 課題
 
-タプルが与えられたとき、そのタプルの長さを返すような `Length` を実装してください
-。
+タプルが与えられたとき、そのタプルの長さを返すような `Length` を実装してくださ
+い。
 
 例:
 
@@ -20,7 +20,7 @@ type spaceX = [
   "FALCON HEAVY",
   "DRAGON",
   "STARSHIP",
-  "HUMAN SPACEFLIGHT"
+  "HUMAN SPACEFLIGHT",
 ];
 
 type teslaLength = Length<tesla>; // expected 4

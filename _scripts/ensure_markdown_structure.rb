@@ -23,4 +23,4 @@ end
 print "\n--- Front Matter data in #{sources.size} files have been checked ---\n\n"
 
 errors.each { |error| print "#{error}\n" }
-exit(errors.size.zero?)
+exit(errors.empty?)
