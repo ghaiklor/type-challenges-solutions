@@ -20,7 +20,7 @@ type spaceX = [
   "FALCON HEAVY",
   "DRAGON",
   "STARSHIP",
-  "HUMAN SPACEFLIGHT"
+  "HUMAN SPACEFLIGHT",
 ];
 
 type teslaLength = Length<tesla>; // expected 4

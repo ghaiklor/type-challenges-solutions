@@ -40,8 +40,8 @@ type Awaited<T> = T extends Promise<string> ? string : T;
 于[条件类型中的类型推断](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html#type-inference-in-conditional-types)。
 
 了解了类型推断之后，我们可以更新我们的解答。我们没有在条件类型中检
-查`Promise<string>`，而是将`string`替换为`infer R`，因为我们不知道那里必须有什么
-。我们只知道它是`Promise<T>`，其内部包含某种类型。
+查`Promise<string>`，而是将`string`替换为`infer R`，因为我们不知道那里必须有什
+么。我们只知道它是`Promise<T>`，其内部包含某种类型。
 
 一旦 TypeScript 确定了`Promise`中的类型，它就会把它赋给我们的类型参数`R`，并在
 “true”分支中可用。我们正是从这里返回它的：

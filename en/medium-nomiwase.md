@@ -150,7 +150,7 @@ another solution, where you can read more about it -
 
 ```typescript
 type AllCombinations<S, U extends string = StringToUnion<S>> = [U] extends [
-  never
+  never,
 ]
   ? ""
   : { [C in U]: `${C}${AllCombinations<never, Exclude<U, C>>}` };
@@ -162,7 +162,7 @@ type and get anything that is in keys of `U`:
 
 ```typescript
 type AllCombinations<S, U extends string = StringToUnion<S>> = [U] extends [
-  never
+  never,
 ]
   ? ""
   : { [C in U]: `${C}${AllCombinations<never, Exclude<U, C>>}` }[U];
@@ -175,7 +175,7 @@ The last piece of the puzzle is the empty string added to our union:
 
 ```typescript
 type AllCombinations<S, U extends string = StringToUnion<S>> = [U] extends [
-  never
+  never,
 ]
   ? ""
   : "" | { [C in U]: `${C}${AllCombinations<never, Exclude<U, C>>}` }[U];
@@ -189,7 +189,7 @@ type StringToUnion<S> = S extends `${infer C}${infer R}`
   : never;
 
 type AllCombinations<S, U extends string = StringToUnion<S>> = [U] extends [
-  never
+  never,
 ]
   ? ""
   : "" | { [C in U]: `${C}${AllCombinations<never, Exclude<U, C>>}` }[U];

@@ -56,8 +56,8 @@ type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]
 ```
 
 如果我们的累加器是空的或没有足够的项目，我们需要继续切分 `T` 直到累加器达到所需
-要的大小。为了做到这一点，我们继续递归地调用 `Chunk` 类型，并建产一个新的累加器
-。在这个累加器中，我们推送之前的 `A` 和 `T` 中的项目 `H`。
+要的大小。为了做到这一点，我们继续递归地调用 `Chunk` 类型，并建产一个新的累加
+器。在这个累加器中，我们推送之前的 `A` 和 `T` 中的项目 `H`。
 
 ```typescript
 type Chunk<T, N, A extends unknown[] = []> = T extends [infer H, ...infer T]

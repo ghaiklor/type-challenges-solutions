@@ -27,8 +27,8 @@ type Includes<T, U> = never;
 ```
 
 タプルの中から要素を見つけるためには、まずタプルをユニオンへと「変換」するのが得
-策です。そのためには Indexed Access 型を使用します。`T[number]` にアクセスすると
-、TypeScript は `T` のすべての要素からなるユニオンを返します。たとえば
+策です。そのためには Indexed Access 型を使用します。`T[number]` にアクセスする
+と、TypeScript は `T` のすべての要素からなるユニオンを返します。たとえば
 `T = [1, 2, 3]` である場合、`T[number]` とすると `1 | 2 | 3` が返されます。
 
 ```typescript

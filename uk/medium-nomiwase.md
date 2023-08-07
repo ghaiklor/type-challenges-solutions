@@ -148,7 +148,7 @@ type AllCombinations<S, U extends string = StringToUnion<S>> = U extends never
 
 ```typescript
 type AllCombinations<S, U extends string = StringToUnion<S>> = [U] extends [
-  never
+  never,
 ]
   ? ""
   : { [C in U]: `${C}${AllCombinations<never, Exclude<U, C>>}` };
@@ -160,7 +160,7 @@ type AllCombinations<S, U extends string = StringToUnion<S>> = [U] extends [
 
 ```typescript
 type AllCombinations<S, U extends string = StringToUnion<S>> = [U] extends [
-  never
+  never,
 ]
   ? ""
   : { [C in U]: `${C}${AllCombinations<never, Exclude<U, C>>}` }[U];
@@ -173,7 +173,7 @@ type AllCombinations<S, U extends string = StringToUnion<S>> = [U] extends [
 
 ```typescript
 type AllCombinations<S, U extends string = StringToUnion<S>> = [U] extends [
-  never
+  never,
 ]
   ? ""
   : "" | { [C in U]: `${C}${AllCombinations<never, Exclude<U, C>>}` }[U];
@@ -187,7 +187,7 @@ type StringToUnion<S> = S extends `${infer C}${infer R}`
   : never;
 
 type AllCombinations<S, U extends string = StringToUnion<S>> = [U] extends [
-  never
+  never,
 ]
   ? ""
   : "" | { [C in U]: `${C}${AllCombinations<never, Exclude<U, C>>}` }[U];

@@ -10,8 +10,8 @@ tags: built-in readonly object-keys
 
 实现内置的`Readonly<T>`泛型而不使用它。
 
-构造一个将`T`所有属性设置为`readonly`的类型，这意味着该类型的属性不可以重新赋值
-。
+构造一个将`T`所有属性设置为`readonly`的类型，这意味着该类型的属性不可以重新赋
+值。
 
 例如：
 

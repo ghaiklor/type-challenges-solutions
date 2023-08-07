@@ -97,10 +97,10 @@ type MapTypes<T, R extends { mapFrom: unknown; mapTo: unknown }> = {
 至此，我们通过了除了那个联合类型之外的所有的测试用例。在挑战说明中指出可能指定映
 射为对象的联合类型。
 
-因此，我们也需要对映射本身进行枚举。我们首先将 `R['mapTo']` 替换为条件类型
-。Typescript 中的条件类型是可分发的（distributive），这意味着他会枚举联合类型中
-的每个元素。然而，他作用于条件类型开始的类型。因此，我们以类型参数 `R` 开始，并
-检查匹配的值类型：
+因此，我们也需要对映射本身进行枚举。我们首先将 `R['mapTo']` 替换为条件类
+型。Typescript 中的条件类型是可分发的（distributive），这意味着他会枚举联合类型
+中的每个元素。然而，他作用于条件类型开始的类型。因此，我们以类型参数 `R` 开始，
+并检查匹配的值类型：
 
 ```typescript
 type MapTypes<T, R extends { mapFrom: unknown; mapTo: unknown }> = {

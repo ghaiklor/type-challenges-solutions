@@ -20,8 +20,8 @@ type Result = AppendToObject<Test, "value", 4>; // expected to be { id: '1', val
 
 ## 解答
 
-当我们试图改变 TypeScript 中的对象接口时，通常交叉（intersection）类型会很有帮助
-。这一挑战也不例外。我试着写了一个类型，它接受整个`T`和一个带有新属性的对象:
+当我们试图改变 TypeScript 中的对象接口时，通常交叉（intersection）类型会很有帮
+助。这一挑战也不例外。我试着写了一个类型，它接受整个`T`和一个带有新属性的对象:
 
 ```typescript
 type AppendToObject<T, U, V> = T & { [P in U]: V };

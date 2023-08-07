@@ -31,8 +31,8 @@ type Res3 = Join<["o"], "u">; // expected to be 'o'
 type Join<T, U> = any;
 ```
 
-枚举数组的经典技巧是推断它的第一个元素和剩余元素，然后递归。让我们先添加推断逻辑
-：
+枚举数组的经典技巧是推断它的第一个元素和剩余元素，然后递归。让我们先添加推断逻
+辑：
 
 ```typescript
 type Join<T, U> = T extends [infer S, ...infer R] ? never : never;
@@ -71,7 +71,7 @@ type Join<T, U> = T extends [infer S, ...infer R]
 ```typescript
 type Join<T extends string[], U extends string | number> = T extends [
   infer S,
-  ...infer R
+  ...infer R,
 ]
   ? `${S}${U}${Join<R, U>}`
   : "";
@@ -83,7 +83,7 @@ type Join<T extends string[], U extends string | number> = T extends [
 ```typescript
 type Join<T extends string[], U extends string | number> = T extends [
   infer S extends string,
-  ...infer R extends string[]
+  ...infer R extends string[],
 ]
   ? `${S}${U}${Join<R, U>}`
   : "";
@@ -102,7 +102,7 @@ type R0 = Join<["a", "p", "p", "l", "e"], "-">;
 ```typescript
 type Join<T extends string[], U extends string | number> = T extends [
   infer S extends string,
-  ...infer R extends string[]
+  ...infer R extends string[],
 ]
   ? `${S}${R["length"] extends 0 ? never : never}${Join<R, U>}`
   : "";
@@ -114,7 +114,7 @@ type Join<T extends string[], U extends string | number> = T extends [
 ```typescript
 type Join<T extends string[], U extends string | number> = T extends [
   infer S extends string,
-  ...infer R extends string[]
+  ...infer R extends string[],
 ]
   ? `${S}${R["length"] extends 0 ? "" : never}${Join<R, U>}`
   : "";
@@ -125,7 +125,7 @@ type Join<T extends string[], U extends string | number> = T extends [
 ```typescript
 type Join<T extends string[], U extends string | number> = T extends [
   infer S extends string,
-  ...infer R extends string[]
+  ...infer R extends string[],
 ]
   ? `${S}${R["length"] extends 0 ? "" : U}${Join<R, U>}`
   : "";

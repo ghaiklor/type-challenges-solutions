@@ -78,7 +78,7 @@ type Modifier<M extends string[]> = M[number] extends never
 type BEM<
   B extends string,
   E extends string[],
-  M extends string[]
+  M extends string[],
 > = `${Block<B>}${Element<E>}${Modifier<M>}`;
 ```
 
@@ -95,7 +95,7 @@ type Modifier<M extends string[]> = M[number] extends never
 type BEM<
   B extends string,
   E extends string[],
-  M extends string[]
+  M extends string[],
 > = `${Block<B>}${Element<E>}${Modifier<M>}`;
 ```
 
