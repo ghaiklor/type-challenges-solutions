@@ -8,7 +8,7 @@ tags: array
 
 ## Challenge
 
-Implement type `CheckRepeatedChars<T>` which will return whether type `T` contains a duplicated member
+Implement type `CheckRepeatedChars<T>` which will return whether type `T` contains a duplicated member.
 
 ```ts
   type CheckRepeatedTuple<[1, 2, 3]>   // false
@@ -17,7 +17,10 @@ Implement type `CheckRepeatedChars<T>` which will return whether type `T` contai
 
 ## Solution
 
-Let's begin by iterating over the tuple by inferring its content. after that, we need to check if `F` is repeated in the rest of the array so we check that by extending the union of the `Rest`.
+The idea behind this challenge is to check if the tuple contains repeated elements or not,
+We have to take every single element and check if it is repeated. We will do this by inferring the first element and checking if it exists in the rest of the tuple.
+
+We will infer the first element, ```F``` and check if it exists in the rest of the tuple by checking if the element extends the ```Rest[number]``` union.
 
 ```ts
 type CheckRepeatedTuple<T extends unknown[]> = T extends [
@@ -26,12 +29,11 @@ type CheckRepeatedTuple<T extends unknown[]> = T extends [
 ]
   ? F extends Rest[number]
     ? true
-    : false
+    : ....
   : false;
 ```
 
-For this case if the first item exists in the remaining items of the array so return true otherwise we need to check every other item so we will use [Recursive Conditional](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types) we pass the `Rest` to the `CheckRepeatedTuple`
-it will infer the first element of the passing array again and check if it exists in the remaining items.
+If the first element exists in the ```Rest[number]``` that means the item is repeated, in the other case, if it does not exist, we will call the  ```CheckRepeatedTuple``` again with the rest of the tuple in a recursive way so it will repeat the process of inferring the first element of the passing array again and check if it exists in the remaining items.
 
 ```ts
 type CheckRepeatedTuple<T extends unknown[]> = T extends [
@@ -43,12 +45,6 @@ type CheckRepeatedTuple<T extends unknown[]> = T extends [
     : CheckRepeatedTuple<Rest>
   : false;
 ```
-
-It will be like this:
-
-```T => [1, 2, 3 ]``` then infer ```F``` it will be equal to 1 then the ```Rest = [2 ,3]```
-so when  ```F``` extends the union of the Rest ```Rest[number]``` as you know we get the union of the array by ```array[number]``` it will cause false so check the other path ```CheckRepeatedTuple<[2, 3]>``` and so on.
-
 ## References
 
 - [Conditional Types](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
