@@ -19,7 +19,6 @@ Implement type `CheckRepeatedChars<T>` which will return whether type `T` contai
 
 The idea behind this challenge is to check if the tuple contains repeated elements or not,
 We have to take every single element and check if it is repeated. We will do this by inferring the first element and checking if it exists in the rest of the tuple.
-
 We will infer the first element, ```F``` and check if it exists in the rest of the tuple by checking if the element extends the ```Rest[number]``` union.
 
 ```ts
@@ -29,7 +28,7 @@ type CheckRepeatedTuple<T extends unknown[]> = T extends [
 ]
   ? F extends Rest[number]
     ? true
-    : ....
+    : false
   : false;
 ```
 
