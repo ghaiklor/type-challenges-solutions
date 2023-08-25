@@ -33,7 +33,7 @@ literal type which is constructed from those parts and our required `To` part:
 type ReplaceAll<
   S extends string,
   From extends string,
-  To extends string
+  To extends string,
 > = From extends ""
   ? S
   : S extends `${infer L}${From}${infer R}`
@@ -49,7 +49,7 @@ to the type itself (recursively):
 type ReplaceAll<
   S extends string,
   From extends string,
-  To extends string
+  To extends string,
 > = From extends ""
   ? S
   : S extends `${infer L}${From}${infer R}`
@@ -66,7 +66,7 @@ type ReplaceAll<
   S extends string,
   From extends string,
   To extends string,
-  Before extends string = ""
+  Before extends string = "",
 > = From extends ""
   ? S
   : S extends `${Before}${infer L}${From}${infer R}`

@@ -70,7 +70,7 @@ assignable to type 'string | number | bigint | boolean | null | undefined'”.
 ```typescript
 type Join<T extends string[], U extends string | number> = T extends [
   infer S,
-  ...infer R
+  ...infer R,
 ]
   ? `${S}${U}${Join<R, U>}`
   : "";
@@ -84,7 +84,7 @@ type Join<T extends string[], U extends string | number> = T extends [
 ```typescript
 type Join<T extends string[], U extends string | number> = T extends [
   infer S extends string,
-  ...infer R extends string[]
+  ...infer R extends string[],
 ]
   ? `${S}${U}${Join<R, U>}`
   : "";
@@ -104,7 +104,7 @@ type R0 = Join<["a", "p", "p", "l", "e"], "-">;
 ```typescript
 type Join<T extends string[], U extends string | number> = T extends [
   infer S extends string,
-  ...infer R extends string[]
+  ...infer R extends string[],
 ]
   ? `${S}${R["length"] extends 0 ? never : never}${Join<R, U>}`
   : "";
@@ -117,7 +117,7 @@ type Join<T extends string[], U extends string | number> = T extends [
 ```typescript
 type Join<T extends string[], U extends string | number> = T extends [
   infer S extends string,
-  ...infer R extends string[]
+  ...infer R extends string[],
 ]
   ? `${S}${R["length"] extends 0 ? "" : never}${Join<R, U>}`
   : "";
@@ -128,7 +128,7 @@ type Join<T extends string[], U extends string | number> = T extends [
 ```typescript
 type Join<T extends string[], U extends string | number> = T extends [
   infer S extends string,
-  ...infer R extends string[]
+  ...infer R extends string[],
 ]
   ? `${S}${R["length"] extends 0 ? "" : U}${Join<R, U>}`
   : "";

@@ -72,7 +72,7 @@ generics:
 ```typescript
 type Join<T extends string[], U extends string | number> = T extends [
   infer S,
-  ...infer R
+  ...infer R,
 ]
   ? `${S}${U}${Join<R, U>}`
   : "";
@@ -85,7 +85,7 @@ also strings. So that, we add the same construct in the block with inferring:
 ```typescript
 type Join<T extends string[], U extends string | number> = T extends [
   infer S extends string,
-  ...infer R extends string[]
+  ...infer R extends string[],
 ]
   ? `${S}${U}${Join<R, U>}`
   : "";
@@ -105,7 +105,7 @@ or not, instead of simply putting the separator:
 ```typescript
 type Join<T extends string[], U extends string | number> = T extends [
   infer S extends string,
-  ...infer R extends string[]
+  ...infer R extends string[],
 ]
   ? `${S}${R["length"] extends 0 ? never : never}${Join<R, U>}`
   : "";
@@ -118,7 +118,7 @@ process, so we don't need a separator there:
 ```typescript
 type Join<T extends string[], U extends string | number> = T extends [
   infer S extends string,
-  ...infer R extends string[]
+  ...infer R extends string[],
 ]
   ? `${S}${R["length"] extends 0 ? "" : never}${Join<R, U>}`
   : "";
@@ -129,7 +129,7 @@ In all other cases, we put the separator:
 ```typescript
 type Join<T extends string[], U extends string | number> = T extends [
   infer S extends string,
-  ...infer R extends string[]
+  ...infer R extends string[],
 ]
   ? `${S}${R["length"] extends 0 ? "" : U}${Join<R, U>}`
   : "";

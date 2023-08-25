@@ -53,9 +53,9 @@ type MyReadonly2<T, K> = T;
 type MyReadonly2<T, K> = T & { readonly [P in K]: T[P] };
 ```
 
-看起来是一种解决方案，但是我们得到一个编译错误
-：`Type ‘P’ cannot be used to index type ‘T’`。这是对的，因为我们没有对`K`设置约
-束，它应该是 “`T`中的每一个键” :
+看起来是一种解决方案，但是我们得到一个编译错
+误：`Type ‘P’ cannot be used to index type ‘T’`。这是对的，因为我们没有对`K`设置
+约束，它应该是 “`T`中的每一个键” :
 
 ```ts
 type MyReadonly2<T, K extends keyof T> = T & { readonly [P in K]: T[P] };
@@ -77,17 +77,17 @@ type MyReadonly2<T, K extends keyof T = keyof T> = Omit<T, K> & Readonly<T>;
 ```
 
 你可能发现`solution-1`在 TypeScript 4.5 及以上的版本中不能正常工作，因为原本的行
-为在 TypeScript 中是一个 bug（
-在[microsoft/TypeScript#45122](https://github.com/microsoft/TypeScript/issues/45122)中
+为在 TypeScript 中是一个
+bug（在[microsoft/TypeScript#45122](https://github.com/microsoft/TypeScript/issues/45122)中
 列出，
 在[microsoft/TypeScript#45263](https://github.com/microsoft/TypeScript/pull/45263)中
 被修复，在 TypeScript 4.5 版本中正式发布）。从概念上来说，交叉类型意味着 "与"，
 因此`{readonly a: string} & {a: string}`与`{a: string}`应该是相等的，也就是说属
 性`a`是可读且可写的。
 
-在 TypeScript 4.5 之前， TypeScript 有着相反的不正确的行为，也就是说在交叉类型中
-，一些成员的属性是只读的，但在另外成员中同名属性是可读可写的，最终对象的相应属性
-却是只读的，这种行为是不正确的，但这已经被修复了。因此这也就解释了为什
+在 TypeScript 4.5 之前， TypeScript 有着相反的不正确的行为，也就是说在交叉类型
+中，一些成员的属性是只读的，但在另外成员中同名属性是可读可写的，最终对象的相应属
+性却是只读的，这种行为是不正确的，但这已经被修复了。因此这也就解释了为什
 么`solution-1`不能正常工作。想要解决这个问题，可以像下面这样写：
 
 ```ts

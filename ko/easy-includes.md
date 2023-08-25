@@ -43,7 +43,9 @@ type Includes<T, U> = T[number];
 type Includes<T extends unknown[], U> = T[number];
 ```
 
-이제 원소들의 유니온을 갖게 되었습니다. 찾고자 하는 원소가 유니온에 존재하는지 어떻게 확인할 수 있을까요? `extends` 를 사용하면 `U`라는 원소가 `T[number]` 에서 반환한 원소들의 유니온에 존재하는지 알 수 있습니다.
+이제 원소들의 유니온을 갖게 되었습니다. 찾고자 하는 원소가 유니온에 존재하는지
+어떻게 확인할 수 있을까요? `extends` 를 사용하면 `U`라는 원소가 `T[number]` 에서
+반환한 원소들의 유니온에 존재하는지 알 수 있습니다.
 
 ```typescript
 type Includes<T extends unknown[], U> = U extends T[number] ? true : false;
