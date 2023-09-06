@@ -42,6 +42,11 @@ type Length<T extends any> = T["length"];
 type Length<T extends { length: number }> = T["length"];
 ```
 
+另一种解决方案：
+```ts
+type Length<T extends readonly any[]> = T["length"];
+```
+
 ## 参考
 
 - [Indexed Types](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html)
