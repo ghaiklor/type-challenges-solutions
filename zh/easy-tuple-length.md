@@ -19,7 +19,7 @@ type spaceX = [
   "FALCON HEAVY",
   "DRAGON",
   "STARSHIP",
-  "HUMAN SPACEFLIGHT",
+  "HUMAN SPACEFLIGHT"
 ];
 
 type teslaLength = Length<tesla>; // expected 4
@@ -40,6 +40,12 @@ type Length<T extends any> = T["length"];
 
 ```ts
 type Length<T extends { length: number }> = T["length"];
+```
+
+另一种解决方案：
+
+```ts
+type Length<T extends readonly any[]> = T["length"];
 ```
 
 ## 参考
