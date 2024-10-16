@@ -11,5 +11,7 @@ main:
     url: /zh/
   - title: "日本語"
     url: /ja/
+  - title: "Español"
+    url: /es
   - title: "GitHub"
     url: https://github.com/ghaiklor/type-challenges-solutions
