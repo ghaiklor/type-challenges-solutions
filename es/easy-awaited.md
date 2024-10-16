@@ -6,70 +6,67 @@ level: easy
 tags: promise
 ---
 
-## Challenge
+## Desafío
 
-Si tenemos un tipo el cual esta envuelto por un otro tipo como `Promise`. Como 
-podemos obtener el tipo que ha sido envuelto? Por ejemplo, si tenemos 
-`Promise<ExampleType>`, como obtenemos `ExampleType`??
+Si tenemos un tipo el cual es un tipo encapsulador como `Promise`. ¿Cómo podemos 
+obtener un tipo que está dentro del tipo encapsulador? Por ejemplo, si tenemos 
+`Promise<ExampleType>` ¿cómo obtenemos `ExampleType`?
 
+## Solución
 
-## Solution
+Un desafío bastante interesante que requiere que conozcamos una de las 
+características subestimadas de TypeScript, en mi humilde opinión.
 
-Es un desafio bastante interesante el cual require que conozcamos una de las
-caracteristicas mas infravaloradas de TypeScript, en mi humilde opinion.
+Pero, antes de explicar lo que quiero decir, analicemos el desafío. El autor
+nos pide que extraigamos el tipo. ¿Qué es extraer en este contexto? Esto es 
+extraer el tipo interno de otro tipo.
 
-Pero, antes de explicar a lo que me refiero, analicemos el desafio. El autor
-nos pide que desenvolvamos el tipo. Que es desenvolver? Desenvolver es extraer
-el tipo interno dentro de otro tipo.
+Déjame explicarlo con un ejemplo. Si tienes un tipo `Promise<string>`,
+extraer el tipo `Promise` dará como resultado el tipo `string`. 
+Al extraer, obtuvimos el tipo interno del tipo externo.
 
-Dejame explicar con un ejemplo. Si tienes un tipo `Promise<string`, 
-desenvolviendo el tipo `Promise` resultara en el tipo `string`. Obtenemos el 
-tipo interno de el tipo externo.
+Ten en cuenta que también debes extraer el tipo de forma recursiva. Por ejemplo, 
+si tienes el tipo `Promise<Promise<string>>`, debes extraer el tipo `string`.
 
-Nota que tambien necesitas desenvolver el tipo recursivamente. Por ejemplo,
-si tienes el tipo `Promise<Promise<string>>` tienes que regresar el tipo 
-`string`.
-
-Ahora, al desafio. Empezare con el caso mas sencillo. Si nuestro tipo
-`Awaited` obtiene `Promise<string`, necesitamos retornar `string`, de lo 
-contrario debemos retornar `T`, porque `T` no es de tipo `Promise`: 
+Ahora, el desafío. Comenzaré con el caso más simple. Si nuestro tipo `Awaited`
+obtiene `Promise<string>`, debemos extraer el `string`, de lo contrario, 
+devolvemos el `T` en sí, porque no es un `Promesa`:
 
 ```ts
 type Awaited<T> = T extends Promise<string> ? string : T;
 ```
 
 Sin embargo, hay un problema. De esa manera, podemos solo encargarnos de 
-`strings` en `Promise`, sin embargo debemos poder manejar cualquier caso. 
-Como lo logramos? Como podemos obtener el tipo de `Promise` si no sabemos
-que es lo que hay alli?
+`strings` en `Promise`, sin embargo debemos poder manejar cualquier caso. ¿Cómo 
+lo logramos? ¿Cómo obtener podemos el tipo de `Promise` si no sabemos que es lo 
+que hay alli?
 
-Para estos propositos, TypeScript tiene inferencia de tipos en los tipos 
-condicionales! Puede decirle al compilador "hey, una vez sepas que tipo es este, 
-asignalo a mi parametro, por favor". Puedes leer mas sobre [inferencia de tipos
-en los tipos condicionales aqui](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html#type-inference-in-conditional-types).
+Para estas propuestas, TypeScript tiene inferencia de tipos en los tipos 
+condicionales. Puede decirle al compilador "hey, una vez sepas que tipo es este, 
+asignalo a mi parámetro, por favor". Puedes leer más sobre [inferencia de tipos en los tipos condicionales aquí](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html#type-inference-in-conditional-types).
 
-Al conocer sobre la inferencia de tipo, podemos actualizar nuestra solucion. 
+Al conocer sobre la inferencia de tipo, podemos actualizar nuestra solución.
 En vez de propbar `Promise<string>` en nuestro tipo condicional, podemos 
-remplazar `string` con `infer R`, porque no sabemos que tipo debe ir alli. Lo 
-unico que sabemos es que es un `Promise<T>` con algun tipo dentro.
+remplazar `string` con `infer R`, porque no sabemos que tipo debe ir alli. 
+Lo único que sabemos es que es un `Promise<T>` con algún tipo dentro.
 
 Una vez TypeScript descubre que tipo es el cual esta dentro de `Promise`, 
-lo asignara a nuestro parametro tipo `R` y esta disponible en la rama `true`.
+lo asignara a nuestro parámetro tipo `R` y está disponible en la rama `true`.
 Exactamente donde lo retornamos.
 
 ```ts
 type Awaited<T> = T extends Promise<infer R> ? R : T;
 ```
 
-Estamos casi listos, sin embargo del tipo `Promise<Promise<string>>`, obtenemos
-el tipo `Promise<string>`. Es por esto que necesitamos repetir el mismo proceso
+Estamos casi listos, sin embargo del tipo `Promise<Promise<string>>`, obtenemos 
+el tipo `Promise<string>`. Es por esto que necesitamos repetir el mismo proceso 
 recursivamente, lo cual es logrado usando `Awaited` en si mismo.
 
 ```ts
 type Awaited<T> = T extends Promise<infer R> ? Awaited<R> : T;
 ```
 
-## Referenccias
+## Referencias
 
 - [Tipos Condicionales](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html)
 - [Inferencia de Tipo en Tipos Condicionales](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#inferring-within-conditional-types)
