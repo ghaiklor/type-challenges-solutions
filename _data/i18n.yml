@@ -322,3 +322,61 @@ ja:
   medium: "中級"
   hard: "上級"
   extreme: "エクストリーム"
+es: 
+  date:
+    format: 
+    abbr_day_names: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"]
+    abbr_month_names:
+      [
+        "Ene",
+        "Feb",
+        "Mar",
+        "Abr",
+        "May",
+        "Jun",
+        "Jul",
+        "Ago",
+        "Set",
+        "Oct",
+        "Nov",
+        "Dic",
+      ]
+    day_names:
+    [
+      "Domingo",
+      "Lunes",
+      "Martes",
+      "Miércoles",
+      "Jueves",
+      "Viernes",
+      "Sábado",
+    ]
+  month_names:
+    [
+      "Enero",
+      "Febrero",
+      "Marzo",
+      "Abril",
+      "Mayo",
+      "Junio",
+      "Julio",
+      "Agosto",
+      "Septiembre",
+      "Octubre",
+      "Noviembre",
+      "Diciembre",
+    ]
+  morelink: "Seguir leyendo"
+  page-older: "Más antigua"
+  page-newer: "Más nueva"
+  archive: "Archivo del Blog"
+  archive-category: "Archivo de la categoría '%1'"
+  archive-tag: "Archivo del tag '%1'"
+  comments: "Comentarios"
+  challenge: "Desafío"
+  solution: "Solución"
+  warm: "Calentamiento"
+  easy: "Fácil"
+  medium: "Medio"
+  hard: "Difícil"
+  extreme: "Extremo"
