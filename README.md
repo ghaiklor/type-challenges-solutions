@@ -9,6 +9,17 @@
 [![GitHub followers](https://img.shields.io/github/followers/ghaiklor?label=Follow&style=social)](https://github.com/ghaiklor)
 [![Twitter Follow](https://img.shields.io/twitter/follow/ghaiklor?label=Follow&style=social)](https://twitter.com/ghaiklor)
 
+## Project Status
+
+This repository contains my past **Type Challenges** solutions - each one crafted in the spare moments I had between work to learn, experiment, and share explanations.
+
+> - I no longer have the time (or interest) to solve new challenges or maintain this collection.
+> - I will not be accepting pull requests or writing any new solutions.
+> - Issues used for comments will no longer receive responses and may be closed without notice.
+
+That said, all existing solutions remain here for you to read, learn from, and build upon.
+I hope you find something useful - and that this archive continues to spark your own TypeScript adventures!
+
 ## Intro
 
 High-quality types can help improve projects’ maintainability while avoiding potential bugs.
